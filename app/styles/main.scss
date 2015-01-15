@@ -3,6 +3,8 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
 
+@import url(http://fonts.googleapis.com/css?family=Roboto:100,200,300,400,700);
+
 @import "./_nav.scss";
 @import "compass/css3";
 
@@ -97,6 +99,14 @@ img.grayscale {
   -o-background-size: cover;
   background-size: cover;
 
+  .container-fluid{
+    padding-top: 10%;
+  }
+
+  .logo{
+    width: 50%;
+  }
+
   h1 {
     font-size:80px;
     -webkit-text-stroke: 1px rgba(255,255,255,0.1);
@@ -116,7 +126,7 @@ img.grayscale {
     font-size:28px;
     border-color:#eeeeee;
     padding:15px;
-    background-color:transparent;
+    background-color: rgba(0,0,0,0.5);
     color:#ffffff;
 
     &:hover{
@@ -172,32 +182,65 @@ img.grayscale {
 
 .featurette {
   background: url('../images/bgtr.svg') top right no-repeat, url('../images/bgbl.svg') bottom left no-repeat, url('../images/bgbl.svg') bottom left no-repeat, url('../images/overlay.png'), linear-gradient(45deg, #b39c68, #a56365, #412e4c);
-  height: 80%;
-  padding: 50px 0;
+  height: 85%;
+  padding: 50px;
   color: #ffffff;
 
   h1{
-    padding-bottom: 15px;
+    padding-bottom: 20px;
   }
-}
 
-.featurette-item {
-  margin-bottom: 15px;
+  .featurette-item {
+    margin-bottom: 15px;
+    height: 20.9em;
 
     & > i {
-    background: rgba(255,255,255,0.5);
-    border: 3px solid #ffffff;
-    border-radius: 50%;
-    display: inline-block;
-    font-size: 56px;
-    width: 140px;
-    height: 140px;
-    line-height: 136px;
-    vertical-align: middle; 
-    text-align: center;
+      background: rgba(255,255,255,0.5);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5);
+      color: #fff;
+      border-radius: 100%;
+      display: inline-block;
+      font-size: 56px;
+      width: 3.5em;
+      height: 3.5em;
+      line-height: 3.6em;
+      vertical-align: middle; 
+      text-align: center;
 
-    &:hover{
-      font-size: 68px;
+      &:before{
+        content: '';
+        background: rgba(255,255,255,0.5);
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        margin-left: -0.15em;
+        width: 0.3em;
+        height: 0.3em;
+        display: block;
+        border-radius: 100%;
+      }
+
+      &:after{
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: 0.3em;
+        width: 1px;
+        height: 1.7em;
+        background: rgba(255,255,255,0.5);
+        margin-left: -0.5px;
+      }
+    }
+  }
+
+  .featurette-text{
+    padding-top: 10px;
+    p{
+      font-size: 1.2em;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 300;
+      color: #fff;
+      padding: 0 10px 0 10px;
     }
   }
 }
@@ -205,7 +248,7 @@ img.grayscale {
 
 .callout {
   color: #ffffff;
-  padding-top:7%;
+  padding-top:5%;
   height: 100%;
   width: 100%;
   background: url('http://www.bootply.com/assets/example/bg_suburb.jpg') no-repeat center center fixed; 
@@ -213,6 +256,10 @@ img.grayscale {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+
+  .img-row{
+    padding: 20px 0 20px 0;
+  }
 }
 
 .gallery {
