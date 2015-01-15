@@ -9,11 +9,12 @@
  */
 angular.module('barliftApp')
   .controller('MainCtrl', function ($scope, ParseService) {
-    $scope.user={email: 'test1'};
-    console.log(ParseService);
+    $scope.user = {};
     $scope.addEmail = function(user) { //create a new movie. Issues a POST to /api/movies
       ParseService.addEmail(user.email,function(res) {
-        console.log(res);
+        $scope.$apply(function() {
+          $scope.user.email = 'Thanks!';
+        });
       });
     };
 

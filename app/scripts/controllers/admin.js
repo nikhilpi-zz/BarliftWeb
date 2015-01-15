@@ -10,15 +10,20 @@
 angular.module('barliftApp')
   .controller('AdminCtrl', function ($scope, $location, ParseService) {
     if (ParseService.isLoggedIn()){
-      $scope.user = ParseService.getUser();
+      // $scope.user = ParseService.getUser();
     } else {
       $location.path('/login');
     }
 
-    $scope.emails = []
+    $scope.emails = [];
     ParseService.getEmails(function(data){
       $scope.$apply(function() {
         $scope.emails = data;
-      })
+      });
     });
+
+    $scope.logout = function(){
+      ParseService.logout();
+      $location.path('/login');
+    };
   });
