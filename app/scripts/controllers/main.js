@@ -8,12 +8,11 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-  .controller('MainCtrl', function ($scope, parseEmail) {
-    
+  .controller('MainCtrl', function ($scope, ParseService) {
+    $scope.user={email: 'test1'};
+    console.log(ParseService);
     $scope.addEmail = function(user) { //create a new movie. Issues a POST to /api/movies
-      $scope.entry = new parseEmail(); //this object now has a $save() method
-      $scope.entry.email= user.email;
-      $scope.entry.$save(function(res) {
+      ParseService.addEmail(user.email,function(res) {
         console.log(res);
       });
     };

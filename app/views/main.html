@@ -3,8 +3,14 @@
   <div class="container-fluid">
     <img class="logo" src="../images/barliftlogo.svg">
     <div>&nbsp;</div>
-    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" ng-model="user.email">
-    <a class="btn btn-default btn-lg" ng-click="addEmail(user)">Get Started</a>
+    <div class="row">
+      <div class="col-md-3 col-md-offset-3">
+        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" ng-model="user.email">
+      </div>
+      <div class="col-md-3">
+        <a class="btn btn-default btn-lg" ng-click="addEmail(user)">Get Started</a>
+      </div>
+    </div>
   </div>
 </div>
 
