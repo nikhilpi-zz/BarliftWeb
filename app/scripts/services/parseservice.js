@@ -85,9 +85,9 @@ angular.module('barliftApp')
       },
 
       // Create a new book record
-      addEmail : function addEmail(_email, callback) {
+      addEmail : function addEmail(_email, _isBar, _name, callback) {
         var object = new Email();
-        object.save({email:_email}, {
+        object.save({email:_email, name: _name, isBar: _isBar}, {
           success: function(object) {
             callback(object);
           },

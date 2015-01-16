@@ -9,14 +9,23 @@
  */
 angular.module('barliftApp')
   .controller('MainCtrl', function ($scope, ParseService) {
-    $scope.user = {};
-    $scope.bar = {};
-    $scope.addEmail = function(user) { //create a new movie. Issues a POST to /api/movies
-      ParseService.addEmail(user.email,function(res) {
-        $scope.$apply(function() {
-          $scope.user.email = 'Thanks!';
+    $scope.user = {email : null, barName : null, isBar : false};
+    $scope.addEmail = function(attr) { //create a new movie. Issues a POST to /api/movies
+      if (typeof $scope.user.email === 'undefined'){
+        $scope.user.email = 'Invalid Email!';
+      } else {
+        if(attr === 'isBar'){
+          $scope.user.isBar = true;
+        } else {
+          $scope.user.isBar = false;
+        }
+        console.log($scope.user);
+        ParseService.addEmail($scope.user.email, $scope.user.isBar, $scope.user.barName,function(res) {
+          $scope.$apply(function() {
+            $scope.user.email = 'Thanks!';
+          });
         });
-      });
+      }
     };
 
   });
