@@ -302,6 +302,10 @@ img.grayscale {
   .img-row{
     padding: 20px 0 20px 0;
 
+    .col-md-offset-1 {
+      margin-left: 12.333333%;
+    }
+
     &:hover span.text-content {
       opacity: 1;
     }
