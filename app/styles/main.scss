@@ -7,7 +7,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 
 @import "./_nav.scss";
 @import "compass/css3";
-$icon-font-path: "../fonts/";
+
 
 
 html,
@@ -203,9 +203,8 @@ img.grayscale {
     margin-bottom: 15px;
     height: 20.9em;
 
-    .glyphicon{
-      font-size: 2em;
-      top: .29em;
+    img{
+      width: 3em;
     }
 
     & > i {
