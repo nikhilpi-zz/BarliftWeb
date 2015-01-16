@@ -9,7 +9,7 @@
 angular.module('barliftApp')
   .directive('emailGrid', function () {
     return {
-      template: '<div ng-repeat="email in emails">{{email}}</div>',
+      templateUrl: 'views/emailgrid.html',
       restrict: 'E',
       link: function postLink(scope, element, attrs) {
 

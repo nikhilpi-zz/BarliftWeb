@@ -18,6 +18,7 @@ angular.module('barliftApp')
     $scope.emails = [];
     ParseService.getEmails(function(data){
       $scope.$apply(function() {
+        console.log(data);
         $scope.emails = data;
       });
     });
