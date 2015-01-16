@@ -208,7 +208,7 @@ module.exports = function (grunt) {
           '<%= yeoman.dist %>/scripts/{,*/}*.js',
           '<%= yeoman.dist %>/styles/{,*/}*.css',
           '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-          '<%= yeoman.dist %>/styles/fonts/*'
+          // '<%= yeoman.dist %>/styles/fonts/*'
         ]
       }
     },
@@ -244,12 +244,12 @@ module.exports = function (grunt) {
     // The following *-min tasks will produce minified files in the dist folder
     // By default, your `index.html`'s <!-- Usemin block --> will take care of
     // minification. These next options are pre-configured if you do not wish
-    // to use the Usemin blocks.
+    // // to use the Usemin blocks.
     // cssmin: {
     //   dist: {
     //     files: {
     //       '<%= yeoman.dist %>/styles/main.css': [
-    //         '.tmp/styles/{,*/}*.css'
+    //         '.tmp/styles/{,*/}*.css',
     //       ]
     //     }
     //   }
@@ -263,9 +263,9 @@ module.exports = function (grunt) {
     //     }
     //   }
     // },
-    // concat: {
-    //   dist: {}
-    // },
+    concat: {
+      dist: {}
+    },
 
     imagemin: {
       dist: {
