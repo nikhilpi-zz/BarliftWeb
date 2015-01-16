@@ -10,6 +10,7 @@
 angular.module('barliftApp')
   .controller('MainCtrl', function ($scope, ParseService) {
     $scope.user = {};
+    $scope.bar = {};
     $scope.addEmail = function(user) { //create a new movie. Issues a POST to /api/movies
       ParseService.addEmail(user.email,function(res) {
         $scope.$apply(function() {
