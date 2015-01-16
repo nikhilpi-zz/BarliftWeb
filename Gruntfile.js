@@ -342,8 +342,7 @@ module.exports = function (grunt) {
             'views/{,*/}*.html',
             'images/{,*/}*.{webp}',
             'fonts/{,*/}*.*',
-            'images/{,*/}*.svg',
-            'bower_components/sass-bootstrap/fonts/*.*'
+            'images/{,*/}*.svg'
           ]
         }, {
           expand: true,

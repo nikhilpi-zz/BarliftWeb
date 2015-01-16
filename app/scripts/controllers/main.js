@@ -19,7 +19,6 @@ angular.module('barliftApp')
         } else {
           $scope.user.isBar = false;
         }
-        console.log($scope.user);
         ParseService.addEmail($scope.user.email, $scope.user.isBar, $scope.user.barName,function(res) {
           $scope.$apply(function() {
             $scope.user.email = 'Thanks!';
