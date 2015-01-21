@@ -36,8 +36,11 @@ angular
         redirectTo: '/'
       });
   })
-  .run(function($rootScope, $location) {
+  .run(function($rootScope, $location, User) {
+    Parse.initialize('5DZi1FrdZcwBKXIxMplWsqYu3cEEumlmFDB1kKnC','G7yhVdBRY3S2jvjkHKddlsES5YZu1z99Nh9JPLTN');
+    User.getUser();
     $rootScope.$on( '$routeChangeStart', function(event, next, current) {
+
       if ($rootScope.loggedInUser === null) {
         // no logged user, redirect to /login
         if ( next.templateUrl === 'views/admin.html') {

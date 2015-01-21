@@ -9,14 +9,14 @@ describe('Controller: AdminCtrl', function () {
     scope;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
+  beforeEach(inject(function ($controller, $rootScope, User, ParseService) {
     scope = $rootScope.$new();
     AdminCtrl = $controller('AdminCtrl', {
       $scope: scope
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings.length).toBe(3);
-  });
+  // it('should emails to the scope', function () {
+  //   expect(scope.emails.length).not.to.equal(0);
+  // });
 });

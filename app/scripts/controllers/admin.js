@@ -8,8 +8,8 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-  .controller('AdminCtrl', function ($scope, $location, ParseService) {
-    if (ParseService.isLoggedIn()){
+  .controller('AdminCtrl', function ($scope, $location, User, ParseService) {
+    if (User.isLoggedIn()){
       // $scope.user = ParseService.getUser();
     } else {
       $location.path('/login');
@@ -23,7 +23,7 @@ angular.module('barliftApp')
     });
 
     $scope.logout = function(){
-      ParseService.logout();
+      User.logout();
       $location.path('/login');
     };
   });

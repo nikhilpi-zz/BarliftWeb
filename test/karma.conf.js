@@ -26,6 +26,9 @@ module.exports = function(config) {
       'bower_components/angular-route/angular-route.js',
       'bower_components/angular-sanitize/angular-sanitize.js',
       'bower_components/angular-touch/angular-touch.js',
+      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+      'http://www.parsecdn.com/js/parse-1.3.3.min.js',
+      'app/scripts/app.js',
       'app/scripts/**/*.js',
       'test/mock/**/*.js',
       'test/spec/**/*.js'

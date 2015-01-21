@@ -8,9 +8,13 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-  .controller('LoginCtrl', function ($scope, $location, ParseService) {
+  .controller('LoginCtrl', function ($scope, $location, User) {
+    if (User.isLoggedIn()){
+      $location.path('/admin');
+    }
+
     $scope.login = function() {
-      ParseService.login($scope.login_username, $scope.login_password, function(user) {
+      User.login($scope.login_username, $scope.login_password, function(user) {
         $scope.$apply(function() {
           $location.path('/admin');
         });
