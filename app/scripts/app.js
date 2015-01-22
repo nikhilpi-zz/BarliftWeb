@@ -32,6 +32,10 @@ angular
         templateUrl: 'views/admin.html',
         controller: 'AdminCtrl'
       })
+      .when('/bar', {
+        templateUrl: 'views/bar.html',
+        controller: 'BarCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -41,12 +45,12 @@ angular
     User.getUser();
     $rootScope.$on( '$routeChangeStart', function(event, next, current) {
 
-      if ($rootScope.loggedInUser === null) {
-        // no logged user, redirect to /login
-        if ( next.templateUrl === 'views/admin.html') {
-        } else {
-          $location.path('/login');
-        }
-      }
+      // if ($User.getUser() && next.templateUrl === 'views/login.html') {
+      //   User.getUserRole(function(role){
+      //   $scope.$apply(function() {
+      //     $location.path('/'+ role.toLowerCase());
+      //     });
+      //   });
+      // }
     });
   });

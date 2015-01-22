@@ -79,7 +79,46 @@ angular.module('barliftApp')
         } else {
           return false;
         }
-      }
+      },
+
+      checkUserRole : function checkUserRole(roleName, cb){
+        var query = (new Parse.Query(Parse.Role));
+        query.equalTo("name", roleName);
+        query.equalTo("users", Parse.User.current());
+        query.first({
+          success: function(result){
+            if(result){
+              cb(true);
+            } else {
+              cb(false);
+            }
+          }
+        });
+      },
+
+      getUserRole : function checkUserRole(cb){
+        var queryRoles = new Parse.Query('_Role');
+        queryRoles.find({
+          success: function(roles) {
+            for(var i = 0; i < roles.length; i++) {
+              var queryUser = (new Parse.Query(Parse.Role));
+              queryUser.equalTo("objectId", roles[i].id);
+              queryUser.equalTo("users", Parse.User.current());
+              queryUser.first({
+                success: function(result){
+                  if(result){
+                    cb(result.get('name'));
+                  }
+                }
+              });
+            }
+          },
+
+          error: function(error) {
+            
+          }
+        });
+      },
     
     };
 

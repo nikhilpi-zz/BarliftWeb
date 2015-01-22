@@ -2,15 +2,15 @@
 
 /**
  * @ngdoc function
- * @name barliftApp.controller:AdminCtrl
+ * @name barliftApp.controller:BarCtrl
  * @description
- * # AdminCtrl
+ * # BarCtrl
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-  .controller('AdminCtrl', function ($scope, $location, User, ParseService) {
+  .controller('BarCtrl', function ($scope, $location, User, Deals) {
     if (User.isLoggedIn()){
-      User.checkUserRole('Admin', function(isRole){
+      User.checkUserRole('Bar', function(isRole){
         if (!isRole){
           $scope.$apply(function() {
             $location.path('/login');
@@ -21,11 +21,8 @@ angular.module('barliftApp')
       $location.path('/login');
     }
 
-    $scope.emails = [];
-    ParseService.getEmails(function(data){
-      $scope.$apply(function() {
-        $scope.emails = data;
-      });
+    Deals.getUserDeals(User.getUser(), function(res){
+      console.log(res);
     });
 
     $scope.logout = function(){

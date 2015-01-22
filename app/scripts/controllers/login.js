@@ -10,13 +10,19 @@
 angular.module('barliftApp')
   .controller('LoginCtrl', function ($scope, $location, User) {
     if (User.isLoggedIn()){
-      $location.path('/admin');
+      User.getUserRole(function(role){
+        $scope.$apply(function() {
+          $location.path('/'+ role.toLowerCase());
+        });
+      });
     }
 
     $scope.login = function() {
       User.login($scope.login_username, $scope.login_password, function(user) {
-        $scope.$apply(function() {
-          $location.path('/admin');
+        User.getUserRole(function(role){
+          $scope.$apply(function() {
+            $location.path('/'+ role.toLowerCase());
+          });
         });
       });
     };
