@@ -1,0 +1,6 @@
+<div class="panel panel-default">
+  <div class="panel-heading">Your Deals</div>
+  <ul class="list-group">
+    <li ng-repeat="deal in deals" class="list-group-item"><a ng-click="select({deal: deal})">{{deal.name}}</a></li>
+  </ul>
+</div>

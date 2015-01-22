@@ -14,6 +14,15 @@ angular.module('barliftApp')
     var Deal = Parse.Object.extend("Deal");
     var dealQuery = new Parse.Query(Deal);
 
+    function listToJSON(lst){
+      var out = []
+      for (var i = 0; i < lst.length;i++) {
+        out.push(lst[i].toJSON());
+      }
+      return out;
+    }
+    
+
     var Deals = {
       name: 'Deals',
 
@@ -21,7 +30,7 @@ angular.module('barliftApp')
         dealQuery.equalTo('user', user.get('objectId'));
         dealQuery.find({ 
           success: function(results){
-            callback(results);
+            callback(listToJSON(results));
           }
         });
       }

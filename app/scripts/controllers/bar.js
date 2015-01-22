@@ -9,6 +9,7 @@
  */
 angular.module('barliftApp')
   .controller('BarCtrl', function ($scope, $location, User, Deals) {
+
     if (User.isLoggedIn()){
       User.checkUserRole('Bar', function(isRole){
         if (!isRole){
@@ -21,9 +22,19 @@ angular.module('barliftApp')
       $location.path('/login');
     }
 
+    $scope.bar = User.getUser();
+    $scope.deals = []
+    $scope.selectedDeal = {}
+
     Deals.getUserDeals(User.getUser(), function(res){
-      console.log(res);
+      $scope.$apply(function() {
+        $scope.deals = res; 
+      });
     });
+
+    $scope.selectDeal = function(deal){
+      $scope.selectedDeal = deal; 
+    };
 
     $scope.logout = function(){
       User.logout();

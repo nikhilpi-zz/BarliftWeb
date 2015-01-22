@@ -1,2 +1,20 @@
-<p>This is the Bar view.</p>
-<a class="btn btn-default btn-lg" ng-click="logout()">Logout</a>
+<div id="bar_page" class= "bar-page">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8">
+        <h2>Hello {{bar.get("username")}}</h2>
+      </div>
+      <div class="col-md-4 col-md-offset-6">
+        <a class="btn btn-default btn-lg" ng-click="logout()">Logout</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <deal-form deal="selectedDeal"></deal-form>
+      </div>
+      <div class="col-md-4 col-md-offset-6">
+        <deal-list deals="deals" select="selectDeal(deal)"></deal-list>
+      </div>
+    </div>
+  </div>
+</div>
