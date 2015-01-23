@@ -23,14 +23,19 @@ angular.module('barliftApp')
     }
 
     $scope.bar = User.getUser();
+    console.log($scope.bar);
     $scope.deals = []
     $scope.selectedDeal = {}
 
-    Deals.getUserDeals(User.getUser(), function(res){
-      $scope.$apply(function() {
-        $scope.deals = res; 
-      });
-    });
+    Deals(User.getUser()).query({
+      where: {
+        user: User.getUserPointer()
+      }}, 
+      function(res){
+        console.log(res);
+        $scope.deals = res.results; 
+      }
+    );
 
     $scope.selectDeal = function(deal){
       $scope.selectedDeal = deal; 
