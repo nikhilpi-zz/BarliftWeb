@@ -34,6 +34,7 @@ angular.module('barliftApp')
 
     $scope.selectDeal = function(deal){
       $scope.selectedDeal = deal; 
+      Deals.saveDeal(User.getUser(), deal)
     };
 
     $scope.logout = function(){

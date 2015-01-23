@@ -14,12 +14,22 @@ angular.module('barliftApp')
     var Deal = Parse.Object.extend("Deal");
     var dealQuery = new Parse.Query(Deal);
 
+    var deals = [];
+
     function listToJSON(lst){
       var out = []
       for (var i = 0; i < lst.length;i++) {
         out.push(lst[i].toJSON());
       }
       return out;
+    }
+
+    function jsonToParseDeal(deal){
+      for (parseDeal in deals){
+        if (deal.objectId === parseDeal.id){
+          return parseDeal;
+        }
+      }
     }
     
 
@@ -30,9 +40,18 @@ angular.module('barliftApp')
         dealQuery.equalTo('user', user.get('objectId'));
         dealQuery.find({ 
           success: function(results){
+            deals = results;
             callback(listToJSON(results));
           }
         });
+      },
+
+      saveDeal : function saveDeal(user, deal){
+        var parseDeal = jsonToParseDeal(deal);
+        for (key in Object.keys(deal)){
+          console.log(deal[key]);
+          console.log(parseDeal.get(key);
+        }
       }
     };
 
