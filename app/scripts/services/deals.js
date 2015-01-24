@@ -8,52 +8,31 @@
  * Factory in the barliftApp.
  */
 angular.module('barliftApp')
-  .factory('Deals', function () {
-    // Service logic
-    // ...
-    var Deal = Parse.Object.extend("Deal");
-    var dealQuery = new Parse.Query(Deal);
+  .factory('Deals', function ($resource) {
+    var parseAppId = '5DZi1FrdZcwBKXIxMplWsqYu3cEEumlmFDB1kKnC';
+    var parseRestKey = 'pMT9AefpMkJfbcJ5fTA2uOGxwpitMII7hpCt8x4O';
 
-    var deals = [];
-
-    function listToJSON(lst){
-      var out = []
-      for (var i = 0; i < lst.length;i++) {
-        out.push(lst[i].toJSON());
+    return function(user){
+      var header = {
+        'X-Parse-Application-Id': parseAppId,
+        'X-Parse-REST-API-Key': parseRestKey,
+      };
+      if (user){
+        angular.extend(header, header, {'X-Parse-Session-Token': user._sessionToken});
       }
-      return out;
-    }
 
-    function jsonToParseDeal(deal){
-      for (parseDeal in deals){
-        if (deal.objectId === parseDeal.id){
-          return parseDeal;
-        }
-      }
-    }
-    
-
-    var Deals = {
-      name: 'Deals',
-
-      getUserDeals : function getUserDeals(user, callback){
-        dealQuery.equalTo('user', user.get('objectId'));
-        dealQuery.find({ 
-          success: function(results){
-            deals = results;
-            callback(listToJSON(results));
+      return $resource('https://api.parse.com/1/classes/Deal/:id',
+        {
+          id: '@_id'
+        },
+        { 
+          query: {
+            headers: header
+          },
+          update: {
+            method: 'PUT',
+            headers: header
           }
         });
-      },
-
-      saveDeal : function saveDeal(user, deal){
-        var parseDeal = jsonToParseDeal(deal);
-        for (key in Object.keys(deal)){
-          console.log(deal[key]);
-          console.log(parseDeal.get(key);
-        }
-      }
     };
-
-    return Deals;
   });

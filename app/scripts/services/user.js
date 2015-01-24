@@ -73,6 +73,14 @@ angular.module('barliftApp')
         }
       },
 
+      getUserPointer : function getUserPointer() {
+        return {
+          __type: 'Pointer',
+          className: '_User',
+          objectId: currentUser.id
+        };
+      },
+
       isLoggedIn : function isLoggedIn() {
         if(currentUser || Parse.User.current()) {
           return true;
