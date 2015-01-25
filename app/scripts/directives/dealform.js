@@ -12,7 +12,8 @@ angular.module('barliftApp')
       templateUrl: 'views/dealform.html',
       restrict: 'E',
       scope: {
-        deal: '='
+        deal: '=',
+        save: '&'
       },
       link: function postLink(scope, element, attrs) {
         scope.today = function() {

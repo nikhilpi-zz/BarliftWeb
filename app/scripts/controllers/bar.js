@@ -24,22 +24,53 @@ angular.module('barliftApp')
 
     $scope.bar = User.getUser();
     console.log($scope.bar);
-    $scope.deals = []
-    $scope.selectedDeal = {}
+    $scope.deals = [];
+    $scope.selectedDeal = {};
 
-    Deals(User.getUser()).query({
-      where: {
-        user: User.getUserPointer()
-      }}, 
-      function(res){
-        console.log(res);
-        $scope.deals = res.results; 
+    $scope.loadDeals = function(){
+      Deals(User.getUser()).query({
+        where: {
+          user: User.getUserPointer()
+        }}, 
+        function(res){
+          console.log(res);
+          $scope.deals = res.results; 
+        }
+      );
+    };
+
+    $scope.loadDeals();
+
+    $scope.saveDeal = function(deal){
+      if (deal.objectId){
+        Deals(User.getUser()).update(deal, function(res){
+          console.log(res);
+          $scope.loadDeals();
+        })
+      } else {
+        deal.ACL = {};
+        deal.ACL['*'] = {
+          read: true
+        };
+        deal.ACL[User.getUser().id] = {
+          read: true,
+          write: true
+        };
+        deal.ACL['role:Admin'] = {
+          read: true,
+          write: true
+        };
+        deal.user = User.getUserPointer();
+        Deals(User.getUser()).save(deal, function(res){
+          console.log(res);
+          $scope.loadDeals();
+        })
+
       }
-    );
+    };
 
     $scope.selectDeal = function(deal){
       $scope.selectedDeal = deal; 
-      Deals.saveDeal(User.getUser(), deal)
     };
 
     $scope.logout = function(){

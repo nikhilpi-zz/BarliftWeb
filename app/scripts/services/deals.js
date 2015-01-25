@@ -21,11 +21,15 @@ angular.module('barliftApp')
         angular.extend(header, header, {'X-Parse-Session-Token': user._sessionToken});
       }
 
-      return $resource('https://api.parse.com/1/classes/Deal/:id',
+      return $resource('https://api.parse.com/1/classes/Deal/:objectId',
         {
-          id: '@_id'
+          objectId: '@objectId'
         },
         { 
+          save: {
+            method: 'POST',
+            headers: header
+          },
           query: {
             headers: header
           },
