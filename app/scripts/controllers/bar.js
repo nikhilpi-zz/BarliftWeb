@@ -33,7 +33,6 @@ angular.module('barliftApp')
           user: User.getUserPointer()
         }}, 
         function(res){
-          console.log(res);
           $scope.deals = res.results; 
         }
       );
@@ -44,7 +43,6 @@ angular.module('barliftApp')
     $scope.saveDeal = function(deal){
       if (deal.objectId){
         Deals(User.getUser()).update(deal, function(res){
-          console.log(res);
           $scope.loadDeals();
         })
       } else {
@@ -65,8 +63,8 @@ angular.module('barliftApp')
           console.log(res);
           $scope.loadDeals();
         })
-
       }
+      $scope.selectedDeal = {};
     };
 
     $scope.selectDeal = function(deal){

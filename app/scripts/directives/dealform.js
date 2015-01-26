@@ -7,7 +7,7 @@
  * # dealForm
  */
 angular.module('barliftApp')
-  .directive('dealForm', function () {
+  .directive('dealForm', ['ParseTypes', function (ParseTypes) {
     return {
       templateUrl: 'views/dealform.html',
       restrict: 'E',
@@ -16,31 +16,18 @@ angular.module('barliftApp')
         save: '&'
       },
       link: function postLink(scope, element, attrs) {
-        scope.today = function() {
-          scope.dt = new Date();
-        };
-        scope.today();
+        scope.$watch('deal', function(newVal, oldVal){
+          if (scope.deal.deal_start_date){
+            scope.deal.deal_start_date = ParseTypes.parseDate(scope.deal.deal_start_date);
+          } else {
+            scope.deal.deal_start_date = new Date();
+          }
+        });
 
-        scope.clear = function () {
-          scope.dt = null;
-        };
-
-        // Disable weekend selection
-        scope.disabled = function(date, mode) {
-          return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-        };
-
-        scope.toggleMin = function() {
-          scope.minDate = scope.minDate ? null : new Date();
-        };
-        scope.toggleMin();
-
-        scope.open = function($event) {
-          $event.preventDefault();
-          $event.stopPropagation();
-
-          scope.opened = true;
-        };
+        scope.dealSave = function(deal){
+          deal.deal_start_date = ParseTypes.date(deal.deal_start_date);
+          scope.save({deal: deal})
+        }
 
         scope.dateOptions = {
           formatYear: 'yy',
@@ -49,6 +36,6 @@ angular.module('barliftApp')
 
         scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
         scope.format = scope.formats[0];
-            }
+      }
     };
-  });
+  }]);

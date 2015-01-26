@@ -16,13 +16,11 @@
     <input type="number" class="form-control" id="dealName" placeholder="100" ng-model="deal.deal_qty">
   </div>
   <div class="form-group">
-    <label for="dealName">Start Day:</label>
-    <p class="input-group">
-      <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="deal.deal_start_date" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
-      <span class="input-group-btn">
-        <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-      </span>
-    </p>
+    <label for="dealName">Start Date:</label>
+    <timepicker ng-model="deal.deal_start_date" hour-step="1" minute-step="1" show-meridian="true"></timepicker>
+    <div style="display:inline-block; min-height:290px;">
+      <datepicker ng-model="deal.deal_start_date" min-date="minDate" show-weeks="true" class="well well-sm"></datepicker>
+    </div>
   </div>
-  <button type="submit" class="btn btn-default" ng-click="save({deal: deal})">Submit</button>
+  <button type="submit" class="btn btn-default" ng-click="dealSave(deal)">Submit</button>
 </form>
