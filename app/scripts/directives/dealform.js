@@ -7,35 +7,34 @@
  * # dealForm
  */
 angular.module('barliftApp')
-  .directive('dealForm', ['ParseTypes', function (ParseTypes) {
+  .directive('dealForm', ['ParseTypes', 'Deals', function (ParseTypes, Deals) {
     return {
       templateUrl: 'views/dealform.html',
       restrict: 'E',
       scope: {
         deal: '=',
-        save: '&'
+        user: '='
       },
       link: function postLink(scope, element, attrs) {
+        scope.isNew = true;
+        //Convert parse date to js date
         scope.$watch('deal', function(newVal, oldVal){
-          if (scope.deal.deal_start_date){
-            scope.deal.deal_start_date = ParseTypes.parseDate(scope.deal.deal_start_date);
+          if(scope.deal.objectId){
+            scope.isNew = false;
           } else {
-            scope.deal.deal_start_date = new Date();
+            scope.isNew = true;
           }
         });
 
-        scope.dealSave = function(deal){
-          deal.deal_start_date = ParseTypes.date(deal.deal_start_date);
-          scope.save({deal: deal})
-        }
-
-        scope.dateOptions = {
-          formatYear: 'yy',
-          startingDay: 1
+        //convert date back to parse date. Update or save depending on object
+        scope.saveDeal = function(deal){
+          Deals.save(deal);
+          scope.deal = Deals.newDeal(scope.user);
         };
-
-        scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-        scope.format = scope.formats[0];
+        scope.updateDeal = function(deal){
+          Deals.update(deal);
+          scope.deal = Deals.newDeal(scope.user);
+        };
       }
     };
   }]);

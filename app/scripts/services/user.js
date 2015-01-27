@@ -8,128 +8,96 @@
  * Factory in the barliftApp.
  */
 angular.module('barliftApp')
-  .factory('User', function () {
-    var currentUser;
-
-    var User = {
-      name: 'User',
-
-      // Login a user
-      login : function login(username, password, callback) {
-        Parse.User.logIn(username, password, {
-          success: function(user) {
-            currentUser = user;
-            callback(user);
-          },
-          error: function(user, error) {
-            alert('Error: ' + error.message);
+  .factory('User', function ($resource, $http, ParseTypes, Session) {
+    var apiRest = $resource('https://api.parse.com/1/users/:objectId',
+      {
+        objectId: '@objectId'
+      },
+      { 
+        getCurrent: {
+          method:'GET',
+          cache: true,
+          url: 'https://api.parse.com/1/users/me',
+          transformResponse: function(data, headersGetter){
+            data = angular.fromJson(data);
+            return ParseTypes.resProcess(data,'_User');
           }
-        });
-      },
-
-      // // Login a user using Facebook
-      // FB_login : function FB_login(callback) {
-      //   Parse.FacebookUtils.logIn(null, {
-      //     success: function(user) {
-      //       if (!user.existed()) {
-      //         alert("User signed up and logged in through Facebook!");
-      //       } else {
-      //         alert("User logged in through Facebook!");
-      //       }
-      //       $rootScope.loggedInUser = user;
-      //       callback(user);
-      //     },
-      //     error: function(user, error) {
-      //       alert("User cancelled the Facebook login or did not fully authorize.");
-      //     }
-      //   });
-      // },
-
-      // // Register a user
-      // signUp : function signUp(username, password, callback) {
-      //   Parse.User.signUp(username, password, { ACL: new Parse.ACL() }, {
-      //       success: function(user) {
-      //           loggedInUser = user;
-      //           callback(user);
-      //       },
-
-      //       error: function(user, error) {
-      //         alert("Error: " + error.message);
-      //       }
-      //   });
-      // },
-
-      // Logout current user
-      logout : function logout(callback) {
-        Parse.User.logOut();
-        currentUser = null;
-      },
-
-      // Get current logged in user
-      getUser : function getUser() {
-        if(currentUser || Parse.User.current()) {
-          currentUser = Parse.User.current();
-          return Parse.User.current();
+        },
+        get: {
+          method:'GET',
+          cache: true,
+          transformResponse: function(data, headersGetter){
+            data = angular.fromJson(data);
+            return ParseTypes.resProcess(data,'_User');
+          }
+        },
+        save: {
+          method: 'POST',
+          transformRequest: function(data, headersGetter){
+            var req = ParseTypes.reqProcess(data);
+            req = angular.toJson(req);
+            return req;
+          }
+        },
+        query: {
+          method:'GET',
+          isArray: true,
+          transformResponse: function(data, headersGetter){
+            data = angular.fromJson(data);
+            var results = data.results;
+            var processed = results.map(function(x){
+              return ParseTypes.resProcess(x,'_User');
+            });
+            return processed;
+          }
+        },
+        update: {
+          method: 'PUT',
+          transformRequest: function(data, headersGetter){
+            var req = ParseTypes.reqProcess(data);
+            req = angular.toJson(req);
+            return req;
+          }
         }
-      },
+    });
 
-      getUserPointer : function getUserPointer() {
-        return {
-          __type: 'Pointer',
-          className: '_User',
-          objectId: currentUser.id
-        };
-      },
+    // apiRest.newDeal = function(user){
+    //   var deal = {
+    //     ACL: {
+    //       '*': {
+    //         read: true
+    //       },
+    //       'role:Admin': {
+    //         read: true,
+    //         write: true
+    //       }
+    //     },
+    //     schema: [
+    //       {
+    //         key: 'deal_start_date',
+    //         __type: 'Date'
+    //       },
+    //       {
+    //         key: 'deal_end_date',
+    //         __type: 'Date'
+    //       },
+    //       {
+    //         key: 'user',
+    //         __type: 'Pointer',
+    //         className: '_User'
+    //       }
+    //     ],
+    //     deal_start_date: new Date(),
+    //     deal_end_date: new Date()
+    //   };
 
-      isLoggedIn : function isLoggedIn() {
-        if(currentUser || Parse.User.current()) {
-          return true;
-        } else {
-          return false;
-        }
-      },
+    //   deal.ACL[user.objectId] = {
+    //       read: true,
+    //       write: true
+    //     };
+    //   deal.user = user.objectId;
+    //   return deal;
+    // };
 
-      checkUserRole : function checkUserRole(roleName, cb){
-        var query = (new Parse.Query(Parse.Role));
-        query.equalTo("name", roleName);
-        query.equalTo("users", Parse.User.current());
-        query.first({
-          success: function(result){
-            if(result){
-              cb(true);
-            } else {
-              cb(false);
-            }
-          }
-        });
-      },
-
-      getUserRole : function checkUserRole(cb){
-        var queryRoles = new Parse.Query('_Role');
-        queryRoles.find({
-          success: function(roles) {
-            for(var i = 0; i < roles.length; i++) {
-              var queryUser = (new Parse.Query(Parse.Role));
-              queryUser.equalTo("objectId", roles[i].id);
-              queryUser.equalTo("users", Parse.User.current());
-              queryUser.first({
-                success: function(result){
-                  if(result){
-                    cb(result.get('name'));
-                  }
-                }
-              });
-            }
-          },
-
-          error: function(error) {
-            
-          }
-        });
-      },
-    
-    };
-
-    // The factory function returns ParseService, which is injected into controllers.
-    return User;
+    return apiRest; 
   });

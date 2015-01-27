@@ -8,35 +8,81 @@
  * Factory in the barliftApp.
  */
 angular.module('barliftApp')
-  .factory('Deals', function ($resource) {
-    var parseAppId = '5DZi1FrdZcwBKXIxMplWsqYu3cEEumlmFDB1kKnC';
-    var parseRestKey = 'pMT9AefpMkJfbcJ5fTA2uOGxwpitMII7hpCt8x4O';
+  .factory('Deals', function ($resource, $http, ParseTypes) {
 
-    return function(user){
-      var header = {
-        'X-Parse-Application-Id': parseAppId,
-        'X-Parse-REST-API-Key': parseRestKey,
-      };
-      if (user){
-        angular.extend(header, header, {'X-Parse-Session-Token': user._sessionToken});
-      }
-
-      return $resource('https://api.parse.com/1/classes/Deal/:objectId',
-        {
-          objectId: '@objectId'
-        },
-        { 
-          save: {
-            method: 'POST',
-            headers: header
-          },
-          query: {
-            headers: header
-          },
-          update: {
-            method: 'PUT',
-            headers: header
+    var apiRest = $resource('https://api.parse.com/1/classes/Deal/:objectId',
+      {
+        objectId: '@objectId'
+      },
+      { 
+        save: {
+          method: 'POST',
+          transformRequest: function(data, headersGetter){
+            var req = ParseTypes.reqProcess(data);
+            req = angular.toJson(req);
+            return req;
           }
-        });
+        },
+        query: {
+          isArray: true,
+          transformResponse: function(data, headersGetter){
+            data = angular.fromJson(data);
+            var results = data.results;
+            var processed = results.map(function(x){
+              return ParseTypes.resProcess(x,'Deal');
+            });
+            return processed;
+          }
+        },
+        update: {
+          method: 'PUT',
+          transformRequest: function(data, headersGetter){
+            var req = ParseTypes.reqProcess(data);
+            req = angular.toJson(req);
+            return req;
+          }
+        }
+    });
+
+    apiRest.newDeal = function(user){
+      var today = new Date();
+      var deal = {
+        ACL: {
+          '*': {
+            read: true
+          },
+          'role:Admin': {
+            read: true,
+            write: true
+          }
+        },
+        schema: [
+          {
+            key: 'deal_start_date',
+            __type: 'Date'
+          },
+          {
+            key: 'deal_end_date',
+            __type: 'Date'
+          },
+          {
+            key: 'user',
+            __type: 'Pointer',
+            className: '_User'
+          }
+        ],
+        deal_start_date: today,
+        deal_end_date: today
+      };
+
+      deal.ACL[user.objectId] = {
+          read: true,
+          write: true
+        };
+      deal.user = user.objectId;
+      return deal;
     };
+
+    return apiRest; 
+
   });
