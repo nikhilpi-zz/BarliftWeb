@@ -66,18 +66,14 @@ angular
         redirectTo: '/'
       });
   })
-  .run(function($rootScope, $http, USER_ROLES, AUTH_EVENTS, AuthService, Session) {
-    Parse.initialize('5DZi1FrdZcwBKXIxMplWsqYu3cEEumlmFDB1kKnC','G7yhVdBRY3S2jvjkHKddlsES5YZu1z99Nh9JPLTN');
+  .run(function($rootScope, $http, $location, $window, USER_ROLES, AUTH_EVENTS, AuthService, Session) {
     $http.defaults.headers.common['X-Parse-Application-Id'] = '5DZi1FrdZcwBKXIxMplWsqYu3cEEumlmFDB1kKnC';
     $http.defaults.headers.common['X-Parse-REST-API-Key'] = 'pMT9AefpMkJfbcJ5fTA2uOGxwpitMII7hpCt8x4O';
 
-    $rootScope.currentUser = null;
-    $rootScope.userRoles = USER_ROLES;
-    $rootScope.isAuthorized = AuthService.isAuthorized;
-   
-    $rootScope.setCurrentUser = function (user) {
-      $rootScope.currentUser = user;
-    };
+    if ($window.sessionStorage['session']) {
+      var session = JSON.parse($window.sessionStorage['session']);
+      Session.create(session.userId, session.userName, session.sessionToken, session.userRole);
+    }
 
     $rootScope.$on('$routeChangeStart', function (event, next) {
       var authorizedRoles = next.data.authorizedRoles;
@@ -85,8 +81,10 @@ angular
         event.preventDefault();
         if (AuthService.isAuthenticated()) {
           $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
+          $location.path('/login');
         } else {
           $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+          $location.path('/login');
         }
       }
     });

@@ -13,12 +13,14 @@ angular.module('barliftApp')
       username: '',
       password: ''
     };
+    if (AuthService.isAuthenticated()){
+      $location.path('/'+ Session.userRole.toLowerCase());
+    }
+
     $scope.login = function (credentials) {
       AuthService.login(credentials).then(function (user) {
         $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-        $rootScope.setCurrentUser(user);
         $location.path('/'+ Session.userRole.toLowerCase());
- 
       }, function () {
         $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
       });

@@ -8,7 +8,7 @@
  * Factory in the barliftApp.
  */
 angular.module('barliftApp')
-  .factory('AuthService', function ($http, Session) {
+  .factory('AuthService', function ($http, $location, $window, Session, User) {
     var authService = {};
 
     authService.login = function (credentials) {
@@ -17,7 +17,7 @@ angular.module('barliftApp')
         method: 'GET',
         params: credentials
       }).then(function(res){
-        Session.create(res.data.objectId, res.data.username, res.data.sessionToken);
+        Session.create(res.data.objectId, res.data.username, res.data.sessionToken, '');
         return res.data.objectId;
       }).then(function(user){
         return $http({
@@ -37,8 +37,14 @@ angular.module('barliftApp')
         });
       }).then(function(role){
         Session.setRole(role.data.results[0].name);
-        return Session.userId;
+        $window.sessionStorage['session'] = JSON.stringify(Session);
       });
+    };
+
+    authService.logout = function(){
+      Session.destroy();
+      delete $window.sessionStorage['session'];
+      $location.path('/login')
     };
    
     authService.isAuthenticated = function () {
@@ -49,7 +55,6 @@ angular.module('barliftApp')
       if (!angular.isArray(authorizedRoles)) {
         authorizedRoles = [authorizedRoles];
       }
-      console.log(Session.userRole);
       return (authorizedRoles.indexOf('*') !== -1  || (authService.isAuthenticated() &&
         authorizedRoles.indexOf(Session.userRole) !== -1));
     };

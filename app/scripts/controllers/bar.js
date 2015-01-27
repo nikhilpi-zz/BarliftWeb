@@ -8,31 +8,29 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-  .controller('BarCtrl', function ($scope, $location, User, Deals) {
-
-    $scope.user = User.getUser();
+  .controller('BarCtrl', function ($scope, $location, User, Deals, Session, AuthService) {
+    $scope.user = {};
     $scope.deals = [];
-    $scope.selectedDeal = Deals($scope.user).newDeal();
 
-    $scope.loadDeals = function(){
-      Deals(User.getUser()).query({
-        where: {
-          user: User.getUserPointer()
-        }}, 
+    User.getCurrent(function(res){
+      $scope.user = res;
+      Deals.query({
+          where: {
+            user: $scope.user.getPointer
+          }
+        }, 
         function(res){
           $scope.deals = res; 
         }
       );
-    };
+    });
 
-    $scope.loadDeals();
+    $scope.selectedDeal = Deals.newDeal($scope.user);
 
     $scope.selectDeal = function(deal){
       $scope.selectedDeal = deal; 
     };
 
-    $scope.logout = function(){
-      User.logout();
-      $location.path('/login');
-    };
+    $scope.logout = AuthService.logout;
+
   });
