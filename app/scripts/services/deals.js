@@ -8,7 +8,7 @@
  * Factory in the barliftApp.
  */
 angular.module('barliftApp')
-  .factory('Deals', function ($resource, $http, ParseTypes) {
+  .factory('Deals', function ($resource, ParseTypes) {
 
     var apiRest = $resource('https://api.parse.com/1/classes/Deal/:objectId',
       {

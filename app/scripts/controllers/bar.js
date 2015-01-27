@@ -8,7 +8,7 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-  .controller('BarCtrl', function ($scope, $location, User, Deals, Session, AuthService) {
+  .controller('BarCtrl', function ($scope, $location, User, Deals, AuthService) {
     $scope.user = {};
     $scope.deals = [];
 

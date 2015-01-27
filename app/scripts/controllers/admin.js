@@ -9,8 +9,10 @@
  */
 angular.module('barliftApp')
   .controller('AdminCtrl', function ($scope, $location, User, AuthService) {
-
-    $scope.emails = [];
+    $scope.user = {};
+    User.getCurrent(function(res){
+      $scope.user = res;
+    });
 
     $scope.logout = AuthService.logout;
   });
