@@ -41,7 +41,9 @@ angular.module('barliftApp')
             transformResponse: function(data, headersGetter){
               data = angular.fromJson(data);
               var results = data.results;
-              var processed = results.map(ParseTypes.resProcess);
+              var processed = results.map(function(x){
+                return ParseTypes.resProcess(x,'Deal');
+              });
               return processed;
             }
           },

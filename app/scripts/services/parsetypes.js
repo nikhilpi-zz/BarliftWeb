@@ -12,7 +12,7 @@ angular.module('barliftApp')
     //Takes in json objects, converts to parse api types
 
     return {
-      resProcess: function(obj){
+      resProcess: function(obj, objClass){
         var keys = Object.keys(obj);
         obj.schema = [];
         for(var i = 0; i < keys.length; i++){
@@ -39,6 +39,14 @@ angular.module('barliftApp')
             }
           }
         }
+
+        obj.getPointer = function(){
+          return {
+            objectId: obj.objectId,
+            __type: 'Pointer', 
+            className: objClass
+          };
+        };
         return obj;
       },
 
@@ -69,6 +77,7 @@ angular.module('barliftApp')
           }
         }
         delete obj['schema'];
+        delete obj['getPointer'];
         return obj;
       }
     };
