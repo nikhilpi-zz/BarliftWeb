@@ -8,7 +8,7 @@
  * Factory in the barliftApp.
  */
 angular.module('barliftApp')
-  .factory('User', function () {
+  .factory('User', function ($resource, ParseTypes) {
     var currentUser;
 
     function extendUser(user){

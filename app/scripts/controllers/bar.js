@@ -10,18 +10,6 @@
 angular.module('barliftApp')
   .controller('BarCtrl', function ($scope, $location, User, Deals) {
 
-    if (User.isLoggedIn()){
-      User.checkUserRole('Bar', function(isRole){
-        if (!isRole){
-          $scope.$apply(function() {
-            $location.path('/login');
-          });
-        }
-      });
-    } else {
-      $location.path('/login');
-    }
-
     $scope.user = User.getUser();
     $scope.deals = [];
     $scope.selectedDeal = Deals($scope.user).newDeal();
