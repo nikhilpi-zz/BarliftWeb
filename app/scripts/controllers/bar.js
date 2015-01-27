@@ -22,10 +22,9 @@ angular.module('barliftApp')
       $location.path('/login');
     }
 
-    $scope.bar = User.getUser();
-    console.log($scope.bar);
+    $scope.user = User.getUser();
     $scope.deals = [];
-    $scope.selectedDeal = {};
+    $scope.selectedDeal = Deals($scope.user).newDeal();
 
     $scope.loadDeals = function(){
       Deals(User.getUser()).query({
@@ -33,39 +32,12 @@ angular.module('barliftApp')
           user: User.getUserPointer()
         }}, 
         function(res){
-          $scope.deals = res.results; 
+          $scope.deals = res; 
         }
       );
     };
 
     $scope.loadDeals();
-
-    $scope.saveDeal = function(deal){
-      if (deal.objectId){
-        Deals(User.getUser()).update(deal, function(res){
-          $scope.loadDeals();
-        })
-      } else {
-        deal.ACL = {};
-        deal.ACL['*'] = {
-          read: true
-        };
-        deal.ACL[User.getUser().id] = {
-          read: true,
-          write: true
-        };
-        deal.ACL['role:Admin'] = {
-          read: true,
-          write: true
-        };
-        deal.user = User.getUserPointer();
-        Deals(User.getUser()).save(deal, function(res){
-          console.log(res);
-          $scope.loadDeals();
-        })
-      }
-      $scope.selectedDeal = {};
-    };
 
     $scope.selectDeal = function(deal){
       $scope.selectedDeal = deal; 

@@ -11,6 +11,15 @@ angular.module('barliftApp')
   .factory('User', function () {
     var currentUser;
 
+    function extendUser(user){
+      user.getUserPointer ={
+        __type: 'Pointer',
+        className: '_User',
+        objectId: user.id
+      };
+      return user;
+    }
+
     var User = {
       name: 'User',
 
@@ -18,7 +27,7 @@ angular.module('barliftApp')
       login : function login(username, password, callback) {
         Parse.User.logIn(username, password, {
           success: function(user) {
-            currentUser = user;
+            currentUser = extendUser(user);
             callback(user);
           },
           error: function(user, error) {
@@ -68,7 +77,7 @@ angular.module('barliftApp')
       // Get current logged in user
       getUser : function getUser() {
         if(currentUser || Parse.User.current()) {
-          currentUser = Parse.User.current();
+          currentUser = extendUser(Parse.User.current());
           return Parse.User.current();
         }
       },

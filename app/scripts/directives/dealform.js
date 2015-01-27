@@ -7,35 +7,40 @@
  * # dealForm
  */
 angular.module('barliftApp')
-  .directive('dealForm', ['ParseTypes', function (ParseTypes) {
+  .directive('dealForm', ['ParseTypes', 'Deals', function (ParseTypes, Deals) {
     return {
       templateUrl: 'views/dealform.html',
       restrict: 'E',
       scope: {
         deal: '=',
-        save: '&'
+        user: '='
       },
       link: function postLink(scope, element, attrs) {
+        scope.isNew = true;
+        console.log(scope.user);
+        //Convert parse date to js date
         scope.$watch('deal', function(newVal, oldVal){
-          if (scope.deal.deal_start_date){
-            scope.deal.deal_start_date = ParseTypes.parseDate(scope.deal.deal_start_date);
+          if(scope.deal.objectId){
+            scope.isNew = false;
           } else {
-            scope.deal.deal_start_date = new Date();
+            scope.isNew = true;
           }
         });
 
-        scope.dealSave = function(deal){
-          deal.deal_start_date = ParseTypes.date(deal.deal_start_date);
-          scope.save({deal: deal})
-        }
-
-        scope.dateOptions = {
-          formatYear: 'yy',
-          startingDay: 1
+        //convert date back to parse date. Update or save depending on object
+        scope.saveDeal = function(deal){
+          if (deal.objectId){
+            Deals(scope.user).update(deal, function(res){
+              scope.deal = Deals(scope.user).newDeal();
+            })
+          } else {
+            Deals(scope.user).save(deal, function(res){
+              scope.deal.objectId = res.objectId;
+              scope.deal = Deals(scope.user).newDeal();
+            })
+          } 
         };
 
-        scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-        scope.format = scope.formats[0];
       }
     };
   }]);
