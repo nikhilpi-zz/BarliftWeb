@@ -8,7 +8,7 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-  .controller('AdminCtrl', function ($scope, $location, User, AuthService) {
+  .controller('AdminCtrl', function ($scope, User, AuthService) {
     $scope.user = {};
     User.getCurrent(function(res){
       $scope.user = res;
