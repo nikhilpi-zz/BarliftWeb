@@ -27,6 +27,10 @@ angular.module('barliftApp')
 
     $scope.selectedDeal = Deals.newDeal($scope.user);
 
+    $scope.newDeal = function(){
+      $scope.selectedDeal = Deals.newDeal($scope.user);
+    };
+
     $scope.selectDeal = function(deal){
       $scope.selectedDeal = deal; 
     };

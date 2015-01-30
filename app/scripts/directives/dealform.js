@@ -27,31 +27,37 @@ angular.module('barliftApp')
           }
         });
 
-        //convert date back to parse date. Update or save depending on object
         scope.saveDeal = function(deal){
           Deals.save(deal,function(res){
-            console.log(res);
             deal.objectId = res.objectId;
             scope.deals.push(deal);
             scope.deal = Deals.newDeal(scope.user);
+            scope.isNew = true;
           });
         };
 
         scope.updateDeal = function(deal){
           Deals.update(deal, function(){
             scope.deal = Deals.newDeal(scope.user);
+            scope.isNew = true;
           });
         };
 
         scope.deleteDeal = function(deal){
           Deals.delete(deal, function(res){
-            scope.deal = Deals.newDeal(scope.user);
             var index = scope.deals.indexOf(deal);
             if (index > -1) {
               scope.deals.splice(index, 1);
             }
+            scope.deal = Deals.newDeal(scope.user);
+            scope.isNew = true;
           })
-        }
+        };
+
+        scope.clearDeal = function(){
+          scope.deal = Deals.newDeal(scope.user);
+          scope.isNew = true;
+        };
       }
     };
   }]);
