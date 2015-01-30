@@ -8,7 +8,7 @@
  * Factory in the barliftApp.
  */
 angular.module('barliftApp')
-  .factory('Deals', function ($resource, ParseTypes) {
+  .factory('Deals', function ($resource, ParseTypes, Session) {
 
     var apiRest = $resource('https://api.parse.com/1/classes/Deal/:objectId',
       {
@@ -41,6 +41,9 @@ angular.module('barliftApp')
             req = angular.toJson(req);
             return req;
           }
+        },
+        'delete': {
+          method: 'DELETE'
         }
     });
 
@@ -75,11 +78,11 @@ angular.module('barliftApp')
         deal_end_date: today
       };
 
-      deal.ACL[user.objectId] = {
+      deal.ACL[Session.userId] = {
           read: true,
           write: true
         };
-      deal.user = user.objectId;
+      deal.user = Session.userId;
       return deal;
     };
 

@@ -57,7 +57,6 @@ angular.module('barliftApp')
           var currentVal = obj[schema[i].key];
           switch(type){
             case "Pointer":
-              console.log(obj[schema[i].key]);
               var pointer = {
                 objectId: currentVal,
                 __type: schema[i].__type, 
