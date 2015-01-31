@@ -11,6 +11,8 @@ angular.module('barliftApp')
   .controller('BarCtrl', function ($scope, $location, User, Deals, AuthService) {
     $scope.user = {};
     $scope.deals = [];
+    $scope.selectedDeal = {};
+    $scope.selectedDeal = Deals.newDeal($scope.user);
 
     User.getCurrent(function(res){
       $scope.user = res;
@@ -25,14 +27,8 @@ angular.module('barliftApp')
       );
     });
 
-    $scope.selectedDeal = Deals.newDeal($scope.user);
-
     $scope.newDeal = function(){
       $scope.selectedDeal = Deals.newDeal($scope.user);
-    };
-
-    $scope.selectDeal = function(deal){
-      $scope.selectedDeal = deal; 
     };
 
     $scope.logout = AuthService.logout;
