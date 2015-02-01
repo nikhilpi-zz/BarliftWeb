@@ -34,6 +34,16 @@ angular.module('barliftApp')
                 });
                 obj[keys[i]] = new Date(obj[keys[i]].iso);
                 break;
+              case "GeoPoint":
+                obj.schema.push({
+                  key: keys[i], 
+                  __type: obj[keys[i]].__type
+                });
+                obj[keys[i]] = {
+                  latitude: obj[keys[i]].latitude,
+                  longitude: obj[keys[i]].longitude
+                };
+                break;
               default:
                 break;
             }
@@ -52,30 +62,40 @@ angular.module('barliftApp')
 
       reqProcess: function(obj){
         var schema = obj.schema;
-        for(var i = 0; i < schema.length; i++){
-          var type = schema[i].__type;
-          var currentVal = obj[schema[i].key];
-          switch(type){
-            case "Pointer":
-              var pointer = {
-                objectId: currentVal,
-                __type: schema[i].__type, 
-                className: schema[i].className
-              };
-              obj[schema[i].key] = pointer;
-              break;
-            case "Date":
-              var date = {
-                iso: currentVal,
-                __type: schema[i].__type
-              };
-              obj[schema[i].key] = date;
-              break;
-            default:
-              break;
+        if (schema){
+          for(var i = 0; i < schema.length; i++){
+            var type = schema[i].__type;
+            var currentVal = obj[schema[i].key];
+            switch(type){
+              case "Pointer":
+                var pointer = {
+                  objectId: currentVal,
+                  __type: schema[i].__type, 
+                  className: schema[i].className
+                };
+                obj[schema[i].key] = pointer;
+                break;
+              case "Date":
+                var date = {
+                  iso: currentVal,
+                  __type: schema[i].__type
+                };
+                obj[schema[i].key] = date;
+                break;
+              case "GeoPoint":
+                var geo = {
+                  __type: schema[i].__type,
+                  latitude: currentVal.latitude,
+                  longitude: currentVal.longitude
+                };
+                obj[schema[i].key] = geo;
+                break;
+              default:
+                break;
+            }
           }
+          delete obj['schema'];
         }
-        delete obj['schema'];
         delete obj['getPointer'];
         return obj;
       }
