@@ -20,7 +20,8 @@ angular.module('barliftApp')
           url: 'https://api.parse.com/1/users/me',
           transformResponse: function(data, headersGetter){
             data = angular.fromJson(data);
-            return ParseTypes.resProcess(data,'_User');
+            var res = ParseTypes.resProcess(data,'_User')
+            return res;
           }
         },
         get: {
@@ -37,6 +38,10 @@ angular.module('barliftApp')
             var req = ParseTypes.reqProcess(data);
             req = angular.toJson(req);
             return req;
+          },
+          transformResponse: function(data, headersGetter){
+            data = angular.fromJson(data);
+            return ParseTypes.resProcess(data,'_User');
           }
         },
         query: {
@@ -57,6 +62,10 @@ angular.module('barliftApp')
             var req = ParseTypes.reqProcess(data);
             req = angular.toJson(req);
             return req;
+          },
+          transformResponse: function(data, headersGetter){
+            data = angular.fromJson(data);
+            return ParseTypes.resProcess(data,'_User');
           }
         }
     });
