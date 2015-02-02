@@ -13,10 +13,12 @@ angular.module('barliftApp')
       restrict: 'E',
       scope: {
         deals: '=',
-        select: '&'
+        select: '='
       },
       link: function postLink(scope, element, attrs) {
-        
+        scope.selectDeal = function(deal){
+          scope.select = deal;
+        };
       }
     };
   });

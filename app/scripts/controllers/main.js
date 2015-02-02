@@ -8,7 +8,7 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-  .controller('MainCtrl', function ($scope, ParseService) {
+  .controller('MainCtrl', function ($scope, Emails) {
     $scope.navPages=[{name: 'About', link:'#sec1'},
                   {name: 'Team', link:'#sec3'},
                   {name: 'For Bars', link:'#sec4'}];
@@ -23,10 +23,8 @@ angular.module('barliftApp')
         } else {
           $scope.user.isBar = false;
         }
-        ParseService.addEmail($scope.user.email, $scope.user.isBar, $scope.user.barName,function(res) {
-          $scope.$apply(function() {
+        Emails.save({email: $scope.user.email, isBar: $scope.user.isBar, name: $scope.user.barName} ,function(res) {
             $scope.user.email = 'Thanks!';
-          });
         });
       }
     };

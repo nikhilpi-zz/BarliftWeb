@@ -7,48 +7,57 @@
  * # dealForm
  */
 angular.module('barliftApp')
-  .directive('dealForm', function () {
+  .directive('dealForm', ['ParseTypes', 'Deals', function (ParseTypes, Deals) {
     return {
       templateUrl: 'views/dealform.html',
       restrict: 'E',
       scope: {
+        deals: '=',
         deal: '=',
-        save: '&'
+        user: '='
       },
       link: function postLink(scope, element, attrs) {
-        scope.today = function() {
-          scope.dt = new Date();
-        };
-        scope.today();
+        scope.isNew = true;
+        //Convert parse date to js date
+        scope.$watch('deal', function(newVal, oldVal){
+          if(scope.deal.objectId){
+            scope.isNew = false;
+          } else {
+            scope.isNew = true;
+          }
+        });
 
-        scope.clear = function () {
-          scope.dt = null;
-        };
-
-        // Disable weekend selection
-        scope.disabled = function(date, mode) {
-          return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-        };
-
-        scope.toggleMin = function() {
-          scope.minDate = scope.minDate ? null : new Date();
-        };
-        scope.toggleMin();
-
-        scope.open = function($event) {
-          $event.preventDefault();
-          $event.stopPropagation();
-
-          scope.opened = true;
+        scope.saveDeal = function(deal){
+          Deals.save(deal,function(res){
+            deal.objectId = res.objectId;
+            scope.deals.push(deal);
+            scope.deal = Deals.newDeal(scope.user);
+            scope.isNew = true;
+          });
         };
 
-        scope.dateOptions = {
-          formatYear: 'yy',
-          startingDay: 1
+        scope.updateDeal = function(deal){
+          Deals.update(deal, function(){
+            scope.deal = Deals.newDeal(scope.user);
+            scope.isNew = true;
+          });
         };
 
-        scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-        scope.format = scope.formats[0];
+        scope.deleteDeal = function(deal){
+          Deals.delete(deal, function(res){
+            var index = scope.deals.indexOf(deal);
+            if (index > -1) {
+              scope.deals.splice(index, 1);
             }
+            scope.deal = Deals.newDeal(scope.user);
+            scope.isNew = true;
+          })
+        };
+
+        scope.clearDeal = function(){
+          scope.deal = Deals.newDeal(scope.user);
+          scope.isNew = true;
+        };
+      }
     };
-  });
+  }]);
