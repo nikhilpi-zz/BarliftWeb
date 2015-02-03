@@ -16,7 +16,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'ngMaterial'
   ])
   .constant('AUTH_EVENTS', {
     loginSuccess: 'auth-login-success',

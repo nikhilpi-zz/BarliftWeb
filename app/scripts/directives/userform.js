@@ -21,20 +21,11 @@ angular.module('barliftApp')
           if(newVal.geometry){
             scope.user.location.latitude = newVal.geometry.location.D;
             scope.user.location.longitude = newVal.geometry.location.k;
-            console.log(scope.user);
           };
         });
 
-        scope.$watch('user', function(newV, oldV){
-          console.log('Current user:');
-          console.log(scope.user);
-        });
-
-
         scope.updateUser = function(user){
-          console.log(user);
           User.update(user, function(res){
-
           });
         };
 
