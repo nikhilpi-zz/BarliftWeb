@@ -1,4 +1,4 @@
-<div id="bar_page" class= "bar-page">
+<!-- <div id="bar_page" class= "bar-page">
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-6">
@@ -26,4 +26,45 @@
       </tab>
     </tabset>
   </div>
+</div>
+
+ -->
+<div id="bar_page" class= "bar-page">
+    <md-tabs class="md-primary" md-selected="data.selectedIndex">
+      <md-tab id="deal-creator" aria-controls="deal-creator-content">
+        Deal Creator
+      </md-tab>
+      <md-tab id="profile-editor" aria-controls="profile-editor-content">
+        Profile Editor
+      </md-tab>
+    </md-tabs>
+    <ng-switch on="data.selectedIndex" class="tabpanel-container">
+        <div role="tabpanel"
+             id="deal-creator-content"
+             aria-labelledby="deal-creator"
+             ng-switch-when="0"
+             md-swipe-left="next()"
+             md-swipe-right="previous()" >
+            <div layout="row" layout-wrap>
+              <div flex="33">
+                <deal-list deals="deals" select="selectedDeal"></deal-list>
+              </div>
+              <div flex="66">
+                <deal-form deals="deals" deal="selectedDeal" user="user"></deal-form>
+              </div>
+            </div>  
+
+
+        </div>
+        <div role="tabpanel"
+             id="profile-editor-content"
+             aria-labelledby="profile-editor"
+             ng-switch-when="1"
+             md-swipe-left="next()"
+             md-swipe-right="previous()" >
+            <div class="col-md-8 col-md-offset-1">
+              <user-form user="user"></user-form>
+            </div>
+        </div>
+    </ng-switch>
 </div>

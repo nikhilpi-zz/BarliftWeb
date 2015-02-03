@@ -1,6 +1,20 @@
-<div class="panel panel-default">
-  <div class="panel-heading">Your Deals</div>
-  <ul class="list-group">
-    <li ng-repeat="deal in deals" class="list-group-item"><a ng-click="selectDeal(deal)">{{deal.name}}</a></li>
-  </ul>
-</div>
+<md-content>
+  <md-toolbar md-scroll-shrink>
+    <div class="md-toolbar-tools md-accent">
+      <h3>
+        <span>Your Deals</span>
+      </h3>
+    </div>
+  </md-toolbar>
+  <md-list>
+    <md-item ng-repeat="deal in deals">
+      <md-item-content>
+        <a ng-click="selectDeal(deal)">
+          <div class="md-tile-content">
+            <h3>{{deal.name}}</h3>
+          </div>
+        </a>
+      </md-item-content>
+    </md-item>
+  </md-list>
+</md-content>
