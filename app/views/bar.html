@@ -1,34 +1,4 @@
-<!-- <div id="bar_page" class= "bar-page">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-6">
-        <h2>Hello {{user.username}}</h2>
-      </div>
-      <div class="col-md-4">
-        <a class="btn btn-default btn-lg" ng-click="logout()">Logout</a>
-      </div>
-    </div>
-    <tabset>
-      <tab heading="Deal Creator">
-        <div class="row">
-          <div class="col-md-6">
-            <deal-form deals="deals" deal="selectedDeal" user="user"></deal-form>
-          </div>
-          <div class="col-md-4">
-            <deal-list deals="deals" select="selectedDeal"></deal-list>
-          </div>
-        </div>
-      </tab> 
-      <tab heading="Profile Editor">
-        <div class="col-md-8 col-md-offset-1">
-          <user-form user="user"></user-form>
-        </div>
-      </tab>
-    </tabset>
-  </div>
-</div>
 
- -->
 <div id="bar_page" class= "bar-page">
     <md-tabs class="md-primary" md-selected="data.selectedIndex">
       <md-tab id="deal-creator" aria-controls="deal-creator-content">
@@ -62,8 +32,10 @@
              ng-switch-when="1"
              md-swipe-left="next()"
              md-swipe-right="previous()" >
-            <div class="col-md-8 col-md-offset-1">
-              <user-form user="user"></user-form>
+            <div layout="row" layout-wrap>
+              <div flex="100">
+                <user-form user="user"></user-form>
+              </div>
             </div>
         </div>
     </ng-switch>
