@@ -33,7 +33,7 @@ angular
     editor: 'User',
     bar: 'Bar'
   })
-  .config(function ($routeProvider, USER_ROLES) {
+  .config(function ($routeProvider, USER_ROLES, $mdThemingProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -66,6 +66,12 @@ angular
       .otherwise({
         redirectTo: '/'
       });
+
+    $mdThemingProvider.theme('default')
+      .primaryPalette('blue',{
+        'hue-1': '600'
+      })
+      .accentPalette('orange');
   })
   .run(function($rootScope, $http, $location, $window, USER_ROLES, AUTH_EVENTS, AuthService, Session) {
     $http.defaults.headers.common['X-Parse-Application-Id'] = '5DZi1FrdZcwBKXIxMplWsqYu3cEEumlmFDB1kKnC';
