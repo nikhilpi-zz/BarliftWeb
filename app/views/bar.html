@@ -1,4 +1,3 @@
-
 <div id="bar_page" class= "bar-page" layout="column" layout-fill>
     <md-toolbar class="md-primary">
       <div class="md-toolbar-tools">
@@ -7,7 +6,7 @@
         <md-button ng-click="logout()">Logout</md-button>
       </div>
     </md-toolbar>
-    <md-tabs class="md-primary md-hue-1 bar-page" md-selected="data.selectedIndex">
+    <md-tabs class="md-primary md-hue-1" md-selected="data.selectedIndex">
       <md-tab id="deal-creator" aria-controls="deal-creator-content">
         Deal Creator
       </md-tab>
@@ -16,7 +15,7 @@
       </md-tab>
     </md-tabs>
 
-    <ng-switch on="data.selectedIndex" class="tabpanel-container bar-page">
+    <ng-switch on="data.selectedIndex" class="tabpanel-container">
         <div role="tabpanel"
              id="deal-creator-content"
              aria-labelledby="deal-creator"
