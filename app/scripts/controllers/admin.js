@@ -7,12 +7,14 @@
  * # AdminCtrl
  * Controller of the barliftApp
  */
-angular.module('barliftApp')
-  .controller('AdminCtrl', function ($scope, User, AuthService) {
-    $scope.user = {};
-    User.getCurrent(function(res){
-      $scope.user = res;
-    });
+var admin = angular.module('barliftApp');
 
-    $scope.logout = AuthService.logout;
+admin.controller('AdminCtrl', function ($scope, Deals, AuthService) {
+  $scope.deals = [];
+
+  Deals.query(function(res){
+    $scope.deals = res;
   });
+
+  $scope.logout = AuthService.logout;
+});

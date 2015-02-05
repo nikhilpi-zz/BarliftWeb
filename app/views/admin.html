@@ -1,13 +1,13 @@
-<div id="admin_page" class= "admin-page">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-3">
-        <h2>Hello Admin</h2>
-      </div>
-      <div class="col-md-3 col-md-offset-6">
-        <a class="btn btn-default btn-lg" ng-click="logout()">Logout</a>
-      </div>
-    </div>
-    <email-grid></email-grid>
-  </div>
+<div id="admin_page">
+
+  <md-tabs class="md-primary" md-selected="data.selectedIndex">
+    <md-tab id="deal-creator">ALL</md-tab>
+    <md-tab id="profile-editor">ACCEPTED</md-tab>
+    <md-button class="md-raised md-primary pull-right" ng-click="logout()">Logout</md-button>
+  </md-tabs>
+
+  <ul class="list-group">
+    <li ng-repeat="deal in deals" class="list-group-item">{{deal.name}}</li>
+  </ul>
+
 </div>
