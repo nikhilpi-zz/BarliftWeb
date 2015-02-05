@@ -16,6 +16,8 @@ angular.module('barliftApp')
         select: '='
       },
       link: function postLink(scope, element, attrs) {
+        scope.selectDeal=null;
+
         scope.selectDeal = function(deal){
           scope.select = deal;
         };

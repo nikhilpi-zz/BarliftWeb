@@ -1,25 +1,36 @@
-<md-content>
-  <md-toolbar md-scroll-shrink>
+<md-content class="deals" layout-fill>
+  <md-toolbar class="md-primary md-hue-1">
     <div class="md-toolbar-tools">
       <h3>
         <span>Your Deals</span>
       </h3>
     </div>
   </md-toolbar>
-  <md-list>
-    <md-item ng-repeat="deal in deals">
-      <md-item-content>
-        <md-card>
-          <md-card-content>
-            <a ng-click="selectDeal(deal)">
+  <md-content md-scroll-y class="deal-list" layout-fill>
+    <md-list>
+      <md-item ng-repeat="deal in deals">
+        <md-item-content>
+          <md-card flex="33">
+            <md-card-content ng-click="selectDeal(deal)" ng-class="{'approved-deal-card': deal.approved, 'unapproved-deal-card': !deal.approved, 'deal-selected': deal===select}">
               <div class="md-tile-content">
-                <h3>{{deal.name}}</h3>
-                <h3>{{deal.deal_start_date.getMonth()+1}}/{{deal.deal_start_date.getDate()+1}}/{{deal.deal_start_date.getFullYear()}}</h3>
+                <div layout="row">
+                  <div layout="column">
+                    <h3>{{deal.name}}</h3>
+                    <h3>{{deal.deal_start_date.getMonth()+1}}/{{deal.deal_start_date.getDate()+1}}/{{deal.deal_start_date.getFullYear()}}</h3>
+                  </div>
+                  <span flex=""></span>
+                  <h3 ng-if="deal.approved">
+                    Approved
+                  </h3>
+                  <h3 ng-if="!deal.approved">
+                    Waiting Approval
+                  </h3>
+                </div>
               </div>
-            </a>
-          </md-card-content>
-        </md-card>
-      </md-item-content>
-    </md-item>
-  </md-list>
+            </md-card-content>
+          </md-card>
+        </md-item-content>
+      </md-item>
+    </md-list>
+  <md-content> 
 </md-content>

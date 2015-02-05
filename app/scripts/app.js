@@ -69,9 +69,11 @@ angular
 
     $mdThemingProvider.theme('default')
       .primaryPalette('blue',{
-        'hue-1': '600'
+        'hue-1': '600',
+        'hue-2': '800'
       })
-      .accentPalette('orange');
+      .accentPalette('green')
+      .warnPalette('red');
   })
   .run(function($rootScope, $http, $location, $window, USER_ROLES, AUTH_EVENTS, AuthService, Session) {
     $http.defaults.headers.common['X-Parse-Application-Id'] = '5DZi1FrdZcwBKXIxMplWsqYu3cEEumlmFDB1kKnC';

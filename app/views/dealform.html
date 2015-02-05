@@ -1,13 +1,14 @@
+
 <div layout="column">
   <md-content class="">
-    <md-toolbar md-scroll-shrink class="md-primary md-hue-1">
+    <md-toolbar md-scroll-shrink class="md-primary md-hue-2">
     <div class="md-toolbar-tools">
       <div ng-if="isNew">
-        <md-button class="" ng-click="saveDeal(deal)">Create</md-button>
+        <md-button class="" ng-click="saveDeal(deal)" ng-disabled="dealForm.$invalid">Create</md-button>
         <md-button class="" ng-click="clearDeal()">Clear</md-button>
       </div>
       <div ng-if="!isNew">
-        <md-button class="" ng-click="updateDeal(deal)">Update</md-button>
+        <md-button class="" ng-click="updateDeal(deal)" ng-disabled="dealForm.$invalid">Update</md-button>
         <md-button class="" ng-click="deleteDeal(deal)">Delete</md-button>
         <md-button class="" ng-click="clearDeal()">New</md-button>
       </div>
@@ -16,75 +17,56 @@
     <form name="dealForm">
       <md-input-container flex>
         <label>Deal Name</label>
-        <input ng-model="deal.name" placeholder="Sunday Special">
+        <input ng-model="deal.name" name="dealname" placeholder="Sunday Special" required>
       </md-input-container>
       <md-input-container flex>
         <label>Description</label>
-        <textarea ng-model="deal.description" columns="1" md-maxlength="150"></textarea>
+        <textarea ng-model="deal.description" columns="1" md-maxlength="150" required></textarea>
       </md-input-container>
-      <md-input-container flex>
-        <label>Target Community</label>
-        <input ng-model="deal.community_name" placeholder="Northwestern">
-      </md-input-container>
-      <md-input-container flex>
-        <label>Deal Quantity:</label>
-        <input type="number" ng-model="deal.deal_qty" placeholder="100">
-      </md-input-container>
-      <div layout layout-sm="column">
-        <md-input-container flex>
-          <label>Hour</label>
-          <input type="number" ng-model="deal.deal_qty" placeholder="9" min="1" max="12">
-        </md-input-container>
-        <md-input-container flex>
-          <label>Minute</label>
-          <input type="number" ng-model="deal.deal_qty" placeholder="00" min="0" max="59">
-        </md-input-container>
-        <md-radio-group ng-model="am">
-          <md-radio-button value="am" aria-label="Label 1">AM</md-radio-button>
-          <md-radio-button value="pm"> PM </md-radio-button>
+      <div layout="row">
+        <div layout="column" flex="50">
+          <md-input-container flex>
+            <label>Target Community</label>
+            <input ng-model="deal.community_name" placeholder="Northwestern" required>
+          </md-input-container>
+          <md-input-container flex>
+            <label>Deal Quantity:</label>
+            <input type="number" ng-model="deal.deal_qty" placeholder="100" required>
+          </md-input-container>
+        </div>
+        <md-radio-group ng-model="deal.deal_type" flex="50" required>
+          <md-radio-button value="food" aria-label="Label 1">Food</md-radio-button>
+          <md-radio-button value="drink">Drink</md-radio-button>
+          <md-radio-button value="event" aria-label="Label 3">Event</md-radio-button>
         </md-radio-group>
-      </div>
-      <div layout layout-sm="column">
-        <md-input-container flex>
-          <label>Day</label>
-          <input type="number" ng-model="deal.deal_qty" placeholder="1" min="1" max="31">
-        </md-input-container>
-        <md-input-container flex>
-          <label>Month</label>
-          <input type="number" ng-model="deal.deal_qty" placeholder="1" min="1" max="12">
-        </md-input-container>
-        <md-input-container flex>
-          <label>Year</label>
-          <input type="number" ng-model="deal.deal_qty" placeholder="2015" min="2015" max="2018">
-        </md-input-container>
-      </div>
-      <div layout layout-sm="column">
-        <md-input-container flex>
-          <label>Hour</label>
-          <input type="number" ng-model="deal.deal_qty" placeholder="9" min="1" max="12">
-        </md-input-container>
-        <md-input-container flex>
-          <label>Minute</label>
-          <input type="number" ng-model="deal.deal_qty" placeholder="00" min="0" max="59">
-        </md-input-container>
-        <md-radio-group ng-model="am">
-          <md-radio-button value="am" aria-label="Label 1">AM</md-radio-button>
-          <md-radio-button value="pm"> PM </md-radio-button>
-        </md-radio-group>
-      </div>
-      <div layout layout-sm="column">
-        <md-input-container flex>
-          <label>Day</label>
-          <input type="number" ng-model="deal.deal_qty" placeholder="1" min="1" max="31">
-        </md-input-container>
-        <md-input-container flex>
-          <label>Month</label>
-          <input type="number" ng-model="deal.deal_qty" placeholder="1" min="1" max="12">
-        </md-input-container>
-        <md-input-container flex>
-          <label>Year</label>
-          <input type="number" ng-model="deal.deal_qty" placeholder="2015" min="2015" max="2018">
-        </md-input-container>
+      </div>  
+      <div layout="row">
+        <div layout="column" flex="50">
+          <h2> Start:</h2>
+          <div layout="row" layout-sm="column">
+            <md-input-container flex>
+              <label>Time</label>
+              <input type="time" ng-model="deal.deal_start_date" required>
+            </md-input-container>
+            <md-input-container flex>
+              <label>Day</label>
+              <input type="date" ng-model="deal.deal_start_date" required>
+            </md-input-container>
+          </div>
+        </div>
+        <div layout="column" flex="50">
+          <h2> End:</h2>
+          <div layout="row" layout-sm="column">
+            <md-input-container flex>
+              <label>Time</label>
+              <input type="time" ng-model="deal.deal_end_date" required>
+            </md-input-container>
+            <md-input-container flex>
+              <label>Day</label>
+              <input type="date" ng-model="deal.deal_end_date" required>
+            </md-input-container>
+          </div>
+        </div>
       </div>
     </form>
   </md-content>
