@@ -11,7 +11,7 @@
       <md-item ng-repeat="deal in deals">
         <md-item-content>
           <md-card flex="33">
-            <md-card-content ng-click="selectDeal(deal)" ng-class="{'approved-deal-card': deal.approved, 'unapproved-deal-card': !deal.approved, 'deal-selected': deal===select}">
+            <md-card-content ng-click="selectDeal(deal)" class="deal-card" ng-class="{'approved-deal-card': deal.approved, 'unapproved-deal-card': !deal.approved, 'deal-selected': deal===select}">
               <div class="md-tile-content">
                 <div layout="row" flex>
                   <div layout="column">
