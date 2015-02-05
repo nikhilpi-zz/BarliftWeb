@@ -60,7 +60,8 @@ angular.module('barliftApp')
         return obj;
       },
 
-      reqProcess: function(obj){
+      reqProcess: function(inObj){
+        var obj = angular.copy(inObj);
         var schema = obj.schema;
         if (schema){
           for(var i = 0; i < schema.length; i++){

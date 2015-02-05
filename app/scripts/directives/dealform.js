@@ -18,7 +18,7 @@ angular.module('barliftApp')
       },
       link: function postLink(scope, element, attrs) {
         scope.isNew = true;
-        //Convert parse date to js date
+
         scope.$watch('deal', function(newVal, oldVal){
           if(scope.deal.objectId){
             scope.isNew = false;
@@ -33,6 +33,8 @@ angular.module('barliftApp')
             scope.deals.push(deal);
             scope.deal = Deals.newDeal(scope.user);
             scope.isNew = true;
+            scope.dealForm.$setPristine();
+            scope.dealForm.$setUntouched();
           });
         };
 
@@ -40,6 +42,8 @@ angular.module('barliftApp')
           Deals.update(deal, function(){
             scope.deal = Deals.newDeal(scope.user);
             scope.isNew = true;
+            scope.dealForm.$setPristine();
+            scope.dealForm.$setUntouched();
           });
         };
 
@@ -51,12 +55,16 @@ angular.module('barliftApp')
             }
             scope.deal = Deals.newDeal(scope.user);
             scope.isNew = true;
+            scope.dealForm.$setPristine();
+            scope.dealForm.$setUntouched();
           })
         };
 
         scope.clearDeal = function(){
           scope.deal = Deals.newDeal(scope.user);
           scope.isNew = true;
+          scope.dealForm.$setPristine();
+          scope.dealForm.$setUntouched();
         };
       }
     };

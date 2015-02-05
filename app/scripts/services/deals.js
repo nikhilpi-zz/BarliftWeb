@@ -48,7 +48,7 @@ angular.module('barliftApp')
     });
 
     apiRest.newDeal = function(user){
-      var today = new Date();
+      var today = new Date(2015, 0, 1, 18, 0, 0);
       var deal = {
         ACL: {
           '*': {
@@ -83,6 +83,7 @@ angular.module('barliftApp')
           write: true
         };
       deal.user = Session.userId;
+      deal.approved = false;
       return deal;
     };
 
