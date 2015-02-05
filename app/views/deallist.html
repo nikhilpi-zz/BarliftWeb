@@ -1,4 +1,4 @@
-<md-content class="deals" layout-fill>
+<div class="deals" layout="column" layout-fill>
   <md-toolbar class="md-primary md-hue-1">
     <div class="md-toolbar-tools">
       <h3>
@@ -6,14 +6,14 @@
       </h3>
     </div>
   </md-toolbar>
-  <md-content md-scroll-y class="deal-list" layout-fill>
+  <md-content md-scroll-y class="deal-list">
     <md-list>
       <md-item ng-repeat="deal in deals">
         <md-item-content>
           <md-card flex="33">
             <md-card-content ng-click="selectDeal(deal)" ng-class="{'approved-deal-card': deal.approved, 'unapproved-deal-card': !deal.approved, 'deal-selected': deal===select}">
               <div class="md-tile-content">
-                <div layout="row">
+                <div layout="row" flex>
                   <div layout="column">
                     <h3>{{deal.name}}</h3>
                     <h3>{{deal.deal_start_date.getMonth()+1}}/{{deal.deal_start_date.getDate()+1}}/{{deal.deal_start_date.getFullYear()}}</h3>
@@ -32,5 +32,5 @@
         </md-item-content>
       </md-item>
     </md-list>
-  <md-content> 
-</md-content>
+  </md-content>
+</div>
