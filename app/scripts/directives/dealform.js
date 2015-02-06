@@ -7,7 +7,7 @@
  * # dealForm
  */
 angular.module('barliftApp')
-  .directive('dealForm', ['ParseTypes', 'Deals', function (ParseTypes, Deals) {
+  .directive('dealForm', ['ParseTypes', 'Deals', 'Push', function (ParseTypes, Deals, Push) {
     return {
       templateUrl: 'views/dealform.html',
       restrict: 'E',

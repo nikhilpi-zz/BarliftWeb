@@ -48,7 +48,8 @@ angular.module('barliftApp')
     });
 
     apiRest.newDeal = function(user){
-      var today = new Date(2015, 0, 1, 18, 0, 0);
+      var today = new Date();
+      var date = new Date(today.getFullYear(), today.getMonth(), today.getDate(), today.getHours(), today.getMinutes());
       var deal = {
         ACL: {
           '*': {
@@ -74,8 +75,8 @@ angular.module('barliftApp')
             className: '_User'
           }
         ],
-        deal_start_date: today,
-        deal_end_date: today
+        deal_start_date: date,
+        deal_end_date: date
       };
 
       deal.ACL[Session.userId] = {
