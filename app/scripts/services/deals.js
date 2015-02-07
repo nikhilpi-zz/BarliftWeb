@@ -85,6 +85,7 @@ angular.module('barliftApp')
         };
       deal.user = Session.userId;
       deal.approved = false;
+      deal.num_accepted = 0;
       return deal;
     };
 
