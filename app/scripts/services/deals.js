@@ -70,13 +70,23 @@ angular.module('barliftApp')
             __type: 'Date'
           },
           {
+            key: 'start_utc',
+            __type: 'Date'
+          },
+          {
+            key: 'end_utc',
+            __type: 'Date'
+          },
+          {
             key: 'user',
             __type: 'Pointer',
             className: '_User'
           }
         ],
         deal_start_date: date,
-        deal_end_date: date
+        deal_end_date: date,
+        end_utc: new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds()),
+        start_utc: new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds())
       };
 
       deal.ACL[Session.userId] = {
