@@ -11,20 +11,13 @@
       <md-item ng-repeat="deal in deals">
         <md-item-content>
           <md-card flex="33">
-            <md-card-content ng-click="selectDeal(deal)" class="deal-card" ng-class="{'approved-deal-card': deal.approved, 'unapproved-deal-card': !deal.approved, 'deal-selected': deal===select}">
+            <md-card-content ng-click="selectDeal(deal)" class="deal-card">
               <div class="md-tile-content">
                 <div layout="row" flex>
                   <div layout="column">
                     <h3>{{deal.name}}</h3>
                     <h3>{{deal.deal_start_date.getMonth()+1}}/{{deal.deal_start_date.getDate()+1}}/{{deal.deal_start_date.getFullYear()}}</h3>
-                  </div>
-                  <span flex=""></span>
-                  <h3 ng-if="deal.approved">
-                    Approved
-                  </h3>
-                  <h3 ng-if="!deal.approved">
-                    Waiting Approval
-                  </h3>
+                  </div> 
                 </div>
               </div>
             </md-card-content>
