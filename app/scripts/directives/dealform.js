@@ -28,8 +28,8 @@ angular.module('barliftApp')
         });
 
         scope.saveDeal = function(deal){
-          deal.start_utc = new Date(deal.deal_start_date.getUTCFullYear(), deal.deal_start_date.getUTCMonth(), deal.deal_start_date.getUTCDate(), deal.deal_start_date.getUTCHours(), deal.deal_start_date.getUTCMinutes());
-          deal.end_utc = new Date(deal.deal_end_date.getUTCFullYear(), deal.deal_end_date.getUTCMonth(), deal.deal_end_date.getUTCDate(), deal.deal_end_date.getUTCHours(), deal.deal_end_date.getUTCMinutes());
+          deal.start_utc = deal.deal_start_date.valueOf();
+          deal.end_utc = deal.deal_end_date.valueOf();
           Deals.save(deal,function(res){
             deal.objectId = res.objectId;
             scope.deals.push(deal);
@@ -64,8 +64,8 @@ angular.module('barliftApp')
         };
 
         scope.updateDeal = function(deal){
-          deal.start_utc = new Date(deal.deal_start_date.getUTCFullYear(), deal.deal_start_date.getUTCMonth(), deal.deal_start_date.getUTCDate(), deal.deal_start_date.getUTCHours(), deal.deal_start_date.getUTCMinutes());
-          deal.end_utc = new Date(deal.deal_end_date.getUTCFullYear(), deal.deal_end_date.getUTCMonth(), deal.deal_end_date.getUTCDate(), deal.deal_end_date.getUTCHours(), deal.deal_end_date.getUTCMinutes());
+          deal.start_utc = deal.deal_start_date.valueOf();
+          deal.end_utc = deal.deal_end_date.valueOf();
           Deals.update(deal, function(){
             scope.deal = Deals.newDeal(scope.user);
             scope.isNew = true;
