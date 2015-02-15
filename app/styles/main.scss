@@ -9,8 +9,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 @import "compass/css3";
 @import "./_bar.scss";
 @import "./_deals.scss";
-
-
+@import "./_admin.scss";
 
 html,
 body{
@@ -188,7 +187,7 @@ img.grayscale {
 }
 
 .bright {
-  background: #dbdbdb url('http://www.bootply.com/assets/example/pt_topo.png') repeat center center fixed; 
+  background: #dbdbdb url('http://www.bootply.com/assets/example/pt_topo.png') repeat center center fixed;
   color:#777;
 }
 
@@ -220,7 +219,7 @@ img.grayscale {
       width: 3.5em;
       height: 3.5em;
       line-height: 3.6em;
-      vertical-align: middle; 
+      vertical-align: middle;
       text-align: center;
 
       &:before{
@@ -267,7 +266,7 @@ img.grayscale {
   padding-top:5%;
   height: 100%;
   width: 100%;
-  background: url('../images/team.jpeg') no-repeat center center fixed; 
+  background: url('../images/team.jpeg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

@@ -4,7 +4,7 @@
       <div class="md-toolbar-tools">
         <span>Hello {{user.username}}</span>
         <span flex=""></span>
-        <md-button>Logout</md-button>
+        <md-button ng-click="logout()">Logout</md-button>
       </div>
     </md-toolbar>
     <md-tabs class="md-primary md-hue-1 bar-page" md-selected="data.selectedIndex">
@@ -24,7 +24,7 @@
              md-swipe-left="next()"
              md-swipe-right="previous()">
             <md-content md-scroll-y flex>
-              <div layout="row"> 
+              <div layout="row">
                 <div flex="33">
                   <deal-list deals="deals" select="selectedDeal"></deal-list>
                 </div>
@@ -32,7 +32,7 @@
                   <deal-form deals="deals" deal="selectedDeal" user="user"></deal-form>
                 </div>
               </div>
-            </md-content>  
+            </md-content>
 
 
         </div>

@@ -1,13 +1,25 @@
-<div id="admin_page">
+<!-- Loading Flat UI -->
+<link href="bower_components/flat-ui/dist/css/flat-ui.css" rel="stylesheet">
 
-  <md-tabs class="md-primary" md-selected="data.selectedIndex">
-    <md-tab id="deal-creator">ALL</md-tab>
-    <md-tab id="profile-editor">ACCEPTED</md-tab>
-    <md-button class="md-raised md-primary pull-right" ng-click="logout()">Logout</md-button>
-  </md-tabs>
+<div class="row">
+  <nav-bar class="col-md-2"></nav-bar>
 
-  <ul class="list-group">
-    <li ng-repeat="deal in deals" class="list-group-item">{{deal.name}}</li>
-  </ul>
+  <div class="col-md-10 remove-padding">
+
+    <search-bar></search-bar>
+
+    <div id="deal-content" class="extra-padding">
+      <deal-options></deal-options>
+      <hr/>
+      <deal-grid></deal-grid>
+    </div>
+
+  </div>
 
 </div>
+
+
+
+
+
+
