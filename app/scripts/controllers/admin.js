@@ -12,11 +12,3 @@ app.controller('AdminCtrl', function ($scope, Deals, AuthService) {
 });
 
 
-app.directive('navBar', function (){
-  return {
-    templateUrl: 'views/admin/nav-bar.html',
-    restrict: 'E'
-  };
-});
-
-

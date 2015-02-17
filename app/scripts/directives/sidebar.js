@@ -2,16 +2,17 @@
 
 /**
  * @ngdoc directive
- * @name barliftApp.directive:navBar
+ * @name barliftApp.directive:sideBar
  * @description
- * # navBar
+ * # sideBar
  */
 angular.module('barliftApp')
-  .directive('navBar', function () {
+  .directive('sideBar', function () {
     return {
-      templateUrl: 'views/navbar.html',
+      templateUrl: 'views/sidebar.html',
       restrict: 'E',
       link: function postLink(scope, element, attrs) {
+
       }
     };
   });

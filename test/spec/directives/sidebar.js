@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Directive: navBar', function () {
+describe('Directive: sideBar', function () {
 
   // load the directive's module
   beforeEach(module('barliftApp'));
@@ -13,8 +13,8 @@ describe('Directive: navBar', function () {
   }));
 
   it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<nav-bar></nav-bar>');
+    element = angular.element('<side-bar></side-bar>');
     element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the navBar directive');
+    expect(element.text()).toBe('this is the sideBar directive');
   }));
 });

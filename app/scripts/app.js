@@ -17,7 +17,6 @@ angular
     'ngSanitize',
     'ngTouch',
     'ui.bootstrap',
-    'ngMaterial'
   ])
   .constant('AUTH_EVENTS', {
     loginSuccess: 'auth-login-success',
@@ -33,7 +32,7 @@ angular
     editor: 'User',
     bar: 'Bar'
   })
-  .config(function ($routeProvider, USER_ROLES, $mdThemingProvider) {
+  .config(function ($routeProvider, USER_ROLES) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -67,13 +66,6 @@ angular
         redirectTo: '/'
       });
 
-    $mdThemingProvider.theme('default')
-      .primaryPalette('blue',{
-        'hue-1': '600',
-        'hue-2': '800'
-      })
-      .accentPalette('green')
-      .warnPalette('red');
   })
   .run(function($rootScope, $http, $location, $window, USER_ROLES, AUTH_EVENTS, AuthService, Session) {
     $http.defaults.headers.common['X-Parse-Application-Id'] = '5DZi1FrdZcwBKXIxMplWsqYu3cEEumlmFDB1kKnC';
