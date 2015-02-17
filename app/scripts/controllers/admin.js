@@ -1,18 +1,22 @@
-'use strict';
+var app = angular.module('barliftApp');
 
-/**
- * @ngdoc function
- * @name barliftApp.controller:AdminCtrl
- * @description
- * # AdminCtrl
- * Controller of the barliftApp
- */
-angular.module('barliftApp')
-  .controller('AdminCtrl', function ($scope, User, AuthService) {
-    $scope.user = {};
-    User.getCurrent(function(res){
-      $scope.user = res;
-    });
+app.controller('AdminCtrl', function ($scope, Deals, AuthService) {
+  // variables
+  $scope.deals = [];
 
-    $scope.logout = AuthService.logout;
-  });
+  // get all deals
+  Deals.query(function(deals) { $scope.deals = deals; });
+
+  // logout
+  $scope.logout = AuthService.logout;
+});
+
+
+app.directive('navBar', function (){
+  return {
+    templateUrl: 'views/admin/nav-bar.html',
+    restrict: 'E'
+  };
+});
+
+

@@ -1,13 +1,25 @@
-<div id="admin_page" class= "admin-page">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-3">
-        <h2>Hello Admin</h2>
-      </div>
-      <div class="col-md-3 col-md-offset-6">
-        <a class="btn btn-default btn-lg" ng-click="logout()">Logout</a>
-      </div>
+<!-- Loading Flat UI -->
+<link href="bower_components/flat-ui/dist/css/flat-ui.css" rel="stylesheet">
+
+<div class="row">
+  <nav-bar class="col-md-2"></nav-bar>
+
+  <div class="col-md-10 remove-padding">
+
+    <search-bar></search-bar>
+
+    <div id="deal-content" class="extra-padding">
+      <deal-options></deal-options>
+      <hr/>
+      <deal-grid></deal-grid>
     </div>
-    <email-grid></email-grid>
+
   </div>
+
 </div>
+
+
+
+
+
+

@@ -22,14 +22,16 @@
              ng-switch-when="0"
              md-swipe-left="next()"
              md-swipe-right="previous()">
-              <div layout="row" layout-fill> 
+            <md-content md-scroll-y flex>
+              <div layout="row">
                 <div flex="33">
                   <deal-list deals="deals" select="selectedDeal"></deal-list>
                 </div>
                 <div flex="66">
                   <deal-form deals="deals" deal="selectedDeal" user="user"></deal-form>
                 </div>
-              </div> 
+              </div>
+            </md-content>
         </div>
         <div role="tabpanel"
              id="profile-editor-content"
