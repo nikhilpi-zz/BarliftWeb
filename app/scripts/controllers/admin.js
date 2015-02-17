@@ -19,33 +19,4 @@ app.directive('navBar', function (){
   };
 });
 
-app.directive('searchBar', function (){
-  return {
-    templateUrl: 'views/admin/search-bar.html',
-    restrict: 'E'
-  };
-});
 
-app.directive('dealOptions', function (){
-  return {
-    templateUrl: 'views/admin/deal-options.html',
-    restrict: 'E'
-  };
-});
-
-app.directive('dealGrid', function (){
-  return {
-    templateUrl: 'views/admin/deal-grid.html',
-    restrict: 'E'
-  };
-});
-
-app.directive('dealCard', function (){
-  return {
-    templateUrl: 'views/admin/deal-card.html',
-    restrict: 'E',
-    scope: {
-      deal: '=',
-    }
-  };
-});

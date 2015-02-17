@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc directive
- * @name barliftApp.directive:emailGrid
+ * @name barliftApp.directive:dealGrid
  * @description
- * # emailGrid
+ * # dealGrid
  */
 angular.module('barliftApp')
-  .directive('emailGrid', function () {
+  .directive('dealGrid', function () {
     return {
-      templateUrl: 'views/emailgrid.html',
+      templateUrl: 'views/dealgrid.html',
       restrict: 'E',
       link: function postLink(scope, element, attrs) {
 
