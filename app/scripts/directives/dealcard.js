@@ -13,8 +13,9 @@ angular.module('barliftApp')
       restrict: 'E',
       scope: {
         deal: '=',
-      }
+      },
       link: function postLink(scope, element, attrs) {
-        element.text('this is the dealCard directive');      }
+      
+      }
     };
   });
