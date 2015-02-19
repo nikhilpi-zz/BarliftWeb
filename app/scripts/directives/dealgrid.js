@@ -7,17 +7,12 @@
  * # dealGrid
  */
 angular.module('barliftApp')
-  .directive('dealGrid', function ($modal) {
+  .directive('dealGrid', function () {
     return {
       templateUrl: 'views/dealgrid.html',
       restrict: 'E',
       link: function postLink(scope, element, attrs) {
-        scope.openDeal = function() {
-          console.log('opening');
-          var modalInstance = $modal.open({
-            template: '<h2>Hello</h2>'
-          });
-        };
-      } 
+
+      }
     };
   });

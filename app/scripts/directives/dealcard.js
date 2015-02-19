@@ -7,16 +7,19 @@
  * # dealCard
  */
 angular.module('barliftApp')
-  .directive('dealCard', function () {
+  .directive('dealCard', function ($modal) {
     return {
       templateUrl: 'views/dealcard.html',
       restrict: 'E',
-      scope: {
-        deal: '=',
-        openDeal: '&'
-      },
       link: function postLink(scope, element, attrs) {
-      
+
+        scope.openDeal = function(deal) {
+          var modalInstance = $modal.open({
+            templateUrl: 'views/dealform.html',
+            scope: scope
+          });
+        };
+
       }
     };
   });
