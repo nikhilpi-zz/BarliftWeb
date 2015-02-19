@@ -1,10 +1,18 @@
-<div class="col-md-3 deal-card">
+<div class="col-md-3 deal-card" >
   <div class="tile">
-    <h4>{{deal.name}}</h4>
+    <a ng-click="openDeal()"> <h4>{{deal.name}}</h4></a>
     Online
     <hr/>
-    <p>
-      {{deal.description}}
-    </p>
+    <div class="animate-switch-container"
+    ng-switch on="selection">
+        <p class="animate-switch" ng-switch-default>{{deal.description}}</p>
+        <div class="animate-switch" ng-switch-when="test">poop Div</div>
+    </div>
+    <div class="btn-toolbar">
+      <div class="btn-group">
+        <a class="btn btn-primary" ng-click="selection='description'"><span class="fui-time"></span></a>
+        <a class="btn btn-primary" ng-click="selection='test'"><span class="fui-photo"></span></a>
+      </div>
+    </div>
   </div>
 </div>
