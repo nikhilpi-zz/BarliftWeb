@@ -1,6 +1,7 @@
 <div id="deal-grid" class="container-fluid">
   <div class="row">
-    <deal-card ng-repeat="deal in deals" deal="deal"></deal-card>
+    <a ng-click="openDeal()"> hello</a>
+    <deal-card ng-repeat="deal in deals" deal="deal" openDeal="openDeal"></deal-card>
   </div> <!-- /row -->
 </div>
 

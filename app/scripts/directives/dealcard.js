@@ -13,6 +13,7 @@ angular.module('barliftApp')
       restrict: 'E',
       scope: {
         deal: '=',
+        openDeal: '&'
       },
       link: function postLink(scope, element, attrs) {
       
