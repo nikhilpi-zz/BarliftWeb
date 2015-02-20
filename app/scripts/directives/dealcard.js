@@ -11,15 +11,23 @@ angular.module('barliftApp')
     return {
       templateUrl: 'views/dealcard.html',
       restrict: 'E',
-      link: function postLink(scope, element, attrs) {
+      link: function(scope, element, attrs) {
+        var dealDetailsModal;
 
-        scope.openDeal = function(deal) {
-          var modalInstance = $modal.open({
+        scope.viewDetails = function(deal) {
+          dealDetailsModal = $modal.open({
             templateUrl: 'views/dealform.html',
             scope: scope
           });
         };
 
+        scope.update = function() {
+          dealDetailsModal.close(console.log('susscessgul!'));
+        };
+
+        scope.cancel = function() {
+          dealDetailsModal.dismiss();
+        };
       }
     };
   });
