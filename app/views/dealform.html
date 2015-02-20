@@ -6,7 +6,32 @@
   </div>
 
   <div class="modal-body">
-    <p>{{deal.description}}</p>
+    <form class="form-horizontal" role="form">
+
+      <!-- repeat text input fields -->
+      <div ng-init="textInputs = [
+        {name: 'Name',      val: deal.name},
+        {name: 'Community', val: deal.community_name},
+        {name: 'Type',      val: deal.deal_type},
+        {name: 'Quantity',  val: deal.deal_qty}
+      ]">
+        <div class="form-group" ng-repeat="inp in textInputs">
+          <label class="col-md-2 control-label">{{inp.name}}</label>
+          <div class="col-md-10">
+            <input type="text" class="form-control" value="{{inp.val}}">
+          </div>
+        </div>
+      </div>
+
+      <!-- other form elements -->
+      <div class="form-group">
+        <label class="col-md-2 control-label">Description</label>
+        <div class="col-md-10">
+          <textarea class="form-control" rows="3">{{deal.description}}</textarea>
+        </div>
+      </div>
+
+    </form>
   </div>
 
   <div class="modal-footer">
