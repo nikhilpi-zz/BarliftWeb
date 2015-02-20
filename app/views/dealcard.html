@@ -1,20 +1,31 @@
-<div class="col-md-3 deal-card" >
-  <div class="tile" ng-click="viewDetails(deal)">
+<style>
+  .deal-card {
+    height: 250px;
+    font-size: 0.8em;
+    overflow: hidden;
+  }
+</style>
 
-    <div>{{deal.name}}</div>
-    <div>Online</div>
-    <hr/>
+<div class="col-md-3">
+  <div class="tile deal-card" ng-click="viewDetails()">
 
-    <div class="animate-switch-container" ng-switch on="selection">
-      <p class="animate-switch" ng-switch-default>{{deal.description}}</p>
-      <div class="animate-switch" ng-switch-when="test">poop Div</div>
+    <div class="modal-header">
+      {{deal.name}}
+      <progressbar value="percent_accepted"
+        ng-attr-type="{{deal.approved ? 'success' : 'warning'}}">
+        <b>{{deal.num_accepted}} / {{deal.deal_qty}}</b>
+      </progressbar>
     </div>
 
-    <div class="btn-toolbar">
-      <div class="btn-group">
-        <a class="btn btn-primary" ng-click="selection='description'"><span class="fui-time"></span></a>
-        <a class="btn btn-primary" ng-click="selection='test'"><span class="fui-photo"></span></a>
-      </div>
+    <div class="modal-body">
+      <b>From</b> {{deal.deal_start_date | date:'mediumDate'}}<br/>
+      <b>To</b> {{deal.deal_end_date | date:'mediumDate'}}
+
+      <h4>
+      <span class="glyphicon"
+            ng-class="deal.approved ? 'glyphicon-ok-circle' : 'glyphicon-remove-circle'">
+      </span>
+      </h4>
     </div>
 
   </div>

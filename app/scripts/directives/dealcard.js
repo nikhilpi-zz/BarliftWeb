@@ -13,8 +13,11 @@ angular.module('barliftApp')
       restrict: 'E',
       link: function(scope, element, attrs) {
         var dealDetailsModal;
+        scope.index = scope.deal.approved;
 
-        scope.viewDetails = function(deal) {
+        scope.percent_accepted = scope.deal.num_accepted*100 / scope.deal.deal_qty;
+
+        scope.viewDetails = function() {
           dealDetailsModal = $modal.open({
             templateUrl: 'views/dealform.html',
             scope: scope
