@@ -8,10 +8,14 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-  .controller('MainCtrl', function ($scope, Emails) {
-    $scope.navPages=[{name: 'About', link:'#sec1'},
-                  {name: 'Team', link:'#sec3'},
-                  {name: 'For Bars', link:'#sec4'}];
+  .controller('MainCtrl', function ($scope, Emails, $location) {
+    $scope.pagename = function() { 
+      if (!$scope.selection){
+        return $location.path(); 
+      } else {
+        return '/' + $scope.selection;
+      }
+    };
 
     $scope.user = {email : null, barName : null, isBar : false};
     $scope.addEmail = function(attr) { //create a new movie. Issues a POST to /api/movies
