@@ -1,5 +1,5 @@
-<div class="home-wrapper container-fluid">
-  <div class="animate-switch-container"
+<div ng-cloak class="home-wrapper container-fluid">
+  <div class="animate-switch-container row"
     ng-switch on="pagename()">
     <div class="home" ng-switch-default>
       <div class="row">
@@ -8,13 +8,15 @@
         </div>
         <div class="cover-container col-md-4">
           <div class="banner row">
-            <div class="col-sm-3 col-xs-3">
-              <img class="img-responsive" src="/images/dm.png">
-            </div>
-            <div class="col-sm-9 col-xs-9">
-              <h3>Win $1000 for your DM team!</h3>
-              <p>Learn more...</p>
-            </div>
+            <a ng-click="switchWithin('about')">
+              <div class="col-sm-3 col-xs-3">
+                <img class="img-responsive" src="/images/dm.png">
+              </div>
+              <div class="col-sm-9 col-xs-9">
+                <h3>Win $1000 for your DM team!</h3>
+                <p>Learn more...</p>
+              </div>
+            </a>
           </div>
           <div class="cover row">
             <img class="img-responsive logo" src="/images/logo.png">
@@ -28,7 +30,13 @@
               nudge friends and find out
               where the crowds are headed.
             </p>
-              <a class="btn-download">Download the app <i class="fa fa-chevron-circle-right"></i></a> 
+              <!-- <a class="btn-download">Download the app <i class="fa fa-chevron-circle-right"></i></a>  -->
+              <form class="form-inline">
+                <div class="form-group">
+                  <input type="email" ng-model="user.email" class="form-control" id="email" placeholder="barlift@u.northwestern.edu">
+                </div>
+                <button type="submit" class="btn btn-get" ng-click="addEmail()">Get invitation</button>
+              </form>
               <p class="subtitle">Available for iOS and Android</p>
           </div>
         </div>
@@ -72,9 +80,14 @@
             <p>The DM team with the most BarLift app downloads (iOS/Android) will win $800.</p>
             <h6>2nd Prize - $200</h6>
             <p>Each user download will be an entry to a raffle. The more downloads a DM team has, the higher the chances of winning.</p>
-            <p>Contest starts on Feb 25th and ends on March 6th Winners will be announced on  March 7th </p>
+            <p>Contest starts on Feb 27th and ends on March 6th Winners will be announced on  March 7th </p>
             <p>Feel free to spread the word to friends that aren’t involved with DM! Their downloads count too! (No age limit – all entries welcome)</p>
-              <a class="btn-download">Download the app <i class="fa fa-chevron-circle-right"></i></a> 
+              <form class="form-inline">
+                <div class="form-group">
+                  <input type="email" ng-model="user.email" class="form-control" id="email" placeholder="barlift@u.northwestern.edu">
+                </div>
+                <button type="submit" class="btn btn-get" ng-click="addEmail()">Get invitation</button>
+              </form>
               <p class="subtitle">Available for iOS and Android</p>
           </div>
         </div>
@@ -88,7 +101,7 @@
         <ul class="nav mastfoot-nav">
           <li><a ng-click="selection='home'">HOME</a></li>
           <li><a ng-click="selection='about'">ABOUT</a></li>
-          <li><a ng-click="selection='team'">TEAM</a></li>
+          <!-- <li><a ng-click="selection='team'">TEAM</a></li> -->
           <li><a href="mailto:hello@barliftapp.com">CONTACT</a></li>
         </ul>
       </nav>

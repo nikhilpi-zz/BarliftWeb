@@ -17,17 +17,17 @@ angular.module('barliftApp')
       }
     };
 
-    $scope.user = {email : null, barName : null, isBar : false};
-    $scope.addEmail = function(attr) { //create a new movie. Issues a POST to /api/movies
+    $scope.switchWithin = function(page) { 
+      $scope.selection = page;
+    };
+
+
+    $scope.user = {email : null};
+    $scope.addEmail = function(attr) {
       if (typeof $scope.user.email === 'undefined'){
         $scope.user.email = 'Invalid Email!';
       } else {
-        if(attr === 'isBar'){
-          $scope.user.isBar = true;
-        } else {
-          $scope.user.isBar = false;
-        }
-        Emails.save({email: $scope.user.email, isBar: $scope.user.isBar, name: $scope.user.barName} ,function(res) {
+        Emails.save({email: $scope.user.email} ,function(res) {
             $scope.user.email = 'Thanks!';
         });
       }
