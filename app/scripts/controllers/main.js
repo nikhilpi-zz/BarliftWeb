@@ -13,9 +13,16 @@ angular.module('barliftApp')
       if (!$scope.selection){
         return $location.path(); 
       } else {
+        $location.path('/' + $scope.selection); 
         return '/' + $scope.selection;
       }
     };
+
+    $scope.isActive = function(route) {
+      console.log(route);
+      console.log($location.path());
+      return route === $location.path();
+    }
 
     $scope.switchWithin = function(page) { 
       $scope.selection = page;

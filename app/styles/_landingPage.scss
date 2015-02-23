@@ -85,13 +85,11 @@
       &:hover, &:focus{
         background-color: transparent;
       }
+      &.active{
+        color: #fff;
+        color: rgba(255,255,255,1);
+      }
     }
-  }
-
-  .mastfoot-nav > .active > a,
-  .mastfoot-nav > .active > a:hover,
-  .mastfoot-nav > .active > a:focus {
-    color: #fff;
   }
 }
 
@@ -112,13 +110,26 @@
 }
 
 .about{
+  .banner{
+    margin-bottom: 0;
+    padding: 0;
+    .img-responsive{
+      width: 50%;
+      margin: auto;
+    }
+  }
   .cover{
     text-align: left;
     h3{
       margin-top: 0;
     }
+    h6{
+      margin-bottom: 5px;
+    }
     p{
       font-size: 1em;
+      line-height: 1.5;
+      margin: 0 0 10px;
       &.subtitle{
         font-size: .7em;
         padding-top: 1%;
