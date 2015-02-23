@@ -53,13 +53,13 @@
 }
 
 @-webkit-keyframes slideDown {
-  from {padding-top: -100%;}
-  to {padding-top: 10%;}
+  from {margin-top: -40%;}
+  to {margin-top: 0;}
 }
 
 @keyframes slideDown {
-  from {padding-top: -100%;}
-  to {padding-top: 10%;}
+  from {margin-top: -40%;}
+  to {margin-top: 0;}
 }
 
 
@@ -76,7 +76,7 @@
 
     & > a {
       font-size: 1em;
-      padding-top: 10%;
+      padding-top: 7%;
       font-weight: bold;
       color: #fff; /* IE8 proofing */
       color: rgba(255,255,255,.75);
