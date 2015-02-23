@@ -1,192 +1,98 @@
-<div class="landing-page body-wrap">
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation" ng-controller="HeaderCtrl">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#/">Barlift</a>
-    </div>
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-        <li ng-repeat="page in navPages"><a scroll-on-click href="{{page.link}}">{{page.name}}</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<div id="sec0" class="header alt vert">
-  <div class="container-fluid">
-    <img class="logo" src="../images/barliftlogo.svg">
-    <div>&nbsp;</div>
-    <form class="form-inline">
-      <input type="email" class="form-control email-input" name="emailForm" placeholder="Enter email" ng-model="user.email">
-      <a class="btn btn-default btn-lg" ng-click="addEmail()">Get Early Access</a>
-    </form>
-  </div>
-</div>
-
-<div id="sec1" class="blurb">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-12">
-        <h1>BarLift uses your location to send you relevant, high quality deals when you're out at night.</h1>
-        <p class="lead">Drink specials and happy hour deals are great, but we don’t always receive that information at the right time. Oftentimes we either forget, or simply have no knowledge about the specials around us. </p>
-        <p class="lead">BarLift solves this problem by providing relevant, location-based deals that are delivered to you in real-time throughout the night when you’re actually making decisions about where to go, giving you spontaneous options at unbeatable prices. By providing bars with a mechanism to dynamically lower prices throughout the night, BarLift presents users with deals that previously never would have existed.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="featurette" id="sec2">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-12 text-center">
-        <h1>How does it work?</h1>
-      </div>
-    </div>
-    <div class="row  hidden-sm hidden-xs">
-      <div class="col-md-4 text-center">
-        <div class="featurette-item">
-          <i class="">
-            <img src="../images/cloud.png">
-          </i>
+<div class="home-wrapper container-fluid">
+  <div class="animate-switch-container"
+    ng-switch on="pagename()">
+    <div class="home" ng-switch-default>
+      <div class="row">
+        <div class="left-content col-md-4 hidden-sm hidden-xs">
+          <img class="drink" src="/images/mojito.png">
         </div>
-      </div>
-      <div class="col-md-4 text-center">
-        <div class="featurette-item">
-          <i class="">
-            <img src="../images/phone.png">
-          </i>
-        </div>
-      </div>
-      <div class="col-md-4 text-center">
-        <div class="featurette-item">
-          <i class="">
-            <img src="../images/drink.png">
-          </i>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="featurette-text col-md-4 text-center">
-        <h3>1. Dynamic Deal Creation</h3>
-        <p>BarLift enables bars to instantaneously create and send out promotions to BarLift users within its vicinity.</p>
-      </div>
-      <div class="featurette-text col-md-4 text-center">
-        <h3>2. Smartphone Notification</h3>
-        <p>BarLift alerts users of high quality deals at nearby bars and clubs via push notifications on their smartphones.</p>
-      </div>
-      <div class="featurette-text col-md-4 text-center">
-        <h3>3. Redemption</h3>
-        <p>BarLift users present promotion at the bar for redemption.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="callout" id="sec3">
-  <div class="container-fluid">
-    <div class="col-md-12 text-center"><h1>Our Team</h1></div>
-    <div class="col-md-12 text-center">&nbsp;</div>
-    <div class="col-md-12 text-center">
-      <div class="row img-row">
-        <div class="col-sm-3 img-card">
-          <a href="http://linkedin.com/in/nikhilpi/">
-            <img class="img-circle grayscale" src="../images/nikhil.jpeg">
-            <div class="img-caption"><h3>Nikhil Pai</h3></div>
-          </a>
-        </div>
-        <div class="col-sm-3 img-card">
-          <a href="http://linkedin.com/in/shikharm">
-            <img class="img-circle grayscale" src="../images/shikhar.jpg">
-            <div class="img-caption"><h3>Shikhar Mohan</h3></div>
-          </a>
-        </div>
-        <div class="col-sm-3 img-card">
-          <a href="http://linkedin.com/in/divirgupta">
-            <img class="img-circle grayscale" src="../images/divir.jpg">
-            <div class="img-caption"><h3>Divir Gupta</h3></div>
-          </a>
-        </div>
-        <div class="col-sm-3 img-card">
-          <a href="http://linkedin.com/in/dominicwong2014">
-            <img class="img-circle grayscale" src="../images/dom.jpg">
-            <div class="img-caption"><h3>Dominic Wong</h3></div>
-          </a>
-        </div>
-      </div>
-      <div class="row img-row">
-        <div class="col-sm-3 col-md-offset-1 img-card">
-          <a href="http://linkedin.com/in/zakallen">
-           <img class="img-circle grayscale" src="../images/zak.jpg">
-           <div class="img-caption"><h3>Zak Allen</h3></div>
-          </a>
-        </div>
-        <div class="col-sm-3 img-card">
-          <a href="http://linkedin.com/in/oskarmelking">
-            <img class="img-circle grayscale" src="../images/oskar.jpg">
-            <div class="img-caption"><h3>Oskar Melking</h3></div>
-          </a>
-        </div>
-        <div class="col-sm-3 img-card">
-          <a href="http://linkedin.com/in/matsglj">
-           <img class="img-circle grayscale" src="../images/mats.jpg">
-           <div class="img-caption"><h3>Mats Gabriel Love Johansen</h3></div>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<div id="sec4" class="blurb">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-4 col-md-offset-2">
-        <h1>Are you a bar?</h1>
-        <p class="lead">Generate instant demand for nights, slower than you’d expect.</p>
-        <p class="lead">We'd love to partner with you</p>
-      </div>
-      <div class="col-md-4">
-        <form>
-          <div class="form-group">
-            <label for="exampleInputEmail1"><h3>Bar Name</h3></label>
-            <input type="text" class="form-control" ng-model="user.barName" placeholder="Enter Bar Name">
+        <div class="cover-container col-md-4">
+          <div class="banner row">
+            <div class="col-sm-3 col-xs-3">
+              <img class="img-responsive" src="/images/dm.png">
+            </div>
+            <div class="col-sm-9 col-xs-9">
+              <h3>Win $1000 for your DM team!</h3>
+              <p>Learn more...</p>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1"><h3>Email Address</h3></label>
-            <input type="email" class="form-control" ng-model="user.email" placeholder="Enter Email">
+          <div class="cover row">
+            <img class="img-responsive logo" src="/images/logo.png">
+            <h3 class="cover-heading hidden-sm hidden-xs">Drink Spontaneously</h3>
+            <p class="lead hidden-sm hidden-xs">
+              BarLift sends you awesome deals 
+              from bars and restaurants around you.
+            </p>
+            <p class="lead hidden-sm hidden-xs">
+              See who’s interested in going out,
+              nudge friends and find out
+              where the crowds are headed.
+            </p>
+              <a class="btn-download">Download the app <i class="fa fa-chevron-circle-right"></i></a> 
+              <p class="subtitle">Available for iOS and Android</p>
           </div>
-          <button type="submit" class="btn btn-default" ng-click="addEmail('isBar')">Submit</button>
-        </form>
+        </div>
+        <div class="right-content col-md-4">
+          <img class="phone" src="/images/iphone_6.png">
+        </div>
+      </div>
+      <div class="cover row visible-xs-* hidden-md hidden-lg">
+        <h3 class="cover-heading">Drink Spontaneously</h3>
+        <p class="lead">
+          BarLift sends you awesome deals 
+          from bars and restaurants around you.
+        </p>
+        <p class="lead">
+          See who’s interested in going out,
+          nudge friends and find out
+          where the crowds are headed.
+        </p>
       </div>
     </div>
+    <div class="about" ng-switch-when="/about">
+      <div class="row">
+        <div class="col-md-4 col-md-offset-2 hidden-sm hidden-xs">
+          <img class="img-responsive" src="/images/iphone_6.png">
+        </div>
+        <div class="cover-container col-md-5">
+          <div class="cover row">
+            <div class="row">
+              <div class="col-md-8">
+                <h6>DM teams:</h6>
+                <h3 class="cover-heading">Win $1000!</h3>
+              </div>
+              <div class="col-md-3">
+                <img class="img-responsive" src="/images/dm.png">
+              </div>
+            </div>
+            <p>
+              BarLift, a Northwestern student startup, is partnering with Dance Marathon to donate $1000 to DM.
+            </p>
+            <h6>1st Prize - $800</h6>
+            <p>The DM team with the most BarLift app downloads (iOS/Android) will win $800.</p>
+            <h6>2nd Prize - $200</h6>
+            <p>Each user download will be an entry to a raffle. The more downloads a DM team has, the higher the chances of winning.</p>
+            <p>Contest starts on Feb 25th and ends on March 6th Winners will be announced on  March 7th </p>
+            <p>Feel free to spread the word to friends that aren’t involved with DM! Their downloads count too! (No age limit – all entries welcome)</p>
+              <a class="btn-download">Download the app <i class="fa fa-chevron-circle-right"></i></a> 
+              <p class="subtitle">Available for iOS and Android</p>
+          </div>
+        </div>
+        
+      </div>
+    </div>  
   </div>
-</div>
-
-
-<footer>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3 text-center">
-        <ul class="social">
-          <li>
-            <a class="soc-link" href="https://www.facebook.com/barlift">facebook</a>
-          </li>
-          <li>
-            <a class="soc-link" href="mailto:hellobarliftapp.com">email</a>
-          </li>
+  <div class="row">
+    <div class="mastfoot col-md-4 col-md-offset-4">
+      <nav>
+        <ul class="nav mastfoot-nav">
+          <li><a ng-click="selection='home'">HOME</a></li>
+          <li><a ng-click="selection='about'">ABOUT</a></li>
+          <li><a ng-click="selection='team'">TEAM</a></li>
+          <li><a href="mailto:hello@barliftapp.com">CONTACT</a></li>
         </ul>
-        <hr>
-        <p>Barlift ©2015</p>
-      </div>
+      </nav>
     </div>
   </div>
-</footer>
 
 </div>
