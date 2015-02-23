@@ -1,5 +1,6 @@
 
 .home-wrapper {
+  height: 100%;
   overflow: scroll;
   background: url(../images/wood-bg.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
@@ -195,10 +196,10 @@
 }
 
 @media(max-width: 480px){
-  body, html, .ng-scope{
-    height: auto;
-    width: 100%;
-  }
+  // body, html, .ng-scope{
+  //   height: auto;
+  //   width: 100%;
+  // }
 
   .banner{
     margin: auto 5%;
