@@ -8,7 +8,7 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-  .controller('MainCtrl', function ($scope, Emails, $location) {
+  .controller('MainCtrl', function ($scope, Emails, $location, $window) {
     $scope.pagename = function() { 
       if (!$scope.selection){
         return $location.path(); 
@@ -18,9 +18,21 @@ angular.module('barliftApp')
       }
     };
 
+    $scope.getDevice = function() {
+      var userAgent = $window.navigator.userAgent;
+      var devices = {android: /Android/i, ios: /iPhone/i};
+
+      for(var key in devices) {
+        if (devices[key].test(userAgent)) {
+          return key;
+        }
+       };
+       return 'unknown';
+    }
+
+    console.log($scope.getDevice());
+
     $scope.isActive = function(route) {
-      console.log(route);
-      console.log($location.path());
       return route === $location.path();
     }
 

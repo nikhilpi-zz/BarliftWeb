@@ -33,6 +33,11 @@
     height: 100%;
     padding: 1% 0;
 
+    &.logo .img-responsive{
+      width: 50%;
+      margin: auto;
+    }
+
     h3{
       font-weight: 400;
       font-size: 1em;
@@ -127,43 +132,17 @@
   }
 }
 
-
-
-@-webkit-keyframes slideUp {
-  from {padding-top: 100%;}
-  to {padding-top: 10%;}
-}
-
-@keyframes slideUp {
-  from {padding-top: 100%;}
-  to {padding-top: 10%;}
-}
-
-@-webkit-keyframes slideDown {
-  from {margin-top: -40%;}
-  to {margin-top: 0;}
-}
-
-@keyframes slideDown {
-  from {margin-top: -40%;}
-  to {margin-top: 0;}
-}
-
 .about{
   .banner{
-    .img-responsive{
-      width: 50%;
-      margin: auto;
-    }
+    padding-top: 0;
   }
-
   .body{
     padding-top: 1%;
   }
   .right-content{
     padding-top: 2%;
     .phone{
-      width: 90%;
+      width: 85%;
     }
   }
 
@@ -188,6 +167,32 @@
   }
 }
 
+.team{
+  .img-card{
+    img{
+      width: 60%;
+      margin: auto;
+    }
+    .img-caption{
+      h3{
+        color: #fff;
+        font-size: 1em;
+        margin-top: 5%;
+      }
+    }
+  }
+  .team-grid .col-md-offset-1{
+    margin-left: 12.333333%;
+  }
+}
+
+.app-store-btns{
+  margin: auto;
+  .img-responsive{
+    margin: auto;
+  }
+}
+
 .btn-download{
   background-color: #e8613d;
   color: #fff;
@@ -202,10 +207,26 @@
   }
 }
 
-.btn-get{
-  background-color: #e8613d;
-  color: #fff;
+@-webkit-keyframes slideUp {
+  from {padding-top: 100%;}
+  to {padding-top: 10%;}
 }
+
+@keyframes slideUp {
+  from {padding-top: 100%;}
+  to {padding-top: 10%;}
+}
+
+@-webkit-keyframes slideDown {
+  from {margin-top: -40%;}
+  to {margin-top: 0;}
+}
+
+@keyframes slideDown {
+  from {margin-top: -40%;}
+  to {margin-top: 0;}
+}
+
 
 
 @media(max-width: 480px){

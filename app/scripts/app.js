@@ -48,6 +48,13 @@ angular
           authorizedRoles: [USER_ROLES.all]
         }
       })
+      .when('/team', {
+        templateUrl: 'views/main.html',
+        controller: 'MainCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
+      })
       .when('/login', {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl',
