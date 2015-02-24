@@ -68,8 +68,8 @@
     width: 95%;
     margin-top: -20%;
     padding-top: 10%;
-    -webkit-animation: slideUp 1s;
-    animation: slideUp 1s;
+    -webkit-animation: hideOnLoad 500ms, slideUp 1s 500ms;
+    animation: hideOnLoad 500ms, slideUp 1s 500ms;
   }
 }
 
@@ -79,8 +79,8 @@
     width: 100%;
     padding-top: 20%;
     margin-left: 10%;
-    -webkit-animation: slideDown 1s;
-    animation: slideDown 1s;
+    -webkit-animation: hideOnLoad 500ms, slideDown 1s 500ms;
+    animation: hideOnLoad 500ms, slideDown 1s 500ms;
   }
 }
 
@@ -237,6 +237,17 @@
   from {margin-top: -40%;}
   to {margin-top: 0;}
 }
+
+@-webkit-keyframes hideOnLoad {
+  from {visibility: hidden;}
+  to {visibility: hidden;}
+}
+
+@keyframes hideOnLoad {
+  from {visibility: hidden;}
+  to {visibility: hidden;}
+}
+
 
 
 
