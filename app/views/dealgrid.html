@@ -1,6 +1,14 @@
-<div id="deal-grid" class="container-fluid">
-   <div class="row">
-    <deal-card ng-repeat="deal in deals"/>
+<div class="row">
+  <button class="btn btn-default">ALL</button>
+  <button class="btn btn-primary">ONLINE</button>
+  <button class="btn btn-inverse">OFFLINE</button>
+  <button class="btn btn-warning">WAITING</button>
+</div>
+<div class="row">
+  <div id="deal-grid" class="container-fluid">
+     <div class="row">
+      <deal-card ng-repeat="deal in deals"/>
+    </div>
   </div>
 </div>
 
