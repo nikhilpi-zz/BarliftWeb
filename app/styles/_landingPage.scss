@@ -219,6 +219,13 @@
     }
   }
 
+  .right-content{
+      .phone{
+        -webkit-animation: none;
+        animation: none;
+      }
+    }
+
   .banner{
     .col-xs-3{
       padding-right: 0;
