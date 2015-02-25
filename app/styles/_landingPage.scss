@@ -63,7 +63,7 @@
   height: 83.333%;
   min-height: 550px;
   .dm{
-    margin-top: -1.3em;
+    max-height: 5em;
   }
 }
 
@@ -143,6 +143,20 @@
   }
   .body{
     padding-top: 1%;
+    .header{
+      border-bottom: 1px #fff solid;
+      margin: 0;
+      .col-md-3{
+        width: 118px;
+        padding-left: 0;
+      }
+      .col-md-8{
+        padding-left: 0;
+        h3{
+          margin-bottom: 0;
+        }
+      }
+    }
   }
   .right-content{
     padding-top: 2%;
@@ -154,6 +168,7 @@
 
   .center-content{
     text-align: left;
+    padding-left: 0;
     h3{
       margin-top: 0;
     }
