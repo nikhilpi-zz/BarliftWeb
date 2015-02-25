@@ -169,13 +169,14 @@
     .phone{
       width: 85%;
       margin-left: 20%;
-      margin-top: -24%;
     }
   }
 
   .center-content{
     text-align: left;
     padding-left: 0;
+    min-width: 393px;
+    min-height: 550px;
     h3{
       margin-top: 0;
     }
@@ -296,7 +297,11 @@
   .center-content.mobile{
     margin: 0 5px;
     h3{
-      margin: 0;
+      margin: 0 0 10px 0;
+    }
+
+    p{
+      font-size: 1.5em;
     }
   }
 
@@ -331,9 +336,22 @@
     .body{
       .center-content{
         padding-left: 15px;
+        min-width: inherit;
+        min-height: inherit;
+        h4{
+          margin-top: 10%;
+        }
+        p{
+          font-size: 1.5em;
+          margin-bottom: 5%;
+          &.subtitle{
+            font-size: 1.2em;
+          }
+        }
       }
 
       .header{
+        margin-bottom: 5%;
         .col-md-3{
           width: 92px;
         }
