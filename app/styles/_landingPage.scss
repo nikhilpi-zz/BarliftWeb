@@ -153,6 +153,9 @@
       }
       .col-md-8{
         padding-left: 0;
+        h6{
+          margin-bottom: 0;
+        }
         h3{
           margin-bottom: 2%;
         }
@@ -255,6 +258,11 @@
     color: #fff;
     background-color: #ea633f;
   }
+}
+
+.btn-get{
+  background-color: #e8613d;
+  color: #fff;
 }
 
 @-webkit-keyframes slideUp {

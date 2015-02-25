@@ -31,7 +31,7 @@
             nudge friends and find out
             where the crowds are headed.
           </p>
-          <a ng-if="getDevice() === 'ios'"  href="https://itunes.apple.com/us/app/barlift/id965946420?ls=1&mt=8" class="btn-download">Download the app <i class="fa fa-chevron-circle-right"></i></a> 
+<!--           <a ng-if="getDevice() === 'ios'"  href="https://itunes.apple.com/us/app/barlift/id965946420?ls=1&mt=8" class="btn-download">Download the app <i class="fa fa-chevron-circle-right"></i></a> 
           <a ng-if="getDevice() === 'android'"  href="https://play.google.com/store/apps/details?id=com.barliftapp.barlift" class="btn-download">Download the app <i class="fa fa-chevron-circle-right"></i></a> 
           <div ng-if="getDevice() === 'unknown'" class="row app-store-btns">
             <a class="col-sm-4 col-sm-offset-2 apple-badge" href="https://itunes.apple.com/us/app/barlift/id965946420?ls=1&mt=8">
@@ -41,7 +41,14 @@
               <img class="img-responsive" alt="Android app on Google Play"
                    src="images/googlebadge.png" />
             </a>
-          </div>
+          </div> -->
+          <form class="form-inline">
+            <div class="form-group">
+              <input type="email" ng-model="user.email" class="form-control" id="email" placeholder="barlift@u.northwestern.edu">
+            </div>
+            <button type="submit" class="btn btn-get" ng-click="addEmail()">Get invitation</button>
+          </form>
+          <p class="subtitle">Available for iOS and Android</p>
         </div>
         <div class="right-content col-md-4">
           <img class="phone" src="/images/iphone_6.png">
@@ -85,7 +92,7 @@
           <p>
             BarLift, a Northwestern student startup, is partnering with Dance Marathon to donate $1000 to DM.
           </p>
-          <a ng-if="getDevice() === 'ios'"  href="https://itunes.apple.com/us/app/barlift/id965946420?ls=1&mt=8" class="btn-download">Download the app <i class="fa fa-chevron-circle-right"></i></a> 
+<!--           <a ng-if="getDevice() === 'ios'"  href="https://itunes.apple.com/us/app/barlift/id965946420?ls=1&mt=8" class="btn-download">Download the app <i class="fa fa-chevron-circle-right"></i></a> 
           <a ng-if="getDevice() === 'android'"  href="https://play.google.com/store/apps/details?id=com.barliftapp.barlift" class="btn-download">Download the app <i class="fa fa-chevron-circle-right"></i></a> 
           <div ng-if="getDevice() === 'unknown'" class="row app-store-btns">
             <a class="col-sm-4 apple-badge" href="https://itunes.apple.com/us/app/barlift/id965946420?ls=1&mt=8">
@@ -95,7 +102,14 @@
               <img class="img-responsive" alt="Android app on Google Play"
                    src="images/googlebadge.png" />
             </a>
-          </div>
+          </div> -->
+          <form class="form-inline">
+            <div class="form-group">
+              <input type="email" ng-model="user.email" class="form-control" id="email" placeholder="barlift@u.northwestern.edu">
+            </div>
+            <button type="submit" class="btn btn-get" ng-click="addEmail()">Get invitation</button>
+          </form>
+          <p class="subtitle">Available for iOS and Android</p>
           <h4>1st Prize - $800</h4>
           <p>The DM team with the most BarLift app downloads (iOS/Android) will win $800.</p>
           <h4>2nd Prize - $200</h4>
