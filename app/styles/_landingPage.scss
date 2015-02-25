@@ -9,6 +9,8 @@
   background-size: cover;
   font-family: 'Lato', sans-serif;
   color: #fff;
+  min-width: 1090px;
+  min-height: 771px;
 
   .home, .about, .team{
     height: 100%;
@@ -373,7 +375,9 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    overflow-x:hidden
+    overflow-x:hidden;
+    min-width: inherit;
+    min-height: inherit;
   }
 
   .team .team-grid .col-md-offset-1 {
