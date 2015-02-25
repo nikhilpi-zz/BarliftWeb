@@ -1,7 +1,7 @@
 
 .home-wrapper {
   height: 100%;
-  overflow: scroll;
+  //overflow: scroll;
   background: url(../images/wood-bg.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -10,13 +10,30 @@
   font-family: 'Lato', sans-serif;
   color: #fff;
 
-  h3{
+  .home, .about, .team{
+    height: 100%;
+  }
+
+  h2{
     font-weight: 400;
     font-size: 2.5em;
+  }
+  h4{
+    font-weight: 800;
+    font-size: 1.2em;
+  }
+  h5{
+    font-weight: 100;
+    font-size: 1.2em;
   }
   p{
     font-weight: 200;
     font-size: 1.2em;
+    line-height: 1.4em;
+    margin-bottom: 5px;
+    &.subtitle{
+      font-size: .7em;
+    }
   }
 }
 
@@ -31,14 +48,10 @@
     background-color: rgba(255,255,255,.2);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    height: 100%;
     padding: 1% 0;
-
-    &.logo .img-responsive{
-      width: 50%;
-      margin: auto;
+    img{
+      max-height: 106px;
     }
-
     h3{
       font-weight: 400;
       font-size: 1.2em;
@@ -57,6 +70,13 @@
       }
     }
   }
+  .logo{
+    background-color: rgba(255,255,255,0);
+    .img-responsive{
+      margin: auto;
+      width: 50%;
+    }
+  }
 }
 
 .body{
@@ -65,166 +85,9 @@
   .dm{
     max-height: 5em;
   }
-}
-
-.right-content{
-  max-height: 100%;
-  .phone{
-    width: 95%;
-    margin-top: -20%;
-    padding-top: 10%;
-    -webkit-animation: hideOnLoad 500ms, slideUp 1s 500ms;
-    animation: hideOnLoad 500ms, slideUp 1s 500ms;
-  }
-}
-
-.left-content{
-  max-height: 100%;
-  .drink{
-    width: 100%;
-    padding-top: 20%;
-    margin-left: 10%;
-    -webkit-animation: hideOnLoad 500ms, slideDown 1s 500ms;
-    animation: hideOnLoad 500ms, slideDown 1s 500ms;
-  }
-}
-
-.center-content {
-  text-align: center;
-  max-height: 100%;
   .logo{
     width: 80%;
     margin: auto;
-  }
-  p{
-    &.subtitle{
-      font-size: .7em;
-      padding-top: 1%;
-    } 
-  }
-}
-
-.foot{
-  height: 10%;
-  .mastfoot {
-    color: #999; /* IE8 proofing */
-    color: rgba(255,255,255,.5);
-    text-align: center;
-    border-top: 1px #fff solid;
-    position: relative;
-
-    .mastfoot-nav > li {
-      display: inline-block;
-
-      & > a {
-        font-size: 1em;
-        padding-top: 7%;
-        font-weight: bold;
-        color: #fff; /* IE8 proofing */
-        color: rgba(255,255,255,.45);
-        margin-bottom: 0;
-        padding-bottom: 0;
-        cursor: pointer;
-        &:hover, &:focus{
-          background-color: transparent;
-        }
-        &.active{
-          color: #fff;
-          color: rgba(255,255,255,1);
-        }
-      }
-    }
-  }
-}
-
-.about{
-  .banner{
-    background-color: rgba(255,255,255,0);
-  }
-  .body{
-    padding-top: 1%;
-    .header{
-      border-bottom: 1px #fff solid;
-      margin: 0;
-      margin-bottom: 2%;
-      .col-md-3{
-        width: 118px;
-        padding-left: 0;
-      }
-      .col-md-8{
-        padding-left: 0;
-        h6{
-          margin-bottom: 0;
-        }
-        h3{
-          margin-bottom: 2%;
-        }
-      }
-    }
-    .app-store-btns{
-      .col-sm-4{
-        padding-left: 0;
-      }
-    }
-  }
-  .right-content{
-    padding-top: 2%;
-    .phone{
-      width: 80%;
-      margin-left: 20%;
-    }
-  }
-
-  .center-content{
-    text-align: left;
-    padding-left: 0;
-    min-width: 393px;
-    min-height: 550px;
-    h3{
-      margin-top: 0;
-    }
-    h4{
-      margin-bottom: 5px;
-      margin-top: 10px;
-      font-size: 1.2em;
-    }
-    p{
-      font-size: 1em;
-      line-height: 1.5;
-      margin: 0 0 10px;
-      &.subtitle{
-        font-size: .7em;
-      } 
-    }
-  }
-}
-
-.team{
-  .banner{
-    background-color: rgba(255,255,255,0);
-  }
-  h3{
-    margin-bottom: 5%;
-    font-size: 2em;
-    margin-top: 4%;
-  }
-  .img-card{
-    img{
-      width: 60%;
-      margin: auto;
-    }
-    .img-caption{
-      h3{
-        color: #fff;
-        font-size: .8em;
-        font-weight: 400;
-        margin-top: 5%;
-        margin-bottom: 15%;
-      }
-    }
-  }
-  .team-grid .col-md-offset-1{
-    margin-left: 12.333333%;
   }
 }
 
@@ -265,14 +128,147 @@
   color: #fff;
 }
 
+.right-content{
+  max-height: 100%;
+  .phone{
+    width: 95%;
+    min-width: 360px;
+    margin-top: -7%;
+    -webkit-animation: hideOnLoad 500ms, slideUp 1s 500ms;
+    animation: hideOnLoad 500ms, slideUp 1s 500ms;
+  }
+}
+
+.left-content{
+  max-height: 100%;
+  .drink{
+    width: 100%;
+    padding-top: 20%;
+    -webkit-animation: hideOnLoad 500ms, slideDown 1s 500ms;
+    animation: hideOnLoad 500ms, slideDown 1s 500ms;
+  }
+}
+
+.center-content {
+  text-align: center;
+  max-height: 100%;
+}
+
+.foot{
+  height: 10%;
+  .mastfoot {
+    color: #999; /* IE8 proofing */
+    color: rgba(255,255,255,.5);
+    text-align: center;
+    border-top: 1px #fff solid;
+    position: relative;
+
+    .mastfoot-nav > li {
+      display: inline-block;
+
+      & > a {
+        font-size: 1em;
+        padding-top: 7%;
+        font-weight: bold;
+        color: #fff; /* IE8 proofing */
+        color: rgba(255,255,255,.45);
+        margin-bottom: 0;
+        padding-bottom: 0;
+        cursor: pointer;
+        &:hover, &:focus{
+          background-color: transparent;
+        }
+        &.active{
+          color: #fff;
+          color: rgba(255,255,255,1);
+        }
+      }
+    }
+  }
+}
+
+.about{
+  .body{
+    min-height: 604px;
+    .header{
+      border-bottom: 1px #fff solid;
+      margin: 0;
+      margin-bottom: 2%;
+      .col-md-3{
+        width: 118px;
+        padding-left: 0;
+      }
+      .col-md-8{
+        padding-left: 0;
+        padding-right: 0;
+        h5{
+          margin-bottom: 0;
+        }
+        h2{
+          margin-top: 0;
+          margin-bottom: 2%;
+        }
+      }
+    }
+    .app-store-btns{
+      .col-sm-4{
+        padding-left: 0;
+      }
+    }
+  }
+  .right-content{
+    padding-top: 2%;
+    .phone{
+      width: 90%;
+      margin-left: 10%;
+    }
+  }
+
+  .center-content{
+    text-align: left;
+    padding-left: 0;
+    min-width: 393px;
+    min-height: 550px;
+  }
+}
+
+.team{
+  .banner{
+    background-color: rgba(255,255,255,0);
+  }
+  h3{
+    margin-bottom: 5%;
+    font-size: 2em;
+    margin-top: 4%;
+  }
+  .img-card{
+    img{
+      width: 60%;
+      margin: auto;
+    }
+    .img-caption{
+      h3{
+        color: #fff;
+        font-size: .8em;
+        font-weight: 400;
+        margin-top: 5%;
+        margin-bottom: 15%;
+      }
+    }
+  }
+  .team-grid .col-md-offset-1{
+    margin-left: 12.333333%;
+  }
+}
+
 @-webkit-keyframes slideUp {
   from {padding-top: 100%;}
-  to {padding-top: 10%;}
+  to {padding-top: 0;}
 }
 
 @keyframes slideUp {
   from {padding-top: 100%;}
-  to {padding-top: 10%;}
+  to {padding-top: 0;}
 }
 
 @-webkit-keyframes slideDown {
@@ -299,19 +295,36 @@
 
 
 @media(max-width: 480px){
-  body, html, .ng-scope, .main-content, .body {
+  body, html, .main-content, .body {
     height: inherit;
+  }
+  .home-wrapper {
+    h2{
+      font-weight: 400;
+      font-size: 2em;
+      margin-top: 0;
+    }
+    h4{
+      font-weight: 800;
+      font-size: 1.2em;
+    }
+    h5{
+      font-weight: 100;
+      font-size: 1.2em;
+    }
+    p{
+      font-weight: 200;
+      font-size: 1.2em;
+      line-height: 1.4em;
+      margin-bottom: 10px;
+      &.subtitle{
+        font-size: .7em;
+      }
+    }
   }
 
   .center-content.mobile{
     margin: 0 5px;
-    h3{
-      margin: 0 0 10px 0;
-    }
-
-    p{
-      font-size: 1.5em;
-    }
   }
 
   .right-content{
@@ -320,6 +333,8 @@
         animation: none;
         margin-top: 0;
         padding-top: 0;
+        min-width: inherit;
+        margin: auto;
       }
     }
 
@@ -329,12 +344,6 @@
       margin-top: 2%;
     }
     margin: auto 5%;
-    h3{
-      font-size: .7em;
-    }
-    p{
-      font-size: .5em;
-    }
   }
 
   .top{
@@ -347,25 +356,12 @@
         padding-left: 15px;
         min-width: inherit;
         min-height: inherit;
-        h4{
-          margin-top: 10%;
-        }
-        p{
-          font-size: 1.5em;
-          margin-bottom: 5%;
-          &.subtitle{
-            font-size: 1.2em;
-          }
-        }
       }
 
       .header{
         margin-bottom: 5%;
         .col-md-3{
           width: 92px;
-        }
-        h3{
-          font-size: 1.8em;
         }
       }
     }
@@ -377,6 +373,7 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    overflow-x:hidden
   }
 
   .team .team-grid .col-md-offset-1 {
