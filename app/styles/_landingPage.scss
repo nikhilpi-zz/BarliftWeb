@@ -26,6 +26,7 @@
 
 .top{
   height: 16.66%;
+  min-height: 103px;
   .banner{
     background-color: rgba(255,255,255,.2);
     border-bottom-left-radius: 10px;
@@ -60,6 +61,10 @@
 
 .body{
   height: 83.333%;
+  min-height: 550px;
+  .dm{
+    margin-top: -1.3em;
+  }
 }
 
 .right-content{
@@ -134,7 +139,6 @@
 
 .about{
   .banner{
-    padding-top: 0;
     background-color: rgba(255,255,255,0);
   }
   .body{
@@ -144,6 +148,7 @@
     padding-top: 2%;
     .phone{
       width: 85%;
+      margin-left: 20%;
     }
   }
 
@@ -199,9 +204,21 @@
 
 .app-store-btns{
   margin: auto;
+  min-width: 400px;
+  text-align: center;
   .img-responsive{
     margin: auto;
   }
+  .apple-badge{
+    min-width: 7.2em;
+  }
+  .google-badge{
+    min-width: 6em;
+    img{
+      width:85%;
+    }
+  }
+
 }
 
 .btn-download{
@@ -257,6 +274,7 @@
   }
 
   .center-content.mobile{
+    margin: 0 5px;
     h3{
       margin: 0;
     }
