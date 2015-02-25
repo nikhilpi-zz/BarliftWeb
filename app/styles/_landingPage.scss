@@ -146,6 +146,7 @@
     .header{
       border-bottom: 1px #fff solid;
       margin: 0;
+      margin-bottom: 2%;
       .col-md-3{
         width: 118px;
         padding-left: 0;
@@ -153,8 +154,13 @@
       .col-md-8{
         padding-left: 0;
         h3{
-          margin-bottom: 0;
+          margin-bottom: 2%;
         }
+      }
+    }
+    .app-store-btns{
+      .col-sm-4{
+        padding-left: 0;
       }
     }
   }
@@ -182,7 +188,6 @@
       margin: 0 0 10px;
       &.subtitle{
         font-size: .7em;
-        padding-top: 2%;
       } 
     }
   }
@@ -233,7 +238,6 @@
       width:85%;
     }
   }
-
 }
 
 .btn-download{
@@ -315,6 +319,27 @@
     }
     p{
       font-size: .5em;
+    }
+  }
+
+  .top{
+    min-height: inherit;
+  }
+
+  .about{
+    .body{
+      .center-content{
+        padding-left: 15px;
+      }
+
+      .header{
+        .col-md-3{
+          width: 92px;
+        }
+        h3{
+          font-size: 1.8em;
+        }
+      }
     }
   }
 
