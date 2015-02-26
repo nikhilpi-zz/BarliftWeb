@@ -19,8 +19,8 @@ angular.module('barliftApp')
         scope.details = {};
         scope.$watch('details', function(newVal, oldVal){
           if(newVal.geometry){
-            scope.user.location.latitude = newVal.geometry.location.D;
-            scope.user.location.longitude = newVal.geometry.location.k;
+            scope.user.location.latitude = newVal.geometry.location.k;
+            scope.user.location.longitude = newVal.geometry.location.D;
           };
         });
 
