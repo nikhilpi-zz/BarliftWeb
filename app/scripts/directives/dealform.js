@@ -34,32 +34,6 @@ angular.module('barliftApp')
             deal.objectId = res.objectId;
             scope.deals.push(deal);
             scope.deal = Deals.newDeal(scope.user);
-
-            var pushInfo = {
-              channels: [
-                deal.community_name
-              ],
-              push_time: deal.deal_start_date,
-              data:{
-                alert: deal.name
-              }
-            };
-
-            var pushInfo2 = {
-              channels: [
-                'Ppp'
-              ],
-              push_time: new Date(),
-              data:{
-                alert: 'poop'
-              }
-            };
-
-            Push.push( pushInfo, function(res){
-              scope.isNew = true;
-              scope.dealForm.$setPristine();
-              scope.dealForm.$setUntouched();
-            });
           });
         };
 

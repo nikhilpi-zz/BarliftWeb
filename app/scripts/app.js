@@ -17,6 +17,7 @@ angular
     'ngSanitize',
     'ngTouch',
     'ui.bootstrap',
+    'ngMaterial'
   ])
   .constant('AUTH_EVENTS', {
     loginSuccess: 'auth-login-success',
