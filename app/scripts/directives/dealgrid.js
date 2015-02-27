@@ -11,6 +11,9 @@ angular.module('barliftApp')
     return {
       templateUrl: 'views/dealgrid.html',
       restrict: 'E',
+      scope: {
+        deals: '='
+      },
       link: function postLink(scope, element, attrs) {
 
       }

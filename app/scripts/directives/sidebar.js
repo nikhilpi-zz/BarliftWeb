@@ -11,6 +11,10 @@ angular.module('barliftApp')
     return {
       templateUrl: 'views/sidebar.html',
       restrict: 'E',
+      scope:{
+        selection: '=',
+        logout: '&'
+      },
       link: function postLink(scope, element, attrs) {
 
       }

@@ -2,15 +2,16 @@
 
   <div class="row">
     <div class="col-md-2">
-      <side-bar/>
+      <side-bar selection="selection" logout="logout(x)"></side-bar>
     </div>
 
     <div class="col-md-10">
       <div class="row">
         <nav-bar/>
       </div>
-      <div class="container-fluid">
-        <deal-grid/>
+      <div class="container-fluid" ng-switch on="selection">
+        <deal-grid deals="deals" ng-switch-default></deal-grid>
+        <h2 ng-switch-when="venues">poop</h2>
       </div>
     </div>
 

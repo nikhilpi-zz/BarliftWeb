@@ -1,31 +1,15 @@
-<style>
-  .deal-card {
-    height: 250px;
-    font-size: 0.8em;
-    overflow: hidden;
-  }
-</style>
-
-<div class="col-md-3">
-  <div class="tile deal-card" ng-click="viewDetails()">
-
+<div class="deal deal-card col-md-3">
+  <div class="tile" ng-click="viewDetails()">
     <div class="modal-header">
-      {{deal.name}}
+      <h6>{{deal.name}}</h6>
       <progressbar value="percent_accepted"
         ng-attr-type="{{deal.approved ? 'success' : 'warning'}}">
         <b>{{deal.num_accepted}} / {{deal.deal_qty}}</b>
       </progressbar>
     </div>
-
     <div class="modal-body">
       <b>From</b> {{deal.deal_start_date | date:'mediumDate'}}<br/>
       <b>To</b> {{deal.deal_end_date | date:'mediumDate'}}
-
-      <h4>
-      <span class="glyphicon"
-            ng-class="deal.approved ? 'glyphicon-ok-circle' : 'glyphicon-remove-circle'">
-      </span>
-      </h4>
     </div>
 
   </div>
