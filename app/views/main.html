@@ -17,7 +17,7 @@
       </div>
       <div class="row body">
         <div class="left-content col-md-4 hidden-sm hidden-xs">
-          <img class="img-responsive drink" src="/images/mojito.png">
+          <img class="img-responsive drink" src="/images/coke.png">
         </div>
         <div class="center-content col-md-4">
           <img class="img-responsive logo" src="/images/logo.png">
@@ -185,7 +185,9 @@
         <div class="results-grid col-md-8 col-md-offset-2">
             <div class="container-fluid">
               <div class="col-md-12 text-center">
-                <h3>Current DM Competition Standings</h3>
+                <a ng-click="switchWithin('about')">
+                  <h3>Current DM Competition Standings</h3>
+                </a>
               </div>
               <div class="col-md-12">
                 <div class="table-responsive">
@@ -205,6 +207,19 @@
                       </tr>
                     </tbody>
                   </table>
+                </div>
+              </div>
+              <div class="download-btns col-md-6 col-md-offset-3 text-center">
+                <a ng-if="getDevice() === 'ios'"  href="https://itunes.apple.com/us/app/barlift/id965946420?ls=1&mt=8" class="btn-download">Download the app <i class="fa fa-chevron-circle-right"></i></a> 
+                <a ng-if="getDevice() === 'android'"  href="https://play.google.com/store/apps/details?id=com.barliftapp.barlift" class="btn-download">Download the app <i class="fa fa-chevron-circle-right"></i></a> 
+                <div ng-if="getDevice() === 'unknown'" class="row app-store-btns">
+                  <a class="col-sm-4 col-sm-offset-2 apple-badge" href="https://itunes.apple.com/us/app/barlift/id965946420?ls=1&mt=8">
+                    <img class="img-responsive" src="images/applebadge.png">
+                  </a>
+                  <a class="col-sm-4 google-badge" href="https://play.google.com/store/apps/details?id=com.barliftapp.barlift">
+                    <img class="img-responsive" alt="Android app on Google Play"
+                         src="images/googlebadge.png" />
+                  </a>
                 </div>
               </div>
             </div>

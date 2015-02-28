@@ -39,7 +39,6 @@
   }
   a{
     color: #fff;
-    text-decoration: underline;
     cursor: pointer;
   }
 }
@@ -151,6 +150,7 @@
   .drink{
     width: 100%;
     padding-top: 20%;
+    margin-left: 10%;
     -webkit-animation: hideOnLoad 500ms, slideDown 1s 500ms;
     animation: hideOnLoad 500ms, slideDown 1s 500ms;
   }
@@ -218,6 +218,9 @@
           margin-top: 0;
           margin-bottom: 2%;
         }
+        a{
+          text-decoration: underline;
+        }
       }
     }
     .app-store-btns{
@@ -275,6 +278,10 @@
   .table-responsive{
     height: 400px;
     overflow: scroll;
+  }
+  .download-btns{
+    padding-top: 5%;
+    padding-bottom: 5%;
   }
 }
 
