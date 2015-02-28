@@ -45,7 +45,7 @@ angular.module('barliftApp')
         for(var i = 0; i < Object.keys(data.result).length; i++){
           var name = Object.keys(data.result)[i];
           var score = data.result[name];
-          if (name !== '' && name !== 'undefined'){
+          if (name !== '' && name !== 'undefined' && name !== 'Choose a team...'){
             results.push({name: name, score: score});
           }
         }
