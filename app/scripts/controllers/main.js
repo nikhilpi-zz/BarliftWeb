@@ -8,7 +8,7 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-  .controller('MainCtrl', function ($scope, Emails, $location, $window) {
+  .controller('MainCtrl', function ($scope, Emails, $location, $window, $http) {
     $scope.pagename = function() { 
       if (!$scope.selection){
         return $location.path(); 
@@ -30,8 +30,6 @@ angular.module('barliftApp')
        return 'unknown';
     }
 
-    console.log($scope.getDevice());
-
     $scope.isActive = function(route) {
       return route === $location.path();
     }
@@ -40,6 +38,20 @@ angular.module('barliftApp')
       $scope.selection = page;
     };
 
+    $scope.results = null;
+    $http.post('https://api.parse.com/1/functions/getScores').
+      success(function(data, status, headers, config) {
+        var results = [];
+        for(var i = 0; i < Object.keys(data.result).length; i++){
+          var name = Object.keys(data.result)[i];
+          var score = data.result[name];
+          if (name !== '' && name !== 'undefined'){
+            results.push({name: name, score: score});
+          }
+        }
+        console.log(results);
+        $scope.results = results;
+    });
 
     $scope.user = {email : null};
     $scope.addEmail = function(attr) {

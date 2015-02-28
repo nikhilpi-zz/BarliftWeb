@@ -42,13 +42,6 @@
                    src="images/googlebadge.png" />
             </a>
           </div>
-<!--           <form class="form-inline">
-            <div class="form-group">
-              <input type="email" ng-model="user.email" class="form-control" id="email" placeholder="Enter email">
-            </div>
-            <button type="submit" class="btn btn-get" ng-click="addEmail()">Get invitation</button>
-          </form>
-          <p class="subtitle">Available for iOS and Android</p> -->
         </div>
         <div class="right-content col-md-4">
           <img class="img-responsive phone" src="/images/iphone_6.png">
@@ -90,7 +83,7 @@
             </div>
           </div>
           <p>
-            BarLift, a Northwestern student startup, is partnering with Dance Marathon to donate $1000 to DM.
+            BarLift, a Northwestern student startup, is partnering with Dance Marathon to donate $1000 to DM. <a ng-click="switchWithin('competition')">See scores here!</a>
           </p>
           <a ng-if="getDevice() === 'ios'"  href="https://itunes.apple.com/us/app/barlift/id965946420?ls=1&mt=8" class="btn-download">Download the app <i class="fa fa-chevron-circle-right"></i></a> 
           <a ng-if="getDevice() === 'android'"  href="https://play.google.com/store/apps/details?id=com.barliftapp.barlift" class="btn-download">Download the app <i class="fa fa-chevron-circle-right"></i></a> 
@@ -103,13 +96,6 @@
                    src="images/googlebadge.png" />
             </a>
           </div>
-<!--           <form class="form-inline">
-            <div class="form-group">
-              <input type="email" ng-model="user.email" class="form-control" id="email" placeholder="Enter email">
-            </div>
-            <button type="submit" class="btn btn-get" ng-click="addEmail()">Get invitation</button>
-          </form>
-          <p class="subtitle">Available for iOS and Android</p> -->
           <h4>1st Prize - $800</h4>
           <p>The DM team with the most BarLift app downloads (iOS/Android) will win $800.</p>
           <h4>2nd Prize - $200</h4>
@@ -186,14 +172,53 @@
 
         </div>
       </div>
+    </div>
+    <div class="results" ng-switch-when="/competition">
+      <div class="row top">
+        <div class="logo col-md-4 col-md-offset-4 row">
+          <a ng-click="switchWithin('home')">
+            <img class="img-responsive" src="/images/logo.png">
+          </a>
+        </div>
+      </div>
+      <div class="row body">
+        <div class="results-grid col-md-8 col-md-offset-2">
+            <div class="container-fluid">
+              <div class="col-md-12 text-center">
+                <h3>Current DM Competition Standings</h3>
+              </div>
+              <div class="col-md-12">
+                <div class="table-responsive">
+                  <table class="table table-condensed">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Team</th>
+                        <th>Downloads</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="team in results | orderBy:'score':true">
+                        <th scope="row">{{$index+1}}</th>
+                        <td>{{team.name}}</td>
+                        <td>{{team.score}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
     </div> 
   </div>
   <div class="row foot">
-    <div class="mastfoot col-md-4 col-md-offset-4">
+    <div class="mastfoot col-md-6 col-md-offset-3">
       <nav>
         <ul class="nav mastfoot-nav">
           <li><a ng-class="{active:isActive('/')}" ng-click="selection='home'">HOME</a></li>
           <li><a ng-class="{active:isActive('/about')}" ng-click="selection='about'">ABOUT</a></li>
+          <li><a ng-class="{active:isActive('/competition')}" ng-click="selection='competition'">COMPETITION</a></li>
           <li><a ng-class="{active:isActive('/team')}" ng-click="selection='team'">TEAM</a></li>
           <!-- <li><a ng-click="selection='team'">TEAM</a></li> -->
           <li><a href="mailto:hello@barliftapp.com">CONTACT</a></li>
