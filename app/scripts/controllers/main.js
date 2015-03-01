@@ -49,7 +49,6 @@ angular.module('barliftApp')
             results.push({name: name, score: score});
           }
         }
-        console.log(results);
         $scope.results = results;
     });
 
