@@ -31,13 +31,27 @@
             nudge friends and find out
             where the crowds are headed.
           </h5>
-          <a ng-if="getDevice() === 'ios'"  href="https://itunes.apple.com/us/app/barlift/id965946420?ls=1&mt=8" class="btn-download">Download the app <i class="fa fa-chevron-circle-right"></i></a> 
-          <a ng-if="getDevice() === 'android'"  href="https://play.google.com/store/apps/details?id=com.barliftapp.barlift" class="btn-download">Download the app <i class="fa fa-chevron-circle-right"></i></a> 
+          <a ng-if="getDevice() === 'ios'"  
+            href="https://itunes.apple.com/us/app/barlift/id965946420?ls=1&mt=8" 
+            class="btn-download"
+            analytics-on="click"
+            analytics-event="Download iOS">Download the app <i class="fa fa-chevron-circle-right"></i></a> 
+          <a ng-if="getDevice() === 'android'"  
+            href="https://play.google.com/store/apps/details?id=com.barliftapp.barlift" 
+            class="btn-download"
+            analytics-on="click"
+            analytics-event="Download Android">Download the app <i class="fa fa-chevron-circle-right"></i></a> 
           <div ng-if="getDevice() === 'unknown'" class="row app-store-btns">
-            <a class="col-sm-4 col-sm-offset-2 apple-badge" href="https://itunes.apple.com/us/app/barlift/id965946420?ls=1&mt=8">
+            <a class="col-sm-4 col-sm-offset-2 apple-badge" 
+              href="https://itunes.apple.com/us/app/barlift/id965946420?ls=1&mt=8"
+              analytics-on="click"
+              analytics-event="Download iOS">
               <img class="img-responsive" src="images/applebadge.png">
             </a>
-            <a class="col-sm-4 google-badge" href="https://play.google.com/store/apps/details?id=com.barliftapp.barlift">
+            <a class="col-sm-4 google-badge" 
+              href="https://play.google.com/store/apps/details?id=com.barliftapp.barlift"
+              analytics-on="click"
+              analytics-event="Download Android">
               <img class="img-responsive" alt="Android app on Google Play"
                    src="images/googlebadge.png" />
             </a>
@@ -85,13 +99,27 @@
           <p>
             BarLift, a Northwestern student startup, is partnering with Dance Marathon to donate $1000 to DM. <a ng-click="switchWithin('competition')">See scores here!</a>
           </p>
-          <a ng-if="getDevice() === 'ios'"  href="https://itunes.apple.com/us/app/barlift/id965946420?ls=1&mt=8" class="btn-download">Download the app <i class="fa fa-chevron-circle-right"></i></a> 
-          <a ng-if="getDevice() === 'android'"  href="https://play.google.com/store/apps/details?id=com.barliftapp.barlift" class="btn-download">Download the app <i class="fa fa-chevron-circle-right"></i></a> 
+          <a ng-if="getDevice() === 'ios'"  
+            href="https://itunes.apple.com/us/app/barlift/id965946420?ls=1&mt=8" 
+            class="btn-download"
+            analytics-on="click"
+            analytics-event="Download iOS">Download the app <i class="fa fa-chevron-circle-right"></i></a> 
+          <a ng-if="getDevice() === 'android'"  
+            href="https://play.google.com/store/apps/details?id=com.barliftapp.barlift" 
+            class="btn-download"
+            analytics-on="click"
+            analytics-event="Download Android">Download the app <i class="fa fa-chevron-circle-right"></i></a> 
           <div ng-if="getDevice() === 'unknown'" class="row app-store-btns">
-            <a class="col-sm-4 apple-badge" href="https://itunes.apple.com/us/app/barlift/id965946420?ls=1&mt=8">
+            <a class="col-sm-4 col-sm-offset-2 apple-badge" 
+              href="https://itunes.apple.com/us/app/barlift/id965946420?ls=1&mt=8"
+              analytics-on="click"
+              analytics-event="Download iOS">
               <img class="img-responsive" src="images/applebadge.png">
             </a>
-            <a class="col-sm-4 google-badge" href="https://play.google.com/store/apps/details?id=com.barliftapp.barlift">
+            <a class="col-sm-4 google-badge" 
+              href="https://play.google.com/store/apps/details?id=com.barliftapp.barlift"
+              analytics-on="click"
+              analytics-event="Download Android">
               <img class="img-responsive" alt="Android app on Google Play"
                    src="images/googlebadge.png" />
             </a>
