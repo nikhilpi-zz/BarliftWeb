@@ -17,6 +17,8 @@ angular
     'ngSanitize',
     'ngTouch',
     'ui.bootstrap',
+    'angulartics', 
+    'angulartics.google.analytics'
   ])
   .constant('AUTH_EVENTS', {
     loginSuccess: 'auth-login-success',
