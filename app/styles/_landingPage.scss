@@ -405,7 +405,8 @@
     overflow-x:hidden;
     min-width: inherit;
     min-height: inherit;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .team .team-grid .col-md-offset-1 {
