@@ -1,1 +1,1 @@
-<div id="deal-grid" class="container-fluid"> <div class="row"> <deal-card ng-repeat="deal in deals" deal="deal"></deal-card> </div> <!-- /row --> </div>
+<div class="deal deal-grid" class="row"> <div class="container-fluid"> <div class="row ctrl-btns"> <div class="col-md-2 col-xs-12"> <a ng-click="openForm(newDeal)" class="btn btn-block btn-lg btn-primary">Add deal</a> </div> </div> <div class="row"> <deal-card ng-repeat="deal in deals | orderBy:'deal_start_date':true" deal="deal" select="openForm(deal)"> </div> </div> </div>
