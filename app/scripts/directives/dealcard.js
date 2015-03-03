@@ -12,10 +12,11 @@ angular.module('barliftApp')
       templateUrl: 'views/dealcard.html',
       restrict: 'E',
       scope: {
-        deal: '=',
+        select: '&',
+        deal: '='
       },
-      link: function postLink(scope, element, attrs) {
-      
+      link: function(scope, element, attrs) {
+        
       }
     };
   });

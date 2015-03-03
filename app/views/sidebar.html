@@ -1,14 +1,16 @@
 <div id="side-bar" class="container-fluid">
-  <img src="images/barliftlogo.svg" alt=""/>
-
   <div>
-    <span class="fui-home"></span>
-    Deals
+    <a ng-click="selection='deals'">
+      <span class="fui-tag"></span>
+      Deals
+    </a>
   </div>
 
   <div>
-    <span class="fui-eye"></span>
-    Analytics
+    <a ng-click="selection='venues'">
+      <span class="fui-home"></span>
+      Venues
+    </a>
   </div>
 
   <hr/>
@@ -20,7 +22,6 @@
       <a ng-click="logout()">Logout</a>
     </li>
   </ul>
-
   <script src="bower_components/flat-ui/docs/assets/js/application.js"></script>
 </div>
 
