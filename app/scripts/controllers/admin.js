@@ -1,11 +1,11 @@
 var app = angular.module('barliftApp');
 
-app.controller('AdminCtrl', function ($scope, Deals, AuthService) {
+app.controller('AdminCtrl', function ($scope, User, Deals, AuthService) {
   // variables
   $scope.deals = [];
-  $scope.selection = 'deals';
+  $scope.user = {};
 
-  // get all deals
+  User.getCurrent(function(res){ $scope.user = res; });
   Deals.query(function(deals) { $scope.deals = deals; });
 
   // logout

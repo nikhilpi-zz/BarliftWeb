@@ -1,11 +1,7 @@
 <div class="deal deal-card col-md-3">
-  <div class="tile" ng-click="viewDetails()">
+  <div class="tile" ng-click="select(deal)">
     <div class="modal-header">
-      <h6>{{deal.name}}</h6>
-      <progressbar value="percent_accepted"
-        ng-attr-type="{{deal.approved ? 'success' : 'warning'}}">
-        <b>{{deal.num_accepted}} / {{deal.deal_qty}}</b>
-      </progressbar>
+      <h6>{{deal.name | limitTo : 25}}...</h6>
     </div>
     <div class="modal-body">
       <b>From</b> {{deal.deal_start_date | date:'mediumDate'}}<br/>
