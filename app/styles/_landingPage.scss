@@ -14,6 +14,7 @@
 
   .home, .about, .team{
     height: 100%;
+
   }
 
   h2{
@@ -45,6 +46,7 @@
 
 .main-content{
   height: 90%;
+  max-width: 1420px;
 }
 
 .top{
@@ -163,6 +165,7 @@
 
 .foot{
   height: 10%;
+  max-width: 1420px;
   .mastfoot {
     color: #999; /* IE8 proofing */
     color: rgba(255,255,255,.5);
