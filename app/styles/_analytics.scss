@@ -1,0 +1,27 @@
+.big-icon {
+  font-size: 50px;
+}
+.big-text {
+  font-size: 1.8em;
+}
+
+.outer {
+  height: 100px;
+  width: 100%;
+  padding: 0px 20px;
+  display: table;
+}
+
+.inner {
+  display:table-cell;
+  vertical-align:middle;
+  text-align:left;
+}
+
+#gender {
+  height: 300px;
+}
+
+#community {
+  height: 300px;
+}
