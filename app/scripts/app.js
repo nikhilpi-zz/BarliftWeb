@@ -17,8 +17,9 @@ angular
     'ngSanitize',
     'ngTouch',
     'ui.bootstrap',
-    'angulartics', 
-    'angulartics.google.analytics'
+    'angulartics',
+    'angulartics.google.analytics',
+    'nvd3ChartDirectives'
   ])
   .constant('AUTH_EVENTS', {
     loginSuccess: 'auth-login-success',
@@ -124,7 +125,7 @@ angular
   .factory('AuthInterceptor', function ($rootScope, $q,
                                         AUTH_EVENTS) {
     return {
-      responseError: function (response) { 
+      responseError: function (response) {
         $rootScope.$broadcast({
           401: AUTH_EVENTS.notAuthenticated,
           403: AUTH_EVENTS.notAuthorized,
