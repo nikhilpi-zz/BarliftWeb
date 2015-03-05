@@ -1,14 +1,21 @@
-<div>
-  <select class="form-control select select-primary select-block mbl"
-          ng-model="selected"
-          ng-options="deal.name for deal in deals | orderBy:'deal_start_date':true">
-  </select>
+<div class="row">
+  <div class="col-md-4">
+    <select class="form-control select select-primary select-block mbl"
+    ng-model="selected"
+    ng-options="deal.name for deal in deals | orderBy:'deal_start_date':true">
+    </select>
+  </div>
+  <div class="col-md-4">
+    <button ng-click="getData()">Get Data</button>
+    {{selected.objectId}}
+  </div>
+
 </div>
 
 <div class="row">
 
   <div class="col-md-4">
-    <div class="tile">
+    <div id="stat1" class="tile">
       <div class="outer">
         <div class="inner">
           <span class="fui-user pull-right big-icon"></span>
@@ -20,7 +27,7 @@
   </div>
 
   <div class="col-md-4">
-    <div class="tile">
+    <div id="stat2" class="tile">
       <div class="outer">
         <div class="inner">
           <span class="fui-user pull-right big-icon"></span>
@@ -32,7 +39,7 @@
   </div>
 
   <div class="col-md-4">
-    <div class="tile">
+    <div id="stat3" class="tile">
       <div class="outer">
         <div class="inner">
           <span class="fui-user pull-right big-icon"></span>
@@ -48,7 +55,7 @@
 <div class="row">
 
   <div class="col-md-4">
-    <div class="tile">
+    <div id="stat4" class="tile">
       <div class="outer">
         <div class="inner">
           <span class="fui-user pull-right big-icon"></span>
@@ -60,7 +67,7 @@
   </div>
 
   <div class="col-md-4">
-    <div class="tile">
+    <div id="stat5" class="tile">
       <div class="outer">
         <div class="inner">
           <span class="fui-user pull-right big-icon"></span>
@@ -72,7 +79,7 @@
   </div>
 
   <div class="col-md-4">
-    <div class="tile">
+    <div id="stat6" class="tile">
       <div class="outer">
         <div class="inner">
           <span class="fui-user pull-right big-icon"></span>
@@ -117,4 +124,3 @@
     </div>
   </div>
 </div>
-

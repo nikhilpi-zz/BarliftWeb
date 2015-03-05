@@ -7,7 +7,7 @@
  * # analytics
  */
 angular.module('barliftApp')
-  .directive('analytics', function () {
+  .directive('analytics', function (User) {
     return {
       templateUrl: 'views/analytics.html',
       restrict: 'E',
@@ -15,7 +15,7 @@ angular.module('barliftApp')
         deals: '='
       },
       link: function postLink(scope, element, attrs) {
-        scope.selected = scope.deals[0];
+        scope.selected = scope.deals[scope.deals.length-1];
 
         scope.exampleData = [
           {
@@ -69,6 +69,28 @@ angular.module('barliftApp')
           return function(d) {
             return d.y;
           };
+        };
+
+        scope.getData = function() {
+
+          var params = {
+            "keys":"deals_redeemed,dm_team,num_nights,pay_interest,profile,times_nudged",
+            "where": {
+              "$relatedTo": {
+                "object": {
+                  "__type": "Pointer",
+                  "className": "Deal",
+                  "objectId": scope.selected.objectId
+                },
+                "key": "social"
+              }
+            }
+          };
+
+          User.query(params, function(res) {
+            console.log(res.length)
+            //console.log(JSON.stringify(res, null, 2));
+          });
         };
 
       }
