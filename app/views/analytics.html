@@ -1,15 +1,13 @@
 <div class="row">
   <div class="col-md-4">
-    <select class="form-control select select-primary select-block mbl"
-    ng-model="selected"
-    ng-options="deal.name for deal in deals | orderBy:'deal_start_date':true">
+    <select
+      class="form-control select select-primary select-block mbl"
+      ng-model="selected"
+      ng-change="updateStats()"
+      ng-options="deal.name for deal in deals | orderBy:'deal_start_date':true"
+      style="width: 100%;">
     </select>
   </div>
-  <div class="col-md-4">
-    <button ng-click="getData()">Get Data</button>
-    {{selected.objectId}}
-  </div>
-
 </div>
 
 <div class="row">
@@ -18,9 +16,9 @@
     <div id="stat1" class="tile">
       <div class="outer">
         <div class="inner">
-          <span class="fui-user pull-right big-icon"></span>
-          <div class="big-text">{{selected.deal_type}}</div>
-          <div>Food Type</div>
+          <span class="glyphicon glyphicon-cutlery pull-right big-icon"></span>
+          <div class="big-text">{{selected.deal_type | capitalize}}</div>
+          <div>Food type</div>
         </div>
       </div>
     </div>
@@ -30,9 +28,9 @@
     <div id="stat2" class="tile">
       <div class="outer">
         <div class="inner">
-          <span class="fui-user pull-right big-icon"></span>
+          <span class="glyphicon glyphicon-scale pull-right big-icon"></span>
           <div class="big-text">{{selected.num_accepted}}</div>
-          <div>Food Type</div>
+          <div>Interested</div>
         </div>
       </div>
     </div>
@@ -42,9 +40,9 @@
     <div id="stat3" class="tile">
       <div class="outer">
         <div class="inner">
-          <span class="fui-user pull-right big-icon"></span>
-          <div class="big-text">{{selected.deal_type}}</div>
-          <div>Food Type</div>
+          <span class="glyphicon glyphicon-shopping-cart pull-right big-icon"></span>
+          <div class="big-text">{{numPrepay*100/totalUsers | number:0}}%</div>
+          <div>Willing to prepay</div>
         </div>
       </div>
     </div>
@@ -58,9 +56,9 @@
     <div id="stat4" class="tile">
       <div class="outer">
         <div class="inner">
-          <span class="fui-user pull-right big-icon"></span>
-          <div class="big-text">{{selected.deal_type}}</div>
-          <div>Food Type</div>
+          <span class="glyphicon glyphicon-glass pull-right big-icon"></span>
+          <div class="big-text">{{numNightOuts/totalUsers | number:0}}</div>
+          <div>Avg. weekly night outs</div>
         </div>
       </div>
     </div>
@@ -70,9 +68,9 @@
     <div id="stat5" class="tile">
       <div class="outer">
         <div class="inner">
-          <span class="fui-user pull-right big-icon"></span>
-          <div class="big-text">{{selected.num_accepted}}</div>
-          <div>Food Type</div>
+          <span class="glyphicon glyphicon-hand-right pull-right big-icon"></span>
+          <div class="big-text">{{numNudges/totalUsers | number:0}}</div>
+          <div>Avg. nudges</div>
         </div>
       </div>
     </div>
@@ -82,9 +80,9 @@
     <div id="stat6" class="tile">
       <div class="outer">
         <div class="inner">
-          <span class="fui-user pull-right big-icon"></span>
-          <div class="big-text">{{selected.deal_type}}</div>
-          <div>Food Type</div>
+          <span class="glyphicon glyphicon-gift pull-right big-icon"></span>
+          <div class="big-text">{{numDealsRedeemed/totalUsers | number:0}}</div>
+          <div>Avg. deals redeeemed</div>
         </div>
       </div>
     </div>

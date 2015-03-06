@@ -17,6 +17,10 @@ angular.module('barliftApp')
       link: function postLink(scope, element, attrs) {
         scope.selected = scope.deals[scope.deals.length-1];
 
+        // stats
+        scope.totalUsers = 0;
+
+
         scope.exampleData = [
           {
             key: "Gender",
@@ -71,7 +75,7 @@ angular.module('barliftApp')
           };
         };
 
-        scope.getData = function() {
+        scope.updateStats = function() {
 
           var params = {
             "keys":"deals_redeemed,dm_team,num_nights,pay_interest,profile,times_nudged",
@@ -88,10 +92,24 @@ angular.module('barliftApp')
           };
 
           User.query(params, function(res) {
-            console.log(res.length)
-            //console.log(JSON.stringify(res, null, 2));
+            scope.numPrepay = 0;
+            scope.numNightOuts = 0;
+            scope.numNudges = 0;
+            scope.numDealsRedeemed = 0;
+            scope.totalUsers = res.length;
+
+            angular.forEach(res, function(value) {
+              // get basic numerical stats
+              if (value.pay_interest) scope.numPrepay += 1;
+              if (parseInt(value.num_nights)) scope.numNightOuts += parseInt(value.num_nights);
+              if (parseInt(value.times_nudged)) scope.numNudges += parseInt(value.times_nudged);
+              if (parseInt(value.deals_redeemed)) scope.numDealsRedeemed += parseInt(value.deals_redeemed);
+            });
+
           });
         };
+
+        scope.updateStats();
 
       }
     };
