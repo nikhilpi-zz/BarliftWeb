@@ -18,7 +18,8 @@ angular.module('barliftApp')
         scope.selected = scope.deals[scope.deals.length-1];
 
         // bar chart helper funtions
-        var format = d3.format('.0%');
+        //var format = d3.format('.0%');
+        var format = d3.format('.0f');
         scope.valueFormatFunction = function() {
           return function (d) {
             return format(d);
@@ -71,8 +72,8 @@ angular.module('barliftApp')
             {
               key: "Gender",
               values: [
-                ["Male",  males/scope.totalUsers],
-                ["Female" , females/scope.totalUsers ]
+                ["Male",  males],
+                ["Female" , females]
               ]
             }
           ];

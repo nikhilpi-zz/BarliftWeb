@@ -11,7 +11,11 @@
         style="width: 80%; height:40px;">
       </select>
 
-      <div style="font-size: 1.3em">{{selected.deal_start_date | date:'EEEE, MMM d, y'}}</div>
+      <div style="font-size: 1.2em">
+        <b>{{selected.community_name}}</b><br>
+        {{selected.deal_start_date | date:'EEEE, MMM d, y'}}
+      </div>
+
 
     </div>
   </div>
@@ -73,7 +77,7 @@
       <div class="outer">
         <div class="inner">
           <span class="glyphicon glyphicon-glass pull-right big-icon"></span>
-          <div class="big-text">{{numNightOuts/totalUsers | number:0}}</div>
+          <div class="big-text">{{numNightOuts/totalUsers | number:1}}</div>
           <div>Avg. weekly night outs</div>
         </div>
       </div>
@@ -85,7 +89,7 @@
       <div class="outer">
         <div class="inner">
           <span class="glyphicon glyphicon-hand-right pull-right big-icon"></span>
-          <div class="big-text">{{numNudges/totalUsers | number:0}}</div>
+          <div class="big-text">{{numNudges/totalUsers | number:1}}</div>
           <div>Avg. nudges</div>
         </div>
       </div>
@@ -97,7 +101,7 @@
       <div class="outer">
         <div class="inner">
           <span class="glyphicon glyphicon-gift pull-right big-icon"></span>
-          <div class="big-text">{{numDealsRedeemed/totalUsers | number:0}}</div>
+          <div class="big-text">{{numDealsRedeemed/totalUsers | number:1}}</div>
           <div>Avg. deals redeeemed</div>
         </div>
       </div>
@@ -113,8 +117,8 @@
       <nvd3-discrete-bar-chart
         data="genderArr"
         showXAxis="true"
-        showValues="true"
-        valueFormat="valueFormatFunction()">
+        valueFormat="valueFormatFunction()"
+        showValues="true">
       </nvd3-discrete-bar-chart>
     </div>
   </div>
