@@ -1,14 +1,30 @@
 <div class="row">
+
   <div class="col-md-4">
-    <select
-      class="form-control select select-primary select-block mbl"
-      ng-model="selected"
-      ng-change="updateStats()"
-      ng-options="deal.name for deal in deals | orderBy:'deal_start_date':true"
-      style="width: 100%;">
-    </select>
+    <div class="tile medium-tile">
+      <h5>Deal</h5>
+      <select
+        class="form-control select select-primary select-block mbl"
+        ng-model="selected"
+        ng-change="updateStats()"
+        ng-options="deal.name for deal in deals | orderBy:'deal_start_date':true"
+        style="width: 80%; height:40px;">
+      </select>
+
+      <div style="font-size: 1.3em">{{selected.deal_start_date | date:'EEEE, MMM d, y'}}</div>
+
+    </div>
   </div>
+
+  <div class="col-md-8">
+    <div class="tile medium-tile">
+      <h5>Description</h5>
+      {{selected.description}}
+    </div>
+  </div>
+
 </div>
+
 
 <div class="row">
 
@@ -92,32 +108,32 @@
 
 <div class="row">
   <div class="col-md-4">
-    <div id="gender" class="tile">
+    <div class="tile long-tile">
       <h4>Gender</h4>
       <nvd3-discrete-bar-chart
-        data="exampleData"
+        data="genderArr"
         showXAxis="true"
         showValues="true"
-        showLegend="true">
+        valueFormat="valueFormatFunction()">
       </nvd3-discrete-bar-chart>
     </div>
   </div>
 
   <div class="col-md-8">
-    <div id="community" class="tile">
+    <div class="tile long-tile">
       <h4>Student Groups</h4>
         <nvd3-pie-chart
-          data="exampleData2"
-          id="donutRatioExample"
-          width="550"
-          height="350"
-          margin="{left:0,top:0,bottom:0,right:0}"
+          data="groupsArr"
+          width="200"
+          height="200"
+          margin="{left:280,top:-80,bottom:0,right:0}"
           x="xFunction()"
           y="yFunction()"
           donut="true"
           donutRatio=".25"
-          showLegend="true">
-          <svg height="250"></svg>
+          showLegend="true"
+          legendrightalign="false">
+          <svg height="100" width="100"></svg>
         </nvd3-pie-chart>
     </div>
   </div>

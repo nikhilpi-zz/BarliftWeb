@@ -17,68 +17,41 @@ angular.module('barliftApp')
       link: function postLink(scope, element, attrs) {
         scope.selected = scope.deals[scope.deals.length-1];
 
-        // stats
-        scope.totalUsers = 0;
-
-
-        scope.exampleData = [
-          {
-            key: "Gender",
-            values: [
-              ["Male", 70 ],
-              ["Female" , 30 ]
-            ]
+        // bar chart helper funtions
+        var format = d3.format('.0%');
+        scope.valueFormatFunction = function() {
+          return function (d) {
+            return format(d);
           }
-        ];
+        };
 
-
-        scope.exampleData2 = [
-          {
-            key: "One",
-            y: 5
-          },
-          {
-            key: "Two",
-            y: 2
-          },
-          {
-            key: "Three",
-            y: 9
-          },
-          {
-            key: "Four",
-            y: 7
-          },
-          {
-            key: "Five",
-            y: 4
-          },
-          {
-            key: "Six",
-            y: 3
-          },
-          {
-            key: "Seven",
-            y: 9
-          }
-        ];
-
+        // pie chart helper functions
         scope.xFunction = function(){
           return function(d) {
-            return d.key;
+            return d.name;
           };
         };
 
         scope.yFunction = function(){
           return function(d) {
-            return d.y;
+            return d.value;
           };
         };
 
-        scope.updateStats = function() {
+        // reset scope variables
+        var resetVals = function(res) {
+          scope.numPrepay = 0;
+          scope.numNightOuts = 0;
+          scope.numNudges = 0;
+          scope.numDealsRedeemed = 0;
+          scope.totalUsers = res.length;
+          scope.groupsArr = [];
+        };
 
-          var params = {
-            "keys":"deals_redeemed,dm_team,num_nights,pay_interest,profile,times_nudged",
+        // param to get users related to deals
+        var getParams = function() {
+          return {
+            "keys": "deals_redeemed,dm_team,num_nights,pay_interest,profile,times_nudged",
             "where": {
               "$relatedTo": {
                 "object": {
@@ -90,21 +63,58 @@ angular.module('barliftApp')
               }
             }
           };
+        };
 
-          User.query(params, function(res) {
-            scope.numPrepay = 0;
-            scope.numNightOuts = 0;
-            scope.numNudges = 0;
-            scope.numDealsRedeemed = 0;
-            scope.totalUsers = res.length;
+        // update geneder data to be used by nvd3 bar chart
+        var updateGenderArr = function(males, females) {
+          scope.genderArr = [
+            {
+              key: "Gender",
+              values: [
+                ["Male",  males/scope.totalUsers],
+                ["Female" , females/scope.totalUsers ]
+              ]
+            }
+          ];
+        };
 
-            angular.forEach(res, function(value) {
+        // update groups to be used by nvd3 pie chart
+        var updateGroups = function(groups) {
+          angular.forEach(groups, function(value, name) {
+            if(name=='Choose a team...') scope.groupsArr.push({name: 'Others', value: value})
+            else if (name && value>1) scope.groupsArr.push({name: name, value: value});
+          });
+        };
+
+        scope.updateStats = function() {
+
+          User.query(getParams(), function(res) {
+            resetVals(res);
+
+            var males = 0;
+            var females = 0;
+            var groups = {};
+
+            angular.forEach(res, function(user) {
               // get basic numerical stats
-              if (value.pay_interest) scope.numPrepay += 1;
-              if (parseInt(value.num_nights)) scope.numNightOuts += parseInt(value.num_nights);
-              if (parseInt(value.times_nudged)) scope.numNudges += parseInt(value.times_nudged);
-              if (parseInt(value.deals_redeemed)) scope.numDealsRedeemed += parseInt(value.deals_redeemed);
+              if (user.pay_interest) scope.numPrepay ++;
+              if (parseInt(user.num_nights)) scope.numNightOuts += parseInt(user.num_nights);
+              if (parseInt(user.times_nudged)) scope.numNudges += parseInt(user.times_nudged);
+              if (parseInt(user.deals_redeemed)) scope.numDealsRedeemed += parseInt(user.deals_redeemed);
+
+              // get gender
+              if (user.profile.gender) {
+                if (user.profile.gender=='male') males++;
+                else if (user.profile.gender=='female') females++;
+              };
+
+              // get groups
+              var group = user.dm_team;
+              (group in groups)? groups[group]++ : groups[group] = 1
             });
+
+            updateGroups(groups);
+            updateGenderArr(males, females);
 
           });
         };

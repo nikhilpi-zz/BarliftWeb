@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d9affa25-be52-478e-bebc-8f16d2700822" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/styles/_analytics.scss" afterPath="$PROJECT_DIR$/app/styles/_analytics.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/analytics.html" afterPath="$PROJECT_DIR$/app/views/analytics.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/directives/analytics.js" afterPath="$PROJECT_DIR$/app/scripts/directives/analytics.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/dealcard.html" afterPath="$PROJECT_DIR$/app/views/dealcard.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/index.html" afterPath="$PROJECT_DIR$/app/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="BarliftWeb.iws" />
@@ -30,60 +29,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="admin.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/scripts/controllers/admin.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="315">
-              <caret line="7" column="17" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dealcard.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/dealcard.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.875" vertical-offset="0" max-vertical-offset="270">
-              <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="user.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/scripts/services/user.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1770">
-              <caret line="49" column="57" selection-start-line="49" selection-start-column="44" selection-end-line="49" selection-end-column="57" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="deals.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/scripts/services/deals.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="95" max-vertical-offset="900">
-              <caret line="24" column="9" selection-start-line="24" selection-start-column="9" selection-end-line="24" selection-end-column="9" />
-              <folding>
-                <element signature="e#1292#2286#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="analytics.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/scripts/directives/analytics.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7692308" vertical-offset="410" max-vertical-offset="975">
-              <caret line="111" column="8" selection-start-line="111" selection-start-column="8" selection-end-line="111" selection-end-column="8" />
-              <folding>
-                <element signature="e#500#658#0" expanded="false" />
-                <element signature="e#691#1169#0" expanded="false" />
-                <element signature="e#1208#1289#0" expanded="false" />
-                <element signature="e#1328#1407#0" expanded="false" />
-                <element signature="e#1475#1872#0" expanded="false" />
-              </folding>
+            <state vertical-scroll-proportion="2.7403846" vertical-offset="0" max-vertical-offset="1980">
+              <caret line="95" column="22" selection-start-line="95" selection-start-column="16" selection-end-line="95" selection-end-column="22" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -91,10 +42,11 @@
       <file leaf-file-name="analytics.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/analytics.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.25" vertical-offset="855" max-vertical-offset="1950">
-              <caret line="83" column="72" selection-start-line="83" selection-start-column="72" selection-end-line="83" selection-end-column="72" />
+            <state vertical-scroll-proportion="-20.041666" vertical-offset="1499" max-vertical-offset="2190">
+              <caret line="132" column="26" selection-start-line="132" selection-start-column="26" selection-end-line="132" selection-end-column="26" />
               <folding>
-                <element signature="n#style#0;n#select#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#select#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -145,12 +97,12 @@
         <option value="$PROJECT_DIR$/bower_components/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js" />
         <option value="$PROJECT_DIR$/app/styles/main.scss" />
         <option value="$PROJECT_DIR$/app/styles/_admin.scss" />
-        <option value="$PROJECT_DIR$/app/styles/_analytics.scss" />
         <option value="$PROJECT_DIR$/app/views/dealgrid.html" />
         <option value="$PROJECT_DIR$/app/index.html" />
         <option value="$PROJECT_DIR$/app/scripts/filters/capitalize.js" />
         <option value="$PROJECT_DIR$/app/views/dealcard.html" />
         <option value="$PROJECT_DIR$/app/scripts/filters/cut.js" />
+        <option value="$PROJECT_DIR$/app/styles/_analytics.scss" />
         <option value="$PROJECT_DIR$/app/views/analytics.html" />
         <option value="$PROJECT_DIR$/app/scripts/directives/analytics.js" />
       </list>
@@ -777,16 +729,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bower_components/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.0740743" vertical-offset="34621" max-vertical-offset="39510">
-          <caret line="2319" column="163" selection-start-line="2319" selection-start-column="157" selection-end-line="2319" selection-end-column="163" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bower_components/angular-bootstrap/ui-bootstrap.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="58605">
@@ -843,14 +785,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.12096774" vertical-offset="0" max-vertical-offset="496">
           <caret line="4" column="93" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="93" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/styles/_analytics.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6048387" vertical-offset="0" max-vertical-offset="615">
-          <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
           <folding />
         </state>
       </provider>
@@ -921,27 +855,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/styles/_analytics.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42540324" vertical-offset="134" max-vertical-offset="630">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bower_components/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.60649085" vertical-offset="26086" max-vertical-offset="39480">
+          <caret line="1761" column="75" selection-start-line="1761" selection-start-column="69" selection-end-line="1761" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/analytics.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.25" vertical-offset="855" max-vertical-offset="1950">
-          <caret line="83" column="72" selection-start-line="83" selection-start-column="72" selection-end-line="83" selection-end-column="72" />
+        <state vertical-scroll-proportion="-20.041666" vertical-offset="1499" max-vertical-offset="2190">
+          <caret line="132" column="26" selection-start-line="132" selection-start-column="26" selection-end-line="132" selection-end-column="26" />
           <folding>
-            <element signature="n#style#0;n#select#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#select#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/scripts/directives/analytics.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7692308" vertical-offset="410" max-vertical-offset="975">
-          <caret line="111" column="8" selection-start-line="111" selection-start-column="8" selection-end-line="111" selection-end-column="8" />
-          <folding>
-            <element signature="e#500#658#0" expanded="false" />
-            <element signature="e#691#1169#0" expanded="false" />
-            <element signature="e#1208#1289#0" expanded="false" />
-            <element signature="e#1328#1407#0" expanded="false" />
-            <element signature="e#1475#1872#0" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="2.7403846" vertical-offset="0" max-vertical-offset="1980">
+          <caret line="95" column="22" selection-start-line="95" selection-start-column="16" selection-end-line="95" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>
