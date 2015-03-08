@@ -1,7 +1,7 @@
 <div class="deal deal-card col-md-3">
   <div class="tile" ng-click="select(deal)">
     <div class="modal-header">
-      <h6>{{deal.name | limitTo : 25}}...</h6>
+      <h6>{{deal.name | cut:25}}</h6>
     </div>
     <div class="modal-body">
       <b>From</b> {{deal.deal_start_date | date:'mediumDate'}}<br/>
