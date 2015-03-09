@@ -272,7 +272,7 @@
 
   img.farley{
     margin-top: 10%;
-    @include animation('hideOnLoad 3500ms, fadeIn 500ms 3500ms');
+    @include animation('hideOnLoad 1750ms, fadeIn 500ms 1750ms');
   }
 
   .img-card{
@@ -282,25 +282,25 @@
     }
 
     &.one{
-         @include animation('fadeIn 500ms');
+         @include animation('fadeIn 250ms');
     }
     &.six{
-       @include animation('hideOnLoad 500ms, fadeIn 500ms 500ms');
+       @include animation('hideOnLoad 250ms, fadeIn 500ms 250ms');
     }
     &.four{
-       @include animation('hideOnLoad 1000ms, fadeIn 500ms 1000ms');
+       @include animation('hideOnLoad 500ms, fadeIn 500ms 500ms');
     }
     &.five{
-       @include animation('hideOnLoad 1500ms, fadeIn 500ms 1500ms');
+       @include animation('hideOnLoad 750ms, fadeIn 500ms 750ms');
     }
     &.three{
-       @include animation('hideOnLoad 2000ms, fadeIn 500ms 2000ms');
+       @include animation('hideOnLoad 1000ms, fadeIn 500ms 1000ms');
     }
     &.two{
-       @include animation('hideOnLoad 2500ms, fadeIn 500ms 2500ms');
+       @include animation('hideOnLoad 1250ms, fadeIn 500ms 1250ms');
     }
     &.seven{
-       @include animation('hideOnLoad 3000ms, fadeIn 500ms 3000ms');
+       @include animation('hideOnLoad 1500ms, fadeIn 500ms 1500ms');
     }
 
     .img-caption{
