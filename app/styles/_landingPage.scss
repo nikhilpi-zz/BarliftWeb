@@ -3,10 +3,7 @@
   height: 100%;
   //overflow: scroll;
   background: url(../images/wood-bg.jpg) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  @include vendor-property(background-size, cover);
   font-family: 'Lato', sans-serif;
   color: #fff;
   min-width: 1090px;
@@ -144,8 +141,7 @@
     width: 95%;
     min-width: 360px;
     margin-top: -7%;
-    -webkit-animation: hideOnLoad 500ms, slideUp 1s 500ms;
-    animation: hideOnLoad 500ms, slideUp 1s 500ms;
+    @include animation('hideOnLoad 500ms, slideUp 1s 500ms');
   }
 }
 
@@ -155,8 +151,7 @@
     width: 100%;
     padding-top: 20%;
     margin-left: 10%;
-    -webkit-animation: hideOnLoad 500ms, slideDown 1s 500ms;
-    animation: hideOnLoad 500ms, slideDown 1s 500ms;
+    @include animation('hideOnLoad 500ms, slideDown 1s 500ms');
   }
 }
 
@@ -238,10 +233,6 @@
   }
   .right-content{
     padding-top: 2%;
-    .phone{
-      width: 90%;
-      margin-left: 10%;
-    }
   }
 
   .center-content{
@@ -250,6 +241,23 @@
     min-width: 393px;
     min-height: 550px;
   }
+}
+
+.phone-carousel {
+    background: url('../images/phone-slides/0.png') no-repeat left top;
+    background-size: cover;
+    width: 80%;
+    margin-top: -12%;
+    margin-left: 20%;
+    .phone-screen{
+      width: 67%;
+      padding-top: 29%;
+      margin-left: 16.5%;
+      padding-bottom: 34%;
+    }
+    .carousel-control{
+      background: none;
+    }
 }
 
 .team{
@@ -266,6 +274,29 @@
       width: 60%;
       margin: auto;
     }
+
+    &.one{
+         @include animation('fadeIn 500ms');
+    }
+    &.six{
+       @include animation('hideOnLoad 500ms, fadeIn 500ms 500ms');
+    }
+    &.four{
+       @include animation('hideOnLoad 1000ms, fadeIn 500ms 1000ms');
+    }
+    &.five{
+       @include animation('hideOnLoad 1500ms, fadeIn 500ms 1500ms');
+    }
+    &.three{
+       @include animation('hideOnLoad 2000ms, fadeIn 500ms 2000ms');
+    }
+    &.two{
+       @include animation('hideOnLoad 2500ms, fadeIn 500ms 2500ms');
+    }
+    &.seven{
+       @include animation('hideOnLoad 3000ms, fadeIn 500ms 3000ms');
+    }
+
     .img-caption{
       h3{
         color: #fff;
@@ -292,34 +323,24 @@
   }
 }
 
-@-webkit-keyframes slideUp {
-  from {padding-top: 100%;}
-  to {padding-top: 0;}
+@include keyframes(slideUp) {
+  0% {padding-top: 100%;}
+  100% {padding-top: 0;}
 }
 
-@keyframes slideUp {
-  from {padding-top: 100%;}
-  to {padding-top: 0;}
+@include keyframes(slideDown) {
+  0% {margin-top: -60%;}
+  100% {margin-top: 0;}
 }
 
-@-webkit-keyframes slideDown {
-  from {margin-top: -60%;}
-  to {margin-top: 0;}
+@include keyframes(fadeIn) {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
-@keyframes slideDown {
-  from {margin-top: -40%;}
-  to {margin-top: 0;}
-}
-
-@-webkit-keyframes hideOnLoad {
-  from {visibility: hidden;}
-  to {visibility: hidden;}
-}
-
-@keyframes hideOnLoad {
-  from {visibility: hidden;}
-  to {visibility: hidden;}
+@include keyframes(hideOnLoad) {
+  0% {visibility: hidden;}
+  100% {visibility: hidden;}
 }
 
 
@@ -398,10 +419,7 @@
 
   .home-wrapper {
     background: url(../images/wood-bg.jpg) repeat center center; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+    @include vendor-property(background-size, cover);
     overflow-x:hidden;
     min-width: inherit;
     min-height: inherit;

@@ -84,7 +84,15 @@
       </div>
       <div class="row body">
         <div class="right-content col-md-4 col-md-offset-2 hidden-sm hidden-xs">
-          <img class="phone" src="/images/iphone_6.png">
+          <div class="phone-carousel">
+            <div class="phone-screen">
+              <carousel interval="5000">
+                <slide ng-repeat="slide in slides" active="slide.active">
+                  <img ng-src="{{slide.image}}" style="margin:auto;">
+                </slide>
+              </carousel>
+            </div>
+          </div>
         </div>
         <div class="center-content col-md-4">
           <div class="row header">
@@ -147,25 +155,25 @@
               <div class="col-md-12 text-center"><h3>Our Team</h3></div>
               <div class="col-md-12 text-center">
                 <div class="row img-row">
-                  <div class="col-sm-3 img-card">
+                  <div class="col-sm-3 img-card one">
                     <a href="http://linkedin.com/in/dominicwong2014" target="_blank">
                       <img class="img-circle grayscale" src="/images/team/dom.jpg">
                       <div class="img-caption"><h3>Dominic Wong</h3></div>
                     </a>
                   </div>
-                  <div class="col-sm-3 img-card">
+                  <div class="col-sm-3 img-card two">
                     <a href="http://linkedin.com/in/shikharm" target="_blank">
                       <img class="img-circle grayscale" src="/images/team/shikhar.jpg">
                       <div class="img-caption"><h3>Shikhar Mohan</h3></div>
                     </a>
                   </div>
-                  <div class="col-sm-3 img-card">
+                  <div class="col-sm-3 img-card three">
                     <a href="http://linkedin.com/in/oskarmelking" target="_blank">
                       <img class="img-circle grayscale" src="/images/team/oskar.jpg">
                       <div class="img-caption"><h3>Oskar Melking</h3></div>
                     </a>
                   </div>
-                  <div class="col-sm-3 img-card">
+                  <div class="col-sm-3 img-card four">
                     <a href="http://www.nikhilpi.com" target="_blank">
                       <img class="img-circle grayscale" src="/images/team/nikhil.jpeg">
                       <div class="img-caption"><h3>Nikhil Pai</h3></div>
@@ -173,19 +181,19 @@
                   </div>
                 </div>
                 <div class="row img-row">
-                  <div class="col-sm-3 col-md-offset-1 img-card">
+                  <div class="col-sm-3 col-md-offset-1 img-card five">
                     <a href="http://www.zak-allen.com" target="_blank">
                      <img class="img-circle grayscale" src="/images/team/zak.jpg">
                      <div class="img-caption"><h3>Zak Allen</h3></div>
                     </a>
                   </div>
-                  <div class="col-sm-3 img-card">
+                  <div class="col-sm-3 img-card six">
                     <a href="http://linkedin.com/in/matsglj" target="_blank">
                      <img class="img-circle grayscale" src="/images/team/mats.jpg">
                      <div class="img-caption"><h3>Mats G L Johansen</h3></div>
                     </a>
                   </div>
-                  <div class="col-sm-3 img-card">
+                  <div class="col-sm-3 img-card seven">
                     <a href="http://linkedin.com/in/divirgupta" target="_blank">
                       <img class="img-circle grayscale" src="/images/team/divir.jpg">
                       <div class="img-caption"><h3>Divir Gupta</h3></div>

@@ -63,4 +63,19 @@ angular.module('barliftApp')
       }
     };
 
+    $scope.slides = [
+      {
+        image: 'images/phone-slides/1.png'
+      },
+      {
+        image: 'images/phone-slides/2.png'
+      },
+      {
+        image: 'images/phone-slides/3.png'
+      },
+      {
+        image: 'images/phone-slides/4.png'
+      }
+    ];
+
   });

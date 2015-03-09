@@ -35,7 +35,7 @@ angular
     editor: 'User',
     bar: 'Bar'
   })
-  .config(function ($routeProvider, USER_ROLES) {
+  .config(function ($routeProvider, $animateProvider, USER_ROLES) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -89,6 +89,7 @@ angular
       .otherwise({
         redirectTo: '/'
       });
+      $animateProvider.classNameFilter(/carousel/);
 
   })
   .run(function($rootScope, $http, $location, $window, USER_ROLES, AUTH_EVENTS, AuthService, Session) {

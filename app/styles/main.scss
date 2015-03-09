@@ -12,6 +12,7 @@ body, html, .content-view{
   width: 100%;
 }
 
+@import "./_mixins.scss";
 @import "./_bar.scss";
 @import "./_deals.scss";
 @import "./_landingPage.scss";
