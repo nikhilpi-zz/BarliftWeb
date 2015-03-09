@@ -269,9 +269,10 @@
     font-size: 2em;
     margin-top: 4%;
   }
-  
+
   img.farley{
-    margin-top: 5%;
+    margin-top: 10%;
+    @include animation('hideOnLoad 3500ms, fadeIn 500ms 3500ms');
   }
 
   .img-card{
