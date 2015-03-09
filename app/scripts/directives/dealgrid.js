@@ -30,18 +30,25 @@ angular.module('barliftApp')
         };
 
         scope.update = function() {
-          dealFormModal.close(function(){
-            if (scope.deal.objectId){
-              updateDeal(scope.deal);
-            } else{
-              saveDeal(scope.deal);
-            }
-          });
+          dealFormModal.close();
+          if (scope.deal.objectId){
+            updateDeal(scope.deal);
+          } else{
+            saveDeal(scope.deal);
+          }
         };
 
         scope.cancel = function() {
           dealFormModal.dismiss();
           scope.deal = Deals.newDeal(scope.user);
+        };
+
+        scope.deleteDeal = function() {
+          dealFormModal.dismiss();
+          Deals.delete(scope.deal,function(res){
+            scope.deal = Deals.newDeal(scope.user);
+            Deals.query(function(deals) { scope.deals = deals; });
+          });
         };
 
         scope.pushDeal = function (deal) {
@@ -75,7 +82,6 @@ angular.module('barliftApp')
             scope.deal = Deals.newDeal(scope.user);
           });
         };
-
       }
     };
   });

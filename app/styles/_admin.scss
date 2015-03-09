@@ -1,0 +1,83 @@
+.dashboard{
+  height: 100%;
+  padding-left: 0;
+  padding-right: 0;
+
+  .body{
+    height: 100%;
+
+    .content{
+      padding-top: 9%;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .analytics{
+    height: 100%;
+    overflow: scroll;
+  }
+
+  .deal-grid{
+    height: 100%;
+    overflow: scroll;
+  }
+
+  .side-bar{
+    background-color: #2A3145;
+    height: 100%;
+    padding: 0;
+
+    .header{
+      height: 10%;
+      background-color: #3C4A63;
+      margin-bottom: 5%;
+      text-align: center;
+      color: #fff;
+      font-size: 2em;
+      padding-top: 2%;
+      h6{
+        margin-bottom: 1px;
+      }
+      p{
+        font-size: 10px;
+      }
+    }
+
+    a{
+      color: #fff;
+    }
+
+  }
+
+  .navbar{
+    height: 10%;
+    margin-left: 16.66666%;
+    margin-bottom: 0;
+    background-color: #E9603E;
+    .navbar-nav{
+      padding-top: 1%;
+    }
+    .navbar-brand{
+      padding: 0;
+      img{
+        height: 100%;
+      }
+    }
+  }
+
+  .grid-50{
+    height: 50%;
+    padding: 1%;
+  }
+
+  .grid-33{
+    height: 33%;
+    padding: 1%;
+  }
+
+  .grid-25{
+    height: 25%;
+    padding: 1%;
+  }
+}

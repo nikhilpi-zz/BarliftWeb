@@ -1,13 +1,23 @@
 .deal{
+
   &.deal-card{
     cursor: pointer;
-    height: 10%;
-    .modal-header{
-      min-height: 113px;
+
+    .tile{
+      height: 100%;
+
+      .modal-header{
+        padding: 0;
+      }
     }
   }
 
   .ctrl-btns{
-    margin-bottom: 10px;
+    height: 10%;
+    padding: 1%;
+  }
+
+  .grid{
+    height: 90%;
   }
 }

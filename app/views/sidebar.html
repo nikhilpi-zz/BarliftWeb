@@ -1,27 +1,33 @@
-<div id="side-bar" class="container-fluid">
-  <div>
-    <a ng-click="selection='deals'">
-      <span class="fui-tag"></span>
-      Deals
-    </a>
+<div id="side-bar" class="side-bar">
+  <div class="header">
+    <h6>{{user.bar_name}}</h6>
+    <p>{{user.address}}</p>
   </div>
 
-  <div>
-    <a ng-click="selection='analytics'">
-      <span class="fui-home"></span>
-      Analytics
-    </a>
-  </div>
+  <div class="container-fluid">
+    <div>
+      <a ng-click="selection='deals'">
+        <span class="fui-tag"></span>
+        Deals
+      </a>
+    </div>
 
-  <hr/>
-  <ul class="list-unstyled">
-    <li>
-      <a href="#">Account</a>
-    </li>
-    <li>
-      <a ng-click="logout()">Logout</a>
-    </li>
-  </ul>
-  <script src="bower_components/flat-ui/docs/assets/js/application.js"></script>
+    <div>
+      <a ng-click="selection='analytics'">
+        <span class="fui-eye"></span>
+        Analytics
+      </a>
+    </div>
+
+    <hr/>
+    <ul class="list-unstyled">
+      <li>
+        <a href="#">Account</a>
+      </li>
+      <li>
+        <a ng-click="logout()">Logout</a>
+      </li>
+    </ul>
+  </div>
 </div>
 

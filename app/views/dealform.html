@@ -54,6 +54,7 @@
 
   <div class="modal-footer">
     <button type="button" class="btn btn-default" ng-click="pushDeal(deal)">Push Now</button>
+    <button type="button" ng-if="deal.objectId" class="btn btn-default" ng-click="deleteDeal()">Delete</button>
     <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
     <button type="button" class="btn btn-primary" ng-click="update()">{{deal.objectId ? "Update" : "Create"}}</button>
   </div>

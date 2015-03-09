@@ -12,6 +12,20 @@ body, html, .content-view{
   width: 100%;
 }
 
+.row.no-gutter {
+  margin-right: 0;
+  margin-left: 0;
+}
+.row.no-gutter > [class^="col-"],
+.row.no-gutter > [class*=" col-"] {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.full-height{
+  height: 100%;
+}
+
 @import "./_mixins.scss";
 @import "./_bar.scss";
 @import "./_deals.scss";

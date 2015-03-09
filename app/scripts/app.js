@@ -80,8 +80,8 @@ angular
         }
       })
       .when('/bar', {
-        templateUrl: 'views/bar.html',
-        controller: 'BarCtrl',
+        templateUrl: 'views/admin.html',
+        controller: 'AdminCtrl',
         data: {
           authorizedRoles: [USER_ROLES.bar]
         }

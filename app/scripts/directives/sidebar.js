@@ -12,6 +12,7 @@ angular.module('barliftApp')
       templateUrl: 'views/sidebar.html',
       restrict: 'E',
       scope:{
+        user: '=',
         selection: '=',
         logout: '&'
       },
