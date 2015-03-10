@@ -119,7 +119,10 @@
             data="genderArr"
             showXAxis="true"
             valueFormat="valueFormatFunction()"
-            showValues="true">
+            showValues="true"
+            width="350"
+            height="400">
+            <svg></svg>
           </nvd3-discrete-bar-chart>
         </div>
       </div>
@@ -131,14 +134,13 @@
               data="groupsArr"
               width="200"
               height="200"
-              margin="{left:280,top:-80,bottom:0,right:0}"
               x="xFunction()"
               y="yFunction()"
               donut="true"
               donutRatio=".25"
               showLegend="true"
               legendrightalign="false">
-              <svg height="100" width="100"></svg>
+              <svg></svg>
             </nvd3-pie-chart>
         </div>
       </div>
