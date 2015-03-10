@@ -7,13 +7,7 @@ app.controller('AdminCtrl', function ($scope, User, Deals, AuthService) {
 
   User.getCurrent(function(res){ 
     $scope.user = res; 
-    console.log($scope.user.getPointer());
-    Deals.query({
-      where: { 
-        user: $scope.user.getPointer()
-      }
-    },
-    function(deals) { $scope.deals = deals; });
+    Deals.query(function(deals) { $scope.deals = deals; });
   });
 
   // logout
