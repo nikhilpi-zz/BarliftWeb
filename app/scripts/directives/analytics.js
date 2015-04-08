@@ -23,7 +23,7 @@ angular.module('barliftApp')
         scope.valueFormatFunction = function() {
           return function (d) {
             return format(d);
-          }
+          };
         };
 
         // pie chart helper functions
@@ -52,15 +52,15 @@ angular.module('barliftApp')
         // param to get users related to deals
         var getParams = function() {
           return {
-            "keys": "deals_redeemed,dm_team,num_nights,pay_interest,profile,times_nudged",
-            "where": {
-              "$relatedTo": {
-                "object": {
-                  "__type": "Pointer",
-                  "className": "Deal",
-                  "objectId": scope.selected.objectId
+            keys: 'deals_redeemed,dm_team,num_nights,pay_interest,profile,times_nudged',
+            where: {
+              $relatedTo: {
+                object: {
+                  __type: 'Pointer',
+                  className: 'Deal',
+                  objectId: scope.selected.objectId
                 },
-                "key": "social"
+                key: 'social'
               }
             }
           };
@@ -70,10 +70,10 @@ angular.module('barliftApp')
         var updateGenderArr = function(males, females) {
           scope.genderArr = [
             {
-              key: "Gender",
+              key: 'Gender',
               values: [
-                ["Male",  males],
-                ["Female" , females]
+                ['Male',  males],
+                ['Female' , females]
               ]
             }
           ];
@@ -82,8 +82,12 @@ angular.module('barliftApp')
         // update groups to be used by nvd3 pie chart
         var updateGroups = function(groups) {
           angular.forEach(groups, function(value, name) {
-            if(name=='Choose a team...') scope.groupsArr.push({name: 'Others', value: value})
-            else if (name && value>1) scope.groupsArr.push({name: name, value: value});
+            if(name==='Choose a team...'){
+              scope.groupsArr.push({name: 'Others', value: value});
+            } 
+            else if (name && value>1) {
+              scope.groupsArr.push({name: name, value: value});
+            }
           });
         };
 
@@ -98,16 +102,28 @@ angular.module('barliftApp')
 
             angular.forEach(res, function(user) {
               // get basic numerical stats
-              if (user.pay_interest) scope.numPrepay ++;
-              if (parseInt(user.num_nights)) scope.numNightOuts += parseInt(user.num_nights);
-              if (parseInt(user.times_nudged)) scope.numNudges += parseInt(user.times_nudged);
-              if (parseInt(user.deals_redeemed)) scope.numDealsRedeemed += parseInt(user.deals_redeemed);
+              if (user.pay_interest) {
+                scope.numPrepay ++;
+              }
+              if (parseInt(user.num_nights)) {
+                scope.numNightOuts += parseInt(user.num_nights);
+              }
+              if (parseInt(user.times_nudged)) {
+                scope.numNudges += parseInt(user.times_nudged);
+              }
+              if (parseInt(user.deals_redeemed)) {
+                scope.numDealsRedeemed += parseInt(user.deals_redeemed);
+              }
 
               // get gender
               if (user.profile.gender) {
-                if (user.profile.gender=='male') males++;
-                else if (user.profile.gender=='female') females++;
-              };
+                if (user.profile.gender==='male') {
+                  males++;
+                }
+                else if (user.profile.gender==='female') {
+                  females++;
+                }
+              }
 
               // get groups
               var group = user.dm_team;

@@ -26,13 +26,13 @@ angular.module('barliftApp')
         if (devices[key].test(userAgent)) {
           return key;
         }
-       };
+       }
        return 'unknown';
-    }
+    };
 
     $scope.isActive = function(route) {
       return route === $location.path();
-    }
+    };
 
     $scope.switchWithin = function(page) { 
       $scope.selection = page;
@@ -40,7 +40,7 @@ angular.module('barliftApp')
 
     $scope.results = null;
     $http.post('https://api.parse.com/1/functions/getScores').
-      success(function(data, status, headers, config) {
+      success(function(data) {
         var results = [];
         for(var i = 0; i < Object.keys(data.result).length; i++){
           var name = Object.keys(data.result)[i];
@@ -53,11 +53,11 @@ angular.module('barliftApp')
     });
 
     $scope.user = {email : null};
-    $scope.addEmail = function(attr) {
+    $scope.addEmail = function() {
       if (typeof $scope.user.email === 'undefined'){
         $scope.user.email = 'Invalid Email!';
       } else {
-        Emails.save({email: $scope.user.email} ,function(res) {
+        Emails.save({email: $scope.user.email} ,function() {
             $scope.user.email = 'Thanks!';
         });
       }

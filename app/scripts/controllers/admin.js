@@ -1,6 +1,7 @@
-var app = angular.module('barliftApp');
+'use strict';
 
-app.controller('AdminCtrl', function ($scope, User, Deals, AuthService) {
+angular.module('barliftApp')
+  .controller('AdminCtrl', function ($scope, User, Deals, AuthService) {
   // variables
   $scope.deals = [];
   $scope.user = {};

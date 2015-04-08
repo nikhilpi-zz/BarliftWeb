@@ -18,7 +18,7 @@ angular.module('barliftApp')
     }
 
     $scope.login = function (credentials) {
-      AuthService.login(credentials).then(function (user) {
+      AuthService.login(credentials).then(function () {
         $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
         $location.path('/'+ Session.userRole.toLowerCase());
       }, function () {
