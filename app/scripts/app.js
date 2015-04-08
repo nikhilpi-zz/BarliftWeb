@@ -17,9 +17,7 @@ angular
     'ngSanitize',
     'ngTouch',
     'ui.bootstrap',
-    'angulartics',
-    'angulartics.google.analytics',
-    'nvd3ChartDirectives'
+    'ui.router'
   ])
   .constant('AUTH_EVENTS', {
     loginSuccess: 'auth-login-success',
@@ -35,64 +33,77 @@ angular
     editor: 'User',
     bar: 'Bar'
   })
-  .config(function ($routeProvider, $animateProvider, USER_ROLES) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
+  .config(function ($stateProvider, $urlRouterProvider, $animateProvider, $httpProvider, USER_ROLES) {
+    $urlRouterProvider.otherwise("/");
+
+    $stateProvider
+      .state('home', {
+        abstract: true,
+        templateUrl: 'views/landingpage/home.partial.html',
         controller: 'MainCtrl',
         data: {
           authorizedRoles: [USER_ROLES.all]
         }
       })
-      .when('/about', {
-        templateUrl: 'views/main.html',
+      .state('home.index', {
+        url: "/",
+        templateUrl: 'views/landingpage/home.index.html',
         controller: 'MainCtrl',
         data: {
           authorizedRoles: [USER_ROLES.all]
         }
       })
-      .when('/team', {
-        templateUrl: 'views/main.html',
+      .state('home.about', {
+        url: "/about",
+        templateUrl: 'views/landingpage/home.about.html',
         controller: 'MainCtrl',
         data: {
           authorizedRoles: [USER_ROLES.all]
         }
       })
-      .when('/competition', {
-        templateUrl: 'views/main.html',
+      .state('home.team', {
+        url: "/team",
+        templateUrl: 'views/landingpage/home.team.html',
         controller: 'MainCtrl',
         data: {
           authorizedRoles: [USER_ROLES.all]
         }
       })
-      .when('/login', {
+      .state('index.login', {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl',
         data: {
           authorizedRoles: [USER_ROLES.all]
         }
       })
-      .when('/admin', {
+      .state('index.admin', {
         templateUrl: 'views/admin.html',
         controller: 'AdminCtrl',
         data: {
           authorizedRoles: [USER_ROLES.admin]
         }
       })
-      .when('/bar', {
+      .state('index.bar', {
         templateUrl: 'views/admin.html',
         controller: 'BarCtrl',
         data: {
           authorizedRoles: [USER_ROLES.bar]
         }
-      })
-      .otherwise({
-        redirectTo: '/'
       });
+
       $animateProvider.classNameFilter(/carousel/);
 
+      $httpProvider.interceptors.push([
+        '$injector',
+        function ($injector) {
+          return $injector.get('AuthInterceptor');
+        }
+      ]);
+
   })
-  .run(function($rootScope, $http, $location, $window, USER_ROLES, AUTH_EVENTS, AuthService, Session) {
+  .run(function($rootScope, $http, $location, $window, $state, AUTH_EVENTS, AuthService, Session) {
+    $rootScope.$state = $state;
+
     $http.defaults.headers.common['X-Parse-Application-Id'] = '5DZi1FrdZcwBKXIxMplWsqYu3cEEumlmFDB1kKnC';
     $http.defaults.headers.common['X-Parse-REST-API-Key'] = 'pMT9AefpMkJfbcJ5fTA2uOGxwpitMII7hpCt8x4O';
 
@@ -115,16 +126,7 @@ angular
       }
     });
   })
-  .config(function ($httpProvider) {
-    $httpProvider.interceptors.push([
-      '$injector',
-      function ($injector) {
-        return $injector.get('AuthInterceptor');
-      }
-    ]);
-  })
-  .factory('AuthInterceptor', function ($rootScope, $q,
-                                        AUTH_EVENTS) {
+  .factory('AuthInterceptor', function ($rootScope, $q, AUTH_EVENTS) {
     return {
       responseError: function (response) {
         $rootScope.$broadcast({
