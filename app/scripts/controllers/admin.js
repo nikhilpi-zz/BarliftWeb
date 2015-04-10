@@ -5,6 +5,11 @@ app.controller('AdminCtrl', function ($scope, User, Deals, AuthService) {
   $scope.deals = [];
   $scope.user = {};
 
+  this.userName = 'Example user';
+  $scope.helloText = 'Welcome in SeedProject';
+  $scope.descriptionText = 'It is an application skeleton for a typical AngularJS web app. You can use it to quickly bootstrap your angular webapp projects and dev environment for these projects.';
+
+
   User.getCurrent(function(res){ 
     $scope.user = res; 
     Deals.query(function(deals) { $scope.deals = deals; });

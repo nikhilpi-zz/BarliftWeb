@@ -6,6 +6,8 @@
 @import "fontawesome/scss/font-awesome";
 
 @import "compass/css3";
+@import "style.scss";
+@import "animate.css";
 
 body, html, .content-view{
   height: 100%;
@@ -27,8 +29,6 @@ body, html, .content-view{
 }
 
 @import "./_mixins.scss";
-@import "./_bar.scss";
-@import "./_deals.scss";
 @import "./_landingPage.scss";
-@import "./_admin.scss";
-@import "./_analytics.scss";
+
+

@@ -8,19 +8,19 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-  .controller('LoginCtrl', function ($rootScope, $timeout, $scope, $location, User, AuthService, AUTH_EVENTS, Session) {
+  .controller('LoginCtrl', function ($rootScope, $timeout, $scope, $state, User, AuthService, AUTH_EVENTS, Session) {
     $scope.credentials = {
       username: '',
       password: ''
     };
     if (AuthService.isAuthenticated()){
-      $location.path('/'+ Session.userRole.toLowerCase());
+      $state.go('dash.main');
     }
 
     $scope.login = function (credentials) {
       AuthService.login(credentials).then(function (user) {
         $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-        $location.path('/'+ Session.userRole.toLowerCase());
+        $state.go('dash.main');
       }, function () {
         $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
       });

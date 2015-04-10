@@ -69,25 +69,36 @@ angular
           authorizedRoles: [USER_ROLES.all]
         }
       })
-      .state('index.login', {
+      .state('home.login', {
+        url: "/login",
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl',
         data: {
           authorizedRoles: [USER_ROLES.all]
         }
       })
-      .state('index.admin', {
-        templateUrl: 'views/admin.html',
-        controller: 'AdminCtrl',
+      .state('dash', {
+        abstract: true,
+        url: "/admin",
+        templateUrl: "views/dash/common/content.html",
         data: {
-          authorizedRoles: [USER_ROLES.admin]
+          authorizedRoles: [USER_ROLES.all]
         }
       })
-      .state('index.bar', {
-        templateUrl: 'views/admin.html',
-        controller: 'BarCtrl',
+      .state('dash.main', {
+        url: "/main",
+        templateUrl: 'views/dash/dash.main.html',
+        controller: 'AdminCtrl',
         data: {
-          authorizedRoles: [USER_ROLES.bar]
+          authorizedRoles: [USER_ROLES.all]
+        }
+      })
+      .state('dash.minor', {
+        url: "/minor",
+        templateUrl: 'views/dash/dash.minor.html',
+        controller: 'AdminCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
         }
       });
 
@@ -112,7 +123,7 @@ angular
       Session.create(session.userId, session.userName, session.sessionToken, session.userRole);
     }
 
-    $rootScope.$on('$routeChangeStart', function (event, next) {
+    $rootScope.$on('$stateChangeStart', function (event, next) {
       var authorizedRoles = next.data.authorizedRoles;
       if (!AuthService.isAuthorized(authorizedRoles)) {
         event.preventDefault();
