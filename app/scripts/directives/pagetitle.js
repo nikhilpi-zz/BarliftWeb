@@ -9,8 +9,6 @@
 angular.module('barliftApp')
   .directive('pageTitle', function ($rootScope, $timeout) {
     return {
-      template: '<div></div>',
-      restrict: 'E',
       link: function postLink(scope, element, attrs) {
         var listener = function(event, toState, toParams, fromState, fromParams) {
           // Default title - load on Dashboard 1

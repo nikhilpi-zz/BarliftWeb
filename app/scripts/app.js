@@ -80,6 +80,7 @@ angular
       .state('dash', {
         abstract: true,
         url: "/admin",
+        controller: 'AdminCtrl',
         templateUrl: "views/dash/common/content.html",
         data: {
           authorizedRoles: [USER_ROLES.all]
