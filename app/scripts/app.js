@@ -69,7 +69,7 @@ angular
           authorizedRoles: [USER_ROLES.all]
         }
       })
-      .state('home.login', {
+      .state('login', {
         url: "/login",
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl',
@@ -94,9 +94,24 @@ angular
           authorizedRoles: [USER_ROLES.all]
         }
       })
-      .state('dash.minor', {
-        url: "/minor",
-        templateUrl: 'views/dash/dash.minor.html',
+      .state('dash.deals', {
+        abstract: true,
+        url: "/deals",
+        templateUrl: 'views/dash/dash.deals.html',
+        controller: 'AdminCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
+      }).state('dash.deals.list', {
+        url: "/deals",
+        template: '<deal-list deals="deals"></deal-list>',
+        controller: 'AdminCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
+      }).state('dash.deals.builder', {
+        url: "/deals",
+        template: '<deal-builder></deal-builder>',
         controller: 'AdminCtrl',
         data: {
           authorizedRoles: [USER_ROLES.all]
