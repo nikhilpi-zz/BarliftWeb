@@ -359,6 +359,18 @@ module.exports = function (grunt) {
         }, {
           expand: true,
           flatten: false,
+          cwd: '<%= yeoman.app %>/styles/plugins',
+          src: '**/*.css',
+          dest: '<%= yeoman.dist %>/css/plugins/'
+        }, {
+          expand: true,
+          flatten: false,
+          cwd: '<%= yeoman.app %>/js/plugins',
+          src: '**/*.js',
+          dest: '<%= yeoman.dist %>/js/plugins/'
+        }, {  
+          expand: true,
+          flatten: false,
           cwd: 'bower_components/flat-ui/fonts',
           src: '**/*.*',
           dest: '<%= yeoman.dist %>/fonts/',

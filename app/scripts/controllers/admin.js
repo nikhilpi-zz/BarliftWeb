@@ -1,18 +1,20 @@
 var app = angular.module('barliftApp');
 
-app.controller('AdminCtrl', function ($scope, User, Deals, AuthService) {
+app.controller('AdminCtrl', function ($scope, User, Deals, AuthService, $http) {
   // variables
   $scope.deals = [];
   $scope.user = {};
-
-  $scope.userName = 'Example user';
-  $scope.helloText = 'Welcome in SeedProject';
-  $scope.descriptionText = 'It is an application skeleton for a typical AngularJS web app. You can use it to quickly bootstrap your angular webapp projects and dev environment for these projects.';
-
+  $scope.communities = [];
+  $scope.today = new Date();
 
   User.getCurrent(function(res){ 
     $scope.user = res; 
     Deals.query(function(deals) { $scope.deals = deals; });
+  });
+
+  $http.get('https://api.parse.com/1/config').
+    success(function(data, status, headers, config) {
+      $scope.communities = data.params.communities;
   });
 
   // logout

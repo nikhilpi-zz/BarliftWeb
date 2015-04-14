@@ -17,7 +17,8 @@ angular
     'ngSanitize',
     'ngTouch',
     'ui.bootstrap',
-    'ui.router'
+    'ui.router',
+    'oc.lazyLoad',
   ])
   .constant('AUTH_EVENTS', {
     loginSuccess: 'auth-login-success',
@@ -33,8 +34,13 @@ angular
     editor: 'User',
     bar: 'Bar'
   })
-  .config(function ($stateProvider, $urlRouterProvider, $animateProvider, $httpProvider, USER_ROLES) {
+  .config(function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $httpProvider, USER_ROLES) {
     $urlRouterProvider.otherwise("/");
+
+    $ocLazyLoadProvider.config({
+        // Set to true if you want to see what and when is dynamically loaded
+        debug: false
+    });
 
     $stateProvider
       .state('home', {
@@ -94,31 +100,39 @@ angular
           authorizedRoles: [USER_ROLES.all]
         }
       })
-      .state('dash.deals', {
+      .state('deals', {
         abstract: true,
         url: "/deals",
-        templateUrl: 'views/dash/dash.deals.html',
+        templateUrl: 'views/dash/common/content.html',
         controller: 'AdminCtrl',
         data: {
           authorizedRoles: [USER_ROLES.all]
         }
-      }).state('dash.deals.list', {
-        url: "/deals",
-        template: '<deal-list deals="deals"></deal-list>',
+      }).state('deals.list', {
+        url: "/list",
+        templateUrl: 'views/dash/deals.list.html',
         controller: 'AdminCtrl',
         data: {
           authorizedRoles: [USER_ROLES.all]
         }
-      }).state('dash.deals.builder', {
-        url: "/deals",
-        template: '<deal-builder></deal-builder>',
+      }).state('deals.builder', {
+        url: "/builder",
+        templateUrl: 'views/dash/deals.builder.html',
         controller: 'AdminCtrl',
         data: {
           authorizedRoles: [USER_ROLES.all]
+        },
+        resolve: {
+          loadPlugin: function ($ocLazyLoad) {
+            return $ocLazyLoad.load([
+              {
+                name: 'datePicker',
+                files: ['css/plugins/datapicker/angular-datapicker.css','js/plugins/datapicker/datePicker.js']
+              }
+            ]);
+          }
         }
       });
-
-      $animateProvider.classNameFilter(/carousel/);
 
       $httpProvider.interceptors.push([
         '$injector',
