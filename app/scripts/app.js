@@ -111,14 +111,12 @@ angular
       }).state('deals.list', {
         url: "/list",
         templateUrl: 'views/dash/deals.list.html',
-        controller: 'AdminCtrl',
         data: {
           authorizedRoles: [USER_ROLES.all]
         }
       }).state('deals.builder', {
-        url: "/builder",
+        url: "/builder/:selectedDeal",
         templateUrl: 'views/dash/deals.builder.html',
-        controller: 'AdminCtrl',
         data: {
           authorizedRoles: [USER_ROLES.all]
         },

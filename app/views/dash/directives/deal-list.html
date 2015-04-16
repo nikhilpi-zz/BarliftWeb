@@ -11,6 +11,14 @@
 
         <div class="stat-percent font-bold text-success">{{deal.num_accepted}}</div>
         <small>People interested</small>
+        <div class="row m-t">
+          <div class="col-md-6">
+            <button class="btn btn-primary btn-block" ui-sref="deals.builder({selectedDeal: deal.objectId})">Edit</button>
+          </div>
+          <div class="col-md-6">
+            <button class="btn btn-primary btn-block">Stats</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

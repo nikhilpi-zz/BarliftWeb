@@ -15,7 +15,7 @@ angular.module('barliftApp')
         deals: '='
       },
       link: function postLink(scope, element, attrs) {
-        
+
       }
     };
   });
