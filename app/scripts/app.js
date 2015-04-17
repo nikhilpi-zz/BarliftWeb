@@ -54,7 +54,6 @@ angular
       .state('home.index', {
         url: "/",
         templateUrl: 'views/landingpage/home.index.html',
-        controller: 'MainCtrl',
         data: {
           authorizedRoles: [USER_ROLES.all]
         }
@@ -62,7 +61,6 @@ angular
       .state('home.about', {
         url: "/about",
         templateUrl: 'views/landingpage/home.about.html',
-        controller: 'MainCtrl',
         data: {
           authorizedRoles: [USER_ROLES.all]
         }
@@ -70,7 +68,6 @@ angular
       .state('home.team', {
         url: "/team",
         templateUrl: 'views/landingpage/home.team.html',
-        controller: 'MainCtrl',
         data: {
           authorizedRoles: [USER_ROLES.all]
         }
@@ -95,7 +92,6 @@ angular
       .state('dash.main', {
         url: "/main",
         templateUrl: 'views/dash/dash.main.html',
-        controller: 'AdminCtrl',
         data: {
           authorizedRoles: [USER_ROLES.all]
         }
@@ -129,6 +125,22 @@ angular
               }
             ]);
           }
+        }
+      })
+      .state('venues', {
+        abstract: true,
+        url: "/venue",
+        templateUrl: 'views/dash/common/content.html',
+        controller: 'AdminCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
+      })
+      .state('venues.list', {
+        url: "/list",
+        templateUrl: 'views/dash/venues.list.html',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
         }
       });
 

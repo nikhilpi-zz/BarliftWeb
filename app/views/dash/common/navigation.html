@@ -26,10 +26,17 @@
                 <a ui-sref="dash.main"><i class="fa fa-laptop"></i> <span class="nav-label">Main page</span> </a>
             </li>
             <li ng-class="{active: $state.includes('deals')}">
-                <a href=""><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Deals</span><span class="fa arrow"></span></a>
+                <a href=""><i class="fa fa-tags"></i> <span class="nav-label">Deals</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level" ng-class="{in: $state.includes('deals')}">
                     <li ui-sref-active="active"><a ui-sref="deals.list">Your deals</a></li>
                     <li ui-sref-active="active"><a ui-sref="deals.builder">Deal Buidler</a></li>
+                </ul>
+            </li>
+            <li ng-class="{active: $state.includes('venues')}">
+                <a href=""><i class="fa fa-building-o"></i> <span class="nav-label">Venues</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level" ng-class="{in: $state.includes('venues')}">
+                    <li ui-sref-active="active"><a ui-sref="venues.list">Your Venues</a></li>
+                    <li ui-sref-active="active"><a ui-sref="venues.builder">Deal Buidler</a></li>
                 </ul>
             </li>
         </ul>

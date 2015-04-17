@@ -1,6 +1,6 @@
 var app = angular.module('barliftApp');
 
-app.controller('AdminCtrl', function ($scope, User, Deals, AuthService, $http) {
+app.controller('AdminCtrl', function ($scope, User, Deals, AuthService, $http, Yelp) {
   // variables
   $scope.selectedDeal = {hello: 'world'};
   $scope.deals = [];
@@ -10,7 +10,16 @@ app.controller('AdminCtrl', function ($scope, User, Deals, AuthService, $http) {
 
   User.getCurrent(function(res){ 
     $scope.user = res; 
-    Deals.query(function(deals) { $scope.deals = deals; });
+
+    Deals.query({
+      where: {
+        user: $scope.user.getPointer()
+      }
+    },function(deals) { $scope.deals = deals; });
+  });
+
+  Yelp.getBusiness('la-macchina-cafe-evanston',function(res){
+    console.log(res);
   });
 
   // logout

@@ -7,7 +7,7 @@
  * # dealBuilder
  */
 angular.module('barliftApp')
-  .directive('dealBuilder', function (Deals, $http, $stateParams, $filter) {
+  .directive('dealBuilder', function (Deals, $http, $stateParams, $filter, $state) {
     return {
       templateUrl: 'views/dash/directives/deal-builder.html',
       restrict: 'E',
@@ -21,7 +21,12 @@ angular.module('barliftApp')
           if(!$stateParams.selectedDeal){
             scope.deal = Deals.newDeal(scope.user);
           } else {
-            scope.deal = $filter('filter')(scope.deals, {objectId: $stateParams.selectedDeal})[0];
+            var dealFound = $filter('filter')(scope.deals, {objectId: $stateParams.selectedDeal})[0];
+            if(!dealFound){
+              $state.go('deals.builder', {selectedDeal: undefined});
+            } else {
+              scope.deal = dealFound;
+            }
           }
         });
 
@@ -34,6 +39,7 @@ angular.module('barliftApp')
           Deals.delete(scope.deal,function(res){
             scope.deal = Deals.newDeal(scope.user);
             Deals.query(function(deals) { scope.deals = deals; });
+            $state.go('deals.builder', {selectedDeal: undefined});
           });
         };
 
