@@ -2,22 +2,22 @@
 
   <div class="form-group">
     <label class="col-sm-4 control-label">How effective was the deal?</label>
-    <div class="col-sm-6"> <h1><rating ng-model="rate" max="5" ng-model="test"></rating></h1></div>
+    <div class="col-sm-6"> <h1><rating max="5" ng-model="feedback.rating"></rating></h1></div>
   </div>
 
   <div class="form-group">
     <label class="col-sm-4 control-label">How many people showed up for the deal?</label>
-    <div class="col-sm-6"><input type="number" class="form-control" min="0"></div>
+    <div class="col-sm-6"><input type="number" class="form-control" min="0" ng-model="feedback.visits"></div>
   </div>
 
   <div class="form-group">
     <label class="col-sm-4 control-label">How much revenue did the deal generate?</label>
-    <div class="col-sm-6"><input type="number" class="form-control" min="0"></div>
+    <div class="col-sm-6"><input type="number" class="form-control" min="0" ng-model="feedback.revenue"></div>
   </div>
 
   <div class="form-group">
     <label class="col-sm-4 control-label">Comments/Suggestions</label>
-    <div class="col-sm-6"><textarea type="text" class="form-control" rows="4" ng-model="test"></textarea></div>
+    <div class="col-sm-6"><textarea type="text" class="form-control" rows="4" ng-model="feedback.comments"></textarea></div>
   </div>
 
   <div class="hr-line-dashed"></div>

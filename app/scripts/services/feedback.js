@@ -2,15 +2,15 @@
 
 /**
  * @ngdoc service
- * @name barliftApp.Deals
+ * @name barliftApp.Feedback
  * @description
- * # Deals
+ * # Feedback
  * Factory in the barliftApp.
  */
 angular.module('barliftApp')
-  .factory('Deals', function ($resource, ParseTypes, Session) {
+  .factory('Feedback', function ($resource, ParseTypes, Session) {
 
-    var apiRest = $resource('https://api.parse.com/1/classes/Deal/:objectId',
+    var apiRest = $resource('https://api.parse.com/1/classes/Feedback/:objectId',
       {
         objectId: '@objectId'
       },
@@ -26,7 +26,8 @@ angular.module('barliftApp')
         get: {
           transformResponse: function(data, headersGetter){
             data = angular.fromJson(data);
-            return ParseTypes.resProcess(data,'Deal');
+            var results = data.results;
+            return ParseTypes.resProcess(results,'Feedback');
           }
         },
         query: {
@@ -35,7 +36,7 @@ angular.module('barliftApp')
             data = angular.fromJson(data);
             var results = data.results;
             var processed = results.map(function(x){
-              return ParseTypes.resProcess(x,'Deal');
+              return ParseTypes.resProcess(x,'Feedback');
             });
             return processed;
           }
@@ -51,12 +52,12 @@ angular.module('barliftApp')
         'delete': {
           method: 'DELETE'
         }
-    });
+      });
 
-    apiRest.newDeal = function(user){
+    apiRest.newFeedback = function(){
       var today = new Date();
       var date = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-      var deal = {
+      var feedback = {
         ACL: {
           '*': {
             read: true
@@ -85,14 +86,11 @@ angular.module('barliftApp')
         deal_end_date: date
       };
 
-      deal.ACL[Session.userId] = {
-          read: true,
-          write: true
-        };
-      deal.user = Session.userId;
-      deal.approved = false;
-      deal.num_accepted = 0;
-      return deal;
+      feedback.ACL[Session.userId] = {
+        read: true,
+        write: true
+      };
+      return feedback;
     };
 
     return apiRest;

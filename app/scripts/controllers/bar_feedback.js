@@ -8,16 +8,24 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-  .controller('BarFeedbackCtrl', function ($scope, Deals, User) {
+  .controller('BarFeedbackCtrl', function ($scope, Deals, User, Feedback) {
     $scope.deal = {};
     $scope.bar_name = {};
 
-    Deals.get({ objectId: 'sWyd96eP6f' }, function(deal) {
+    // get deal for feedback
+    Deals.get({ objectId: 'cvMm6uOKQk' }, function(deal) {
       $scope.deal = deal;
 
+      // get bar name for deal
       User.get({ objectId: deal.user.objectId }, function(bar) {
         $scope.bar_name = bar.bar_name;
       });
+
     });
+
+    // feedback test
+    //Feedback.get({ objectId: 'sfzHwRhRhx' }, function(feedback) {
+    //  console.log(feedback);
+    //});
 
   });
