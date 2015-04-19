@@ -16,7 +16,7 @@ angular.module('barliftApp')
     Deals.get({ objectId: $stateParams.dealId }, function(deal) {
       $scope.deal = deal;
       // get bar name for deal
-      User.get({ objectId: deal.user.objectId }, function(bar) {
+      User.get({ objectId: deal.user }, function(bar) {
         $scope.bar_name = bar.bar_name;
       });
     });
