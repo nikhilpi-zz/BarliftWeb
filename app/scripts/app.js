@@ -81,7 +81,7 @@ angular
         }
       })
       .state('bar_feedback', {
-        url: "/bar_feedback",
+        url: "/bar_feedback/:dealId",
         templateUrl: 'views/bar_feedback.html',
         controller: 'BarFeedbackCtrl',
         data: {
