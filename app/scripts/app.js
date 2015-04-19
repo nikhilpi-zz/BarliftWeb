@@ -80,6 +80,14 @@ angular
           authorizedRoles: [USER_ROLES.all]
         }
       })
+      .state('bar_feedback', {
+        url: "/bar_feedback",
+        templateUrl: 'views/bar_feedback.html',
+        controller: 'BarFeedbackCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
+      })
       .state('dash', {
         abstract: true,
         url: "/admin",
