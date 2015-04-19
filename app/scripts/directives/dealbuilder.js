@@ -13,7 +13,8 @@ angular.module('barliftApp')
       restrict: 'E',
       scope:{
         user: '=',
-        deals: '='
+        deals: '=',
+        venues: '='
       },
       link: function postLink(scope, element, attrs) {
         scope.$watch('deals', function(){
@@ -43,6 +44,7 @@ angular.module('barliftApp')
         };
 
         scope.saveDeal = function(){
+          scope.deal.venue = scope.deal.venue.getPointer();
           Deals.save(scope.deal,function(res){
             scope.deal = Deals.newDeal(scope.user);
             Deals.query(function(deals) { scope.deals = deals; });
@@ -50,6 +52,7 @@ angular.module('barliftApp')
         };
 
         scope.updateDeal = function(){
+          scope.deal.venue = scope.deal.venue.getPointer();
           Deals.update(scope.deal, function(){
             scope.deal = Deals.newDeal(scope.user);
             Deals.query(function(deals) { scope.deals = deals; });
