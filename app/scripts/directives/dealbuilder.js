@@ -12,7 +12,6 @@ angular.module('barliftApp')
       templateUrl: 'views/dash/directives/deal-builder.html',
       restrict: 'E',
       scope:{
-        deal: '=',
         user: '=',
         deals: '='
       },

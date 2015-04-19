@@ -1,9 +1,9 @@
 var app = angular.module('barliftApp');
 
-app.controller('AdminCtrl', function ($scope, User, Deals, AuthService, $http, Yelp) {
+app.controller('AdminCtrl', function ($scope, User, Deals, AuthService, Yelp, Venues) {
   // variables
-  $scope.selectedDeal = {hello: 'world'};
   $scope.deals = [];
+  $scope.venues = [];
   $scope.user = {};
   $scope.communities = [];
   $scope.today = new Date();
@@ -16,11 +16,15 @@ app.controller('AdminCtrl', function ($scope, User, Deals, AuthService, $http, Y
         user: $scope.user.getPointer()
       }
     },function(deals) { $scope.deals = deals; });
+
+    Venues.query({
+      where: {
+        manager: $scope.user.getPointer()
+      }
+    },function(venues) { $scope.venues = venues; });
+
   });
 
-  Yelp.getBusiness('la-macchina-cafe-evanston',function(res){
-    console.log(res);
-  });
 
   // logout
   $scope.logout = AuthService.logout;

@@ -142,14 +142,21 @@ angular
         data: {
           authorizedRoles: [USER_ROLES.all]
         }
+      })
+      .state('venues.builder', {
+        url: "/builder/:selectedDeal",
+        templateUrl: 'views/dash/venues.builder.html',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
       });
 
-      $httpProvider.interceptors.push([
-        '$injector',
-        function ($injector) {
-          return $injector.get('AuthInterceptor');
-        }
-      ]);
+    $httpProvider.interceptors.push([
+      '$injector',
+      function ($injector) {
+        return $injector.get('AuthInterceptor');
+      }
+    ]);
 
   })
   .run(function($rootScope, $http, $location, $window, $state, AUTH_EVENTS, AuthService, Session) {

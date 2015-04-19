@@ -7,10 +7,10 @@
  * # iboxTools
  */
 angular.module('barliftApp')
-  .directive('iboxTools', function () {
+  .directive('iboxTools', function ($timeout) {
     return {
       scope: true,
-      templateUrl: 'views/common/ibox_tools.html',
+      templateUrl: 'views/dash/common/ibox_tools.html',
       restrict: 'A',
       controller: function ($scope, $element) {
         // Function for collapse ibox
