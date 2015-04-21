@@ -7,13 +7,14 @@
  * # dealAnalytics
  */
 angular.module('barliftApp')
-  .directive('dealAnalytics', function ($stateParams, $filter, User, Deals) {
+  .directive('dealAnalytics', function ($stateParams, $filter, User, Deals, $state) {
     return {
       templateUrl: 'views/dash/directives/deal-analytics.html',
       restrict: 'E',
       scope: {
         user: '=',
-        deals: '='
+        deals: '=',
+        deal: '='
       },
       link: function postLink(scope, element, attrs) {
 
