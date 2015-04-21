@@ -11,7 +11,8 @@ angular.module('barliftApp')
     return {
       templateUrl: 'views/dash/directives/feedback-form.html',
       restrict: 'E',
-      link: function postLink(scope, element, attrs) {
+      require:"^ngController",
+      link: function postLink(scope, element, attrs, myCtrl) {
         scope.feedback = {};
 
         // submit form to Feedback class
@@ -20,6 +21,9 @@ angular.module('barliftApp')
           scope.feedback.deal = scope.deal.getPointer();
           // save to Parse
           Feedback.save(scope.feedback);
+          // show thank you msg
+          myCtrl.setSelected("submitted");
+
         };
 
       }

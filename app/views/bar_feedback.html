@@ -12,10 +12,14 @@
         <div class="ibox-title">
           <h5>Bar Feedback</h5>
         </div>
-        <div class="ibox-content">
-          <feedback-form></feedback-form>
+        <div class="ibox-content" ng-switch on="selected">
+          <feedback-form ng-switch-default></feedback-form>
+          <div ng-switch-when="submitted">
+            <h4>Thank you for your input!</h4>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
