@@ -39,6 +39,12 @@
                     <li ui-sref-active="active"><a ui-sref="venues.builder">Venue Buidler</a></li>
                 </ul>
             </li>
+            <li ng-class="{active: $state.includes('analytics')}">
+                <a href=""><i class="fa fa-eye"></i> <span class="nav-label">Analytics</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level" ng-class="{in: $state.includes('analytics')}">
+                    <li ui-sref-active="active"><a ui-sref="analytics.deal">Deal Analytics</a></li>
+                </ul>
+            </li>
         </ul>
 
     </div>

@@ -13,7 +13,7 @@ app.controller('AdminCtrl', function ($scope, User, Deals, AuthService, Yelp, Ve
 
     Deals.query({
       where: {
-        user: $scope.user.getPointer()
+        //user: $scope.user.getPointer()
       }
     },function(deals) { $scope.deals = deals; });
 

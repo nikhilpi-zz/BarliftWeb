@@ -149,6 +149,35 @@ angular
         data: {
           authorizedRoles: [USER_ROLES.all]
         }
+      })
+      .state('analytics', {
+        abstract: true,
+        url: "/analytics",
+        templateUrl: 'views/dash/common/content.html',
+        controller: 'AdminCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        },
+        resolve: {
+            loadPlugin: function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    {
+                        files: ['js/plugins/chartJs/Chart.min.js']
+                    },
+                    {
+                        name: 'angles',
+                        files: ['js/plugins/chartJs/angles.js']
+                    }
+                ]);
+            }
+        }
+      })
+      .state('analytics.deal', {
+        url: "/deal/:selectedDeal",
+        templateUrl: 'views/dash/analytics.deal.html',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
       });
 
     $httpProvider.interceptors.push([
