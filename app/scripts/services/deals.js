@@ -14,13 +14,19 @@ angular.module('barliftApp')
       {
         objectId: '@objectId'
       },
-      { 
+      {
         save: {
           method: 'POST',
           transformRequest: function(data, headersGetter){
             var req = ParseTypes.reqProcess(data);
             req = angular.toJson(req);
             return req;
+          }
+        },
+        get: {
+          transformResponse: function(data, headersGetter){
+            data = angular.fromJson(data);
+            return ParseTypes.resProcess(data,'Deal');
           }
         },
         query: {
@@ -49,7 +55,7 @@ angular.module('barliftApp')
 
     apiRest.newDeal = function(user){
       var today = new Date();
-      var date = new Date(today.getFullYear(), today.getMonth(), today.getDate(), today.getHours(), today.getMinutes());
+      var date = new Date(today.getFullYear(), today.getMonth(), today.getDate());
       var deal = {
         ACL: {
           '*': {
@@ -76,9 +82,7 @@ angular.module('barliftApp')
           }
         ],
         deal_start_date: date,
-        deal_end_date: date,
-        end_utc: date.valueOf(),
-        start_utc: date.valueOf()
+        deal_end_date: date
       };
 
       deal.ACL[Session.userId] = {
@@ -91,6 +95,6 @@ angular.module('barliftApp')
       return deal;
     };
 
-    return apiRest; 
+    return apiRest;
 
   });

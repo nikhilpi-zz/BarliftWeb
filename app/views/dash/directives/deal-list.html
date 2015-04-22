@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-lg-3" ng-repeat="deal in deals">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <span class="label label-success pull-right" ng-if="deal.deal_start_date > today">Active</span>
+        <span class="label label-success pull-right" ng-if="deal.deal_start_date < today">Past</span>
+        <h5>{{deal.deal_start_date | date:'MM/dd/yyyy'}}</h5>
+      </div>
+      <div class="ibox-content">
+        <h3 class="font-bold no-margins">{{deal.name | limitTo:20}}</h3>
+
+        <div class="stat-percent font-bold text-success">{{deal.num_accepted}}</div>
+        <small>People interested</small>
+        <div class="row m-t">
+          <div class="col-md-6">
+            <button class="btn btn-primary btn-block" ui-sref="deals.builder({selectedDeal: deal.objectId})">Edit</button>
+          </div>
+          <div class="col-md-6">
+            <button class="btn btn-primary btn-block" ui-sref="analytics.deal({selectedDeal: deal.objectId})">Stats</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

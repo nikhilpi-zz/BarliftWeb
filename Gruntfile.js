@@ -301,7 +301,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= yeoman.dist %>',
-          src: ['*.html', 'views/{,*/}*.html'],
+          src: ['*.html', 'views/{,*/}*.html','views/**/{,*/}*.html'],
           dest: '<%= yeoman.dist %>'
         }]
       }
@@ -340,6 +340,7 @@ module.exports = function (grunt) {
             '.htaccess',
             '*.html',
             'views/{,*/}*.html',
+            'views/**/{,*/}*.html',
             'images/{,*/}*.{webp}',
             'fonts/{,*/}*.*',
             'images/{,*/}*.svg'
@@ -356,6 +357,18 @@ module.exports = function (grunt) {
           src: 'fonts/*.*',
           dest: '<%= yeoman.dist %>/fonts/'
         }, {
+          expand: true,
+          flatten: false,
+          cwd: '<%= yeoman.app %>/styles/plugins',
+          src: '**/*.css',
+          dest: '<%= yeoman.dist %>/css/plugins/'
+        }, {
+          expand: true,
+          flatten: false,
+          cwd: '<%= yeoman.app %>/js/plugins',
+          src: '**/*.js',
+          dest: '<%= yeoman.dist %>/js/plugins/'
+        }, {  
           expand: true,
           flatten: false,
           cwd: 'bower_components/flat-ui/fonts',

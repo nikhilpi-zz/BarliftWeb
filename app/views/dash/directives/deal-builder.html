@@ -1,0 +1,42 @@
+<form method="get" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-10"><input type="text" class="form-control" ng-model="deal.name"></div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Description</label>
+        <div class="col-sm-10"><textarea type="text" class="form-control" ng-model="deal.description"></textarea></div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Venue</label>
+        <div class="col-sm-10">
+            <select class="form-control m-b" name="account" ng-model="deal.venue" ng-options="venue.bar_name for venue in venues">
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Community</label>
+        <div class="col-sm-10">
+            <select class="form-control m-b" name="account" ng-model="deal.community_name">
+                <option ng-repeat="community in communities">{{community}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group" id="data_4">
+        <label class="col-sm-2 control-label">Date</label>
+        <div class="col-sm-10">
+            <div class="input-group date">
+                <input type="datetime" class="form-control" date-time ng-model="deal.deal_start_date" min-view="date" auto-close="true" date format="yyyy-MM-dd">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="hr-line-dashed"></div>
+    <div class="form-group">
+        <div class="col-sm-4 col-sm-offset-2">
+            <button class="btn btn-danger" ng-if="deal.objectId" type="submit" ng-click="deleteDeal()">Delete</button>
+            <button class="btn btn-primary" ng-if="deal.objectId" type="submit" ng-click="updateDeal()">Update</button>
+            <button class="btn btn-primary" ng-if="!deal.objectId" type="submit" ng-click="saveDeal()">Create</button>
+        </div>
+    </div>
+</form>

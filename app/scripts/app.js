@@ -17,9 +17,8 @@ angular
     'ngSanitize',
     'ngTouch',
     'ui.bootstrap',
-    'angulartics',
-    'angulartics.google.analytics',
-    'nvd3ChartDirectives'
+    'ui.router',
+    'oc.lazyLoad',
   ])
   .constant('AUTH_EVENTS', {
     loginSuccess: 'auth-login-success',
@@ -35,64 +34,171 @@ angular
     editor: 'User',
     bar: 'Bar'
   })
-  .config(function ($routeProvider, $animateProvider, USER_ROLES) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
+  .config(function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $httpProvider, USER_ROLES) {
+    $urlRouterProvider.otherwise("/");
+
+    $ocLazyLoadProvider.config({
+        // Set to true if you want to see what and when is dynamically loaded
+        debug: false
+    });
+
+    $stateProvider
+      .state('home', {
+        abstract: true,
+        templateUrl: 'views/landingpage/home.partial.html',
         controller: 'MainCtrl',
         data: {
           authorizedRoles: [USER_ROLES.all]
         }
       })
-      .when('/about', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
+      .state('home.index', {
+        url: "/",
+        templateUrl: 'views/landingpage/home.index.html',
         data: {
           authorizedRoles: [USER_ROLES.all]
         }
       })
-      .when('/team', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
+      .state('home.about', {
+        url: "/about",
+        templateUrl: 'views/landingpage/home.about.html',
         data: {
           authorizedRoles: [USER_ROLES.all]
         }
       })
-      .when('/competition', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
+      .state('home.team', {
+        url: "/team",
+        templateUrl: 'views/landingpage/home.team.html',
         data: {
           authorizedRoles: [USER_ROLES.all]
         }
       })
-      .when('/login', {
+      .state('login', {
+        url: "/login",
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl',
         data: {
           authorizedRoles: [USER_ROLES.all]
         }
       })
-      .when('/admin', {
-        templateUrl: 'views/admin.html',
+      .state('bar_feedback', {
+        url: "/bar_feedback/:dealId",
+        templateUrl: 'views/bar_feedback.html',
+        controller: 'BarFeedbackCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
+      })
+      .state('dash', {
+        abstract: true,
+        url: "/admin",
+        controller: 'AdminCtrl',
+        templateUrl: "views/dash/common/content.html",
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
+      })
+      .state('dash.main', {
+        url: "/main",
+        templateUrl: 'views/dash/dash.main.html',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
+      })
+      .state('deals', {
+        abstract: true,
+        url: "/deals",
+        templateUrl: 'views/dash/common/content.html',
         controller: 'AdminCtrl',
         data: {
-          authorizedRoles: [USER_ROLES.admin]
+          authorizedRoles: [USER_ROLES.all]
         }
-      })
-      .when('/bar', {
-        templateUrl: 'views/admin.html',
-        controller: 'BarCtrl',
+      }).state('deals.list', {
+        url: "/list",
+        templateUrl: 'views/dash/deals.list.html',
         data: {
-          authorizedRoles: [USER_ROLES.bar]
+          authorizedRoles: [USER_ROLES.all]
+        }
+      }).state('deals.builder', {
+        url: "/builder/:selectedDeal",
+        templateUrl: 'views/dash/deals.builder.html',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        },
+        resolve: {
+          loadPlugin: function ($ocLazyLoad) {
+            return $ocLazyLoad.load([
+              {
+                name: 'datePicker',
+                files: ['css/plugins/datapicker/angular-datapicker.css','js/plugins/datapicker/datePicker.js']
+              }
+            ]);
+          }
         }
       })
-      .otherwise({
-        redirectTo: '/'
+      .state('venues', {
+        abstract: true,
+        url: "/venue",
+        templateUrl: 'views/dash/common/content.html',
+        controller: 'AdminCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
+      })
+      .state('venues.list', {
+        url: "/list",
+        templateUrl: 'views/dash/venues.list.html',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
+      })
+      .state('venues.builder', {
+        url: "/builder/:selectedDeal",
+        templateUrl: 'views/dash/venues.builder.html',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
+      })
+      .state('analytics', {
+        abstract: true,
+        url: "/analytics",
+        templateUrl: 'views/dash/common/content.html',
+        controller: 'AdminCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        },
+        resolve: {
+            loadPlugin: function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    {
+                        files: ['js/plugins/chartJs/Chart.min.js']
+                    },
+                    {
+                        name: 'angles',
+                        files: ['js/plugins/chartJs/angles.js']
+                    }
+                ]);
+            }
+        }
+      })
+      .state('analytics.deal', {
+        url: "/deal/:selectedDeal",
+        templateUrl: 'views/dash/analytics.deal.html',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
       });
-      $animateProvider.classNameFilter(/carousel/);
+
+    $httpProvider.interceptors.push([
+      '$injector',
+      function ($injector) {
+        return $injector.get('AuthInterceptor');
+      }
+    ]);
 
   })
-  .run(function($rootScope, $http, $location, $window, USER_ROLES, AUTH_EVENTS, AuthService, Session) {
+  .run(function($rootScope, $http, $location, $window, $state, AUTH_EVENTS, AuthService, Session) {
+    $rootScope.$state = $state;
+
     $http.defaults.headers.common['X-Parse-Application-Id'] = '5DZi1FrdZcwBKXIxMplWsqYu3cEEumlmFDB1kKnC';
     $http.defaults.headers.common['X-Parse-REST-API-Key'] = 'pMT9AefpMkJfbcJ5fTA2uOGxwpitMII7hpCt8x4O';
 
@@ -101,7 +207,7 @@ angular
       Session.create(session.userId, session.userName, session.sessionToken, session.userRole);
     }
 
-    $rootScope.$on('$routeChangeStart', function (event, next) {
+    $rootScope.$on('$stateChangeStart', function (event, next) {
       var authorizedRoles = next.data.authorizedRoles;
       if (!AuthService.isAuthorized(authorizedRoles)) {
         event.preventDefault();
@@ -115,16 +221,7 @@ angular
       }
     });
   })
-  .config(function ($httpProvider) {
-    $httpProvider.interceptors.push([
-      '$injector',
-      function ($injector) {
-        return $injector.get('AuthInterceptor');
-      }
-    ]);
-  })
-  .factory('AuthInterceptor', function ($rootScope, $q,
-                                        AUTH_EVENTS) {
+  .factory('AuthInterceptor', function ($rootScope, $q, AUTH_EVENTS) {
     return {
       responseError: function (response) {
         $rootScope.$broadcast({

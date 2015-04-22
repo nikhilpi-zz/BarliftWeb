@@ -16,11 +16,9 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/videojs/dist/video-js/video-js.css" />
-    <link rel="stylesheet" href="bower_components/flat-ui/dist/css/flat-ui.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/metisMenu/dist/metisMenu.css" />
     <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
-    <link rel="stylesheet" href="bower_components/nvd3/build/nv.d3.css" />
-    <link rel="stylesheet" href="bower_components/c3/c3.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -33,7 +31,7 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="content-view" ng-view=""></div>
+    <div class="content-view"  ui-view></div>
 
 
 
@@ -61,49 +59,24 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
-    <script src="bower_components/lodash/dist/lodash.compat.js"></script>
-    <script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="bower_components/videojs/dist/video-js/video.js"></script>
-    <script src="bower_components/flat-ui/dist/js/flat-ui.js"></script>
-    <script src="bower_components/fui-angular/fui-checkbox.js"></script>
-    <script src="bower_components/fui-angular/fui-radio.js"></script>
-    <script src="bower_components/fui-angular/fui-switch.js"></script>
-    <script src="bower_components/fui-angular/fui.js"></script>
-    <script src="bower_components/waypoints/waypoints.js"></script>
-    <script src="bower_components/SHA-1/sha1.js"></script>
-    <script src="bower_components/angulartics/src/angulartics.js"></script>
-    <script src="bower_components/angulartics/src/angulartics-adobe.js"></script>
-    <script src="bower_components/angulartics/src/angulartics-chartbeat.js"></script>
-    <script src="bower_components/angulartics/src/angulartics-cnzz.js"></script>
-    <script src="bower_components/angulartics/src/angulartics-flurry.js"></script>
-    <script src="bower_components/angulartics/src/angulartics-ga-cordova.js"></script>
-    <script src="bower_components/angulartics/src/angulartics-ga.js"></script>
-    <script src="bower_components/angulartics/src/angulartics-gtm.js"></script>
-    <script src="bower_components/angulartics/src/angulartics-kissmetrics.js"></script>
-    <script src="bower_components/angulartics/src/angulartics-mixpanel.js"></script>
-    <script src="bower_components/angulartics/src/angulartics-piwik.js"></script>
-    <script src="bower_components/angulartics/src/angulartics-scroll.js"></script>
-    <script src="bower_components/angulartics/src/angulartics-segmentio.js"></script>
-    <script src="bower_components/angulartics/src/angulartics-splunk.js"></script>
-    <script src="bower_components/angulartics/src/angulartics-woopra.js"></script>
-    <script src="bower_components/angulartics/src/angulartics-marketo.js"></script>
-    <script src="bower_components/angulartics/src/angulartics-intercom.js"></script>
-    <script src="bower_components/d3/d3.js"></script>
-    <script src="bower_components/nvd3/build/nv.d3.js"></script>
-    <script src="bower_components/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js"></script>
-    <script src="bower_components/c3/c3.js"></script>
+    <script src="bower_components/metisMenu/dist/metisMenu.js"></script>
+    <script src="bower_components/slimScroll/jquery.slimscroll.min.js"></script>
+    <script src="bower_components/oclazyload/dist/ocLazyLoad.min.js"></script>
+    <script src="bower_components/oauth-signature/dist/oauth-signature.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
+        <script src="scripts/inspinia.js"></script>
         <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/header.js"></script>
         <script src="scripts/controllers/login.js"></script>
         <script src="scripts/controllers/admin.js"></script>
-        <script src="scripts/directives/navbar.js"></script>
         <script src="scripts/services/user.js"></script>
         <script src="scripts/services/deals.js"></script>
         <script src="scripts/controllers/bar.js"></script>
@@ -111,15 +84,22 @@
         <script src="scripts/services/authservice.js"></script>
         <script src="scripts/services/session.js"></script>
         <script src="scripts/services/emails.js"></script>
-        <script src="scripts/directives/userform.js"></script>
         <script src="scripts/directives/ngautocomplete.js"></script>
         <script src="scripts/services/push.js"></script>
-        <script src="scripts/directives/dealgrid.js"></script>
-        <script src="scripts/directives/dealcard.js"></script>
-        <script src="scripts/directives/sidebar.js"></script>
-        <script src="scripts/directives/analytics.js"></script>
-        <script src="scripts/filters/capitalize.js"></script>
-        <script src="scripts/filters/cut.js"></script>
+        <script src="scripts/directives/pagetitle.js"></script>
+        <script src="scripts/directives/sidenavigation.js"></script>
+        <script src="scripts/directives/iboxtools.js"></script>
+        <script src="scripts/directives/minimalizasidebar.js"></script>
+        <script src="scripts/directives/deallist.js"></script>
+        <script src="scripts/directives/dealbuilder.js"></script>
+        <script src="scripts/services/yelp.js"></script>
+        <script src="scripts/directives/venuebuilder.js"></script>
+        <script src="scripts/services/venues.js"></script>
+        <script src="scripts/directives/dealanalytics.js"></script>
+        <script src="scripts/controllers/bar_feedback.js"></script>
+        <script src="scripts/directives/feedbackform.js"></script>
+        <script src="scripts/services/feedback.js"></script>
+        <script src="scripts/services/cloudcode.js"></script>
         <!-- endbuild -->
 
 

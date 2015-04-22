@@ -1,0 +1,82 @@
+<div class="row">
+    <div class="col-lg-6">
+        <div class="widget lazur-bg p-xl">
+
+            <h2>
+                {{selectedDeal.name}}
+            </h2>
+<!--             <ul class="list-unstyled m-t-md">
+                <li>
+                    <span class="fa fa-envelope m-r-xs"></span>
+                    <label>Email:</label>
+                    mike@mail.com
+                </li>
+                <li>
+                    <span class="fa fa-home m-r-xs"></span>
+                    <label>Address:</label>
+                    Street 200, Avenue 10
+                </li>
+                <li>
+                    <span class="fa fa-phone m-r-xs"></span>
+                    <label>Contact:</label>
+                    (+121) 678 3462
+                </li>
+            </ul> -->
+
+        </div>
+    </div>  
+    <div class="col-lg-3">
+        <div class="widget yellow-bg p-lg text-center">
+            <div class="m-b-md">
+                <i class="fa fa-thumbs-up fa-4x"></i>
+
+                <h1 class="m-xs">{{interestedCount}}</h1>
+
+                <h3 class="font-bold no-margins">
+                    Interested
+                </h3>
+                <small>People</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="widget yellow-bg p-lg text-center">
+            <div class="m-b-md">
+                <i class="fa fa-thumbs-up fa-4x"></i>
+
+                <h1 class="m-xs">{{avgDealsRedeemed | number:2}}</h1>
+
+                <h3 class="font-bold no-margins">
+                    Avg Deals
+                </h3>
+                <small>Redeemed</small>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                Gender Split
+            </div>
+            <div class="ibox-content">
+                <div>
+                    <canvas barchart options="barOptions" data="gender" height="300" responsive=true ></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                Nights out
+            </div>
+            <div class="ibox-content">
+                <div>
+                    <canvas doughnutchart options="doughnutOptions" data="nightsOut" height="300" responsive=true ></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
