@@ -7,35 +7,36 @@
  * # dealAnalytics
  */
 angular.module('barliftApp')
-  .directive('dealAnalytics', function ($stateParams, $filter, User, Deals, $state) {
+  .directive('dealAnalytics', function ($stateParams, $filter, User, Deals, $state, CloudCode) {
     return {
       templateUrl: 'views/dash/directives/deal-analytics.html',
       restrict: 'E',
       scope: {
         user: '=',
         deals: '=',
-        deal: '='
+        selectedDeal: '='
       },
       link: function postLink(scope, element, attrs) {
 
-        if(!$stateParams.selectedDeal){
-            element.text("Please select a deal");
-        } else {
-          getData($stateParams.selectedDeal);
+        if($stateParams.selectedDeal){
+          Deals.get({objectId: $stateParams.selectedDeal}, function(res){
+            scope.selectedDeal = res;
+          });
         }
 
-        scope.$watch('deals', function(){
-          if($stateParams.selectedDeal){
-            var dealFound = $filter('filter')(scope.deals, {objectId: $stateParams.selectedDeal})[0];
-            if(!dealFound){
-              $state.go('deals.builder', {selectedDeal: undefined});
-            } else {
-              scope.deal = dealFound;
-            }
+        scope.$watch('selectedDeal', function(){
+          if (scope.selectedDeal.name != 'Please select a deal'){
+            CloudCode.call('dealAnalytics', {dealId: scope.selectedDeal.objectId}, function(res){
+              scope.interestedCount = res.result.interestedCount;
+              scope.avgDealsRedeemed = res.result.avgDealsRedeemed;
+              scope.gender.datasets[0].data[0] = res.result.gender.male;
+              scope.gender.datasets[0].data[1] = res.result.gender.female;
+            });
           }
         });
 
-
+        scope.interestedCount=0;
+        scope.avgDealsRedeemed=0;
 
         scope.gender = {
           labels: ['Male', 'Female'],
@@ -117,45 +118,6 @@ angular.module('barliftApp')
           barValueSpacing : 5,
           barDatasetSpacing : 1
         };
-
-        scope.interestedCount=0;
-        scope.avgDealsRedeemed=0;
-
-        function getData(dealId){
-          User.query({
-            where: {
-              '$relatedTo': {
-                "object":{
-                    __type: 'Pointer',
-                    className: 'Deal',
-                    objectId: dealId
-                  },
-                key: 'social'
-              } 
-            }
-          }, function(res){
-            processData(res);
-          });
-        }
-
-        function processData(data){
-          angular.forEach(data, function(user) {
-            if (user.profile.gender == 'female'){
-              scope.gender.datasets[0].data[1] += 1;
-            } else {
-              scope.gender.datasets[0].data[0] += 1;
-            }
-            scope.interestedCount += 1;
-            if (user.num_nights && user.num_nights != 'Choose a number...'){
-              scope.nightsOut[parseInt(user.num_nights)].value += 1;
-            }
-            if (user.deals_redeemed){
-              scope.avgDealsRedeemed += parseInt(user.deals_redeemed);
-            }
-          });
-          scope.avgDealsRedeemed = scope.avgDealsRedeemed / scope.interestedCount;
-        }
-
       }
     };
   });

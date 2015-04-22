@@ -27,7 +27,7 @@
                         <div class="feed-activity-list">
                             <div class="feed-element" ng-repeat="deal in deals">
                                 <div class="media-body">
-                                    <a ng-click="selectedDeal=deal">{{deal.name}}</a>
+                                    <a ng-click="selectDeal(deal)">{{deal.name}}</a>
                                 </div>
                             </div>
                         </div>
@@ -36,7 +36,7 @@
             </div>
         </div>
         <div class="col-lg-8">
-            <deal-analytics user="user" deals="deals" deal="selectedDeal"></deal-analytics>
+            <deal-analytics user="user" deals="deals" selected-deal="selectedDeal"></deal-analytics>
         </div>
     </div>
 </div>

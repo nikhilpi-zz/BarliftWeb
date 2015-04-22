@@ -1,12 +1,15 @@
 var app = angular.module('barliftApp');
 
-app.controller('AdminCtrl', function ($scope, User, Deals, AuthService, Yelp, Venues) {
+app.controller('AdminCtrl', function ($scope, User, Deals, AuthService, Venues) {
   // variables
   $scope.deals = [];
   $scope.venues = [];
   $scope.user = {};
   $scope.communities = [];
   $scope.today = new Date();
+  $scope.selectedDeal = {
+      name: 'Please select a deal',
+    };
 
   User.getCurrent(function(res){ 
     $scope.user = res; 
@@ -25,6 +28,9 @@ app.controller('AdminCtrl', function ($scope, User, Deals, AuthService, Yelp, Ve
 
   });
 
+  $scope.selectDeal = function(deal){
+    $scope.selectedDeal = deal;
+  };
 
   // logout
   $scope.logout = AuthService.logout;
