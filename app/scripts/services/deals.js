@@ -79,6 +79,11 @@ angular.module('barliftApp')
             key: 'user',
             __type: 'Pointer',
             className: '_User'
+          },
+          {
+            key: 'venue',
+            __type: 'Pointer',
+            className: 'Venue'
           }
         ],
         deal_start_date: date,
@@ -92,6 +97,7 @@ angular.module('barliftApp')
       deal.user = Session.userId;
       deal.approved = false;
       deal.num_accepted = 0;
+      deal.add_deals = [];
       return deal;
     };
 
