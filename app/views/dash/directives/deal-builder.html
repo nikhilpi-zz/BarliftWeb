@@ -8,6 +8,22 @@
         <div class="col-sm-10"><textarea type="text" class="form-control" ng-model="deal.description"></textarea></div>
     </div>
     <div class="form-group">
+        <div class="col-sm-4 col-sm-offset-2">
+            <button class="btn btn-primary" ng-click="addSubDeal()">Add Sub Deal</button>
+        </div>
+    </div>
+    <div class="form-group" ng-repeat="sub in deal.add_deals track by $index">
+        <label class="col-sm-2 control-label">Sub deal {{$index + 1}}</label>
+        <div class="col-sm-10">
+            <div class="input-group">
+                <input type="text" class="form-control" ng-model="deal.add_deals[$index]">
+                <span class="input-group-btn"> 
+                  <button type="button" class="btn btn-danger" ng-click="removeSubDeal($index)">Remove</button> 
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-sm-2 control-label">Venue</label>
         <div class="col-sm-10">
             <select class="form-control m-b" name="account" ng-model="deal.venue" ng-options="venue.bar_name for venue in venues">

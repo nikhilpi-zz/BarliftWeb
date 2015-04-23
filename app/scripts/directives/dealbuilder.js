@@ -26,6 +26,7 @@ angular.module('barliftApp')
               $state.go('deals.builder', {selectedDeal: undefined});
             } else {
               scope.deal = dealFound;
+              scope.deal.venue = $filter('filter')(scope.venues, {objectId: dealFound.venue})[0];
             }
           }
         });
@@ -34,6 +35,14 @@ angular.module('barliftApp')
           success(function(data, status, headers, config) {
             scope.communities = data.params.communities;
         });
+
+        scope.addSubDeal = function(){
+          scope.deal.add_deals.push('');
+        };
+
+        scope.removeSubDeal = function(i){
+          scope.deal.add_deals.splice(i,1);
+        };
 
         scope.deleteDeal = function() {
           Deals.delete(scope.deal,function(res){
@@ -44,7 +53,7 @@ angular.module('barliftApp')
         };
 
         scope.saveDeal = function(){
-          scope.deal.venue = scope.deal.venue.getPointer();
+          scope.deal.venue = scope.deal.venue.objectId;
           Deals.save(scope.deal,function(res){
             scope.deal = Deals.newDeal(scope.user);
             Deals.query(function(deals) { scope.deals = deals; });
@@ -52,7 +61,7 @@ angular.module('barliftApp')
         };
 
         scope.updateDeal = function(){
-          scope.deal.venue = scope.deal.venue.getPointer();
+          scope.deal.venue = scope.deal.venue.objectId;
           Deals.update(scope.deal, function(){
             scope.deal = Deals.newDeal(scope.user);
             Deals.query(function(deals) { scope.deals = deals; });

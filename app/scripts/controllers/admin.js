@@ -17,7 +17,8 @@ angular.module('barliftApp')
 
     Deals.query({
       where: {
-        //user: $scope.user.getPointer()
+        //user: $scope.user.getPointer(),
+        
       }
     },function(deals) { $scope.deals = deals; });
 

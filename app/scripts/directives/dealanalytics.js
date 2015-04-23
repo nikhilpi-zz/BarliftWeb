@@ -14,13 +14,15 @@ angular.module('barliftApp')
       scope: {
         user: '=',
         deals: '=',
-        selectedDeal: '='
+        selectedDeal: '=',
+        selectDeal: '&'
       },
       link: function postLink(scope, element, attrs) {
+        scope.dealFound = null;
 
         if($stateParams.selectedDeal){
           Deals.get({objectId: $stateParams.selectedDeal}, function(res){
-            scope.selectedDeal = res;
+            scope.selectDeal({deal: res});
           });
         }
 
