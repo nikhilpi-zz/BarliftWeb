@@ -80,6 +80,14 @@ angular
           authorizedRoles: [USER_ROLES.all]
         }
       })
+      .state('register', {
+        url: "/register",
+        templateUrl: 'views/register.html',
+        controller: 'LoginCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
+      })
       .state('bar_feedback', {
         url: "/bar_feedback/:dealId",
         templateUrl: 'views/bar_feedback.html',

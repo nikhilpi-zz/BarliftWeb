@@ -70,43 +70,25 @@ angular.module('barliftApp')
         }
     });
 
-    // apiRest.newDeal = function(user){
-    //   var deal = {
-    //     ACL: {
-    //       '*': {
-    //         read: true
-    //       },
-    //       'role:Admin': {
-    //         read: true,
-    //         write: true
-    //       }
-    //     },
-    //     schema: [
-    //       {
-    //         key: 'deal_start_date',
-    //         __type: 'Date'
-    //       },
-    //       {
-    //         key: 'deal_end_date',
-    //         __type: 'Date'
-    //       },
-    //       {
-    //         key: 'user',
-    //         __type: 'Pointer',
-    //         className: '_User'
-    //       }
-    //     ],
-    //     deal_start_date: new Date(),
-    //     deal_end_date: new Date()
-    //   };
+    apiRest.newBar = function(){
+      var bar = {
+        ACL: {
+          '*': {
+            read: true
+          }
+        },
+        schema: [
+          {
+            key: 'Role',
+            __type: 'Pointer',
+            className: '_Role'
+          }
+        ],
+        Role: 'VyofaLB7t2'
+      };
 
-    //   deal.ACL[user.objectId] = {
-    //       read: true,
-    //       write: true
-    //     };
-    //   deal.user = user.objectId;
-    //   return deal;
-    // };
+      return bar;
+    };
 
     return apiRest; 
   });

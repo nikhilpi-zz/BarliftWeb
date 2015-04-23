@@ -18,7 +18,6 @@ angular.module('barliftApp')
     Deals.query({
       where: {
         //user: $scope.user.getPointer(),
-        
       }
     },function(deals) { $scope.deals = deals; });
 
@@ -27,7 +26,6 @@ angular.module('barliftApp')
         manager: $scope.user.getPointer()
       }
     },function(venues) { $scope.venues = venues; });
-
   });
 
   $scope.selectDeal = function(deal){
