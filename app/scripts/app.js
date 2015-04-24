@@ -88,6 +88,14 @@ angular
           authorizedRoles: [USER_ROLES.all]
         }
       })
+      .state('reset', {
+        url: "/reset",
+        templateUrl: 'views/reset.html',
+        controller: 'LoginCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
+      })
       .state('bar_feedback', {
         url: "/bar_feedback/:dealId",
         templateUrl: 'views/bar_feedback.html',
@@ -120,13 +128,15 @@ angular
         data: {
           authorizedRoles: [USER_ROLES.all]
         }
-      }).state('deals.list', {
+      })
+      .state('deals.list', {
         url: "/list",
         templateUrl: 'views/dash/deals.list.html',
         data: {
           authorizedRoles: [USER_ROLES.all]
         }
-      }).state('deals.builder', {
+      })
+      .state('deals.builder', {
         url: "/builder/:selectedDeal",
         templateUrl: 'views/dash/deals.builder.html',
         data: {
@@ -138,6 +148,27 @@ angular
               {
                 name: 'datePicker',
                 files: ['css/plugins/datapicker/angular-datapicker.css','js/plugins/datapicker/datePicker.js']
+              }
+            ]);
+          }
+        }
+      })
+      .state('deals.main', {
+        url: "/main",
+        templateUrl: 'views/dash/deals.main.html',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        },
+        resolve: {
+          loadPlugin: function ($ocLazyLoad) {
+            return $ocLazyLoad.load([
+              {
+                insertBefore: '#loadBefore',
+                files: ['css/plugins/fullcalendar/fullcalendar.css','js/plugins/fullcalendar/fullcalendar.min.js','js/plugins/fullcalendar/gcal.js']
+              },
+              {
+                name: 'ui.calendar',
+                files: ['js/plugins/fullcalendar/calendar.js']
               }
             ]);
           }

@@ -19,9 +19,9 @@ angular.module('barliftApp')
       }).then(function(res){
         Session.create(res.data.objectId, res.data.username, res.data.sessionToken, '');
         return res.data.Role.objectId;
-      }).then(function(roldId){
+      }).then(function(roleId){
         return $http({
-          url: 'https://api.parse.com/1/roles/'+roldId, 
+          url: 'https://api.parse.com/1/roles/'+roleId, 
           method: 'GET'
         });
       }).then(function(role){

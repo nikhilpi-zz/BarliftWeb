@@ -8,7 +8,7 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-  .controller('LoginCtrl', function ($rootScope, $scope, $state, User, AuthService, AUTH_EVENTS, Session) {
+  .controller('LoginCtrl', function ($rootScope, $http, $scope, $state, User, AuthService, AUTH_EVENTS, Session) {
     $scope.credentials = {
       username: '',
       password: ''
@@ -33,6 +33,20 @@ angular.module('barliftApp')
         }
       )
     };
+
+    $scope.alert = null;
+
+    $scope.reset = function(email){
+      $http.post('https://api.parse.com/1/requestPasswordReset', {
+        email: email
+      }).
+      success(function(data, status, headers, config) {
+        $scope.alert = "A reset link has been sent to your email. It may be in you spam folder";
+      }).
+      error(function(data, status, headers, config) {
+        $scope.alert = data.error;
+      });
+    }
 
     $scope.login = function (credentials) {
       AuthService.login(credentials).then(function () {
