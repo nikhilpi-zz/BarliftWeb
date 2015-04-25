@@ -19,6 +19,7 @@ angular
     'ui.bootstrap',
     'ui.router',
     'oc.lazyLoad',
+    'ui.calendar'
   ])
   .constant('AUTH_EVENTS', {
     loginSuccess: 'auth-login-success',
@@ -166,10 +167,10 @@ angular
                 insertBefore: '#loadBefore',
                 files: ['css/plugins/fullcalendar/fullcalendar.css','js/plugins/fullcalendar/fullcalendar.min.js','js/plugins/fullcalendar/gcal.js']
               },
-              {
-                name: 'ui.calendar',
-                files: ['js/plugins/fullcalendar/calendar.js']
-              }
+              // {
+              //   name: 'ui.calendar',
+              //   files: ['js/plugins/fullcalendar/calendar.js']
+              // }
             ]);
           }
         }

@@ -1,6 +1,6 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>MainDeal</h2>
+        <h2>Deal Builder</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="index.html">Deal</a>
@@ -23,7 +23,7 @@
                     <h5 ng-if="$stateParams.selectedDeal">Edit</h5>
                 </div>
                 <div class="ibox-content">
-                    
+                    <deal-builder user="user" deals="deals" venues="venues"></deal-builder>
                 </div>
             </div>
         </div>
