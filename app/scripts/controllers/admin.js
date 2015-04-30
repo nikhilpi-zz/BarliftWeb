@@ -11,6 +11,8 @@ angular.module('barliftApp')
   $scope.selectedDeal = {
       name: 'Please select a deal',
     };
+  $scope.dealView ='list';
+  $scope.dealFilter = 'all'
 
   User.getCurrent(function(res){ 
     $scope.user = res; 

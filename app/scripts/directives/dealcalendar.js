@@ -2,29 +2,24 @@
 
 /**
  * @ngdoc directive
- * @name barliftApp.directive:promoBuilder
+ * @name barliftApp.directive:dealCalendar
  * @description
- * # promoBuilder
+ * # dealCalendar
  */
 angular.module('barliftApp')
-  .directive('promoBuilder', function () {
+  .directive('dealCalendar', function () {
     return {
-      templateUrl: 'views/dash/directives/promo-builder.html',
+      templateUrl: 'views/dash/directives/deal-calendar.html',
       restrict: 'E',
       scope:{
-        user: '=',
-        deals: '=',
-        venues: '='
+        deals: '='
       },
-      controller: function($scope, CloudCode){
+      controller: function($scope){
         $scope.events = [];
-
-        $scope.selectedDeals = [];
-
         $scope.eventSource = [$scope.events];
+        $scope.deal = null;
 
         $scope.$watch('deals',function(){
-          CloudCode.call('takenPushDays');
           angular.forEach($scope.deals, function(deal){
             $scope.events.push({
               title: deal.name,
@@ -39,12 +34,11 @@ angular.module('barliftApp')
           if(!event.selected){
             event.selected = true;
             event.className = "selected-event"
-            $scope.selectedDeals.push(event.deal);
+            $scope.deal = event.deal;
           } else {
             event.selected = false;
             event.className = ""
-            var index = $scope.selectedDeals.indexOf(event.deal);
-            $scope.selectedDeals.splice(index,1);
+            $scope.deal = null;
           }
         };
 
@@ -60,12 +54,6 @@ angular.module('barliftApp')
             eventClick: $scope.alertOnEventClick
           }
         };
-
-        
-
-      },
-      link: function postLink(scope, element, attrs) {
-        
 
       }
     };
