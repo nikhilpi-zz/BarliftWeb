@@ -37,7 +37,11 @@ angular.module('barliftApp')
         });
 
         scope.addSubDeal = function(){
+          if(!scope.deal.add_deals){
+            scope.deal.add_deals = [];
+          }
           scope.deal.add_deals.push('');
+          
         };
 
         scope.removeSubDeal = function(i){
