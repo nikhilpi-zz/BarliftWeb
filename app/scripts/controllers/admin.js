@@ -30,6 +30,10 @@ angular.module('barliftApp')
     },function(venues) { $scope.venues = venues; });
   });
 
+  $scope.$on('deals-update', function(event, args) {
+    Deals.query(function(deals) { $scope.deals = deals; });
+  });
+
   $scope.selectDeal = function(deal){
     $scope.selectedDeal = deal;
   };

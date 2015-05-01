@@ -14,12 +14,18 @@ angular.module('barliftApp')
       scope:{
         deals: '='
       },
-      controller: function($scope){
+      controller: function($scope,$filter){
         $scope.events = [];
         $scope.eventSource = [$scope.events];
         $scope.deal = null;
+        $scope.today = new Date();
+
 
         $scope.$watch('deals',function(){
+          loadDeals();
+        });
+
+        function loadDeals(){
           angular.forEach($scope.deals, function(deal){
             $scope.events.push({
               title: deal.name,
@@ -28,7 +34,7 @@ angular.module('barliftApp')
               deal: deal
             });
           });
-        });
+        }
 
         $scope.alertOnEventClick = function(event, allDay, jsEvent, view ){
           if(!event.selected){

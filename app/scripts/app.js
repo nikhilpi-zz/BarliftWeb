@@ -166,13 +166,30 @@ angular
               {
                 insertBefore: '#loadBefore',
                 files: ['css/plugins/fullcalendar/fullcalendar.css','js/plugins/fullcalendar/fullcalendar.min.js','js/plugins/fullcalendar/gcal.js']
-              },
-              // {
-              //   name: 'ui.calendar',
-              //   files: ['js/plugins/fullcalendar/calendar.js']
-              // }
+              }
             ]);
           }
+        }
+      })
+      .state('deals.deal', {
+        url: "/deal/:selectedDeal",
+        templateUrl: 'views/dash/deals.deal.html',
+        controller: 'AdminCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        },
+        resolve: {
+            loadPlugin: function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    {
+                        files: ['js/plugins/chartJs/Chart.min.js']
+                    },
+                    {
+                        name: 'angles',
+                        files: ['js/plugins/chartJs/angles.js']
+                    }
+                ]);
+            }
         }
       })
       .state('venues', {
@@ -194,35 +211,6 @@ angular
       .state('venues.builder', {
         url: "/builder/:selectedDeal",
         templateUrl: 'views/dash/venues.builder.html',
-        data: {
-          authorizedRoles: [USER_ROLES.all]
-        }
-      })
-      .state('analytics', {
-        abstract: true,
-        url: "/analytics",
-        templateUrl: 'views/dash/common/content.html',
-        controller: 'AdminCtrl',
-        data: {
-          authorizedRoles: [USER_ROLES.all]
-        },
-        resolve: {
-            loadPlugin: function ($ocLazyLoad) {
-                return $ocLazyLoad.load([
-                    {
-                        files: ['js/plugins/chartJs/Chart.min.js']
-                    },
-                    {
-                        name: 'angles',
-                        files: ['js/plugins/chartJs/angles.js']
-                    }
-                ]);
-            }
-        }
-      })
-      .state('analytics.deal', {
-        url: "/deal/:selectedDeal",
-        templateUrl: 'views/dash/analytics.deal.html',
         data: {
           authorizedRoles: [USER_ROLES.all]
         }

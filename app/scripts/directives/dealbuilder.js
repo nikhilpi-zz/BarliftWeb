@@ -7,7 +7,7 @@
  * # dealBuilder
  */
 angular.module('barliftApp')
-  .directive('dealBuilder', function (Deals, $http, $stateParams, $filter, $state) {
+  .directive('dealBuilder', function (Deals, $http, $stateParams, $filter, $state, $rootScope) {
     return {
       templateUrl: 'views/dash/directives/deal-builder.html',
       restrict: 'E',
@@ -31,6 +31,12 @@ angular.module('barliftApp')
           }
         });
 
+        scope.$watch('deal.deal_start_date', function(){
+          if(scope.deal){
+            scope.deal.deal_end_date = new Date(scope.deal.deal_start_date);
+          }
+        });
+
         $http.get('https://api.parse.com/1/config').
           success(function(data, status, headers, config) {
             scope.communities = data.params.communities;
@@ -51,7 +57,7 @@ angular.module('barliftApp')
         scope.deleteDeal = function() {
           Deals.delete(scope.deal,function(res){
             scope.deal = Deals.newDeal(scope.user);
-            Deals.query(function(deals) { scope.deals = deals; });
+            $rootScope.$broadcast('deals-update');
             $state.go('deals.builder', {selectedDeal: undefined});
           });
         };
@@ -60,7 +66,7 @@ angular.module('barliftApp')
           scope.deal.venue = scope.deal.venue.objectId;
           Deals.save(scope.deal,function(res){
             scope.deal = Deals.newDeal(scope.user);
-            Deals.query(function(deals) { scope.deals = deals; });
+            $rootScope.$broadcast('deals-update');
           });
         };
 
@@ -68,7 +74,7 @@ angular.module('barliftApp')
           scope.deal.venue = scope.deal.venue.objectId;
           Deals.update(scope.deal, function(){
             scope.deal = Deals.newDeal(scope.user);
-            Deals.query(function(deals) { scope.deals = deals; });
+            $rootScope.$broadcast('deals-update');
           });
         };
 
