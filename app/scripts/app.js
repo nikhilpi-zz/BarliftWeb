@@ -116,9 +116,20 @@ angular
       })
       .state('dash.main', {
         url: "/main",
+        controller: 'DashboardCtrl',
         templateUrl: 'views/dash/dash.main.html',
         data: {
           authorizedRoles: [USER_ROLES.all]
+        },
+        resolve: {
+          loadPlugin: function ($ocLazyLoad) {
+            return $ocLazyLoad.load([
+              {
+                name: 'angles',
+                files: ['js/plugins/chartJs/angles.js', 'js/plugins/chartJs/Chart.min.js']
+              }
+            ]);
+          }
         }
       })
       .state('deals', {
