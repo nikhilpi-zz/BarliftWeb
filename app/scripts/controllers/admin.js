@@ -6,13 +6,11 @@ angular.module('barliftApp')
   $scope.deals = [];
   $scope.venues = [];
   $scope.user = {};
-  $scope.communities = [];
-  $scope.today = new Date();
   $scope.selectedDeal = {
       name: 'Please select a deal',
     };
   $scope.dealView ='list';
-  $scope.dealFilter = 'all'
+  $scope.dealFilter = 'all';
 
   User.getCurrent(function(res){ 
     $scope.user = res; 

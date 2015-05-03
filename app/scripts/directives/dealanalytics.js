@@ -7,7 +7,7 @@
  * # dealAnalytics
  */
 angular.module('barliftApp')
-  .directive('dealAnalytics', function ($stateParams, $filter, User, Deals, $state, CloudCode) {
+  .directive('dealAnalytics', function ($stateParams, User, Deals, Venues, CloudCode) {
     return {
       templateUrl: 'views/dash/directives/deal-analytics.html',
       restrict: 'E',
@@ -15,27 +15,27 @@ angular.module('barliftApp')
         user: '=',
         deals: '=',
         selectedDeal: '=',
-        selectDeal: '&'
+        selectedVenue: '='
       },
       link: function postLink(scope, element, attrs) {
-        scope.dealFound = null;
-
         if($stateParams.selectedDeal){
           Deals.get({objectId: $stateParams.selectedDeal}, function(res){
-            scope.selectDeal({deal: res});
+            scope.selectedDeal = res;
+            if (scope.selectDeal.venue){
+              Venues.get({objectId: scope.selectDeal.venue}, function(res){
+                scope.selectedVenue = res;
+              })
+            }
           });
         }
 
-        scope.$watch('selectedDeal', function(){
-          if (scope.selectedDeal.name != 'Please select a deal'){
-            CloudCode.call('dealAnalytics', {dealId: scope.selectedDeal.objectId}, function(res){
-              scope.interestedCount = res.result.interestedCount;
-              scope.avgDealsRedeemed = res.result.avgDealsRedeemed;
-              scope.gender.datasets[0].data[0] = res.result.gender.male;
-              scope.gender.datasets[0].data[1] = res.result.gender.female;
-            });
-          }
+        CloudCode.call('dealAnalytics', {dealId: $stateParams.selectedDeal}, function(res){
+          scope.interestedCount = res.result.interestedCount;
+          scope.avgDealsRedeemed = res.result.avgDealsRedeemed;
+          scope.gender.datasets[0].data[0] = res.result.gender.male;
+          scope.gender.datasets[0].data[1] = res.result.gender.female;
         });
+
 
         scope.interestedCount=0;
         scope.avgDealsRedeemed=0;

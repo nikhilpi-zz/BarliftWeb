@@ -7,27 +7,16 @@
  * # venueBuilder
  */
 angular.module('barliftApp')
-  .directive('venueBuilder', function (Venues, $http, $stateParams, $filter, $state, Yelp) {
+  .directive('venueBuilder', function (Venues, Yelp, $rootScope) {
     return {
       templateUrl: 'views/dash/directives/venue-builder.html',
       restrict: 'E',
       scope:{
         user: '=',
-        venues: '='
+        venues: '=',
+        venue: '='
       },
       link: function postLink(scope, element, attrs) {
-        scope.$watch('venues', function(){
-          if(!$stateParams.selectedVenue){
-            scope.venue = Venues.newVenue(scope.user);
-          } else {
-            var venueFound = $filter('filter')(scope.venues, {objectId: $stateParams.selectedVenue})[0];
-            if(!venueFound){
-              $state.go('venues.builder', {selectedVenue: undefined});
-            } else {
-              scope.venue = venueFound;
-            }
-          }
-        });
 
         scope.loadYelp = function(yelpId){
           yelpId = yelpId.replace('http://', '');
@@ -51,32 +40,32 @@ angular.module('barliftApp')
 
         scope.delete = function() {
           Venues.delete(scope.venue,function(res){
-            scope.venue = Venues.newVenue(scope.user);
-            Venues.query(function(venues) { scope.venues = venues; });
-            $state.go('venues.builder', {selectedDeal: undefined});
+            $rootScope.$broadcast('venues-update');
           });
+        };
+
+        scope.cancel = function() {
+          $rootScope.$broadcast('venues-update');
         };
 
         scope.save = function(){
           if(scope.locationDetails){
             var geo = scope.locationDetails.geometry.location;
             scope.venue.location = {
-              latitude: geo.k,
-              longitude: geo.D
+              latitude: geo.A,
+              longitude: geo.F
             };
             Venues.save(scope.venue,function(res){
-              scope.venue = Venues.newVenue(scope.user);
-              Venues.query(function(venues) { scope.venues = venues; });
+              $rootScope.$broadcast('venues-update');
             });
           } else {
             var geo = geoCode(scope.venue.address, function(geo){
               scope.venue.location = {
-                latitude: geo.k,
-                longitude: geo.D
+                latitude: geo.A,
+                longitude: geo.F
               };
               Venues.save(scope.venue,function(res){
-                scope.venue = Venues.newVenue(scope.user);
-                Venues.query(function(venues) { scope.venues = venues; });
+                $rootScope.$broadcast('venues-update');
               });
             });
           }

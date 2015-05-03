@@ -125,7 +125,7 @@ angular
         abstract: true,
         url: "/deals",
         templateUrl: 'views/dash/common/content.html',
-        controller: 'AdminCtrl',
+        controller: 'DealsviewCtrl',
         data: {
           authorizedRoles: [USER_ROLES.all]
         }
@@ -154,27 +154,9 @@ angular
           }
         }
       })
-      .state('deals.main', {
-        url: "/main",
-        templateUrl: 'views/dash/deals.main.html',
-        data: {
-          authorizedRoles: [USER_ROLES.all]
-        },
-        resolve: {
-          loadPlugin: function ($ocLazyLoad) {
-            return $ocLazyLoad.load([
-              {
-                insertBefore: '#loadBefore',
-                files: ['css/plugins/fullcalendar/fullcalendar.css','js/plugins/fullcalendar/fullcalendar.min.js','js/plugins/fullcalendar/gcal.js']
-              }
-            ]);
-          }
-        }
-      })
       .state('deals.deal', {
         url: "/deal/:selectedDeal",
         templateUrl: 'views/dash/deals.deal.html',
-        controller: 'AdminCtrl',
         data: {
           authorizedRoles: [USER_ROLES.all]
         },
@@ -192,25 +174,44 @@ angular
             }
         }
       })
-      .state('venues', {
+      .state('promo', {
         abstract: true,
-        url: "/venue",
+        url: "/promo",
         templateUrl: 'views/dash/common/content.html',
-        controller: 'AdminCtrl',
+        controller: 'DealsviewCtrl',
         data: {
           authorizedRoles: [USER_ROLES.all]
         }
       })
-      .state('venues.list', {
-        url: "/list",
-        templateUrl: 'views/dash/venues.list.html',
+      .state('promo.push', {
+        url: "/push",
+        templateUrl: 'views/dash/promo.push.html',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        },
+        resolve: {
+          loadPlugin: function ($ocLazyLoad) {
+            return $ocLazyLoad.load([
+              {
+                insertBefore: '#loadBefore',
+                files: ['css/plugins/fullcalendar/fullcalendar.css','js/plugins/fullcalendar/fullcalendar.min.js','js/plugins/fullcalendar/gcal.js']
+              }
+            ]);
+          }
+        }
+      })
+      .state('profile', {
+        abstract: true,
+        url: "/profile",
+        templateUrl: 'views/dash/common/content.html',
+        controller: 'ProfileviewCtrl',
         data: {
           authorizedRoles: [USER_ROLES.all]
         }
       })
-      .state('venues.builder', {
-        url: "/builder/:selectedDeal",
-        templateUrl: 'views/dash/venues.builder.html',
+      .state('profile.venues', {
+        url: "/venues",
+        templateUrl: 'views/dash/profile.venues.html',
         data: {
           authorizedRoles: [USER_ROLES.all]
         }

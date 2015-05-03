@@ -30,20 +30,15 @@
                 <ul class="nav nav-second-level" ng-class="{in: $state.includes('deals')}">
                     <li ui-sref-active="active"><a ui-sref="deals.list">Your deals</a></li>
                     <li ui-sref-active="active"><a ui-sref="deals.builder">Deal Builder</a></li>
-                    <li ui-sref-active="active"><a ui-sref="deals.main">Promo Deals</a></li>
                 </ul>
             </li>
-            <li ng-class="{active: $state.includes('venues')}">
-                <a href=""><i class="fa fa-building-o"></i> <span class="nav-label">Venues</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level" ng-class="{in: $state.includes('venues')}">
-                    <li ui-sref-active="active"><a ui-sref="venues.list">Your Venues</a></li>
-                    <li ui-sref-active="active"><a ui-sref="venues.builder">Venue Buidler</a></li>
-                </ul>
+            <li ui-sref-active="active">
+                <a ui-sref="promo.push"><i class="fa fa-star"></i> <span class="nav-label">Promote</span> </a>
             </li>
-            <li ng-class="{active: $state.includes('analytics')}">
-                <a href=""><i class="fa fa-eye"></i> <span class="nav-label">Analytics</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level" ng-class="{in: $state.includes('analytics')}">
-                    <li ui-sref-active="active"><a ui-sref="analytics.deal">Deal Analytics</a></li>
+            <li ng-class="{active: $state.includes('profile')}">
+                <a href=""><i class="fa fa-user"></i> <span class="nav-label">Profile</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level" ng-class="{in: $state.includes('profile')}">
+                    <li ui-sref-active="active"><a ui-sref="profile.venues">Venues</a></li>
                 </ul>
             </li>
         </ul>

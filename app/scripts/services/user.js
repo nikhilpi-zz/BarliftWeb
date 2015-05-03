@@ -8,8 +8,8 @@
  * Factory in the barliftApp.
  */
 angular.module('barliftApp')
-  .factory('User', function ($resource, $http, ParseTypes, Session) {
-    var apiRest = $resource('https://api.parse.com/1/users/:objectId',
+  .factory('User', function ($resource, ParseTypes, Session, Deals, Venues) {
+    var user = $resource('https://api.parse.com/1/users/:objectId',
       {
         objectId: '@objectId'
       },
@@ -70,7 +70,7 @@ angular.module('barliftApp')
         }
     });
 
-    apiRest.newBar = function(){
+    user.newBar = function(){
       var bar = {
         ACL: {
           '*': {
@@ -90,5 +90,6 @@ angular.module('barliftApp')
       return bar;
     };
 
-    return apiRest; 
+
+    return user; 
   });

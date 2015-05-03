@@ -22,6 +22,12 @@ angular.module('barliftApp')
             return req;
           }
         },
+        get: {
+          transformResponse: function(data, headersGetter){
+            data = angular.fromJson(data);
+            return ParseTypes.resProcess(data,'Venue');
+          }
+        },
         query: {
           isArray: true,
           transformResponse: function(data, headersGetter){

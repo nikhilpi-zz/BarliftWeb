@@ -7,29 +7,21 @@
  * # dealBuilder
  */
 angular.module('barliftApp')
-  .directive('dealBuilder', function (Deals, $http, $stateParams, $filter, $state, $rootScope) {
+  .directive('dealBuilder', function (Deals, $http, $stateParams, $filter, $rootScope) {
     return {
       templateUrl: 'views/dash/directives/deal-builder.html',
       restrict: 'E',
       scope:{
         user: '=',
-        deals: '=',
-        venues: '='
+        venues: '=',
+        deal: '='
       },
       link: function postLink(scope, element, attrs) {
-        scope.$watch('deals', function(){
-          if(!$stateParams.selectedDeal){
-            scope.deal = Deals.newDeal(scope.user);
-          } else {
-            var dealFound = $filter('filter')(scope.deals, {objectId: $stateParams.selectedDeal})[0];
-            if(!dealFound){
-              $state.go('deals.builder', {selectedDeal: undefined});
-            } else {
-              scope.deal = dealFound;
-              scope.deal.venue = $filter('filter')(scope.venues, {objectId: dealFound.venue})[0];
-            }
-          }
-        });
+        if($stateParams.selectedDeal){
+          Deals.get({objectId: $stateParams.selectedDeal}, function(res){
+            scope.deal = res;
+          });
+        }
 
         scope.$watch('deal.deal_start_date', function(){
           if(scope.deal){

@@ -36,6 +36,7 @@
         <div class="col-sm-4 col-sm-offset-2">
             <button class="btn btn-danger" ng-if="venue.objectId" type="submit" ng-click="delete()">Delete</button>
             <button class="btn btn-primary" ng-if="venue.objectId" type="submit" ng-click="save()">Update</button>
+            <button class="btn btn-warning" ng-if="venue.objectId" type="submit" ng-click="cancel()">Cancel</button>
             <button class="btn btn-primary" ng-if="!venue.objectId" type="submit" ng-click="save()">Create</button>
         </div>
     </div>

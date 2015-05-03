@@ -7,7 +7,7 @@
  * # dealList
  */
 angular.module('barliftApp')
-  .directive('dealList', function () {
+  .directive('dealList', function (User) {
     return {
       templateUrl: 'views/dash/directives/deal-list.html',
       restrict: 'E',
