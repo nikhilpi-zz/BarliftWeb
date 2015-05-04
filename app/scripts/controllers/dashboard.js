@@ -8,7 +8,7 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-    .controller('DashboardCtrl', function($scope, User, Deals, CloudCode) {
+    .controller('DashboardCtrl', function($scope, User, Deals, CloudCode, $http) {
 
         $scope.user = {};
 
@@ -17,21 +17,30 @@ angular.module('barliftApp')
 
             Deals.query({}, function(allDeals) {
                 Deals.query({
-                    where: {
-                        user: $scope.user.getPointer()
-                    }
-                },
-                function(barDeals) {
-                  $scope.allDeals = allDeals;
+                        where: {
+                            user: $scope.user.getPointer()
+                        }
+                    },
+                    function(barDeals) {
+                        $scope.allDeals = allDeals;
 
-                  if (res.username == "Admin") {
-                      main(allDeals);
-                  } else {
-                      main(barDeals);
-                  }
-                });
+                        if (res.username == "Admin") {
+                            main(allDeals);
+                        } else {
+                            main(barDeals);
+                        }
+                    });
             });
 
+        });
+
+        // get weather
+        $http.jsonp('http://api.wunderground.com/api/f2a7d6ad5a260a8a/forecast10day/q/IL/Evanston.json?callback=JSON_CALLBACK').
+          success(function(data, status, headers, config) {
+              $scope.weather = data.forecast.simpleforecast.forecastday;
+          }).
+          error(function(data, status, headers, config) {
+              console.log("Couldn't get weather", data);
         });
 
         var nextWeekDeals = function() {
@@ -96,7 +105,7 @@ angular.module('barliftApp')
         var daysLastWeek = function() {
             var d = new Date();
             var day = d.getDay() + 1;
-            var weekday = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
+            var weekday = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
             var lastWeek = [];
             for (var i = 0; i < 7; i++) {
@@ -121,23 +130,41 @@ angular.module('barliftApp')
             return data;
         }
 
-        var mostPopularDeal = function() {
-          var weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-          var dealList = dealsInLastRange($scope.allDeals, 0, 6);
-          var dealName, day;
-          var maxSeenSoFar = 0;
+        var revenueInRange = function(start, end) {
+            var dealList = dealsInLastRange($scope.deals, start, end);
+            var revenue = 0;
 
-          for (var i = 0; i < dealList.length; i++) {
+            for (var i = 0; i < dealList.length; i++) {
+                angular.forEach(dealList[i], function(deal) {
+                    revenue += deal.revenue;
+                });
+            };
+
+            return revenue;
+        }
+
+
+        var mostPopularDeal = function() {
+            var weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            var dealList = dealsInLastRange($scope.allDeals, 0, 6);
+            var dealName, day;
+            var maxSeenSoFar = 0;
+
+            for (var i = 0; i < dealList.length; i++) {
                 angular.forEach(dealList[i], function(deal) {
                     if (deal.num_accepted > maxSeenSoFar) {
-                      dealName = deal.name;
-                      day = deal.deal_start_date
-                      maxSeenSoFar = deal.num_accepted;
+                        dealName = deal.name;
+                        day = deal.deal_start_date
+                        maxSeenSoFar = deal.num_accepted;
                     }
                 });
             };
 
-            return {dealName: dealName, day: weekday[day.getDay()], interested: maxSeenSoFar};
+            return {
+                dealName: dealName,
+                day: weekday[day.getDay()],
+                interested: maxSeenSoFar
+            };
         }
 
         var main = function(deals) {
@@ -160,19 +187,19 @@ angular.module('barliftApp')
 
             // num interested
             var sum = 0;
-            for (var i = 0; i< $scope.interestedLastWeek.length; i++) {
-              sum  += $scope.interestedLastWeek[i];
+            for (var i = 0; i < $scope.interestedLastWeek.length; i++) {
+                sum += $scope.interestedLastWeek[i];
             }
             $scope.numInterestedLastWeek = sum;
 
             var sum = 0;
-            for (var i = 0; i< $scope.interestedTwoWeeksBack.length; i++) {
-               sum += $scope.interestedTwoWeeksBack[i];
+            for (var i = 0; i < $scope.interestedTwoWeeksBack.length; i++) {
+                sum += $scope.interestedTwoWeeksBack[i];
             }
             $scope.numInterestedTwoWeeksBack = sum;
 
             // % increase in interested
-            $scope.interestedIncrease = 100 * ($scope.numInterestedLastWeek - $scope.numInterestedTwoWeeksBack) / $scope.numInterestedTwoWeeksBack; 
+            $scope.interestedIncrease = 100 * ($scope.numInterestedLastWeek - $scope.numInterestedTwoWeeksBack) / $scope.numInterestedTwoWeeksBack;
             $scope.interestedIncreaseAbs = Math.abs($scope.interestedIncrease);
 
 
@@ -180,6 +207,9 @@ angular.module('barliftApp')
             var data = mostPopularDeal();
             $scope.mostPopularDealName = data.dealName;
             $scope.mostPopularDealDay = data.day;
+
+            // revenue last week
+            $scope.revenue = revenueInRange(0, 6);
 
             /**
              * Data for Line chart
