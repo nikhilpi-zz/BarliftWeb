@@ -9,9 +9,7 @@
  */
 angular.module('barliftApp')
     .controller('DashboardCtrl', function($scope, User, Deals, CloudCode) {
-        /**
-         * Get deals for current user
-         */
+
         $scope.user = {};
 
         User.getCurrent(function(res) {
@@ -34,9 +32,6 @@ angular.module('barliftApp')
             }
         });
 
-        /**
-         * Get last week's deals
-         */
         var nextWeekDeals = function() {
             $scope.pastDeals = [];
             $scope.numPastDeals = 0;
@@ -72,8 +67,9 @@ angular.module('barliftApp')
             });
         }
 
-        var lastWeekNumInterested = function() {
-            var data = [0, 0, 0, 0, 0, 0, 0];
+        var dealsInLastRange = function(start, end) {
+            var num_days = end - start + 1;
+            var data = new Array(num_days);
 
             angular.forEach($scope.deals, function(deal) {
                 var today = new Date();
@@ -81,16 +77,21 @@ angular.module('barliftApp')
                 var date = deal["deal_start_date"];
                 date.setHours(0, 0, 0, 0);
 
-                var dateIndex = 6 - Math.floor((today - date) / (1000 * 60 * 60 * 24));
+                var dateDiff = Math.floor((today - date) / (1000 * 60 * 60 * 24));
 
-                if (0 <= dateIndex && dateIndex < 7) {
-                  data[dateIndex] += deal.num_accepted;
+                if (start <= dateDiff && dateDiff <= end) {
+                    var dateIndex = end - dateDiff;
+                    if (data[dateIndex]) {
+                        data[dateIndex].push(deal);
+                    } else {
+                        data[dateIndex] = [deal];
+                    }
                 };
             });
-            $scope.lastNumInterested = data;
+            return data;
         }
 
-        var lastWeekDays = function() {
+        var daysLastWeek = function() {
             var d = new Date();
             var day = d.getDay() + 1;
             var weekday = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
@@ -102,30 +103,80 @@ angular.module('barliftApp')
                 day += 1;
             }
 
-            $scope.lastWeek = lastWeek;
+            return lastWeek;
         }
+
+        var interestedInRange = function(start, end) {
+            var dealList = dealsInLastRange(start, end);
+            var data = Array.apply(null, new Array(dealList.length)).map(Number.prototype.valueOf, 0);
+
+            for (var i = 0; i < dealList.length; i++) {
+                angular.forEach(dealList[i], function(deal) {
+                    data[i] += deal.num_accepted;
+                });
+            };
+
+            return data;
+        };
 
         var main = function(deals) {
             $scope.deals = deals;
 
+            // list of deals next week
             nextWeekDeals();
-            lastWeekDays();
-            lastWeekNumInterested();
+
+            // list of days last week e.g. Mon, Tues 
+            $scope.lastWeekDays = daysLastWeek();
+
+            // list of deals last week
+            $scope.dealsLastWeek = dealsInLastRange(0, 6);
+
+            // list of people interested last week (oldest first)
+            $scope.interestedLastWeek = interestedInRange(0, 6);
+
+            // list of people interested 2 weeks back (oldest first)
+            $scope.interestedTwoWeeksBack = interestedInRange(7, 13);
+
+            // num interested
+            var sum = 0;
+            for (var i = 0; i< $scope.interestedLastWeek.length; i++) {
+              sum  += $scope.interestedLastWeek[i];
+            }
+            $scope.numInterestedLastWeek = sum;
+
+            var sum = 0;
+            for (var i = 0; i< $scope.interestedTwoWeeksBack.length; i++) {
+               sum += $scope.interestedTwoWeeksBack[i];
+            }
+            $scope.numInterestedTwoWeeksBack = sum;
+
+            // % increase in interested
+            $scope.interestedIncrease = 100 * ($scope.numInterestedLastWeek - $scope.numInterestedTwoWeeksBack) / $scope.numInterestedTwoWeeksBack; 
+            $scope.interestedIncreaseAbs = Math.abs($scope.interestedIncrease);
 
             /**
              * Data for Line chart
              */
             $scope.lineData = {
-                labels: $scope.lastWeek,
+                labels: $scope.lastWeekDays,
                 datasets: [{
-                    label: "Example dataset",
+                    label: "Two Weeks Back",
+                    fillColor: "rgba(220,220,220,0.5)",
+                    strokeColor: "rgba(220,220,220,1)",
+                    pointColor: "rgba(220,220,220,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    data: $scope.interestedTwoWeeksBack
+                }, {
+                    label: "Last Week",
                     fillColor: "rgba(26,179,148,0.5)",
                     strokeColor: "rgba(26,179,148,0.7)",
                     pointColor: "rgba(26,179,148,1)",
                     pointStrokeColor: "#fff",
                     pointHighlightFill: "#fff",
                     pointHighlightStroke: "rgba(26,179,148,1)",
-                    data: $scope.lastNumInterested
+                    data: $scope.interestedLastWeek
                 }]
             };
 
