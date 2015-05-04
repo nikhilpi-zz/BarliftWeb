@@ -15,21 +15,23 @@ angular.module('barliftApp')
         User.getCurrent(function(res) {
             $scope.user = res;
 
-            // get all deals if admin, otherwise only that of the current user
-            if (res.username == "Admin") {
-                Deals.query({}, function(deals) {
-                    main(deals);
-                });
-            } else {
+            Deals.query({}, function(allDeals) {
                 Deals.query({
-                        where: {
-                            user: $scope.user.getPointer()
-                        }
-                    },
-                    function(deals) {
-                        main(deals);
-                    });
-            }
+                    where: {
+                        user: $scope.user.getPointer()
+                    }
+                },
+                function(barDeals) {
+                  $scope.allDeals = allDeals;
+
+                  if (res.username == "Admin") {
+                      main(allDeals);
+                  } else {
+                      main(barDeals);
+                  }
+                });
+            });
+
         });
 
         var nextWeekDeals = function() {
@@ -67,11 +69,11 @@ angular.module('barliftApp')
             });
         }
 
-        var dealsInLastRange = function(start, end) {
+        var dealsInLastRange = function(deals, start, end) {
             var num_days = end - start + 1;
             var data = new Array(num_days);
 
-            angular.forEach($scope.deals, function(deal) {
+            angular.forEach(deals, function(deal) {
                 var today = new Date();
                 today.setHours(0, 0, 0, 0);
                 var date = deal["deal_start_date"];
@@ -107,7 +109,7 @@ angular.module('barliftApp')
         }
 
         var interestedInRange = function(start, end) {
-            var dealList = dealsInLastRange(start, end);
+            var dealList = dealsInLastRange($scope.deals, start, end);
             var data = Array.apply(null, new Array(dealList.length)).map(Number.prototype.valueOf, 0);
 
             for (var i = 0; i < dealList.length; i++) {
@@ -117,7 +119,26 @@ angular.module('barliftApp')
             };
 
             return data;
-        };
+        }
+
+        var mostPopularDeal = function() {
+          var weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+          var dealList = dealsInLastRange($scope.allDeals, 0, 6);
+          var dealName, day;
+          var maxSeenSoFar = 0;
+
+          for (var i = 0; i < dealList.length; i++) {
+                angular.forEach(dealList[i], function(deal) {
+                    if (deal.num_accepted > maxSeenSoFar) {
+                      dealName = deal.name;
+                      day = deal.deal_start_date
+                      maxSeenSoFar = deal.num_accepted;
+                    }
+                });
+            };
+
+            return {dealName: dealName, day: weekday[day.getDay()], interested: maxSeenSoFar};
+        }
 
         var main = function(deals) {
             $scope.deals = deals;
@@ -129,7 +150,7 @@ angular.module('barliftApp')
             $scope.lastWeekDays = daysLastWeek();
 
             // list of deals last week
-            $scope.dealsLastWeek = dealsInLastRange(0, 6);
+            $scope.dealsLastWeek = dealsInLastRange($scope.deals, 0, 6);
 
             // list of people interested last week (oldest first)
             $scope.interestedLastWeek = interestedInRange(0, 6);
@@ -153,6 +174,12 @@ angular.module('barliftApp')
             // % increase in interested
             $scope.interestedIncrease = 100 * ($scope.numInterestedLastWeek - $scope.numInterestedTwoWeeksBack) / $scope.numInterestedTwoWeeksBack; 
             $scope.interestedIncreaseAbs = Math.abs($scope.interestedIncrease);
+
+
+            // most popular deal name and day
+            var data = mostPopularDeal();
+            $scope.mostPopularDealName = data.dealName;
+            $scope.mostPopularDealDay = data.day;
 
             /**
              * Data for Line chart
