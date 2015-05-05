@@ -65,7 +65,7 @@ angular
           authorizedRoles: [USER_ROLES.all]
         }
       })
-      .when('/competition', {
+      .when('/nubarweek', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         data: {

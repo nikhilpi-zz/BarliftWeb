@@ -206,6 +206,54 @@
   }
 }
 
+.bar-week{
+  .body{
+    min-height: 604px;
+    p{
+      font-size: 1em;
+    }
+    .header{
+      border-bottom: 1px #fff solid;
+      margin: 0;
+      margin-bottom: 2%;
+      .col-md-3{
+        width: 118px;
+        padding-left: 0;
+      }
+      .col-md-8{
+        padding-left: 0;
+        padding-right: 0;
+        h5{
+          margin-bottom: 0;
+        }
+        h2{
+          margin-top: 0;
+          margin-bottom: 2%;
+        }
+      }
+    }
+    a{
+      text-decoration: underline;
+    }
+    .app-store-btns{
+      .col-sm-4{
+        padding-top: 5px;
+        padding-left: 0;
+      }
+    }
+  }
+  .right-content{
+    padding-top: 2%;
+  }
+
+  .center-content{
+    text-align: left;
+    padding-left: 0;
+    min-width: 393px;
+    min-height: 550px;
+  }
+}
+
 .about{
   .body{
     min-height: 604px;

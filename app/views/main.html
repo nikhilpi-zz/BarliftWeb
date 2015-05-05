@@ -118,6 +118,73 @@
         </div>
       </div>
     </div>
+    <div class="bar-week" ng-switch-when="/nubarweek">
+      <div class="row top">
+        <div class="logo col-md-4 col-md-offset-4 row">
+          <a ng-click="switchWithin('home')">
+            <img class="img-responsive" src="/images/logo.png">
+          </a>
+        </div>
+      </div>
+      <div class="row body">
+        <div class="right-content col-md-4 col-md-offset-2 hidden-sm hidden-xs">
+          <div class="phone-carousel">
+            <div class="phone-screen">
+              <carousel interval="3000">
+                <slide ng-repeat="slide in slides" active="slide.active">
+                  <img ng-src="{{slide.image}}" style="margin:auto;">
+                </slide>
+              </carousel>
+            </div>
+          </div>
+        </div>
+        <div class="center-content col-md-4">
+          <h2>NU Barweek 2015</h2>
+          <p>
+            BarLift is launching verison 2 for Northwestern University's annual bar & restaurant week on May 11th. The new app will allow members of the Northwestern community to browse multiple events & deals around Evanston area. This is a major event for Evanston businesses annually.
+          </p>
+          <p>
+            We have 10+ bars signed up and have scheduled parties and deals from May 11 to May 17. As a result, we cannot afford to delay the launch of the app. Apologies for the tight timeline, but it would be much appreciated if you could help us out! Thank you for taking the time to deal with this situation. 
+          </p>
+          <p>
+            NU Bar Week Schedule (sign up to receive real-time deals)
+          </p>
+          <ul>
+            <li>Monday - La Macchina</li>
+            <li>Tues - Celtic Knot</li>
+            <li>Wed - World of Beer</li>
+            <li>Thurs - Cheesies</li>
+            <li>Fri - 27Live</li>
+            <li>Sat - Las Palmas</li>
+          </ul>
+          <a ng-if="getDevice() === 'ios'"  
+            href="https://itunes.apple.com/us/app/barlift/id965946420?ls=1&mt=8" 
+            class="btn-download"
+            analytics-on="click"
+            analytics-event="Download iOS">Download the app <i class="fa fa-chevron-circle-right"></i></a> 
+          <a ng-if="getDevice() === 'android'"  
+            href="https://play.google.com/store/apps/details?id=com.barliftapp.barlift" 
+            class="btn-download"
+            analytics-on="click"
+            analytics-event="Download Android">Download the app <i class="fa fa-chevron-circle-right"></i></a> 
+          <div ng-if="getDevice() === 'unknown'" class="row app-store-btns">
+            <a class="col-sm-4 col-sm-offset-2 apple-badge" 
+              href="https://itunes.apple.com/us/app/barlift/id965946420?ls=1&mt=8"
+              analytics-on="click"
+              analytics-event="Download iOS">
+              <img class="img-responsive" src="images/applebadge.png">
+            </a>
+            <a class="col-sm-4 google-badge" 
+              href="https://play.google.com/store/apps/details?id=com.barliftapp.barlift"
+              analytics-on="click"
+              analytics-event="Download Android">
+              <img class="img-responsive" alt="Android app on Google Play"
+                   src="images/googlebadge.png" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="terms" ng-switch-when="/terms">
       <div class="row top">
         <div class="logo col-md-4 col-md-offset-4 row">
@@ -130,7 +197,7 @@
         <div class="col-md-8 col-md-offset-2">
 
           <h2>
-            Web Site Terms and Conditions of Use
+            BarLift Web Site and Mobile Application: Terms and Conditions of Use
           </h2>
 
           <h3>
@@ -138,12 +205,8 @@
           </h3>
 
           <p>
-            By accessing this web site, you are agreeing to be bound by these 
-            web site Terms and Conditions of Use, all applicable laws and regulations, 
-            and agree that you are responsible for compliance with any applicable local 
-            laws. If you do not agree with any of these terms, you are prohibited from 
-            using or accessing this site. The materials contained in this web site are 
-            protected by applicable copyright and trade mark law.
+            This Agreement was last modified on May 5, 2015.
+            These terms and conditions (the "Terms") govern your access to and use of BarLift’s websites and mobile applications that link to or reference these Terms ("Site"). This Agreement documents the terms and conditions attached to the use of the site located at www.barliftapp.com and the BarLift mobile applications for iPhone and Android.
           </p>
 
           <h3>
@@ -345,10 +408,11 @@
         <ul class="nav mastfoot-nav">
           <li><a ng-class="{active:isActive('/')}" ng-click="selection='home'">HOME</a></li>
           <li><a ng-class="{active:isActive('/about')}" ng-click="selection='about'">ABOUT</a></li>
+          <li><a ng-class="{active:isActive('/nubarweek')}" ng-click="selection='nubarweek'">NUBARWEEK</a></li>
           <li><a ng-class="{active:isActive('/team')}" ng-click="selection='team'">TEAM</a></li>
           <li><a ng-class="{active:isActive('/terms')}" ng-click="selection='terms'">TERMS</a></li>
           <li><a href="mailto:hello@barliftapp.com">CONTACT</a></li>
-          <li><a href="#/login">LOGIN</a></li>
+          <!-- <li><a href="#/login">LOGIN</a></li> -->
         </ul>
       </nav>
     </div>
