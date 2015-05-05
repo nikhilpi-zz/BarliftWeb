@@ -26,7 +26,6 @@ angular.module('barliftApp')
       Deals.get({objectId: objID}, function(res){
         $scope.selectDeal = res;
         Venues.get({objectId: $scope.selectDeal.venue}, function(res){
-          console.log(res);
           $scope.selectedVenue = res;
         })
       });

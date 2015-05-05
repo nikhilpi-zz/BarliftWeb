@@ -13,19 +13,28 @@ angular.module('barliftApp')
       restrict: 'E',
       scope:{
         user: '=',
-        venues: '=',
-        deal: '='
+        venues: '='
       },
       link: function postLink(scope, element, attrs) {
+        scope.alert = {};
+
         if($stateParams.selectedDeal){
           Deals.get({objectId: $stateParams.selectedDeal}, function(res){
             scope.deal = res;
           });
+        } else {
+          scope.deal = Deals.newDeal(scope.user);
         }
 
         scope.$watch('deal.deal_start_date', function(){
-          if(scope.deal){
+          if(scope.deal && !scope.deal.deal_end_date){
             scope.deal.deal_end_date = new Date(scope.deal.deal_start_date);
+          }
+        });
+
+        scope.$watch('deal.deal_end_date', function(){
+          if(scope.deal.deal_end_date < scope.deal.deal_start_date){
+            scope.alert.text = "End time must come after start time";
           }
         });
 
