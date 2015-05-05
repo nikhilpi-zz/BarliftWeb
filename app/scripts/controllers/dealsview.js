@@ -15,7 +15,7 @@ angular.module('barliftApp')
     $scope.selectedDeal = {};
     $scope.selectedVenue = {};
 
-    $scope.dealView ='list';
+    $scope.dealView ='calendar';
     $scope.dealFilter = 'all';
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){

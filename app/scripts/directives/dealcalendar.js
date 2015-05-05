@@ -36,16 +36,26 @@ angular.module('barliftApp')
           });
         }
 
-        $scope.alertOnEventClick = function(event, allDay, jsEvent, view ){
-          if(!event.selected){
-            event.selected = true;
-            event.className = "selected-event"
-            $scope.deal = event.deal;
-          } else {
-            event.selected = false;
-            event.className = ""
-            $scope.deal = null;
+        $scope.sameDate = function(aDate, bDate){
+          return aDate.getFullYear() === bDate.getFullYear() &&
+            aDate.getMonth() === bDate.getMonth() &&
+            aDate.getDate() === bDate.getDate();
+        };
+
+        $scope.pastDate = function(aDate, bDate){
+          if(aDate.getFullYear() <= bDate.getFullYear()){
+            if(aDate.getMonth() < bDate.getMonth()){
+              return true;
+            } else if (aDate.getDate() < bDate.getDate()) {
+              return true;
+            } else {
+              return false;
+            }
           }
+        };
+
+        $scope.alertOnEventClick = function(event, allDay, jsEvent, view ){
+          $scope.deal = event.deal;
         };
 
         $scope.uiConfig = {
@@ -55,7 +65,7 @@ angular.module('barliftApp')
             header: {
               left: '',
               center: 'title',
-              right: ''
+              right: 'today prev,next'
             },
             eventClick: $scope.alertOnEventClick
           }

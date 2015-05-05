@@ -14,7 +14,7 @@
       <div class="ibox-title">
         <span class="label label-warning pull-right" ng-if="deal.deal_start_date > today">Future</span>
         <span class="label label-primary pull-right" ng-if="sameDate(deal.deal_start_date,today)">Today</span>
-        <span class="label label-default pull-right" ng-if="deal.deal_start_date < today">Past</span>
+        <span class="label label-default pull-right" ng-if="pastDate(deal.deal_start_date,today)">Past</span>
         <h5>{{deal.deal_start_date | date:'MM/dd/yyyy'}}</h5>
       </div>
       <div class="ibox-content">

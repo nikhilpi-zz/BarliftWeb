@@ -28,6 +28,18 @@ angular.module('barliftApp')
           return deal.deal_start_date.valueOf();
         };
 
+        scope.pastDate = function(aDate, bDate){
+          if(aDate.getFullYear() <= bDate.getFullYear()){
+            if(aDate.getMonth() < bDate.getMonth()){
+              return true;
+            } else if (aDate.getDate() < bDate.getDate()) {
+              return true;
+            } else {
+              return false;
+            }
+          }
+        };
+
         scope.filterDeals = function(value, index){
           if(scope.filterKey === 'all'){
             return true;
@@ -36,7 +48,7 @@ angular.module('barliftApp')
           } else if(scope.filterKey === 'today'){
             return scope.sameDate(value.deal_start_date,scope.today)
           } else if(scope.filterKey === 'past'){
-            return value.deal_start_date < scope.today;
+            return scope.pastDate(value.deal_start_date,scope.today);
           } else {
             return false;
           }
