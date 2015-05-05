@@ -15,6 +15,14 @@
 
   }
 
+  .terms{
+    height: inherit;
+    .body{
+      height: inherit;
+      overflow: scroll;
+    }
+  }
+
   h2{
     font-weight: 400;
     font-size: 2.5em;
