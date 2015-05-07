@@ -55,7 +55,7 @@
         <label class="col-sm-2 control-label">Start Time</label>
         <div class="col-sm-6">
             <div class="input-group date">
-                <input type="datetime" class="form-control" date-time ng-model="deal.deal_start_date" max-view="hours" min-view="minutes" date format="h:mm" name="start" required>
+                <input type="datetime" class="form-control" date-time ng-model="deal.deal_start_date" max-view="hours" min-view="minutes" date format="h:mm a" name="start" required>
                 <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
             </div>
         </div>
@@ -64,24 +64,23 @@
         <label class="col-sm-2 control-label">End Time</label>
         <div class="col-sm-6">
             <div class="input-group date">
-                <input type="datetime" class="form-control" date-time ng-model="deal.deal_end_date" max-view="hours" min-view="minutes" date format="h:mm" name="end" required>
+                <input type="datetime" class="form-control" date-time ng-model="deal.deal_end_date" max-view="hours" min-view="minutes" date format="h:mm a" name="end" required>
                 <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-            </div>
-        </div>
-    </div>
-    <div class="form-group" ng-if="alert.text">
-        <div class="col-sm-4 col-sm-offset-2">
-            <div class="alert alert-danger" ng-if="alert">
-                {{alert.text}}
             </div>
         </div>
     </div>
     <div class="hr-line-dashed"></div>
     <div class="form-group">
-        <div class="col-sm-4 col-sm-offset-2">
+        <div class="col-sm-3 col-sm-offset-2">
             <button class="btn btn-danger" ng-if="deal.objectId" type="submit" ng-click="deleteDeal()">Delete</button>
-            <button class="btn btn-primary" ng-if="deal.objectId" type="submit" ng-click="updateDeal()">Update</button>
-            <button class="btn btn-primary" ng-if="!deal.objectId" type="submit" ng-click="saveDeal()">Create</button>
+            <button class="btn btn-primary" ng-if="deal.objectId" type="submit" ng-click="updateDeal()" ng-disabled="dealBuilder.$invalid || alert.text">Update</button>
+            <button class="btn btn-warning" ng-if="deal.objectId" ui-sref="deals.builder({selectedDeal: ''})">Cancel</button>
+            <button class="btn btn-primary" ng-if="!deal.objectId" type="submit" ng-click="saveDeal()"  ng-disabled="dealBuilder.$invalid || alert.text">Create</button>
+        </div>
+        <div class="col-sm-4" ng-if="alert.text">
+            <div class="alert alert-danger" ng-if="alert">
+                {{alert.text}}
+            </div>
         </div>
     </div>
 </form>

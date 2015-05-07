@@ -40,6 +40,12 @@ angular.module('barliftApp')
           }
         };
 
+        scope.isLocked = function(dealDate){
+          var lockDate = new Date();
+          lockDate.setDate(scope.today.getDate()+3);
+          return dealDate < lockDate && dealDate > scope.today || scope.sameDate(dealDate, scope.today);
+        };
+
         scope.filterDeals = function(value, index){
           if(scope.filterKey === 'all'){
             return true;

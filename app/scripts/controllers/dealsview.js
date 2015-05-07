@@ -23,8 +23,10 @@ angular.module('barliftApp')
     });
 
     function loadSelectedDeal(objID){
+      console.log('Loading ', objID);
       Deals.get({objectId: objID}, function(res){
         $scope.selectDeal = res;
+        console.log('Loading ', $scope.selectDeal);
         Venues.get({objectId: $scope.selectDeal.venue}, function(res){
           $scope.selectedVenue = res;
         })

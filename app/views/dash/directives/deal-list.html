@@ -5,6 +5,7 @@
         <span class="label label-warning pull-right" ng-if="deal.deal_start_date > today">Future</span>
         <span class="label label-primary pull-right" ng-if="sameDate(deal.deal_start_date,today)">Today</span>
         <span class="label label-default pull-right" ng-if="pastDate(deal.deal_start_date,today)">Past</span>
+        <span class="label label-danger pull-right" ng-if="isLocked(deal.deal_start_date)">Locked</span>
         <h5>{{deal.deal_start_date | date:'MM/dd/yyyy'}}</h5>
       </div>
       <div class="ibox-content">
@@ -14,7 +15,7 @@
         <small>People interested</small>
         <div class="row m-t">
           <div class="col-md-6">
-            <button class="btn btn-primary btn-block" ui-sref="deals.builder({selectedDeal: deal.objectId})">Edit</button>
+            <button class="btn btn-primary btn-block" ui-sref="deals.builder({selectedDeal: deal.objectId})" ng-disabled="pastDate(deal.deal_start_date,today) || isLocked(deal.deal_start_date)">Edit</button>
           </div>
           <div class="col-md-6">
             <button class="btn btn-primary btn-block" ui-sref="deals.deal({selectedDeal: deal.objectId})">Stats</button>
