@@ -1,13 +1,120 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-        <div class="col-lg-12">
-            <div class="text-center m-t-lg">
-                <h1>
-                    {{helloText}}
-                </h1>
-                <small>
-                    {{descriptionText}}
-                </small>
+        <!-- upcoming deals -->
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <!-- title -->
+                <div class="ibox-title">
+                    <h5>Upcoming deals</h5>
+                    <span class="label label-success pull-right">Next Week</span>
+                </div>
+                <!-- heading -->
+                <div class="ibox-content ibox-heading">
+                    <h3>You have {{numUpcomingDeals}} deals this week!</h3>
+                    <a class="label label-warning" ui-sref="deals.builder">Add more here</a>
+                    
+
+                </div>
+                <!-- timeline -->
+                <div class="ibox-content inspinia-timeline">
+
+                    <!-- day -->
+                    <div class="timeline-item" ng-repeat="dealObj in upcomingDeals">
+                        <div class="row">
+                            <!-- weather -->
+                            <div class="col-xs-3 text-center" style="padding-top: 15px;">
+                                <img ng-src="{{weather[$index].icon_url}}" style="height: 30px;">
+                                <div class="font-bold">
+                                  <small class="text-success">{{weather[$index].high.fahrenheit}}°</small>
+                                  <small class="text-info">&nbsp;{{weather[$index].low.fahrenheit}}°</small>
+                                </div>
+                            </div>
+                            <!-- text content -->
+                            <div class="col-xs-9 content" ng-class="$index == 0 ? 'no-top-border' : ''">
+                                <!-- date -->
+                                <p class="m-b-xs"><strong>{{dealObj.date | date:'fullDate'}}</strong></p>
+                                <!-- deals -->
+                                <p ng-if="dealObj.deals.length > 0" class="text-muted">Deals</p>
+                                <p ng-repeat="deal in dealObj.deals">
+                                    <span class="text-navy">
+                                       {{deal.deal_start_date | date:'shortTime'}} - 
+                                    </span>
+                                    {{deal.name}}<br/>   
+                                </p>
+                                <!-- weather -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- last week summary -->
+        <div class="col-lg-6">
+            <!-- deals chart -->
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right">Last Two Weeks</span>
+                    <h5>People Interested</h5>
+                </div>
+                <div class="ibox-content">
+                    <div>
+                        <canvas linechart options="lineOptions" data="lineData" height="140" responsive=true></canvas>
+                    </div>
+                </div>
+            </div>
+            <!-- bar summary -->
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-info pull-right">Last Week</span>
+                    <h5>Your Summary</h5>
+                    <div class="row">
+                        <div class="ibox-content">
+                            <div class="col-xs-4">
+                                <span class="h3 m-t block">{{numInterestedLastWeek}}</span>
+                                <small class="text-muted m-b block">Interested last week</small>
+                            </div>
+                            <div class="col-xs-4">
+                                <span class="h3 m-t block">{{interestedIncreaseAbs | number:0}}% 
+                                <i ng-if="interestedIncrease >= 0" class="fa fa-level-up text-navy"></i>
+                                <i ng-if="interestedIncrease < 0" class="fa fa-level-down text-danger"></i>
+                                </span>
+                                <small class="text-muted m-b block">Change in interested since the week before</small>
+                            </div>
+                            <div class="col-xs-4">
+                                <span class="h3 m-t block">$ {{revenue}}</span>
+                                <small class="text-muted m-b block">Estimated revenue</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- evanston summary -->
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-info pull-right">Last Week</span>
+                    <h5>Evanston Summary</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2 class="no-margins">{{mostPopularDealName}}</h2>
+                            <div class="font-bold text-navy">
+                                <small>Most popular deal</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="pull-right">
+                                <h2 class="no-margins">{{mostPopularDealDay}}</h2>
+                                <div class="font-bold text-navy">
+                                    <small>Most popular day</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
