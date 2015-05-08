@@ -27,37 +27,35 @@ angular.module('barliftApp')
 
         function loadDeals(){
           angular.forEach($scope.deals, function(deal){
-            $scope.events.push({
-              title: deal.name,
-              editable: false,
-              start: deal.deal_start_date,
-              deal: deal
+            var found = false;
+            angular.forEach($scope.events, function(calEvent){
+              if(calEvent.title === deal.name && angular.equals(calEvent.deal, deal)){
+                found = true;
+              }
             });
+
+            if(!found){
+              $scope.events.push({
+                title: deal.name,
+                editable: false,
+                start: deal.deal_start_date,
+                deal: deal
+              });
+            }
           });
         }
 
         $scope.sameDate = function(aDate, bDate){
-          return aDate.getFullYear() === bDate.getFullYear() &&
-            aDate.getMonth() === bDate.getMonth() &&
-            aDate.getDate() === bDate.getDate();
+          return moment(aDate).dayOfYear() === moment(bDate).dayOfYear()
         };
-
+        
         $scope.pastDate = function(aDate, bDate){
-          if(aDate.getFullYear() <= bDate.getFullYear()){
-            if(aDate.getMonth() < bDate.getMonth()){
-              return true;
-            } else if (aDate.getDate() < bDate.getDate()) {
-              return true;
-            } else {
-              return false;
-            }
-          }
+          return moment(aDate).dayOfYear() < moment(bDate).dayOfYear()
         };
 
         $scope.isLocked = function(dealDate){
-          var lockDate = new Date();
-          lockDate.setDate($scope.today.getDate()-3);
-          return dealDate > lockDate && !$scope.pastDate(dealDate, $scope.today);
+          var lockDate = moment().endOf('day').add(3,'day');
+          return moment(dealDate).isBetween(moment().startOf('day'), lockDate);
         };
 
         $scope.alertOnEventClick = function(event, allDay, jsEvent, view ){

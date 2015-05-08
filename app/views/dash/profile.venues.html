@@ -35,8 +35,8 @@
     <div class="col-lg-8">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <h5 ng-if="!selectedDeal.objectId">Create a new venue</h5>
-          <h5 ng-if="selectedDeal.objectId">Edit {{selectedVenue.bar_name}}</h5>
+          <h5 ng-if="!selectedVenue.objectId">Create a new venue</h5>
+          <h5 ng-if="selectedVenue.objectId">Edit {{selectedVenue.bar_name}}</h5>
         </div>
         <div class="ibox-content">
           <venue-builder user="user" venues="venues" venue="selectedVenue"></venue-builder>

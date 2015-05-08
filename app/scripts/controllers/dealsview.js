@@ -18,21 +18,6 @@ angular.module('barliftApp')
     $scope.dealView ='calendar';
     $scope.dealFilter = 'all';
 
-    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-      loadSelectedDeal(toParams.selectedDeal);
-    });
-
-    function loadSelectedDeal(objID){
-      console.log('Loading ', objID);
-      Deals.get({objectId: objID}, function(res){
-        $scope.selectDeal = res;
-        console.log('Loading ', $scope.selectDeal);
-        Venues.get({objectId: $scope.selectDeal.venue}, function(res){
-          $scope.selectedVenue = res;
-        })
-      });
-    }
-
     User.getCurrent(function(res){ 
       $scope.user = res; 
       Deals.query({

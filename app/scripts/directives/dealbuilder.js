@@ -7,7 +7,7 @@
  * # dealBuilder
  */
 angular.module('barliftApp')
-  .directive('dealBuilder', function (Deals, $http, $stateParams, $state, $rootScope) {
+  .directive('dealBuilder', function (Deals, Venues, $http, $stateParams, $state, $rootScope) {
     return {
       templateUrl: 'views/dash/directives/deal-builder.html',
       restrict: 'E',
@@ -21,6 +21,9 @@ angular.module('barliftApp')
         if($stateParams.selectedDeal){
           Deals.get({objectId: $stateParams.selectedDeal}, function(res){
             scope.deal = res;
+            Venues.get({objectId: scope.deal.venue},function(res){
+              scope.deal.venue=res;
+            });
           });
         } else {
           scope.deal = Deals.newDeal(scope.user);

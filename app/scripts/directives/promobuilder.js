@@ -24,7 +24,6 @@ angular.module('barliftApp')
         $scope.eventSource = [$scope.events];
 
         $scope.$watch('deals',function(){
-          CloudCode.call('takenPushDays');
           angular.forEach($scope.deals, function(deal){
             $scope.events.push({
               title: deal.name,
