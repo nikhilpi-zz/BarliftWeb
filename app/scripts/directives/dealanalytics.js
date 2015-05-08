@@ -28,11 +28,12 @@ angular.module('barliftApp')
 
         scope.$watch('selectedDeal', function(){
           if (scope.selectedDeal.name != 'Please select a deal'){
-            CloudCode.call('dealAnalytics', {dealId: scope.selectedDeal.objectId}, function(res){
-              scope.interestedCount = res.result.interestedCount;
-              scope.avgDealsRedeemed = res.result.avgDealsRedeemed;
-              scope.gender.datasets[0].data[0] = res.result.gender.male;
-              scope.gender.datasets[0].data[1] = res.result.gender.female;
+            CloudCode.call('dealAnalytics', {dealId: scope.selectedDeal.objectId})
+              .then(function(res) {
+                  scope.interestedCount = res.result.interestedCount;
+                  scope.avgDealsRedeemed = res.result.avgDealsRedeemed;
+                  scope.gender.datasets[0].data[0] = res.result.gender.male;
+                  scope.gender.datasets[0].data[1] = res.result.gender.female;
             });
           }
         });
