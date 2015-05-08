@@ -41,14 +41,26 @@ angular.module('barliftApp')
           }).
           error(function(data, status, headers, config) {
               console.log("Couldn't get weather", data);
-        });
+          });
+
+        // get events
+        $http.get('http://planitpurple.northwestern.edu/feed/json/1033').
+          success(function(data, status, headers, config) {
+              $scope.events = data;
+              console.log($scope.events);
+          }).
+          error(function(data, status, headers, config) {
+              console.log(status, "Couldn't get events");
+          });
+
 
         var nextWeekDeals = function() {
-            $scope.pastDeals = [];
-            $scope.numPastDeals = 0;
+            $scope.upcomingDeals = [];
+            $scope.numUpcomingDeals = 0;
 
             // make past deals obj
             var today = new Date;
+            today.setHours(0, 0, 0, 0);
             var myDate = new Date();
 
             for (var i = 0; i < 7; i++) {
@@ -59,7 +71,7 @@ angular.module('barliftApp')
                     date: myDate,
                     deals: []
                 };
-                $scope.pastDeals[i] = dealObj;
+                $scope.upcomingDeals[i] = dealObj;
 
                 nextDay.setDate(myDate.getDate() + 1);
                 myDate = nextDay;
@@ -69,11 +81,11 @@ angular.module('barliftApp')
             angular.forEach($scope.deals, function(deal) {
                 var date = deal["deal_start_date"];
 
-                var dateIndex = Math.floor((date - today) / (1000 * 60 * 60 * 24)) + 1;
+                var dateIndex = Math.floor((date - today) / (1000 * 60 * 60 * 24));
 
-                if (dateIndex >= 0) {
-                    $scope.pastDeals[dateIndex].deals.push(deal);
-                    $scope.numPastDeals += 1;
+                if (dateIndex >= 0 && dateIndex < 7) {
+                    $scope.upcomingDeals[dateIndex].deals.push(deal);
+                    $scope.numUpcomingDeals += 1;
                 };
             });
         }
@@ -85,7 +97,7 @@ angular.module('barliftApp')
             angular.forEach(deals, function(deal) {
                 var today = new Date();
                 today.setHours(0, 0, 0, 0);
-                var date = deal["deal_start_date"];
+                var date = new Date(deal["deal_start_date"]);
                 date.setHours(0, 0, 0, 0);
 
                 var dateDiff = Math.floor((today - date) / (1000 * 60 * 60 * 24));
