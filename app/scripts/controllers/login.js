@@ -26,12 +26,12 @@ angular.module('barliftApp')
 
       User.save(user).$promise.then(
         function(value){
-          $state.go('login');
+          $scope.login({username: newUser.username, password: newUser.password});
         },
         function(error){
           $scope.error = error.data.error;
         }
-      )
+      );
     };
 
     $scope.alert = null;

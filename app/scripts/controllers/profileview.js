@@ -12,6 +12,7 @@ angular.module('barliftApp')
     $scope.venues = [];
     $scope.user = {};
     $scope.selectedVenue = Venues.newVenue($scope.user);
+    $scope.alert = null;
 
     User.getCurrent(function(res){ 
       $scope.user = res; 
@@ -41,5 +42,15 @@ angular.module('barliftApp')
         }
       },function(venues) { $scope.venues = venues; });
     });
+
+    $scope.handleStripe = function(status, response){
+      if(response.error) {
+        $scope.alert = response.error;
+      } else {
+        $scope.token = response.id;
+        $scope.alert = null;
+      }
+    }
+
 
   });

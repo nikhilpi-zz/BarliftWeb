@@ -19,7 +19,8 @@ angular
     'ui.bootstrap',
     'ui.router',
     'oc.lazyLoad',
-    'ui.calendar'
+    'ui.calendar',
+    'angularPayments'
   ])
   .constant('AUTH_EVENTS', {
     loginSuccess: 'auth-login-success',
@@ -37,6 +38,7 @@ angular
   })
   .config(function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $httpProvider, USER_ROLES) {
     $urlRouterProvider.otherwise("/");
+    Stripe.setPublishableKey('pk_test_ilf0PC8WC51SBXQMp8zQFjXi');
 
     $ocLazyLoadProvider.config({
         // Set to true if you want to see what and when is dynamically loaded
@@ -212,6 +214,29 @@ angular
       .state('profile.venues', {
         url: "/venues",
         templateUrl: 'views/dash/profile.venues.html',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
+      })
+      .state('profile.payment', {
+        url: "/payment",
+        templateUrl: 'views/dash/profile.payment.html',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        },
+        resolve: {
+            loadPlugin: function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    {
+                        files: ['css/plugins/steps/jquery.steps.css']
+                    }
+                ]);
+            }
+        }
+      })
+      .state('profile.payment.one_card', {
+        url: "/step_one",
+        templateUrl: 'views/dash/payments_wizard/one_card.html',
         data: {
           authorizedRoles: [USER_ROLES.all]
         }
