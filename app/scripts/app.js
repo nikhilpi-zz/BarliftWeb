@@ -44,6 +44,7 @@ angular
     });
 
     $stateProvider
+      // landing page 
       .state('home', {
         abstract: true,
         templateUrl: 'views/landingpage/home.partial.html',
@@ -73,6 +74,7 @@ angular
           authorizedRoles: [USER_ROLES.all]
         }
       })
+      // login/register
       .state('login', {
         url: "/login",
         templateUrl: 'views/login.html',
@@ -97,14 +99,7 @@ angular
           authorizedRoles: [USER_ROLES.all]
         }
       })
-      .state('bar_feedback', {
-        url: "/bar_feedback/:dealId",
-        templateUrl: 'views/bar_feedback.html',
-        controller: 'BarFeedbackCtrl',
-        data: {
-          authorizedRoles: [USER_ROLES.all]
-        }
-      })
+      // dashabord
       .state('dash', {
         abstract: true,
         url: "/admin",
@@ -132,6 +127,16 @@ angular
           }
         }
       })
+      // feedback
+      .state('feedback', {
+        url: "/feedback/:dealId",
+        templateUrl: 'views/dash/feedback.html',
+        controller: 'FeedbackCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
+      })
+      // deals
       .state('deals', {
         abstract: true,
         url: "/deals",
@@ -185,6 +190,7 @@ angular
             }
         }
       })
+      // promo
       .state('promo', {
         abstract: true,
         url: "/promo",
@@ -211,6 +217,7 @@ angular
           }
         }
       })
+      // profile
       .state('profile', {
         abstract: true,
         url: "/profile",

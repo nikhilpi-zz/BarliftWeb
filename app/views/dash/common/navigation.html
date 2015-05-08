@@ -23,14 +23,13 @@
             </li>
 
             <li ui-sref-active="active">
-                <a ui-sref="dash.main"><i class="fa fa-laptop"></i> <span class="nav-label">Dashboard</span> </a>
+                <a ui-sref="dash.main"><i class="fa fa-dashboard"></i> <span class="nav-label">Dashboard</span> </a>
             </li>
-            <li ng-class="{active: $state.includes('deals')}">
-                <a href=""><i class="fa fa-tags"></i> <span class="nav-label">Deals</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level" ng-class="{in: $state.includes('deals')}">
-                    <li ui-sref-active="active"><a ui-sref="deals.list">Your deals</a></li>
-                    <li ui-sref-active="active"><a ui-sref="deals.builder">Deal Builder</a></li>
-                </ul>
+            <li ui-sref-active="active">
+                <a ui-sref="deals.list"><i class="fa fa-beer"></i> <span class="nav-label">Your Deals</span> </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="deals.builder"><i class="fa fa-plus-square"></i> <span class="nav-label">Create Deal</span> </a>
             </li>
             <li ui-sref-active="active">
                 <a ui-sref="promo.push"><i class="fa fa-star"></i> <span class="nav-label">Promote</span> </a>

@@ -1,37 +1,15 @@
 <div class="row">
-  <div class="col-lg-8">
-    <div class="ibox float-e-margins">
-      <div class="ibox-title">
-        <h5>Select deals</h5>
-      </div>
-      <div class="ibox-content ui-calendar">
-        <div ui-calendar="uiConfig.calendar" calendar="myCalendar1" class="calendar" ng-model="eventSource"></div>
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-4" ng-if="deal">
-    <div class="ibox float-e-margins">
-      <div class="ibox-title">
-        <span class="label label-warning pull-right" ng-if="deal.deal_start_date > today">Future</span>
-        <span class="label label-primary pull-right" ng-if="sameDate(deal.deal_start_date,today)">Today</span>
-        <span class="label label-default pull-right" ng-if="pastDate(deal.deal_start_date,today)">Past</span>
-        <span class="label label-danger pull-right" ng-if="isLocked(deal.deal_start_date)">Locked</span>
-        <h5>{{deal.deal_start_date | date:'MM/dd/yyyy'}}</h5>
-      </div>
-      <div class="ibox-content">
-        <h3 class="font-bold no-margins">{{deal.name | limitTo:20}}...</h3>
-
-        <div class="stat-percent font-bold text-success">{{deal.num_accepted}}</div>
-        <small>People interested</small>
-        <div class="row m-t">
-          <div class="col-md-6">
-            <button class="btn btn-primary btn-block" ui-sref="deals.builder({selectedDeal: deal.objectId})"  ng-disabled="pastDate(deal.deal_start_date,today) || isLocked(deal.deal_start_date)">Edit</button>
-          </div>
-          <div class="col-md-6">
-            <button class="btn btn-primary btn-block" ui-sref="analytics.deal({selectedDeal: deal.objectId})">Stats</button>
-          </div>
+    <div class="col-lg-8">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Select deals</h5>
+            </div>
+            <div class="ibox-content ui-calendar">
+                <div ui-calendar="uiConfig.calendar" calendar="myCalendar1" class="calendar" ng-model="eventSource"></div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+    <div class="col-lg-4" ng-if="deal">
+        <deal-card deal="deal"></deal-card>
+    </div>
 </div>

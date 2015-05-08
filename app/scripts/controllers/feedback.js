@@ -8,7 +8,7 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-  .controller('BarFeedbackCtrl', function ($scope, $stateParams, Deals, User, Feedback) {
+  .controller('FeedbackCtrl', function ($scope, $stateParams, Deals, User, Feedback) {
     $scope.deal = {};
     $scope.bar_name = {};
     $scope.selected = "parent";
@@ -25,5 +25,18 @@ angular.module('barliftApp')
         $scope.bar_name = bar.bar_name;
       });
     });
+
+    $scope.feedback = {};
+
+    // submit form to Feedback class
+    $scope.submit = function(){
+      // add reference to the deal
+      $scope.feedback.deal = $scope.deal.getPointer();
+      // save to Parse
+      Feedback.save($scope.feedback);
+      // show thank you msg
+      myCtrl.setSelected("submitted");
+
+    };
 
   });

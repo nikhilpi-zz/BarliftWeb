@@ -19,6 +19,12 @@
     </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
-    <deal-list ng-if="dealView=='list'" deals="deals" filter-key="dealFilter"></deal-list>
+    <div ng-if="dealView=='list'">
+        <div class="row">
+            <div class="col-lg-3" ng-repeat="deal in deals| orderBy: dealDate:true| filter:filterDeals:true">
+                <deal-card deal="deal"></deal-card>   
+            </div>
+        </div>
+    </div>
     <deal-calendar ng-if="dealView=='calendar'" deals="deals"></deal-calendar>
 </div>
