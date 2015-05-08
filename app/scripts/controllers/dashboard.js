@@ -43,17 +43,6 @@ angular.module('barliftApp')
               console.log("Couldn't get weather", data);
           });
 
-        // get events
-        $http.get('http://planitpurple.northwestern.edu/feed/json/1033').
-          success(function(data, status, headers, config) {
-              $scope.events = data;
-              console.log($scope.events);
-          }).
-          error(function(data, status, headers, config) {
-              console.log(status, "Couldn't get events");
-          });
-
-
         var nextWeekDeals = function() {
             $scope.upcomingDeals = [];
             $scope.numUpcomingDeals = 0;
