@@ -27,7 +27,7 @@ angular.module('barliftApp')
           transformResponse: function(data, headersGetter){
             data = angular.fromJson(data);
             var results = data.results;
-            return ParseTypes.resProcess(results,'Feedback');
+            return ParseTypes.resProcess(data,'Feedback');
           }
         },
         query: {
