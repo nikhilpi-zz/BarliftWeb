@@ -40,7 +40,7 @@ angular.module('barliftApp')
           }
         });
 
-        scope.$watch('deal.deal_end_date', function(){
+        scope.$watch('deal.deal_end_date', function(){      
           if(scope.deal && moment(scope.deal.deal_end_date).isBefore(scope.deal.deal_start_date)){
             scope.alert.text = "End time must come after start time";
           } else {
