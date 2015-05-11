@@ -8,10 +8,20 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-  .controller('ProfileviewCtrl', function ($scope, User, Venues) {
+  .controller('ProfileviewCtrl', function ($scope, User, Venues, $state, CloudCode) {
     $scope.venues = [];
     $scope.user = {};
     $scope.selectedVenue = Venues.newVenue($scope.user);
+    $scope.alert = null;
+    $scope.payments = {
+      plans: [
+      {
+        name: 'Basic', 
+        cost: 30, 
+        details: 'Unlimited Deals per month, Pay per push.',
+        id: 'basic_plan'
+      }]
+    };
 
     User.getCurrent(function(res){ 
       $scope.user = res; 
@@ -41,5 +51,26 @@ angular.module('barliftApp')
         }
       },function(venues) { $scope.venues = venues; });
     });
+
+    $scope.processCard = function(status, response){
+      if(response.error) {
+        $scope.alert = response.error.message || response.error;
+      } else {
+        $scope.token = response.id;
+        $scope.alert = null;
+        $state.go('profile.payment.three_review');
+      }
+    };
+
+    $scope.createSub = function(){
+      CloudCode.call('subscribe',{
+        token: $scope.token,
+        plan: $scope.payments.plans[$scope.payments.subPlan].id,
+        name: $scope.payments.name
+      }, function(res) {
+        $scope.alert = res;
+      });
+    };
+
 
   });
