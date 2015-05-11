@@ -234,9 +234,23 @@ angular
             }
         }
       })
-      .state('profile.payment.one_card', {
+      .state('profile.payment.one_sub', {
         url: "/step_one",
-        templateUrl: 'views/dash/payments_wizard/one_card.html',
+        templateUrl: 'views/dash/payments_wizard/one_sub.html',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
+      })
+      .state('profile.payment.two_card', {
+        url: "/step_two",
+        templateUrl: 'views/dash/payments_wizard/two_card.html',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
+      })
+      .state('profile.payment.three_review', {
+        url: "/step_three",
+        templateUrl: 'views/dash/payments_wizard/three_review.html',
         data: {
           authorizedRoles: [USER_ROLES.all]
         }
