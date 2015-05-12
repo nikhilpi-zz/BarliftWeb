@@ -11,8 +11,16 @@ angular.module('barliftApp')
     return {
       restrict: 'A',
       link: function postLink(scope, element) {
-        $timeout(function(){
-          element.metisMenu();
+        // Call the metsiMenu plugin and plug it to sidebar navigation
+            $timeout(function(){
+                element.metisMenu();
+            });
+ 
+        // Enable initial fixed sidebar
+        var sidebar = element.parent();
+        sidebar.slimScroll({
+            height: '100%',
+            railOpacity: 0.9,
         });
       }
     };
