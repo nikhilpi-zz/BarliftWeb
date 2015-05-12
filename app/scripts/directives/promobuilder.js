@@ -48,7 +48,7 @@ angular.module('barliftApp')
         }
 
         function selectDeal(deal){
-          CloudCode.call('pushCount', {community: 'Northwestern'}).then(
+          CloudCode.call('pushCount', {community: deal.community_name}).then(
           function(res){
             deal.main_price = res.result * 0.02;
             $scope.total += res.result * 0.02;
