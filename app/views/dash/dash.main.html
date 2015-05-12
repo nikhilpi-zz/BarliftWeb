@@ -34,18 +34,21 @@
                                 <!-- date -->
                                 <p class="m-b-xs"><strong>{{obj.date | date:'fullDate'}}</strong></p>
                                 <!-- deals -->
-                                <p ng-if="obj.deals.length > 0" class="text-muted">Deals</p>
+                                <p ng-if="obj.deals.length > 0" class="text-navy">Deals</p>
                                 <p ng-repeat="deal in obj.deals">
-                                    <span class="text-navy">
+                                    <span>
                                        {{deal.deal_start_date | date:'shortTime'}} - 
                                     </span>
                                     {{deal.name}}<br/>   
                                 </p>
                                 <!-- events -->
-                                <p ng-if="obj.events.length > 0" class="text-muted">Events</p>
+                                <p ng-if="obj.events.length > 0" style="color: purple">Events</p>
                                 <p ng-repeat="event in obj.events">
-                                    <span class="text-navy">
+                                    <span ng-if="event.start.dateTime">
                                        {{event.start.dateTime | date:'shortTime'}} - 
+                                    </span>
+                                    <span ng-if="!event.start.dateTime">
+                                       ALL DAY - 
                                     </span>
                                     {{event.summary}}<br/>   
                                 </p>

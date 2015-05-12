@@ -86,11 +86,14 @@ angular.module('barliftApp')
 
       // add events to obj
       angular.forEach($scope.events, function(event) {
-        var date = new Date(event.start.dateTime);
-        var dateIndex = Math.floor((date - today) / (1000 * 60 * 60 * 24));
+        var date = new Date(event.start.date);
+        var temp = new Date(date);
+        temp.setHours(0, 0, 0, 0);
+        var dateIndex = Math.floor((temp - today) / (1000 * 60 * 60 * 24));
+
+        // console.log(event.summary, event.start.date, dateIndex);
 
         if (dateIndex >= 0 && dateIndex < 7) {
-          console.log(event.summary, dateIndex);
           $scope.upcomingDealsEvents[dateIndex].events.push(event);
           $scope.numUpcomingEvents += 1;
         };
@@ -276,10 +279,10 @@ angular.module('barliftApp')
 
       // get events
       var eventsPromise = googleCalendar.getEvents({
-        'calendarId': 'primary',
+        'calendarId': 'qq86rub5anh0ikbdnav9vtlqfou6i38v@import.calendar.google.com',
         'timeMin': (new Date()).toISOString(),
         'singleEvents': true,
-        'maxResults': 10,
+        'maxResults': 20,
         'orderBy': 'startTime'
       });
 

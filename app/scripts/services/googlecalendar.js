@@ -13,7 +13,7 @@ angular.module('barliftApp')
 
     // Your Client ID can be retrieved from your project in the Google
     // Developer Console, https://console.developers.google.com
-    var CLIENT_ID = '727826772449-ci87hns86u2ugjdu23akp4ds14dbksnl.apps.googleusercontent.com';
+    var CLIENT_ID = '1075855110201-bcja8cjst56v479kls73o888ktgg730j.apps.googleusercontent.com';
 
     // This quickstart only requires read-only scope, check
     // https://developers.google.com/google-apps/calendar/auth if you want to
@@ -55,6 +55,7 @@ angular.module('barliftApp')
 
       request.execute(function(resp) {
         var events = resp.items;
+        // console.log(JSON.stringify(events, null, 2));
         googleCalendar.deferred.resolve(events);
       });
     }
