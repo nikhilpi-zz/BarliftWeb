@@ -2,7 +2,7 @@
     <div class="col-lg-8">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>Select deals</h5>
+                <h5>Available Main Deals</h5>
             </div>
 
             <div class="ibox-content ui-calendar">
@@ -23,16 +23,17 @@
                           <tr ng-repeat="deal in selectedDeals">
                               <td><a class="client-link">{{deal.name}}</a></td>
                               <td>{{deal.deal_start_date | date:'MM/dd/yyyy'}}</td>
-                              <td>$5</td>
+                              <td>${{deal.main_price}}</td>
                           </tr>
                           <tr>
                               <td colspan="2"><a class="client-link">Total</a></td>
-                              <td>$100</td>
+                              <td>${{total}}</td>
                           </tr>
                           </tbody>
                       </table>    
                   </div>  
               </div>
+              <button class="btn btn-primary" ng-click="buyDeals()">Buy</button>
           </div>
       </div>
 

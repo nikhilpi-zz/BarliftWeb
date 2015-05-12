@@ -94,7 +94,7 @@ angular.module('barliftApp')
           write: true
         };
       deal.user = Session.userId;
-      deal.approved = false;
+      deal.main = false;
       deal.num_accepted = 0;
       deal.add_deals = [];
       return deal;

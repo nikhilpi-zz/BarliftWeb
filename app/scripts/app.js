@@ -197,7 +197,7 @@ angular
         abstract: true,
         url: "/promo",
         templateUrl: 'views/dash/common/content.html',
-        controller: 'DealsviewCtrl',
+        controller: 'PromoteviewCtrl',
         data: {
           authorizedRoles: [USER_ROLES.all]
         }
@@ -207,16 +207,6 @@ angular
         templateUrl: 'views/dash/promo.push.html',
         data: {
           authorizedRoles: [USER_ROLES.all]
-        },
-        resolve: {
-          loadPlugin: function ($ocLazyLoad) {
-            return $ocLazyLoad.load([
-              {
-                insertBefore: '#loadBefore',
-                files: ['css/plugins/fullcalendar/fullcalendar.css','js/plugins/fullcalendar/fullcalendar.min.js','js/plugins/fullcalendar/gcal.js']
-              }
-            ]);
-          }
         }
       })
       // profile

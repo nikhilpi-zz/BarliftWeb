@@ -15,11 +15,8 @@ angular.module('barliftApp')
       call: function(functionName, params){
         return $http.post('https://api.parse.com/1/functions/'+functionName, params)
           .then(function(res) {
-              console.log(res);
               return res.data;
           }, function(res) {
-              console.log("wrong");
-              // something went wrong
               return $q.reject(res);
           });
       }
