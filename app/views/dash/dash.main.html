@@ -19,7 +19,7 @@
                 <div class="ibox-content inspinia-timeline">
 
                     <!-- day -->
-                    <div class="timeline-item" ng-repeat="dealObj in upcomingDeals">
+                    <div class="timeline-item" ng-repeat="obj in upcomingDealsEvents">
                         <div class="row">
                             <!-- weather -->
                             <div class="col-xs-3 text-center" style="padding-top: 15px;">
@@ -32,16 +32,23 @@
                             <!-- text content -->
                             <div class="col-xs-9 content" ng-class="$index == 0 ? 'no-top-border' : ''">
                                 <!-- date -->
-                                <p class="m-b-xs"><strong>{{dealObj.date | date:'fullDate'}}</strong></p>
+                                <p class="m-b-xs"><strong>{{obj.date | date:'fullDate'}}</strong></p>
                                 <!-- deals -->
-                                <p ng-if="dealObj.deals.length > 0" class="text-muted">Deals</p>
-                                <p ng-repeat="deal in dealObj.deals">
+                                <p ng-if="obj.deals.length > 0" class="text-muted">Deals</p>
+                                <p ng-repeat="deal in obj.deals">
                                     <span class="text-navy">
                                        {{deal.deal_start_date | date:'shortTime'}} - 
                                     </span>
                                     {{deal.name}}<br/>   
                                 </p>
-                                <!-- weather -->
+                                <!-- events -->
+                                <p ng-if="obj.events.length > 0" class="text-muted">Events</p>
+                                <p ng-repeat="event in obj.events">
+                                    <span class="text-navy">
+                                       {{event.start.dateTime | date:'shortTime'}} - 
+                                    </span>
+                                    {{event.summary}}<br/>   
+                                </p>
                             </div>
                         </div>
                     </div>

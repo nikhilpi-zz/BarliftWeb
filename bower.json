@@ -23,7 +23,8 @@
     "oauth-signature": "~1.3.0",
     "angular-ui-calendar": "~0.8.1",
     "PACE": "https://github.com/HubSpot/pace.git#~1.0.2",
-    "moment": "~2.10.2"
+    "moment": "~2.10.2",
+    "ngGAPI": "https://github.com/christiansmith/ngGAPI.git"
   },
   "devDependencies": {
     "angular-mocks": "~1.3.0",
