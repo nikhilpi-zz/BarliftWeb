@@ -19,7 +19,7 @@
                 <div class="ibox-content inspinia-timeline">
 
                     <!-- day -->
-                    <div class="timeline-item" ng-repeat="dealObj in upcomingDeals">
+                    <div class="timeline-item" ng-repeat="obj in upcomingDealsEvents">
                         <div class="row">
                             <!-- weather -->
                             <div class="col-xs-3 text-center" style="padding-top: 15px;">
@@ -32,16 +32,26 @@
                             <!-- text content -->
                             <div class="col-xs-9 content" ng-class="$index == 0 ? 'no-top-border' : ''">
                                 <!-- date -->
-                                <p class="m-b-xs"><strong>{{dealObj.date | date:'fullDate'}}</strong></p>
+                                <p class="m-b-xs"><strong>{{obj.date | date:'fullDate'}}</strong></p>
                                 <!-- deals -->
-                                <p ng-if="dealObj.deals.length > 0" class="text-muted">Deals</p>
-                                <p ng-repeat="deal in dealObj.deals">
-                                    <span class="text-navy">
+                                <p ng-if="obj.deals.length > 0" class="text-navy">Deals</p>
+                                <p ng-repeat="deal in obj.deals">
+                                    <span>
                                        {{deal.deal_start_date | date:'shortTime'}} - 
                                     </span>
                                     {{deal.name}}<br/>   
                                 </p>
-                                <!-- weather -->
+                                <!-- events -->
+                                <p ng-if="obj.events.length > 0" style="color: purple">Events</p>
+                                <p ng-repeat="event in obj.events">
+                                    <span ng-if="event.start.dateTime">
+                                       {{event.start.dateTime | date:'shortTime'}} - 
+                                    </span>
+                                    <span ng-if="!event.start.dateTime">
+                                       ALL DAY - 
+                                    </span>
+                                    {{event.summary}}<br/>   
+                                </p>
                             </div>
                         </div>
                     </div>
