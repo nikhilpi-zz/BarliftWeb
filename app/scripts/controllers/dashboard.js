@@ -86,7 +86,11 @@ angular.module('barliftApp')
 
       // add events to obj
       angular.forEach($scope.events, function(event) {
-        var date = new Date(event.start.date);
+        if (event.start.date) {
+          var date = new Date(event.start.date);
+        } else {
+          var date = new Date(event.start.dateTime);
+        }
         var temp = new Date(date);
         temp.setHours(0, 0, 0, 0);
         var dateIndex = Math.floor((temp - today) / (1000 * 60 * 60 * 24));
