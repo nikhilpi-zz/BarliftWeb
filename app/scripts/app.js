@@ -231,6 +231,13 @@ angular
           authorizedRoles: [USER_ROLES.all]
         }
       })
+      .state('profile.invoice', {
+        url: "/invoice",
+        templateUrl: 'views/dash/profile.invoice.html',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
+      })
       .state('profile.payment', {
         url: "/payment",
         templateUrl: 'views/dash/profile.payment.html',
