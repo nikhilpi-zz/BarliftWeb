@@ -13,6 +13,7 @@ angular.module('barliftApp')
     $scope.user = {};
     $scope.selectedVenue = Venues.newVenue($scope.user);
     $scope.alert = null;
+    $scope.invoices = [];
     $scope.payments = {
       plans: [
       {
@@ -68,9 +69,14 @@ angular.module('barliftApp')
         plan: $scope.payments.plans[$scope.payments.subPlan].id,
         name: $scope.payments.name
       }, function(res) {
-        $scope.alert = res;
+        $state.go('profile.invoice');
       });
     };
+
+    CloudCode.call("getUpComingInvoice",{}).then(function(res){
+      console.log(res.result.data);
+      $scope.invoices = res.result.data;
+    });
 
 
   });

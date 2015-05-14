@@ -115,6 +115,7 @@ angular
                 url: "/main",
                 controller: 'DashboardCtrl',
                 templateUrl: 'views/dash/dash.main.html',
+                // templateUrl: 'views/quickstart.html'
                 data: {
                     authorizedRoles: [USER_ROLES.all]
                 },
@@ -171,7 +172,6 @@ angular
                     }
                 }
             })
-            // analytics
             .state('deals.analytics', {
                 url: "/deal/:selectedDeal",
                 templateUrl: 'views/dash/deals.analytics.html',
@@ -222,6 +222,13 @@ angular
             .state('profile.venues', {
                 url: "/venues",
                 templateUrl: 'views/dash/profile.venues.html',
+                data: {
+                    authorizedRoles: [USER_ROLES.all]
+                }
+            })
+            .state('profile.invoice', {
+                url: "/invoice",
+                templateUrl: 'views/dash/profile.invoice.html',
                 data: {
                     authorizedRoles: [USER_ROLES.all]
                 }

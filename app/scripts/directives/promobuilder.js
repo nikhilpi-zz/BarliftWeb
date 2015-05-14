@@ -7,7 +7,7 @@
  * # promoBuilder
  */
 angular.module('barliftApp')
-  .directive('promoBuilder', function (ParseTypes, $q) {
+  .directive('promoBuilder', function (ParseTypes, $q, $state) {
     return {
       templateUrl: 'views/dash/directives/promo-builder.html',
       restrict: 'E',
@@ -86,7 +86,7 @@ angular.module('barliftApp')
               }).then(sucess));
           });
           $q.all(buys).then(function(){
-              console.log("ALL PROMISES RESOLVED")
+              $state.go('profile.invoice');
           });
         };
 
