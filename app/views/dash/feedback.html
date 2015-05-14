@@ -17,7 +17,7 @@
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">How effective was the deal?</label>
                                 <div class="col-sm-6">
-                                    <h1><rating name="rating" max="5" ng-model="feedback.rating" required></rating></h1>
+                                    <h1><rating name="rating" max="5" ng-model="feedback.rating" style="outline: none;" required></rating></h1>
                                     <span ng-show="form.$dirty && form.rating.$error.required" class="has-error">
                                         <label class="control-label">Required</label>
                                     </span>
@@ -57,8 +57,3 @@
         </div>
     </div>
 </div>
-<style>
-span:focus {
-    outline: none;
-}
-</style>
