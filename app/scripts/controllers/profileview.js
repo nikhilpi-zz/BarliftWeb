@@ -74,9 +74,17 @@ angular.module('barliftApp')
     };
 
     CloudCode.call("getUpComingInvoice",{}).then(function(res){
-      console.log(res.result.data);
       $scope.invoices = res.result.data;
     });
+
+    $scope.updateUser = function(){
+      User.update($scope.user).$promise.then(function(sucess){
+        $state.go('dash')
+      },
+      function(err){
+        $scope.alert.text = err;
+      })
+    }
 
 
   });

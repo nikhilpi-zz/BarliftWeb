@@ -36,7 +36,8 @@ angular
     editor: 'User',
     bar: 'Bar'
   })
-  .config(function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $httpProvider, USER_ROLES) {
+  .config(function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $httpProvider, USER_ROLES, $locationProvider) {
+    $locationProvider.html5Mode(true);
     $urlRouterProvider.otherwise("/");
     Stripe.setPublishableKey('pk_test_ilf0PC8WC51SBXQMp8zQFjXi');
 
@@ -234,6 +235,13 @@ angular
       .state('profile.invoice', {
         url: "/invoice",
         templateUrl: 'views/dash/profile.invoice.html',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
+      })
+      .state('profile.account', {
+        url: "/account",
+        templateUrl: 'views/dash/profile.account.html',
         data: {
           authorizedRoles: [USER_ROLES.all]
         }

@@ -1,6 +1,6 @@
 // Generated on 2014-12-19 using generator-angular 0.10.0
 'use strict';
-
+var modRewrite = require('connect-modrewrite');
 // # Globbing
 // for performance reasons we're only matching one level down:
 // 'test/spec/{,*/}*.js'
@@ -69,8 +69,18 @@ module.exports = function (grunt) {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost',
-        livereload: 35729
-      },
+        livereload: 35729,
+        middleware: function (connect) {
+          return [
+            modRewrite([
+              '!\\.html|\\.js|\\.css|\\.png$ /index.html [L]'
+            ]),
+            lrSnippet,
+            mountFolder(connect, '.tmp'),
+            mountFolder(connect, yeomanConfig.app)
+          ];
+        }
+    },   
       livereload: {
         options: {
           open: true,

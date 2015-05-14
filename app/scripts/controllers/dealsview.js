@@ -14,6 +14,7 @@ angular.module('barliftApp')
         $scope.user = {};
         $scope.selectedDeal = {};
         $scope.selectedVenue = {};
+        $scope.today = new Date();
 
         $scope.dealView = 'calendar';
         $scope.dealFilter = 'all';
@@ -48,7 +49,17 @@ angular.module('barliftApp')
             return deal.deal_start_date.valueOf();
         };
 
+        $scope.sameDate = function(aDate, bDate) {
+            return moment(aDate).dayOfYear() === moment(bDate).dayOfYear()
+        };
+
+        $scope.pastDate = function(aDate, bDate) {
+            return moment(aDate).dayOfYear() < moment(bDate).dayOfYear()
+        };
+
+
         $scope.filterDeals = function(value, index) {
+            console.log($scope.dealFilter);
             if ($scope.dealFilter === 'all') {
                 return true;
             } else if ($scope.dealFilter === 'future') {
