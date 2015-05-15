@@ -7,8 +7,12 @@
  * # AnalyticsCtrl
  * Controller of the barliftWebApp
  */
+
+
 angular.module('barliftApp')
-    .controller('AnalyticsCtrl', function($scope, $stateParams, Deals, CloudCode) {
+    .controller('AnalyticsCtrl', function($scope, $stateParams, Deals, CloudCode, $http) {
+
+        // get deals
         Deals.get({
             objectId: $stateParams.selectedDeal,
             include: "feedback"
@@ -16,61 +20,68 @@ angular.module('barliftApp')
             $scope.deal = res;
         });
 
+
+        /**
+         * Get data for charts
+         */
+
+        // get gender and create doughnut chart
         CloudCode.call('dealAnalytics', {
             dealId: $stateParams.selectedDeal
         }).then(function(res) {
             $scope.males = res.result.gender.male;
             $scope.females = res.result.gender.female;
-
-            /**
-             * Data for Doughnut chart
-             */
-            $scope.doughnutData = [{
-                value: $scope.females,
-                color: "#a3e1d4",
-                highlight: "#1ab394",
-                label: "Female"
-            }, {
-                value: $scope.males,
-                color: "#b5b8cf",
-                highlight: "#9589a6",
-                label: "Male"
-            }];
+            createDoughnut($scope);
         });
 
-        var data1 = [
-            [gd(2012, 1, 1), 7],
-            [gd(2012, 1, 2), 6],
-            [gd(2012, 1, 3), 4],
-            [gd(2012, 1, 4), 8],
-            [gd(2012, 1, 5), 9],
-            [gd(2012, 1, 6), 7],
-            [gd(2012, 1, 7), 5],
-            [gd(2012, 1, 8), 4],
-            [gd(2012, 1, 9), 7],
-            [gd(2012, 1, 10), 8],
-            [gd(2012, 1, 11), 9],
-            [gd(2012, 1, 12), 6],
-            [gd(2012, 1, 13), 4],
-            [gd(2012, 1, 14), 5],
-            [gd(2012, 1, 15), 11],
-            [gd(2012, 1, 16), 8],
-            [gd(2012, 1, 17), 8],
-            [gd(2012, 1, 18), 11],
-            [gd(2012, 1, 19), 11],
-            [gd(2012, 1, 20), 6],
-            [gd(2012, 1, 21), 6],
-            [gd(2012, 1, 22), 8],
-            [gd(2012, 1, 23), 11],
-            [gd(2012, 1, 24), 13],
-            [gd(2012, 1, 25), 7],
-            [gd(2012, 1, 26), 9],
-            [gd(2012, 1, 27), 9],
-            [gd(2012, 1, 28), 8],
-            [gd(2012, 1, 29), 5],
-            [gd(2012, 1, 30), 8],
-            [gd(2012, 1, 31), 25]
-        ];
+        var nudges = [];
+        $scope.nudgeData = [];
+
+        // get nudge data by day
+        CloudCode.call('getNudgesByHour', {
+            dealID: $stateParams.selectedDeal
+        }).then(function(res) {
+            angular.forEach(res.result, function(nudge) {
+                var date = new Date(nudge["createdAt"]);
+                var updated = false;
+
+                var obj = {
+                    date: date,
+                    day: date.getDate(),
+                    hour: date.getHours(),
+                    utc: date.getTime(),
+                    count: 0
+                };
+
+                // if date exists, increment count
+                for (var i = 0; i < nudges.length; i++) {
+                    // nudges[i].day == obj.day && (nudges[i].hour == obj.hour)) {
+                    if (nudges[i].day == obj.day) {
+                        nudges[i].count += 1;
+                        updated = true;
+                        break
+                    }
+                }
+
+                // if date doesn't exists, create new object
+                if (updated == false) {
+                    obj.count += 1;
+                    nudges.push(obj);
+                }
+            });
+
+            // sort nudges by date
+            nudges.sort(function(a,b) { 
+                return a.utc - b.utc;
+            });
+
+            // convert to formate accepted by flot graph
+            angular.forEach(nudges, function(nudge) {
+                $scope.nudgeData.push([nudge.utc, nudge.count]);
+            });
+
+            createNudgeGraph();
+        });
 
         var data2 = [
             [gd(2012, 1, 1), 800],
@@ -85,65 +96,91 @@ angular.module('barliftApp')
             [gd(2012, 1, 10), 876],
             [gd(2012, 1, 11), 689],
             [gd(2012, 1, 12), 700],
-            [gd(2012, 1, 13), 500],
-            [gd(2012, 1, 14), 600],
-            [gd(2012, 1, 15), 700],
-            [gd(2012, 1, 16), 786],
-            [gd(2012, 1, 17), 345],
-            [gd(2012, 1, 18), 888],
-            [gd(2012, 1, 19), 888],
-            [gd(2012, 1, 20), 888],
-            [gd(2012, 1, 21), 987],
-            [gd(2012, 1, 22), 444],
-            [gd(2012, 1, 23), 999],
-            [gd(2012, 1, 24), 567],
-            [gd(2012, 1, 25), 786],
-            [gd(2012, 1, 26), 666],
-            [gd(2012, 1, 27), 888],
-            [gd(2012, 1, 28), 900],
-            [gd(2012, 1, 29), 178],
-            [gd(2012, 1, 30), 555],
-            [gd(2012, 1, 31), 993]
+            [gd(2012, 1, 13), 500]
         ];
 
+        function gd(year, month, day) {
+            return new Date(year, month - 1, day).getTime();
+        }
 
-        var dataset = [{
-            label: "Number of orders",
-            grow: {
-                stepMode: "linear"
-            },
-            data: data2,
-            color: "#1ab394",
-            bars: {
-                show: true,
-                align: "center",
-                barWidth: 24 * 60 * 60 * 600,
-                lineWidth: 0
-            }
-        }, {
-            label: "Payments",
-            grow: {
-                stepMode: "linear"
-            },
-            data: data1,
-            yaxis: 2,
-            color: "#464f88",
-            lines: {
-                lineWidth: 1,
-                show: true,
-                fill: true,
-                fillColor: {
-                    colors: [{
-                        opacity: 0.2
-                    }, {
-                        opacity: 0.2
-                    }]
+        // {
+        //     label: "Deal detail clicks in the app",
+        //     grow: {
+        //         stepMode: "linear"
+        //     },
+        //     data: data2,
+        //     color: "#1ab394",
+        //     bars: {
+        //         show: true,
+        //         align: "center",
+        //         barWidth: 24 * 60 * 60 * 600,
+        //         lineWidth: 0
+        //     }
+        // }, 
+
+        var createNudgeGraph = function() {
+            $scope.graphData = [{
+                label: "Nudges sent",
+                grow: {
+                    stepMode: "linear"
+                },
+                data: $scope.nudgeData,
+                yaxis: 1,
+                color: "#464f88",
+                lines: {
+                    lineWidth: 1,
+                    show: true,
+                    fill: true,
+                    fillColor: {
+                        colors: [{
+                            opacity: 0.2
+                        }, {
+                            opacity: 0.2
+                        }]
+                    }
                 }
-            }
-        }];
+            }];
+        };
 
 
-        var options = {
+        /**
+         * Create charts
+         */
+
+        // create doughnut chart for gender
+        var createDoughnut = function() {
+            $scope.doughnutData = [{
+                value: $scope.females,
+                color: "#a3e1d4",
+                highlight: "#1ab394",
+                label: "Female"
+            }, {
+                value: $scope.males,
+                color: "#b5b8cf",
+                highlight: "#9589a6",
+                label: "Male"
+            }];
+        }
+
+
+        /**
+         * Options for chart configurations
+         */
+
+        // options for doughnut gender chart
+        $scope.doughnutOptions = {
+            segmentShowStroke: true,
+            segmentStrokeColor: "#fff",
+            segmentStrokeWidth: 2,
+            percentageInnerCutout: 45, // This is 0 for Pie charts
+            animationSteps: 100,
+            animationEasing: "easeOutBounce",
+            animateRotate: true,
+            animateScale: false
+        };
+
+        // options for nudge/deal details graph 
+        $scope.graphOptions = {
             grid: {
                 hoverable: true,
                 clickable: true,
@@ -166,7 +203,6 @@ angular.module('barliftApp')
             },
             yaxes: [{
                 position: "left",
-                max: 1070,
                 color: "#d5d5d5",
                 axisLabelUseCanvas: true,
                 axisLabelFontSizePixels: 12,
@@ -185,32 +221,6 @@ angular.module('barliftApp')
                 labelBoxBorderColor: "#d5d5d5",
                 position: "nw"
             },
-        };
-
-        function gd(year, month, day) {
-            return new Date(year, month - 1, day).getTime();
-        }
-
-        /**
-         * Definition of variables
-         * Flot chart
-         */
-        $scope.flotData = dataset;
-        $scope.flotOptions = options;
-
-
-        /**
-         * Options for Doughnut chart
-         */
-        $scope.doughnutOptions = {
-            segmentShowStroke: true,
-            segmentStrokeColor: "#fff",
-            segmentStrokeWidth: 2,
-            percentageInnerCutout: 45, // This is 0 for Pie charts
-            animationSteps: 100,
-            animationEasing: "easeOutBounce",
-            animateRotate: true,
-            animateScale: false
         };
 
     });

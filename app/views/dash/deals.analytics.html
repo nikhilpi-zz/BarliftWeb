@@ -26,7 +26,7 @@
                 </div>
                 <div class="ibox-content">
                     <div class="row">
-                        <div class="col-lg-9">
+                        <div class="col-lg-8">
                             <ul class="stat-list">
                                 <li>
                                     <h2 class="no-margins">{{deal.community_name}}</h2>
@@ -36,11 +36,19 @@
                                     <h2 class="no-margins ">{{deal.deal_start_date | date:'EEE, MMM d'}} - {{deal.deal_end_date | date:'EEE, MMM d'}}</h2>
                                     <small>Dates live</small>
                                 </li>
+                                <li>
+                                    <div>
+                                        <a ui-sref="feedback({dealId: deal.objectId})" class="btn btn-danger btn-md" href="#/deals/builder/">Admin feedback</a>
+                                    </div>
+                                    <small>Visible to admins only</small>
+                                </li>
                             </ul>
                         </div>
-                        <div class="col-lg-3" ng-if="males">
+                        <div class="col-lg-4" ng-if="males">
                             <canvas doughnutchart options="doughnutOptions" data="doughnutData" width="80" height="80"></canvas>
-                            <small>Gender</small>
+                            <div>
+                                <small>Gender</small>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -119,7 +127,7 @@
                 </div>
                 <div class="ibox-content">
                     <div class="flot-chart">
-                        <div flot class="flot-chart-content" dataset="flotData" options="flotOptions"></div>
+                        <div flot class="flot-chart-content" dataset="graphData" options="graphOptions"></div>
                     </div>
                 </div>
             </div>
