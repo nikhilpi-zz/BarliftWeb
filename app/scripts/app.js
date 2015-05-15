@@ -38,7 +38,7 @@ angular
   })
   .config(function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $httpProvider, USER_ROLES, $locationProvider) {
     $locationProvider.html5Mode(true);
-    //$urlRouterProvider.otherwise("/");
+    $urlRouterProvider.otherwise("/");
     Stripe.setPublishableKey('pk_test_ilf0PC8WC51SBXQMp8zQFjXi');
 
         $ocLazyLoadProvider.config({

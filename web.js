@@ -5,10 +5,19 @@ var app = express();
 
 app.use(morgan('dev'));
 
-app.route('/#/terms')
-.all(function(req, res, next) {
-  res.redirect('/terms');
-});
+// app.route('/#/terms')
+// .all(function(req, res, next) {
+//   res.redirect('/terms');
+// });
+// these need to go first:
+app.use("/fonts", gzippo.staticGzip(__dirname + "/dist/fonts"));
+app.use("/images", gzippo.staticGzip(__dirname + "/dist/images"));
+app.use("/js", gzippo.staticGzip(__dirname + "/dist/js"));
+app.use("/scripts", gzippo.staticGzip(__dirname + "/dist/scripts"));
+app.use("/styles", gzippo.staticGzip(__dirname + "/dist/styles"));
+app.use("/views", gzippo.staticGzip(__dirname + "/dist/views"));
 
-app.use(gzippo.staticGzip("" + __dirname + "/dist"));
+// any other routes:
+app.use('/*',gzippo.staticGzip(__dirname + "/dist"));
+
 app.listen(process.env.PORT || 5000);
