@@ -8,8 +8,12 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-  .controller('PromoteviewCtrl', function ($scope, CloudCode, ParseTypes) {
+  .controller('PromoteviewCtrl', function ($scope, User, CloudCode, ParseTypes) {
     $scope.deals = [];
+    $scope.user = {};
+    User.getCurrent(function(res){ 
+      $scope.user = res; 
+    });
 
     CloudCode.call('possibleMainDeals', {}).then(
       function(res){

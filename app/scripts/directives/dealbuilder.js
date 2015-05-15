@@ -29,6 +29,12 @@ angular.module('barliftApp')
           scope.deal = Deals.newDeal(scope.user);
         }
 
+        scope.$watch('deal.name', function(){
+          if(scope.deal.name && scope.deal.name.length >= 50){
+            scope.deal.name = scope.deal.name.substring(0,50);
+          }
+        });
+
         scope.$watch('deal.deal_start_date', function(newValue, oldValue){
           if(moment(scope.deal.deal_start_date).isBefore(moment().add(3,"days"))){
             scope.alert.text = "You must schedule deal 3 days in advance";
@@ -54,9 +60,6 @@ angular.module('barliftApp')
         });
 
         scope.addSubDeal = function(){
-          if(!scope.deal.add_deals){
-            scope.deal.add_deals = [];
-          }
           scope.deal.add_deals.push('');
         };
 
