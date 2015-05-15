@@ -4,6 +4,7 @@
         <span class="label label-primary pull-right" ng-if="sameDate(deal.deal_start_date,today)">Today</span>
         <span class="label label-default pull-right" ng-if="pastDate(deal.deal_start_date,today)">Past</span>
         <span class="label label-danger pull-right" ng-if="isLocked(deal.deal_start_date)">Locked</span>
+        <span class="label label-info pull-right" ng-if="deal.main">Main</span>
         <h5>{{deal.deal_start_date | date:'MM/dd/yyyy'}}</h5>
     </div>
     <div class="ibox-content">

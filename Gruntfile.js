@@ -1,6 +1,6 @@
 // Generated on 2014-12-19 using generator-angular 0.10.0
 'use strict';
-
+var modRewrite = require('connect-modrewrite');
 // # Globbing
 // for performance reasons we're only matching one level down:
 // 'test/spec/{,*/}*.js'
@@ -69,19 +69,34 @@ module.exports = function (grunt) {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost',
-        livereload: 35729
-      },
+        livereload: 35729,
+        middleware: function (connect, options) {
+          var optBase = (typeof options.base === 'string') ? [options.base] : options.base,
+          middleware = [require('connect-modrewrite')(['!(\\..+)$ / [L]'])]
+            .concat(optBase.map(function (path) { 
+              if (path.indexOf('rewrite|') === -1) {
+                return connect.static(path);
+              } else {
+                path = path.replace(/\\/g, '/').split('|');
+                return  connect().use(path[1], connect.static(path[2]))
+              }
+            }));
+
+          return middleware;
+        }
+    },   
       livereload: {
         options: {
           open: true,
           middleware: function (connect) {
             return [
-              connect.static('.tmp'),
-              connect().use(
-                '/bower_components',
-                connect.static('./bower_components')
-              ),
-              connect.static(appConfig.app)
+                modRewrite(['^[^\\.]*$ /index.html [L]']),
+                connect.static('.tmp'),
+                connect().use(
+                    '/bower_components',
+                    connect.static('./bower_components')
+                ),
+                connect.static(appConfig.app)
             ];
           }
         }

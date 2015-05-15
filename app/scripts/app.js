@@ -9,36 +9,37 @@
  * Main module of the application.
  */
 angular
-    .module('barliftApp', [
-        'ngAnimate',
-        'ngCookies',
-        'ngResource',
-        'ngRoute',
-        'ngSanitize',
-        'ngTouch',
-        'ui.bootstrap',
-        'ui.router',
-        'oc.lazyLoad',
-        'ui.calendar',
-        'angularPayments'
-    ])
-    .constant('AUTH_EVENTS', {
-        loginSuccess: 'auth-login-success',
-        loginFailed: 'auth-login-failed',
-        logoutSuccess: 'auth-logout-success',
-        sessionTimeout: 'auth-session-timeout',
-        notAuthenticated: 'auth-not-authenticated',
-        notAuthorized: 'auth-not-authorized'
-    })
-    .constant('USER_ROLES', {
-        all: '*',
-        admin: 'Admin',
-        editor: 'User',
-        bar: 'Bar'
-    })
-    .config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $httpProvider, USER_ROLES) {
-        $urlRouterProvider.otherwise("/");
-        Stripe.setPublishableKey('pk_test_ilf0PC8WC51SBXQMp8zQFjXi');
+  .module('barliftApp', [
+    'ngAnimate',
+    'ngCookies',
+    'ngResource',
+    'ngRoute',
+    'ngSanitize',
+    'ngTouch',
+    'ui.bootstrap',
+    'ui.router',
+    'oc.lazyLoad',
+    'ui.calendar',
+    'angularPayments'
+  ])
+  .constant('AUTH_EVENTS', {
+    loginSuccess: 'auth-login-success',
+    loginFailed: 'auth-login-failed',
+    logoutSuccess: 'auth-logout-success',
+    sessionTimeout: 'auth-session-timeout',
+    notAuthenticated: 'auth-not-authenticated',
+    notAuthorized: 'auth-not-authorized'
+  })
+  .constant('USER_ROLES', {
+    all: '*',
+    admin: 'Admin',
+    editor: 'User',
+    bar: 'Bar'
+  })
+  .config(function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $httpProvider, USER_ROLES, $locationProvider) {
+    $locationProvider.html5Mode(true);
+    //$urlRouterProvider.otherwise("/");
+    Stripe.setPublishableKey('pk_test_ilf0PC8WC51SBXQMp8zQFjXi');
 
         $ocLazyLoadProvider.config({
             // Set to true if you want to see what and when is dynamically loaded
@@ -229,6 +230,13 @@ angular
             .state('profile.invoice', {
                 url: "/invoice",
                 templateUrl: 'views/dash/profile.invoice.html',
+                data: {
+                    authorizedRoles: [USER_ROLES.all]
+                }
+            })
+            .state('profile.account', {
+                url: "/account",
+                templateUrl: 'views/dash/profile.account.html',
                 data: {
                     authorizedRoles: [USER_ROLES.all]
                 }
