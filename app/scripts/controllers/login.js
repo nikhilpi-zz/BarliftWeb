@@ -18,6 +18,18 @@ angular.module('barliftApp')
       $state.go('dash.main');
     }
 
+    $scope.$watch('credentials.username', function() {
+      if ($scope.credentials) {
+        $scope.credentials.username = $scope.credentials.username.toLowerCase().replace(/\s+/g,'');
+      };
+    });
+
+    $scope.$watch('user.username', function() {
+      if ($scope.user) {
+        $scope.user.username = $scope.user.username.toLowerCase().replace(/\s+/g,'');
+      };
+    });
+
     $scope.register = function(newUser){
       var user = User.newBar();
       user.username = newUser.username;

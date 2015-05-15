@@ -1,6 +1,6 @@
 <div class="ibox float-e-margins">
     <div class="ibox-title">
-        <span class="label label-warning pull-right" ng-if="deal.deal_start_date > today">Future</span>
+        <span class="label label-warning pull-right" ng-if="deal.deal_start_date > today && !isLocked(deal.deal_start_date)">Future</span>
         <span class="label label-primary pull-right" ng-if="sameDate(deal.deal_start_date,today)">Today</span>
         <span class="label label-default pull-right" ng-if="pastDate(deal.deal_start_date,today)">Past</span>
         <span class="label label-danger pull-right" ng-if="isLocked(deal.deal_start_date)">Locked</span>
@@ -19,7 +19,7 @@
                 <a ng-if="pastDate(deal.deal_start_date,today)" class="btn btn-sm btn-primary btn-block" ui-sref="feedback({dealId: deal.objectId})">Feedback</a>
             </div>
             <div class="col-md-6">
-                <a class="btn btn-sm btn-primary btn-block" ui-sref="deals.analytics({selectedDeal: deal.objectId})">Stats</a>
+                <a class="btn btn-sm btn-primary btn-block" ui-sref="deals.analytics({selectedDeal: deal.objectId})">Analytics</a>
             </div>
         </div>
     </div>

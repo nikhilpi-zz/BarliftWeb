@@ -105,20 +105,19 @@ angular
             // dashabord
             .state('dash', {
                 abstract: true,
-                url: "/admin",
                 controller: 'AdminCtrl',
                 templateUrl: "views/dash/common/content.html",
                 data: {
-                    authorizedRoles: [USER_ROLES.all]
+                    authorizedRoles: [USER_ROLES.admin, USER_ROLES.bar]
                 }
             })
             .state('dash.main', {
-                url: "/main",
+                url: "/dashboard",
                 controller: 'DashboardCtrl',
                 templateUrl: 'views/dash/dash.main.html',
                 // templateUrl: 'views/quickstart.html'
                 data: {
-                    authorizedRoles: [USER_ROLES.all]
+                    authorizedRoles: [USER_ROLES.admin, USER_ROLES.bar]
                 },
                 resolve: {
                     loadPlugin: function($ocLazyLoad) {
@@ -148,21 +147,21 @@ angular
                 templateUrl: 'views/dash/common/content.html',
                 controller: 'DealsviewCtrl',
                 data: {
-                    authorizedRoles: [USER_ROLES.all]
+                    authorizedRoles: [USER_ROLES.admin, USER_ROLES.bar]
                 }
             })
             .state('deals.list', {
                 url: "/list",
                 templateUrl: 'views/dash/deals.list.html',
                 data: {
-                    authorizedRoles: [USER_ROLES.all]
+                    authorizedRoles: [USER_ROLES.admin, USER_ROLES.bar]
                 }
             })
             .state('deals.builder', {
                 url: "/builder/:selectedDeal",
                 templateUrl: 'views/dash/deals.builder.html',
                 data: {
-                    authorizedRoles: [USER_ROLES.all]
+                    authorizedRoles: [USER_ROLES.admin, USER_ROLES.bar]
                 },
                 resolve: {
                     loadPlugin: function($ocLazyLoad) {
@@ -178,7 +177,7 @@ angular
                 templateUrl: 'views/dash/deals.analytics.html',
                 controller: 'AnalyticsCtrl',
                 data: {
-                    authorizedRoles: [USER_ROLES.all]
+                    authorizedRoles: [USER_ROLES.admin, USER_ROLES.bar]
                 },
                 resolve: {
                     loadPlugin: function($ocLazyLoad) {
@@ -200,14 +199,14 @@ angular
                 templateUrl: 'views/dash/common/content.html',
                 controller: 'PromoteviewCtrl',
                 data: {
-                    authorizedRoles: [USER_ROLES.all]
+                    authorizedRoles: [USER_ROLES.admin, USER_ROLES.bar]
                 }
             })
             .state('promo.push', {
                 url: "/push",
                 templateUrl: 'views/dash/promo.push.html',
                 data: {
-                    authorizedRoles: [USER_ROLES.all]
+                    authorizedRoles: [USER_ROLES.admin, USER_ROLES.bar]
                 }
             })
             // profile
@@ -217,35 +216,35 @@ angular
                 templateUrl: 'views/dash/common/content.html',
                 controller: 'ProfileviewCtrl',
                 data: {
-                    authorizedRoles: [USER_ROLES.all]
+                    authorizedRoles: [USER_ROLES.admin, USER_ROLES.bar]
                 }
             })
             .state('profile.venues', {
                 url: "/venues",
                 templateUrl: 'views/dash/profile.venues.html',
                 data: {
-                    authorizedRoles: [USER_ROLES.all]
+                    authorizedRoles: [USER_ROLES.admin, USER_ROLES.bar]
                 }
             })
             .state('profile.invoice', {
                 url: "/invoice",
                 templateUrl: 'views/dash/profile.invoice.html',
                 data: {
-                    authorizedRoles: [USER_ROLES.all]
+                    authorizedRoles: [USER_ROLES.admin, USER_ROLES.bar]
                 }
             })
             .state('profile.account', {
                 url: "/account",
                 templateUrl: 'views/dash/profile.account.html',
                 data: {
-                    authorizedRoles: [USER_ROLES.all]
+                    authorizedRoles: [USER_ROLES.admin, USER_ROLES.bar]
                 }
             })
             .state('profile.payment', {
                 url: "/payment",
                 templateUrl: 'views/dash/profile.payment.html',
                 data: {
-                    authorizedRoles: [USER_ROLES.all]
+                    authorizedRoles: [USER_ROLES.admin, USER_ROLES.bar]
                 },
                 resolve: {
                     loadPlugin: function($ocLazyLoad) {
@@ -259,21 +258,21 @@ angular
                 url: "/step_one",
                 templateUrl: 'views/dash/payments_wizard/one_sub.html',
                 data: {
-                    authorizedRoles: [USER_ROLES.all]
+                    authorizedRoles: [USER_ROLES.admin, USER_ROLES.bar]
                 }
             })
             .state('profile.payment.two_card', {
                 url: "/step_two",
                 templateUrl: 'views/dash/payments_wizard/two_card.html',
                 data: {
-                    authorizedRoles: [USER_ROLES.all]
+                    authorizedRoles: [USER_ROLES.admin, USER_ROLES.bar]
                 }
             })
             .state('profile.payment.three_review', {
                 url: "/step_three",
                 templateUrl: 'views/dash/payments_wizard/three_review.html',
                 data: {
-                    authorizedRoles: [USER_ROLES.all]
+                    authorizedRoles: [USER_ROLES.admin, USER_ROLES.bar]
                 }
             });
 
@@ -285,7 +284,7 @@ angular
         ]);
 
     })
-    .run(function($rootScope, $http, $location, $window, $state, AUTH_EVENTS, AuthService, Session) {
+    .run(function($rootScope, $http, $window, $state, AUTH_EVENTS, AuthService, Session) {
         $rootScope.$state = $state;
 
         $http.defaults.headers.common['X-Parse-Application-Id'] = '5DZi1FrdZcwBKXIxMplWsqYu3cEEumlmFDB1kKnC';
@@ -302,10 +301,10 @@ angular
                 event.preventDefault();
                 if (AuthService.isAuthenticated()) {
                     $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
-                    $location.path('/login');
+                    $state.go('login');
                 } else {
                     $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
-                    $location.path('/login');
+                    $state.go('login');
                 }
             }
         });

@@ -54,20 +54,17 @@ angular.module('barliftApp')
     });
 
     apiRest.newDeal = function(user){
-      var date = new Date();
+      var date = moment().add(3,'day').toDate();
       var deal = {
         ACL: {
           '*': {
-            read: false,
-            write: false
           },
           'role:Admin': {
             read: true,
             write: true
           },
           'role:User': {
-            read: true,
-            write: false
+            read: true
           }
         },
         schema: [
