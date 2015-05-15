@@ -16,7 +16,7 @@ angular.module('barliftApp')
     };
 
     return {
-      getBusiness: function (yelpID, cb) {
+      getBusiness: function (yelpID) {
         var method = 'GET';
         var url = 'http://api.yelp.com/v2/business/' + yelpID;
         var params = {
@@ -31,7 +31,7 @@ angular.module('barliftApp')
         var tokenSecret = 'l7iJTLAp73HHm5_R8ac2LzNX7po'; //Token Secret
         var signature = oauthSignature.generate(method, url, params, consumerSecret, tokenSecret, { encodeSignature: false});
         params['oauth_signature'] = signature;
-        $http.jsonp(url, {params: params}).success(cb);
+        return $http.jsonp(url, {params: params});
       }
     };
   });

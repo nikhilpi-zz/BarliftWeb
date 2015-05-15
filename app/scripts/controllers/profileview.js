@@ -24,35 +24,6 @@ angular.module('barliftApp')
       }]
     };
 
-    User.getCurrent(function(res){ 
-      $scope.user = res; 
-      Venues.query({
-        where: {
-          manager: $scope.user.getPointer()
-        }
-      },function(venues) { $scope.venues = venues; });
-    });
-
-    $scope.editVenue = function(deal){
-      $scope.selectedVenue = deal;
-    };
-
-    $scope.deleteVenue = function(deal) {
-      Venues.delete(deal,function(res){
-        $scope.selectedVenue = Venues.newVenue($scope.user);
-        $scope.$broadcast('venues-update');
-      });
-    };
-
-    $scope.$on('venues-update', function(event, args) {
-      $scope.selectedVenue = Venues.newVenue($scope.user);
-      Venues.query({
-        where: {
-          manager: $scope.user.getPointer()
-        }
-      },function(venues) { $scope.venues = venues; });
-    });
-
     $scope.processCard = function(status, response){
       if(response.error) {
         $scope.alert = response.error.message || response.error;
