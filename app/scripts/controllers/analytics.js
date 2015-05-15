@@ -8,11 +8,34 @@
  * Controller of the barliftWebApp
  */
 angular.module('barliftApp')
-    .controller('AnalyticsCtrl', function($scope, $stateParams, Deals) {
+    .controller('AnalyticsCtrl', function($scope, $stateParams, Deals, CloudCode) {
         Deals.get({
-            objectId: $stateParams.selectedDeal
+            objectId: $stateParams.selectedDeal,
+            include: "feedback"
         }, function(res) {
             $scope.deal = res;
+        });
+
+        CloudCode.call('dealAnalytics', {
+            dealId: $stateParams.selectedDeal
+        }).then(function(res) {
+            $scope.males = res.result.gender.male;
+            $scope.females = res.result.gender.female;
+
+            /**
+             * Data for Doughnut chart
+             */
+            $scope.doughnutData = [{
+                value: $scope.females,
+                color: "#a3e1d4",
+                highlight: "#1ab394",
+                label: "Female"
+            }, {
+                value: $scope.males,
+                color: "#b5b8cf",
+                highlight: "#9589a6",
+                label: "Male"
+            }];
         });
 
         var data1 = [
@@ -175,20 +198,6 @@ angular.module('barliftApp')
         $scope.flotData = dataset;
         $scope.flotOptions = options;
 
-        /**
-         * Data for Doughnut chart
-         */
-        $scope.doughnutData = [{
-            value: 8,
-            color: "#a3e1d4",
-            highlight: "#1ab394",
-            label: "Female"
-        }, {
-            value: 4,
-            color: "#b5b8cf",
-            highlight: "#1ab394",
-            label: "Male"
-        }];
 
         /**
          * Options for Doughnut chart
