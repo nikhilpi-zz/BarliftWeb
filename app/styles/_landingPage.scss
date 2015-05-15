@@ -87,7 +87,7 @@
 }
 
 .body{
-  height: 83.333%;
+  height: 80%;
   min-height: 550px;
   .dm{
     max-height: 5em;
@@ -316,6 +316,13 @@
   }
   .team-grid .col-md-offset-1{
     margin-left: 12.333333%;
+  }
+}
+
+.terms{
+  .body{
+    height: 500px;
+    overflow: scroll;
   }
 }
 

@@ -77,6 +77,13 @@ angular
                     authorizedRoles: [USER_ROLES.all]
                 }
             })
+            .state('home.terms', {
+                url: "/terms",
+                templateUrl: 'views/landingpage/home.terms.html',
+                data: {
+                    authorizedRoles: [USER_ROLES.all]
+                }
+            })
             // login/register
             .state('login', {
                 url: "/login",
