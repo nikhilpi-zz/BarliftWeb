@@ -70,15 +70,19 @@ module.exports = function (grunt) {
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost',
         livereload: 35729,
-        middleware: function (connect) {
-          return [
-            modRewrite([
-              '!\\.html|\\.js|\\.css|\\.png$ /index.html [L]'
-            ]),
-            lrSnippet,
-            mountFolder(connect, '.tmp'),
-            mountFolder(connect, yeomanConfig.app)
-          ];
+        middleware: function (connect, options) {
+          var optBase = (typeof options.base === 'string') ? [options.base] : options.base,
+          middleware = [require('connect-modrewrite')(['!(\\..+)$ / [L]'])]
+            .concat(optBase.map(function (path) { 
+              if (path.indexOf('rewrite|') === -1) {
+                return connect.static(path);
+              } else {
+                path = path.replace(/\\/g, '/').split('|');
+                return  connect().use(path[1], connect.static(path[2]))
+              }
+            }));
+
+          return middleware;
         }
     },   
       livereload: {
@@ -86,12 +90,13 @@ module.exports = function (grunt) {
           open: true,
           middleware: function (connect) {
             return [
-              connect.static('.tmp'),
-              connect().use(
-                '/bower_components',
-                connect.static('./bower_components')
-              ),
-              connect.static(appConfig.app)
+                modRewrite(['^[^\\.]*$ /index.html [L]']),
+                connect.static('.tmp'),
+                connect().use(
+                    '/bower_components',
+                    connect.static('./bower_components')
+                ),
+                connect.static(appConfig.app)
             ];
           }
         }

@@ -79,10 +79,11 @@ angular.module('barliftApp')
 
     $scope.updateUser = function(){
       User.update($scope.user).$promise.then(function(sucess){
-        $state.go('dash')
+        $scope.alert = null;
+        $state.go('dash.main')
       },
       function(err){
-        $scope.alert.text = err;
+        $scope.alert = {text: err.data.error};
       })
     }
 

@@ -58,11 +58,16 @@ angular.module('barliftApp')
       var deal = {
         ACL: {
           '*': {
-            read: true
+            read: false,
+            write: false
           },
           'role:Admin': {
             read: true,
             write: true
+          },
+          'role:User': {
+            read: true,
+            write: false
           }
         },
         schema: [
