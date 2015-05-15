@@ -8,8 +8,8 @@
  * Factory in the barliftApp.
  */
 angular.module('barliftApp')
-  .factory('User', function ($resource, $http, ParseTypes, Session) {
-    var apiRest = $resource('https://api.parse.com/1/users/:objectId',
+  .factory('User', function ($resource, ParseTypes, Session, Deals, Venues) {
+    var user = $resource('https://api.parse.com/1/users/:objectId',
       {
         objectId: '@objectId'
       },
@@ -70,43 +70,26 @@ angular.module('barliftApp')
         }
     });
 
-    // apiRest.newDeal = function(user){
-    //   var deal = {
-    //     ACL: {
-    //       '*': {
-    //         read: true
-    //       },
-    //       'role:Admin': {
-    //         read: true,
-    //         write: true
-    //       }
-    //     },
-    //     schema: [
-    //       {
-    //         key: 'deal_start_date',
-    //         __type: 'Date'
-    //       },
-    //       {
-    //         key: 'deal_end_date',
-    //         __type: 'Date'
-    //       },
-    //       {
-    //         key: 'user',
-    //         __type: 'Pointer',
-    //         className: '_User'
-    //       }
-    //     ],
-    //     deal_start_date: new Date(),
-    //     deal_end_date: new Date()
-    //   };
+    user.newBar = function(){
+      var bar = {
+        ACL: {
+          '*': {
+            read: true
+          }
+        },
+        schema: [
+          {
+            key: 'Role',
+            __type: 'Pointer',
+            className: '_Role'
+          }
+        ],
+        Role: 'VyofaLB7t2'
+      };
 
-    //   deal.ACL[user.objectId] = {
-    //       read: true,
-    //       write: true
-    //     };
-    //   deal.user = user.objectId;
-    //   return deal;
-    // };
+      return bar;
+    };
 
-    return apiRest; 
+
+    return user; 
   });

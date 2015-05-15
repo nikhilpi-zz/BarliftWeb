@@ -1,18 +1,31 @@
-<div id="login_page" class= "login-page">
-  <div class="container-fluid">
-    <div class="col-md-4 col-md-offset-4">
-      <form class="login_form" ng-submit="login(credentials)" novalidate>
-        <h2>Log In</h2>
-        <div class="form-group">
-          <label>User Name</label>
-          <input type="text" class="form-control" ng-model="credentials.username"/>
+<div class="gray-bg full-height">
+
+    <div class="middle-box text-center loginscreen  animated fadeInDown">
+        <div>
+            <div>
+                <img class="img-responsive" src="/images/logo_orange.png">
+            </div>
+            <h3>Welcome to Barlift</h3>
+            <p>Login to create deals, send push notifications and get analytics on you bar and the surrounding area.
+            </p>
+            <div class="alert alert-danger" ng-if="loginFail">
+                Invalid username or password
+            </div>
+            <form class="m-t" role="form">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Username" required="" ng-model="credentials.username">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Password" required="" ng-model="credentials.password">
+                </div>
+                <button ng-click="login(credentials)" class="btn btn-primary block full-width m-b">Login</button>
+
+                <a ui-sref="reset"><small>Forgot password?</small></a>
+                <p class="text-muted text-center"><small>Do not have an account?</small></p>
+                <a class="btn btn-sm btn-white btn-block" ui-sref="register">Create an account</a>
+            </form>
+            <p class="m-t"> <small>Barlift LLC &copy; 2015</small> </p>
         </div>
-        <div class="form-group">
-          <label>Password</label>
-          <input type="password" class="form-control" ng-model="credentials.password"/>
-        </div>
-        <button type="submit" class='btn'>Log In</button>
-      </form>
     </div>
-  </div>
-</div>
+
+<div>

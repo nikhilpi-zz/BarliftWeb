@@ -8,21 +8,65 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-  .controller('LoginCtrl', function ($rootScope, $timeout, $scope, $location, User, AuthService, AUTH_EVENTS, Session) {
+  .controller('LoginCtrl', function ($rootScope, $http, $scope, $state, User, AuthService, AUTH_EVENTS, Session) {
     $scope.credentials = {
       username: '',
       password: ''
     };
+
     if (AuthService.isAuthenticated()){
-      $location.path('/'+ Session.userRole.toLowerCase());
+      $state.go('dash.main');
+    }
+
+    $scope.$watch('credentials.username', function() {
+      if ($scope.credentials) {
+        $scope.credentials.username = $scope.credentials.username.toLowerCase().replace(/\s+/g,'');
+      };
+    });
+
+    $scope.$watch('user.username', function() {
+      if ($scope.user) {
+        $scope.user.username = $scope.user.username.toLowerCase().replace(/\s+/g,'');
+      };
+    });
+
+    $scope.register = function(newUser){
+      var user = User.newBar();
+      user.username = newUser.username;
+      user.password = newUser.password;
+      user.email = newUser.email;
+
+      User.save(user).$promise.then(
+        function(value){
+          $scope.login({username: newUser.username, password: newUser.password});
+        },
+        function(error){
+          $scope.error = error.data.error;
+        }
+      );
+    };
+
+    $scope.alert = null;
+
+    $scope.reset = function(email){
+      $http.post('https://api.parse.com/1/requestPasswordReset', {
+        email: email
+      }).
+      success(function(data, status, headers, config) {
+        $scope.alert = "A reset link has been sent to your email. It may be in you spam folder";
+      }).
+      error(function(data, status, headers, config) {
+        $scope.alert = data.error;
+      });
     }
 
     $scope.login = function (credentials) {
       AuthService.login(credentials).then(function () {
         $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-        $location.path('/'+ Session.userRole.toLowerCase());
+        $state.go('dash.main');
       }, function () {
         $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+        $scope.loginFail = true;
       });
     };
   });

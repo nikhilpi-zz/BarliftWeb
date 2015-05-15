@@ -18,25 +18,14 @@ angular.module('barliftApp')
         params: credentials
       }).then(function(res){
         Session.create(res.data.objectId, res.data.username, res.data.sessionToken, '');
-        return res.data.objectId;
-      }).then(function(user){
+        return res.data.Role.objectId;
+      }).then(function(roleId){
         return $http({
-          url: 'https://api.parse.com/1/roles', 
-          method: 'GET',
-          params: {
-            where: {
-              users:{
-                '$in': [{
-                  __type: 'Pointer',
-                  className: '_User',
-                  objectId: user
-                }]
-              }
-            }
-          }
+          url: 'https://api.parse.com/1/roles/'+roleId, 
+          method: 'GET'
         });
       }).then(function(role){
-        Session.setRole(role.data.results[0].name);
+        Session.setRole(role.data.name);
         $window.sessionStorage['session'] = JSON.stringify(Session);
       });
     };

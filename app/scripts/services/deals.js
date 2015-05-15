@@ -14,13 +14,19 @@ angular.module('barliftApp')
       {
         objectId: '@objectId'
       },
-      { 
+      {
         save: {
           method: 'POST',
           transformRequest: function(data, headersGetter){
             var req = ParseTypes.reqProcess(data);
             req = angular.toJson(req);
             return req;
+          }
+        },
+        get: {
+          transformResponse: function(data, headersGetter){
+            data = angular.fromJson(data);
+            return ParseTypes.resProcess(data,'Deal');
           }
         },
         query: {
@@ -48,16 +54,17 @@ angular.module('barliftApp')
     });
 
     apiRest.newDeal = function(user){
-      var today = new Date();
-      var date = new Date(today.getFullYear(), today.getMonth(), today.getDate(), today.getHours(), today.getMinutes());
+      var date = moment().add(3,'day').toDate();
       var deal = {
         ACL: {
           '*': {
-            read: true
           },
           'role:Admin': {
             read: true,
             write: true
+          },
+          'role:User': {
+            read: true
           }
         },
         schema: [
@@ -73,12 +80,15 @@ angular.module('barliftApp')
             key: 'user',
             __type: 'Pointer',
             className: '_User'
+          },
+          {
+            key: 'venue',
+            __type: 'Pointer',
+            className: 'Venue'
           }
         ],
         deal_start_date: date,
-        deal_end_date: date,
-        end_utc: date.valueOf(),
-        start_utc: date.valueOf()
+        deal_end_date: date
       };
 
       deal.ACL[Session.userId] = {
@@ -86,11 +96,12 @@ angular.module('barliftApp')
           write: true
         };
       deal.user = Session.userId;
-      deal.approved = false;
+      deal.main = false;
       deal.num_accepted = 0;
+      deal.add_deals = [];
       return deal;
     };
 
-    return apiRest; 
+    return apiRest;
 
   });

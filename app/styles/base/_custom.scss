@@ -1,0 +1,10 @@
+/* Only demo */
+@media (max-width: 1000px) {
+  .welcome-message {
+    display: none;
+  }
+}
+
+.ui-calendar .selected-event{
+  background-color: #1c84c6;
+}

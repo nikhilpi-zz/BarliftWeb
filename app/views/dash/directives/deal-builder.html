@@ -1,0 +1,88 @@
+<form method="get" class="form-horizontal" name="dealBuilder">
+    <div class="form-group" >
+        <label class="col-sm-2 control-label">Deal Headline</label>
+        <div class="col-sm-10">
+            <input type="text" name="headline" class="form-control" ng-model="deal.name" required>
+            <span class="help-block m-b-none">{{deal.name.length}}/50</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-4 col-sm-offset-2">
+            <button class="btn btn-primary" ng-click="addSubDeal()">Add Sub Deal</button>
+        </div>
+    </div>
+    <div class="form-group" ng-repeat="sub in deal.add_deals track by $index">
+        <label class="col-sm-2 control-label">Deal {{$index + 1}}</label>
+        <div class="col-sm-10">
+            <div class="input-group">
+                <input type="text" class="form-control" ng-model="deal.add_deals[$index]" ng-maxlength="50" required>
+                <span class="input-group-btn"> 
+                  <button type="button" class="btn btn-danger" ng-click="removeSubDeal($index)">Remove</button> 
+                </span>
+            </div>
+            <span class="help-block m-b-none">{{deal.add_deals[$index].length}}/50</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Description</label>
+        <div class="col-sm-10">
+            <textarea type="text" class="form-control" ng-model="deal.description" required></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Venue</label>
+        <div class="col-sm-10">
+            <select class="form-control m-b" name="account" ng-model="deal.venue" ng-options="venue.bar_name for venue in venues" required>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Community</label>
+        <div class="col-sm-10">
+            <select class="form-control m-b" name="account" ng-model="deal.community_name" required>
+                <option ng-repeat="community in communities">{{community}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group" id="data_4">
+        <label class="col-sm-2 control-label">Date</label>
+        <div class="col-sm-10">
+            <div class="input-group date">
+                <input type="datetime" class="form-control" date-time ng-model="deal.deal_start_date" min-view="date" auto-close="true" date format="yyyy-MM-dd" required>
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group" id="data_4">
+        <label class="col-sm-2 control-label">Start Time</label>
+        <div class="col-sm-6">
+            <div class="input-group date">
+                <input type="datetime" class="form-control" date-time ng-model="deal.deal_start_date" max-view="hours" min-view="minutes" date format="h:mm a" name="start" required>
+                <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group" id="data_4">
+        <label class="col-sm-2 control-label">End Time</label>
+        <div class="col-sm-6">
+            <div class="input-group date">
+                <input type="datetime" class="form-control" date-time ng-model="deal.deal_end_date" max-view="hours" min-view="minutes" date format="h:mm a" name="end" required>
+                <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="hr-line-dashed"></div>
+    <div class="form-group">
+        <div class="col-sm-3 col-sm-offset-2">
+            <button class="btn btn-danger" ng-if="deal.objectId" type="submit" ng-click="deleteDeal()">Delete</button>
+            <button class="btn btn-primary" ng-if="deal.objectId" type="submit" ng-click="updateDeal()" ng-disabled="dealBuilder.$invalid || alert.text">Update</button>
+            <button class="btn btn-warning" ng-if="deal.objectId" ui-sref="deals.builder({selectedDeal: ''})">Cancel</button>
+            <button class="btn btn-primary" ng-if="!deal.objectId" type="submit" ng-click="saveDeal()"  ng-disabled="dealBuilder.$invalid || alert.text">Create</button>
+        </div>
+        <div class="col-sm-4" ng-if="alert.text">
+            <div class="alert alert-danger" ng-if="alert">
+                {{alert.text}}
+            </div>
+        </div>
+    </div>
+</form>
