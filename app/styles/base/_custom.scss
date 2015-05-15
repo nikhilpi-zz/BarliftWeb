@@ -5,6 +5,22 @@
   }
 }
 
-.ui-calendar .selected-event{
-  background-color: #1c84c6;
+.ui-calendar {
+  .selected-event{
+    background-color: #1c84c6;
+  }
+
+  .main-event{
+    background-color: #23c6c8;
+    border: #23c6c8;
+  }
+
+  .past-event{
+    background-color: #c2c2c2;
+    border: #c2c2c2;
+  }
+}
+
+.fc-event{
+  cursor: pointer;
 }

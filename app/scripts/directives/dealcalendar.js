@@ -28,18 +28,27 @@ angular.module('barliftApp')
         function loadDeals(){
           angular.forEach($scope.deals, function(deal){
             var found = false;
-            angular.forEach($scope.events, function(calEvent){
-              if(calEvent.title === deal.name && angular.equals(calEvent.deal, deal)){
+            angular.forEach($scope.events, function(calEvent, index){
+              if(angular.equals(calEvent.deal, deal)){
                 found = true;
+              } else if(calEvent.deal.objectId === deal.objectId){
+                $scope.events.splice(index, 1);
               }
             });
 
             if(!found){
+              var css = '';
+              if($scope.pastDate(deal.deal_start_date,$scope.today)){
+                css = 'past-event';
+              } else if(deal.main){
+                css = 'main-event';
+              }
               $scope.events.push({
                 title: deal.name,
                 editable: false,
                 start: deal.deal_start_date,
-                deal: deal
+                deal: deal,
+                className: css
               });
             }
           });
