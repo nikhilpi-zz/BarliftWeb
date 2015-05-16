@@ -44,7 +44,7 @@ angular.module('barliftApp')
             angular.forEach(res.result, function(nudge) {
                 var date = new Date(nudge["createdAt"]);
                 var temp = new Date(date);
-                temp.setMinutes(0,0,0);
+                temp.setHours(0, 0, 0, 0);
 
                 // if date exists increment count, otherwise create new
                 if (nudges[temp]) {
@@ -57,55 +57,38 @@ angular.module('barliftApp')
                 }
             });
 
-            console.log(JSON.stringify(nudges, null, 2));
-
-            // convert to formate accepted by flot graph
+            // convert to format accepted by flot graph
             angular.forEach(nudges, function(nudge) {
                 $scope.nudgeData.push([nudge.utc, nudge.count]);
             });
 
-            // // sort nudges by date
-            // $scope.nudgeData.sort(function(a,b) { 
-            //     return a.utc - b.utc;
-            // });
+            // sort nudges by date
+            $scope.nudgeData.sort(function(a, b) {
+                return a[0] - b[0];
+            });
 
             createNudgeGraph();
         });
 
         var data2 = [
-            [gd(2012, 1, 1), 800],
-            [gd(2012, 1, 2), 500],
-            [gd(2012, 1, 3), 600],
-            [gd(2012, 1, 4), 700],
-            [gd(2012, 1, 5), 500],
-            [gd(2012, 1, 6), 456],
-            [gd(2012, 1, 7), 800],
-            [gd(2012, 1, 8), 589],
-            [gd(2012, 1, 9), 467],
-            [gd(2012, 1, 10), 876],
-            [gd(2012, 1, 11), 689],
-            [gd(2012, 1, 12), 700],
-            [gd(2012, 1, 13), 500]
+            [gd(2015, 5, 1), 800],
+            [gd(2015, 5, 2), 500],
+            [gd(2015, 5, 3), 600],
+            [gd(2015, 5, 4), 700],
+            [gd(2015, 5, 5), 500],
+            [gd(2015, 5, 6), 456],
+            [gd(2015, 5, 7), 800],
+            [gd(2015, 5, 8), 589],
+            [gd(2015, 5, 9), 467],
+            [gd(2015, 5, 10), 876],
+            [gd(2015, 5, 11), 689],
+            [gd(2015, 5, 12), 700],
+            [gd(2015, 5, 13), 500]
         ];
 
         function gd(year, month, day) {
             return new Date(year, month - 1, day).getTime();
         }
-
-        // {
-        //     label: "Deal detail clicks in the app",
-        //     grow: {
-        //         stepMode: "linear"
-        //     },
-        //     data: data2,
-        //     color: "#1ab394",
-        //     bars: {
-        //         show: true,
-        //         align: "center",
-        //         barWidth: 24 * 60 * 60 * 600,
-        //         lineWidth: 0
-        //     }
-        // }, 
 
         var createNudgeGraph = function() {
             $scope.graphData = [{
@@ -114,7 +97,6 @@ angular.module('barliftApp')
                     stepMode: "linear"
                 },
                 data: $scope.nudgeData,
-                yaxis: 1,
                 color: "#464f88",
                 lines: {
                     lineWidth: 1,
@@ -127,6 +109,20 @@ angular.module('barliftApp')
                             opacity: 0.2
                         }]
                     }
+                }
+            }, {
+                label: "Deal detail clicks in the app",
+                grow: {
+                    stepMode: "linear"
+                },
+                data: data2,
+                color: "#1ab394",
+                yaxis: 2,
+                bars: {
+                    show: true,
+                    align: "center",
+                    barWidth: 24 * 60 * 60 * 600,
+                    lineWidth: 0
                 }
             }];
         };

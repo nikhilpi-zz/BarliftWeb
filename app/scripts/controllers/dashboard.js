@@ -227,7 +227,6 @@ angular.module('barliftApp')
       $scope.numInterestedTwoWeeksBack = sum;
 
       // % increase in interested
-      $scope.numInterestedTwoWeeksBack = 15;
       if ($scope.numInterestedTwoWeeksBack == 0) {
         $scope.interestedIncreaseAbs = 0;
       } else {
@@ -257,7 +256,7 @@ angular.module('barliftApp')
           pointStrokeColor: "#fff",
           pointHighlightFill: "#fff",
           pointHighlightStroke: "rgba(220,220,220,1)",
-          data: [82, 84, 65, 18, 57, 66, 87]
+          data: $scope.interestedTwoWeeksBack
         }, {
           label: "Last Week",
           fillColor: "rgba(26,179,148,0.5)",
@@ -266,7 +265,7 @@ angular.module('barliftApp')
           pointStrokeColor: "#fff",
           pointHighlightFill: "#fff",
           pointHighlightStroke: "rgba(26,179,148,1)",
-          data: [45, 112, 23, 34, 32, 89, 67]
+          data: $scope.interestedLastWeek
         }]
       };
 
