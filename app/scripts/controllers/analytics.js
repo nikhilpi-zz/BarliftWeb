@@ -34,7 +34,7 @@ angular.module('barliftApp')
             createDoughnut($scope);
         });
 
-        var nudges = [];
+        var nudges = {};
         $scope.nudgeData = [];
 
         // get nudge data by day
@@ -43,42 +43,31 @@ angular.module('barliftApp')
         }).then(function(res) {
             angular.forEach(res.result, function(nudge) {
                 var date = new Date(nudge["createdAt"]);
-                var updated = false;
+                var temp = new Date(date);
+                temp.setMinutes(0,0,0);
 
-                var obj = {
-                    date: date,
-                    day: date.getDate(),
-                    hour: date.getHours(),
-                    utc: date.getTime(),
-                    count: 0
-                };
-
-                // if date exists, increment count
-                for (var i = 0; i < nudges.length; i++) {
-                    // nudges[i].day == obj.day && (nudges[i].hour == obj.hour)) {
-                    if (nudges[i].day == obj.day) {
-                        nudges[i].count += 1;
-                        updated = true;
-                        break
+                // if date exists increment count, otherwise create new
+                if (nudges[temp]) {
+                    nudges[temp].count += 1;
+                } else {
+                    nudges[temp] = {
+                        utc: date.getTime(),
+                        count: 0
                     }
                 }
-
-                // if date doesn't exists, create new object
-                if (updated == false) {
-                    obj.count += 1;
-                    nudges.push(obj);
-                }
             });
 
-            // sort nudges by date
-            nudges.sort(function(a,b) { 
-                return a.utc - b.utc;
-            });
+            console.log(JSON.stringify(nudges, null, 2));
 
             // convert to formate accepted by flot graph
             angular.forEach(nudges, function(nudge) {
                 $scope.nudgeData.push([nudge.utc, nudge.count]);
             });
+
+            // // sort nudges by date
+            // $scope.nudgeData.sort(function(a,b) { 
+            //     return a.utc - b.utc;
+            // });
 
             createNudgeGraph();
         });

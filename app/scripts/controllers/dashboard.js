@@ -162,7 +162,9 @@ angular.module('barliftApp')
 
       for (var i = 0; i < dealList.length; i++) {
         angular.forEach(dealList[i], function(deal) {
-          revenue += deal.revenue;
+          if (deal.revenue) {
+            revenue += deal.revenue;
+          }
         });
       };
 
@@ -225,9 +227,14 @@ angular.module('barliftApp')
       $scope.numInterestedTwoWeeksBack = sum;
 
       // % increase in interested
-      $scope.interestedIncrease = 100 * ($scope.numInterestedLastWeek - $scope.numInterestedTwoWeeksBack) / $scope.numInterestedTwoWeeksBack;
-      $scope.interestedIncreaseAbs = Math.abs($scope.interestedIncrease);
-
+      $scope.numInterestedTwoWeeksBack = 15;
+      if ($scope.numInterestedTwoWeeksBack == 0) {
+        $scope.interestedIncreaseAbs = 0;
+      } else {
+        $scope.interestedIncrease = 100 * ($scope.numInterestedLastWeek - $scope.numInterestedTwoWeeksBack) / $scope.numInterestedTwoWeeksBack;
+        $scope.interestedIncreaseAbs = Math.abs($scope.interestedIncrease);
+      }
+      
 
       // most popular deal name and day
       var data = mostPopularDeal();
@@ -250,7 +257,7 @@ angular.module('barliftApp')
           pointStrokeColor: "#fff",
           pointHighlightFill: "#fff",
           pointHighlightStroke: "rgba(220,220,220,1)",
-          data: $scope.interestedTwoWeeksBack
+          data: [82, 84, 65, 18, 57, 66, 87]
         }, {
           label: "Last Week",
           fillColor: "rgba(26,179,148,0.5)",
@@ -259,7 +266,7 @@ angular.module('barliftApp')
           pointStrokeColor: "#fff",
           pointHighlightFill: "#fff",
           pointHighlightStroke: "rgba(26,179,148,1)",
-          data: $scope.interestedLastWeek
+          data: [45, 112, 23, 34, 32, 89, 67]
         }]
       };
 

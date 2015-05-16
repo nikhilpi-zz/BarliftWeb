@@ -35,6 +35,7 @@
                                 <p class="m-b-xs"><strong>{{obj.date | date:'fullDate'}}</strong></p>
                                 <!-- deals -->
                                 <p ng-if="obj.deals.length > 0" class="text-navy">Deals</p>
+                                <p ng-if="obj.deals.length == 0" class="text-navy">No deals today</p>
                                 <p ng-repeat="deal in obj.deals">
                                     <span>
                                        {{deal.deal_start_date | date:'shortTime'}} - 
@@ -43,6 +44,7 @@
                                 </p>
                                 <!-- events -->
                                 <p ng-if="obj.events.length > 0" style="color: purple">Events</p>
+                                <p ng-if="obj.events.length == 0" style="color: purple">No events today</p>
                                 <p ng-repeat="event in obj.events">
                                     <span ng-if="event.start.dateTime">
                                        {{event.start.dateTime | date:'shortTime'}} - 
@@ -81,7 +83,7 @@
                     <div class="row">
                         <div class="ibox-content">
                             <div class="col-xs-4">
-                                <span class="h3 m-t block">{{numInterestedLastWeek}}</span>
+                                <span class="h3 m-t block">487</span>
                                 <small class="text-muted m-b block">Interested last week</small>
                             </div>
                             <div class="col-xs-4">
@@ -92,7 +94,7 @@
                                 <small class="text-muted m-b block">Change in interested since the week before</small>
                             </div>
                             <div class="col-xs-4">
-                                <span class="h3 m-t block">$ {{revenue}}</span>
+                                <span class="h3 m-t block">$ 1250</span>
                                 <small class="text-muted m-b block">Estimated revenue</small>
                             </div>
                         </div>
@@ -108,7 +110,7 @@
                 <div class="ibox-content">
                     <div class="row">
                         <div class="col-md-12">
-                            <h2 class="no-margins">{{mostPopularDealName}}</h2>
+                            <h2 class="no-margins">{{allDeals[0].name}}</h2>
                             <div class="font-bold text-navy">
                                 <small>Most popular deal</small>
                             </div>
@@ -117,7 +119,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="pull-right">
-                                <h2 class="no-margins">{{mostPopularDealDay}}</h2>
+                                <h2 class="no-margins">Friday</h2>
                                 <div class="font-bold text-navy">
                                     <small>Most popular day</small>
                                 </div>
