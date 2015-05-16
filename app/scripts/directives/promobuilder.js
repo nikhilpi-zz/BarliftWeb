@@ -30,18 +30,27 @@ angular.module('barliftApp')
         function loadDeals(){
           angular.forEach($scope.deals, function(deal){
             var found = false;
-            angular.forEach($scope.events, function(calEvent){
-              if(calEvent.title === deal.name && angular.equals(calEvent.deal, deal)){
+            angular.forEach($scope.events, function(calEvent, index){
+              if(angular.equals(calEvent.deal, deal)){
                 found = true;
+              } else if(calEvent.deal.objectId === deal.objectId){
+                $scope.events.splice(index, 1);
               }
             });
 
             if(!found){
+              var css = [];
+              if(deal.main){
+                css = ['main-event','unselectable-event'];
+              } else if(!deal.eligible_main){
+                css = ['past-event','unselectable-event'];
+              }
               $scope.events.push({
                 title: deal.name,
                 editable: false,
                 start: deal.deal_start_date,
-                deal: deal
+                deal: deal,
+                className: css
               });
             }
           });
@@ -58,16 +67,19 @@ angular.module('barliftApp')
         };
 
         $scope.alertOnEventClick = function(event, allDay, jsEvent, view ){
-          if(!event.selected){
-            event.selected = true;
-            event.className = "selected-event"
-            selectDeal(event.deal);
-          } else {
-            event.selected = false;
-            event.className = ""
-            var index = $scope.selectedDeals.indexOf(event.deal);
-            $scope.selectedDeals.splice(index,1);
-            $scope.total -= event.deal.main_price;
+          if(event.deal.eligible_main){
+            if(!event.selected){
+              event.selected = true;
+              event.className.push('selected-event');
+              selectDeal(event.deal);
+            } else {
+              event.selected = false;
+              var cI = event.className.indexOf('selected-event');
+              event.className.splice(cI,1);    
+              var index = $scope.selectedDeals.indexOf(event.deal);
+              $scope.selectedDeals.splice(index,1);
+              $scope.total -= event.deal.main_price;
+            }
           }
         };
 

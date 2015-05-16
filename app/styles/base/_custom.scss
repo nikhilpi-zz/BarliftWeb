@@ -7,7 +7,7 @@
 
 .ui-calendar {
   .selected-event{
-    background-color: #1c84c6;
+    background-color: #f8ac59;
   }
 
   .main-event{
@@ -23,4 +23,8 @@
 
 .fc-event{
   cursor: pointer;
+}
+
+.unselectable-event{
+  cursor: not-allowed;
 }
