@@ -1,14 +1,14 @@
-<form method="get" class="form-horizontal"> <!--     <div class="form-group">
-        <label class="col-sm-2 control-label">Yelp Link</label>
-        <div class="col-sm-10">
-          <div class="input-group">
-            <input type="text" class="form-control" ng-model="venue.yelpId"> 
-            <span class="input-group-btn"> 
-              <button type="button" class="btn btn-primary" ng-click="loadYelp(venue.yelpId)">Load</button> 
-            </span>
+<div class="row"> <div class="col-lg-4"> <div class="ibox float-e-margins"> <div class="ibox-title"> <h5>Your Locations</h5> </div> <div class="ibox-content"> <div> <div class="feed-activity-list"> <div class="feed-element" ng-repeat="venue in venues"> <a class="pull-left"> <img alt="image" class="img-circle" src="{{venue.image_url}}"> </a> <div class="media-body"> {{venue.bar_name}} <br> <small class="text-muted">{{venue.address}}</small> <div class="actions"> <a class="btn btn-xs btn-white" ng-click="editVenue(venue)">Edit</a> <a class="btn btn-xs btn-danger" ng-click="deleteVenue(venue)">Delete</a> </div> </div> </div> </div> </div> </div> </div> </div> <div class="col-lg-8"> <div class="ibox float-e-margins"> <div class="ibox-title"> <h5 ng-if="!selectedVenue.objectId">Create a new venue</h5> <h5 ng-if="selectedVenue.objectId">Edit {{selectedVenue.bar_name}}</h5> </div> <div class="ibox-content"> <form method="get" class="form-horizontal"> <!--           <div class="form-group">
+            <label class="col-sm-2 control-label">Yelp Link</label>
+            <div class="col-sm-10">
+              <div class="input-group">
+                <input type="text" class="form-control" ng-model="venue.yelpId"> 
+                <span class="input-group-btn"> 
+                  <button type="button" class="btn btn-primary" ng-click="loadYelp(venue)">Load</button> 
+                </span>
+              </div>
+              <span class="help-block m-b-none">Load you business information from yelp</span>
+            </div>
+
           </div>
-          <span class="help-block m-b-none">Load you business information from yelp</span>
-        </div>
-        
-    </div>
-    <div class="hr-line-dashed"></div> --> <div class="form-group"> <label class="col-sm-2 control-label">Venue Name</label> <div class="col-sm-10"><input type="text" class="form-control" ng-model="venue.bar_name"></div> </div> <div class="form-group"> <label class="col-sm-2 control-label">Phone Number</label> <div class="col-sm-10"><input type="text" class="form-control" ng-model="venue.display_phone"></div> </div> <div class="form-group"> <label class="col-sm-2 control-label">Address</label> <div class="col-sm-10"> <input type="text" class="form-control" ng-autocomplete ng-model="venue.address" details="locationDetails"> </div> </div> <div class="form-group"> <label class="col-sm-2 control-label">Image Url</label> <div class="col-sm-10"><input type="text" class="form-control" ng-model="venue.image_url"></div> </div> <div class="hr-line-dashed"></div> <div class="form-group"> <div class="col-sm-4 col-sm-offset-2"> <button class="btn btn-danger" ng-if="venue.objectId" type="submit" ng-click="delete()">Delete</button> <button class="btn btn-primary" ng-if="venue.objectId" type="submit" ng-click="save()">Update</button> <button class="btn btn-warning" ng-if="venue.objectId" type="submit" ng-click="cancel()">Cancel</button> <button class="btn btn-primary" ng-if="!venue.objectId" type="submit" ng-click="save()">Create</button> </div> </div> </form>
+          <div class="hr-line-dashed"></div> --> <div class="form-group"> <label class="col-sm-2 control-label">Location Name</label> <div class="col-sm-10"><input type="text" class="form-control" ng-model="venue.bar_name"></div> </div> <div class="form-group"> <label class="col-sm-2 control-label">Phone Number</label> <div class="col-sm-10"><input type="text" class="form-control" ng-model="venue.display_phone"></div> </div> <div class="form-group"> <label class="col-sm-2 control-label">Address</label> <div class="col-sm-10"> <input type="text" class="form-control" ng-autocomplete ng-model="venue.address" details="locationDetails"> </div> </div> <div class="form-group"> <label class="col-sm-2 control-label">Image Url</label> <div class="col-sm-10"><input type="text" class="form-control" ng-model="venue.image_url"></div> </div> <div class="hr-line-dashed"></div> <div class="form-group"> <div class="col-sm-4 col-sm-offset-2"> <button class="btn btn-danger" ng-if="venue.objectId" type="submit" ng-click="delete()">Delete</button> <button class="btn btn-primary" ng-if="venue.objectId" type="submit" ng-click="update()">Update</button> <button class="btn btn-warning" ng-if="venue.objectId" type="submit" ng-click="cancel()">Cancel</button> <button class="btn btn-primary" ng-if="!venue.objectId" type="submit" ng-click="save()">Create</button> </div> </div> </form> </div> </div> </div> </div>
