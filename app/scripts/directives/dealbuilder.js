@@ -103,6 +103,12 @@ angular.module('barliftApp')
             });
         };
 
+        scope.duplicateDeal = function(){
+          console.log('dupping');
+          console.log(scope.deal);
+          scope.deal.objectId = null;
+        };
+
         scope.updateDeal = function(){
           scope.deal.community_name = scope.deal.community_name.replace(' ','');
           scope.deal.venue = scope.deal.venue.objectId;

@@ -76,6 +76,7 @@
             <button class="btn btn-danger" ng-if="deal.objectId" type="submit" ng-click="deleteDeal()">Delete</button>
             <button class="btn btn-primary" ng-if="deal.objectId" type="submit" ng-click="updateDeal()" ng-disabled="dealBuilder.$invalid || alert.text">Update</button>
             <button class="btn btn-warning" ng-if="deal.objectId" ui-sref="deals.builder({selectedDeal: ''})">Cancel</button>
+            <button class="btn btn-defualt" ng-if="deal.objectId" ng-click="duplicateDeal()">Duplicate</button>
             <button class="btn btn-primary" ng-if="!deal.objectId" type="submit" ng-click="saveDeal()"  ng-disabled="dealBuilder.$invalid || alert.text">Create</button>
         </div>
         <div class="col-sm-4" ng-if="alert.text">
