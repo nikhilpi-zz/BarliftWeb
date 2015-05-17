@@ -9,8 +9,30 @@
  */
 
 
+var generateMixpanelURl = function() {
+    var expire = (new Date().getTime()) + 100000;
+    var interval = 7;
+    var api_key = "9f892f20a7ddce5c46c49bccb9af0c9a";
+    var api_secret = "82da5c883b1e6cb18800ee74553f8665";
+    var sig_param = "api_key=" + api_key + 'event=["Deal Click to Detail"]expire=' + expire + "format=jsoninterval=24type=generalunit=day"
+    var sig = $.md5(sig_param + api_secret);
+    var url = "http://mixpanel.com/api/2.0/events/?format=json&interval=24&expire=" + expire + "&sig=" + sig 
+    + "&api_key=9f892f20a7ddce5c46c49bccb9af0c9a&type=general&event=%5B%22Deal+Click+to+Detail%22%5D&unit=day" 
+    + "&callback=JSON_CALLBACK"
+    return url
+}
+
 angular.module('barliftApp')
     .controller('AnalyticsCtrl', function($scope, $stateParams, Deals, CloudCode, $http) {
+
+        $http.jsonp(generateMixpanelURl()).
+        success(function(data, status, headers, config) {
+            console.log(JSON.stringify(data, null, 2));
+        }).
+        error(function(data, status, headers, config) {
+            console.log("Couldn't get weather", data, status, config);
+        });
+
 
         // get deals
         Deals.get({

@@ -188,6 +188,10 @@ angular
                         }, {
                             name: 'angles',
                             files: ['js/plugins/chartJs/angles.js', 'js/plugins/chartJs/Chart.min.js']
+                        },
+                        {
+                            name: 'mixpanel',
+                            files: ['js/plugins/md5/jquery.md5.min.js']
                         }]);
                     }
                 }

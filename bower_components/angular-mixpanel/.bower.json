@@ -1,0 +1,21 @@
+{
+  "name": "angular-mixpanel",
+  "version": "1.0.0",
+  "main": "./src/angular-mixpanel.js",
+  "dependencies": {
+    "angular": "1.2.x",
+    "angular-mocks": "~1.2.18",
+    "mixpanel": "~2.2.0"
+  },
+  "homepage": "https://github.com/kuhnza/angular-mixpanel",
+  "_release": "1.0.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.0.0",
+    "commit": "715942b588aa998208bba00ab603e09be02aa3ef"
+  },
+  "_source": "git://github.com/kuhnza/angular-mixpanel.git",
+  "_target": "1.0.0",
+  "_originalSource": "angular-mixpanel",
+  "_direct": true
+}
