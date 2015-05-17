@@ -9,30 +9,28 @@
  */
 
 
-var generateMixpanelURl = function() {
+var generateMixpanelURl = function(from_date, to_date) {
     var expire = (new Date().getTime()) + 100000;
-    var interval = 7;
-    var api_key = "9f892f20a7ddce5c46c49bccb9af0c9a";
-    var api_secret = "82da5c883b1e6cb18800ee74553f8665";
-    var sig_param = "api_key=" + api_key + 'event=["Deal Click to Detail"]expire=' + expire + "format=jsoninterval=24type=generalunit=day"
-    var sig = $.md5(sig_param + api_secret);
-    var url = "http://mixpanel.com/api/2.0/events/?format=json&interval=24&expire=" + expire + "&sig=" + sig 
-    + "&api_key=9f892f20a7ddce5c46c49bccb9af0c9a&type=general&event=%5B%22Deal+Click+to+Detail%22%5D&unit=day" 
-    + "&callback=JSON_CALLBACK"
-    return url
+
+    var sig_param = "api_key=9f892f20a7ddce5c46c49bccb9af0c9aevent=Deal Click to Detailexpire=" + expire + "format=jsonfrom_date=" + from_date + 'on=properties["DealID"]to_date=' + to_date + '82da5c883b1e6cb18800ee74553f8665';
+    var sig = $.md5(sig_param);
+
+    var url = "http://mixpanel.com/api/2.0/segmentation/?" +
+        "on=properties%5B%22DealID%22%5D&" +
+        "format=json&" +
+        "from_date=" + from_date + "&" +
+        "expire=" + expire + "&" +
+        "sig=" + sig + "&" +
+        "to_date=" + to_date + "&" +
+        "api_key=9f892f20a7ddce5c46c49bccb9af0c9a&" +
+        "event=Deal+Click+to+Detail" +
+        "&callback=JSON_CALLBACK";
+
+    return url;
 }
 
 angular.module('barliftApp')
     .controller('AnalyticsCtrl', function($scope, $stateParams, Deals, CloudCode, $http) {
-
-        $http.jsonp(generateMixpanelURl()).
-        success(function(data, status, headers, config) {
-            console.log(JSON.stringify(data, null, 2));
-        }).
-        error(function(data, status, headers, config) {
-            console.log("Couldn't get weather", data, status, config);
-        });
-
 
         // get deals
         Deals.get({
@@ -40,7 +38,24 @@ angular.module('barliftApp')
             include: "feedback"
         }, function(res) {
             $scope.deal = res;
-        });
+        }).$promise.then(
+            function(deal) {
+                // get mixpanel data 
+                var from_date = moment(deal.deal_start_date).subtract(3, 'days').format("YYYY-MM-DD");
+                var to_date = moment(deal.deal_end_date).add(3, 'days').format("YYYY-MM-DD");
+
+                $http.jsonp(generateMixpanelURl(from_date, to_date)).
+                success(function(data, status, headers, config) {
+                    // console.log(JSON.stringify(data.data.values, null, 2));
+                    $scope.mixpanel = data.data.values;
+
+                    createMixpanelGraph();
+                }).
+                error(function(data, status, headers, config) {
+                    console.log("Couldn't get mixpanel data", data, status, config);
+                });
+            }
+        );
 
 
         /**
@@ -92,64 +107,6 @@ angular.module('barliftApp')
             createNudgeGraph();
         });
 
-        var data2 = [
-            [gd(2015, 5, 1), 800],
-            [gd(2015, 5, 2), 500],
-            [gd(2015, 5, 3), 600],
-            [gd(2015, 5, 4), 700],
-            [gd(2015, 5, 5), 500],
-            [gd(2015, 5, 6), 456],
-            [gd(2015, 5, 7), 800],
-            [gd(2015, 5, 8), 589],
-            [gd(2015, 5, 9), 467],
-            [gd(2015, 5, 10), 876],
-            [gd(2015, 5, 11), 689],
-            [gd(2015, 5, 12), 700],
-            [gd(2015, 5, 13), 500]
-        ];
-
-        function gd(year, month, day) {
-            return new Date(year, month - 1, day).getTime();
-        }
-
-        var createNudgeGraph = function() {
-            $scope.graphData = [{
-                label: "Nudges sent",
-                grow: {
-                    stepMode: "linear"
-                },
-                data: $scope.nudgeData,
-                color: "#464f88",
-                lines: {
-                    lineWidth: 1,
-                    show: true,
-                    fill: true,
-                    fillColor: {
-                        colors: [{
-                            opacity: 0.2
-                        }, {
-                            opacity: 0.2
-                        }]
-                    }
-                }
-            }, {
-                label: "Deal detail clicks in the app",
-                grow: {
-                    stepMode: "linear"
-                },
-                data: data2,
-                color: "#1ab394",
-                yaxis: 2,
-                bars: {
-                    show: true,
-                    align: "center",
-                    barWidth: 24 * 60 * 60 * 600,
-                    lineWidth: 0
-                }
-            }];
-        };
-
-
         /**
          * Create charts
          */
@@ -168,6 +125,60 @@ angular.module('barliftApp')
                 label: "Male"
             }];
         }
+
+        $scope.graphData = [];
+
+        // create nudge line chart
+        var createNudgeGraph = function() {
+            $scope.graphData.push({
+                label: "Nudges sent",
+                grow: {
+                    stepMode: "linear"
+                },
+                data: $scope.nudgeData,
+                color: "#464f88",
+                lines: {
+                    lineWidth: 1,
+                    show: true,
+                    fill: true,
+                    fillColor: {
+                        colors: [{
+                            opacity: 0.2
+                        }, {
+                            opacity: 0.2
+                        }]
+                    }
+                }
+            });
+        };
+
+        // create mix panel bar graph
+        var createMixpanelGraph = function() {
+            if ($scope.mixpanel[$stateParams.selectedDeal]) {
+                var res = $scope.mixpanel[$stateParams.selectedDeal];
+                var data = [];
+
+                angular.forEach(res, function(val, date) {
+                    data.push([new Date(date).getTime(), val])
+                });
+
+                $scope.graphData.push({
+                    label: "Deal detail clicks in the app",
+                    grow: {
+                        stepMode: "linear"
+                    },
+                    data: data,
+                    color: "#1ab394",
+                    yaxis: 2,
+                    bars: {
+                        show: true,
+                        align: "center",
+                        barWidth: 24 * 60 * 60 * 600,
+                        lineWidth: 0
+                    }
+                });
+            }
+        };
 
 
         /**
