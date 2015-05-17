@@ -55,9 +55,9 @@ angular.module('barliftApp')
         });
 
         scope.$watch('deal.venue', function(){      
-          if(scope.deal.venue){
+          if(scope.deal && scope.deal.venue){
             scope.deal.image_url = scope.deal.venue.image_url;
-          } else {
+          } else if(scope.deal){
             scope.deal.image_url = null;
           }
         });
@@ -81,7 +81,7 @@ angular.module('barliftApp')
               scope.deal = Deals.newDeal(scope.user);
               $rootScope.$broadcast('deals-update');
               scope.$emit('notify', {cssClass: 'alert-success', message:'Your Deal has been deleted'});
-              $state.go('deals.builder', {selectedDeal: undefined});
+              $state.go('deals.list');
             },
             function(err){
               scope.alert.text = err.data.error;

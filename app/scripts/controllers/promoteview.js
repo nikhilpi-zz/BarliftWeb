@@ -21,7 +21,6 @@ angular.module('barliftApp')
         var processed = res.result.map(function(x){
           return ParseTypes.resProcess(x,'Deal');
         });
-        console.log(processed);
         $scope.deals = processed;
       });
     

@@ -28,9 +28,6 @@ angular.module('barliftApp')
             });
 
             Venues.query({
-                where: {
-                    manager: $scope.user.getPointer()
-                }
             }, function(venues) {
                 $scope.venues = venues;
             });
