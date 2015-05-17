@@ -56,11 +56,13 @@ angular.module('barliftApp')
       var venue = {
         ACL: {
           '*': {
-            read: true
           },
           'role:Admin': {
             read: true,
             write: true
+          },
+          'role:User': {
+            read: true
           }
         },
         schema: [
