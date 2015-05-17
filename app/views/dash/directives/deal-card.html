@@ -14,7 +14,7 @@
         <div class="row m-t text-center">
             <div class="col-md-6">
                 <!-- show edit if deal not live-->
-                <a ng-if="!pastDate(deal.deal_start_date,today)" class="btn btn-sm btn-primary btn-block" ui-sref="deals.builder({selectedDeal: deal.objectId})" ng-disabled="isLocked(deal.deal_start_date)">Edit</a>
+                <a ng-if="!pastDate(deal.deal_start_date,today)" class="btn btn-sm btn-primary btn-block" ui-sref="deals.builder({selectedDeal: deal.objectId})">Edit</a>
                 <!-- show feedback if deal is over -->
                 <a ng-if="pastDate(deal.deal_start_date,today)" class="btn btn-sm btn-primary btn-block" ui-sref="feedback({dealId: deal.objectId})">Give Feedback</a>
             </div>

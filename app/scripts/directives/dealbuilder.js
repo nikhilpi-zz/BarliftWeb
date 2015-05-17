@@ -54,6 +54,14 @@ angular.module('barliftApp')
           }
         });
 
+        scope.$watch('deal.venue', function(){      
+          if(scope.deal.venue){
+            scope.deal.image_url = scope.deal.venue.image_url;
+          } else {
+            scope.deal.image_url = null;
+          }
+        });
+
         $http.get('https://api.parse.com/1/config').
           success(function(data, status, headers, config) {
             scope.communities = data.params.communities;
@@ -81,6 +89,7 @@ angular.module('barliftApp')
         };
 
         scope.saveDeal = function(){
+          scope.deal.community_name = scope.deal.community_name.replace(' ','');
           scope.deal.venue = scope.deal.venue.objectId;
           Deals.save(scope.deal).$promise.then(
             function(res){
@@ -95,6 +104,7 @@ angular.module('barliftApp')
         };
 
         scope.updateDeal = function(){
+          scope.deal.community_name = scope.deal.community_name.replace(' ','');
           scope.deal.venue = scope.deal.venue.objectId;
           Deals.update(scope.deal).$promise.then(
             function(res){
