@@ -7,7 +7,7 @@
  * # dealBuilder
  */
 angular.module('barliftApp')
-  .directive('dealBuilder', function (Deals, Venues, $http, $stateParams, $state, $rootScope) {
+  .directive('dealBuilder', function (Deals, Venues, $http, $stateParams, $state, $rootScope, $filter) {
     return {
       templateUrl: 'views/dash/directives/deal-builder.html',
       restrict: 'E',
@@ -21,9 +21,6 @@ angular.module('barliftApp')
         if($stateParams.selectedDeal){
           Deals.get({objectId: $stateParams.selectedDeal}, function(res){
             scope.deal = res;
-            Venues.get({objectId: scope.deal.venue},function(res){
-              scope.deal.venue=res;
-            });
           });
         } else {
           scope.deal = Deals.newDeal(scope.user);
@@ -56,7 +53,7 @@ angular.module('barliftApp')
 
         scope.$watch('deal.venue', function(){      
           if(scope.deal && scope.deal.venue){
-            scope.deal.image_url = scope.deal.venue.image_url;
+            scope.deal.image_url = $filter('filter')(scope.venues, {objectId: scope.deal.venue})[0].image_url;
           } else if(scope.deal){
             scope.deal.image_url = null;
           }
@@ -90,7 +87,6 @@ angular.module('barliftApp')
 
         scope.saveDeal = function(){
           scope.deal.community_name = scope.deal.community_name.replace(' ','');
-          scope.deal.venue = scope.deal.venue.objectId;
           Deals.save(scope.deal).$promise.then(
             function(res){
               scope.deal = Deals.newDeal(scope.user);
@@ -109,7 +105,6 @@ angular.module('barliftApp')
 
         scope.updateDeal = function(){
           scope.deal.community_name = scope.deal.community_name.replace(' ','');
-          scope.deal.venue = scope.deal.venue.objectId;
           Deals.update(scope.deal).$promise.then(
             function(res){
               scope.deal = Deals.newDeal(scope.user);
