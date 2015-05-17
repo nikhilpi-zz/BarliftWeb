@@ -104,8 +104,6 @@ angular.module('barliftApp')
         };
 
         scope.duplicateDeal = function(){
-          console.log('dupping');
-          console.log(scope.deal);
           scope.deal.objectId = null;
         };
 
