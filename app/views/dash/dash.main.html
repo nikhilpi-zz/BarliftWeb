@@ -35,6 +35,7 @@
                                 <p class="m-b-xs"><strong>{{obj.date | date:'fullDate'}}</strong></p>
                                 <!-- deals -->
                                 <p ng-if="obj.deals.length > 0" class="text-navy">Deals</p>
+                                <p ng-if="obj.deals.length == 0" class="text-navy">No deals today</p>
                                 <p ng-repeat="deal in obj.deals">
                                     <span>
                                        {{deal.deal_start_date | date:'shortTime'}} - 
@@ -43,6 +44,7 @@
                                 </p>
                                 <!-- events -->
                                 <p ng-if="obj.events.length > 0" style="color: purple">Events</p>
+                                <p ng-if="obj.events.length == 0" style="color: purple">No events today</p>
                                 <p ng-repeat="event in obj.events">
                                     <span ng-if="event.start.dateTime">
                                        {{event.start.dateTime | date:'shortTime'}} - 
@@ -92,7 +94,7 @@
                                 <small class="text-muted m-b block">Change in interested since the week before</small>
                             </div>
                             <div class="col-xs-4">
-                                <span class="h3 m-t block">$ {{revenue}}</span>
+                                <span class="h3 m-t block">{{revenue}}</span>
                                 <small class="text-muted m-b block">Estimated revenue</small>
                             </div>
                         </div>

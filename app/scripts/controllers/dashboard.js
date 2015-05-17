@@ -163,7 +163,9 @@ angular.module('barliftApp')
 
       for (var i = 0; i < dealList.length; i++) {
         angular.forEach(dealList[i], function(deal) {
-          revenue += deal.revenue;
+          if (deal.revenue) {
+            revenue += deal.revenue;
+          }
         });
       };
 
@@ -226,9 +228,13 @@ angular.module('barliftApp')
       $scope.numInterestedTwoWeeksBack = sum;
 
       // % increase in interested
-      $scope.interestedIncrease = 100 * ($scope.numInterestedLastWeek - $scope.numInterestedTwoWeeksBack) / $scope.numInterestedTwoWeeksBack;
-      $scope.interestedIncreaseAbs = Math.abs($scope.interestedIncrease);
-
+      if ($scope.numInterestedTwoWeeksBack == 0) {
+        $scope.interestedIncreaseAbs = 0;
+      } else {
+        $scope.interestedIncrease = 100 * ($scope.numInterestedLastWeek - $scope.numInterestedTwoWeeksBack) / $scope.numInterestedTwoWeeksBack;
+        $scope.interestedIncreaseAbs = Math.abs($scope.interestedIncrease);
+      }
+      
 
       // most popular deal name and day
       var data = mostPopularDeal();
