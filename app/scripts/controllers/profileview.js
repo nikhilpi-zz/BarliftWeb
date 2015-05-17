@@ -10,7 +10,6 @@
 angular.module('barliftApp')
   .controller('ProfileviewCtrl', function ($scope, AuthService, User, Venues, $state, CloudCode) {
     $scope.logout = AuthService.logout;
-    $scope.venues = [];
     $scope.user = {};
     $scope.selectedVenue = Venues.newVenue($scope.user);
     $scope.alert = null;
@@ -24,6 +23,10 @@ angular.module('barliftApp')
         id: 'basic_plan'
       }]
     };
+
+    User.getCurrent(function(res){ 
+      $scope.user = res; 
+    });
 
     $scope.processCard = function(status, response){
       if(response.error) {
@@ -45,13 +48,14 @@ angular.module('barliftApp')
       });
     };
 
-    CloudCode.call("getUpComingInvoice",{}).then(function(res){
+    CloudCode.call('getUpComingInvoice',{}).then(function(res){
       $scope.invoices = res.result.data;
     });
 
     $scope.updateUser = function(){
       User.update($scope.user).$promise.then(function(sucess){
         $scope.alert = null;
+        $scope.$emit('notify', {cssClass: 'alert-success', message:'Your account has been updated'});
         $state.go('dash.main')
       },
       function(err){

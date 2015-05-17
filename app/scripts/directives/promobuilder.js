@@ -98,6 +98,7 @@ angular.module('barliftApp')
               }).then(sucess));
           });
           $q.all(buys).then(function(){
+              $scope.$emit('notify', {cssClass: 'alert-success', message:'Your deals of the day have been added to your invoice'});
               $state.go('profile.invoice');
           });
         };

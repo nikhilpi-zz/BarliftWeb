@@ -72,6 +72,7 @@ angular.module('barliftApp')
             function(res){
               scope.deal = Deals.newDeal(scope.user);
               $rootScope.$broadcast('deals-update');
+              scope.$emit('notify', {cssClass: 'alert-success', message:'Your Deal has been deleted'});
               $state.go('deals.builder', {selectedDeal: undefined});
             },
             function(err){
@@ -85,6 +86,7 @@ angular.module('barliftApp')
             function(res){
               scope.deal = Deals.newDeal(scope.user);
               $rootScope.$broadcast('deals-update');
+              scope.$emit('notify', {cssClass: 'alert-success', message:'Your Deal has been added'});
               $state.go('deals.list');
             },
             function(err){
@@ -98,6 +100,7 @@ angular.module('barliftApp')
             function(res){
               scope.deal = Deals.newDeal(scope.user);
               $rootScope.$broadcast('deals-update');
+              scope.$emit('notify', {cssClass: 'alert-success', message:'Your Deal has been updated'});
               $state.go('deals.list');
             },
             function(err){

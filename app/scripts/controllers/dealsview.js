@@ -8,7 +8,7 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-    .controller('DealsviewCtrl', function($rootScope, $scope, User, Deals, AuthService, Venues, $stateParams) {
+    .controller('DealsviewCtrl', function($rootScope, $scope, User, Deals, AuthService, Venues) {
         $scope.deals = [];
         $scope.venues = [];
         $scope.user = {};
@@ -18,7 +18,6 @@ angular.module('barliftApp')
         $scope.logout = AuthService.logout;
 
         $scope.dealView = 'calendar';
-        $scope.dealFilter = 'all';
 
         User.getCurrent(function(res) {
             $scope.user = res;
@@ -45,33 +44,5 @@ angular.module('barliftApp')
 
         $scope.logout = AuthService.logout;
 
-        // deal filtering
-        $scope.dealDate = function(deal) {
-            return deal.deal_start_date.valueOf();
-        };
-
-        $scope.sameDate = function(aDate, bDate) {
-            return moment(aDate).dayOfYear() === moment(bDate).dayOfYear()
-        };
-
-        $scope.pastDate = function(aDate, bDate) {
-            return moment(aDate).dayOfYear() < moment(bDate).dayOfYear()
-        };
-
-
-        $scope.filterDeals = function(value, index) {
-            console.log($scope.dealFilter);
-            if ($scope.dealFilter === 'all') {
-                return true;
-            } else if ($scope.dealFilter === 'future') {
-                return value.deal_start_date > $scope.today;
-            } else if ($scope.dealFilter === 'today') {
-                return $scope.sameDate(value.deal_start_date, $scope.today)
-            } else if ($scope.dealFilter === 'past') {
-                return $scope.pastDate(value.deal_start_date, $scope.today);
-            } else {
-                return false;
-            }
-        };
 
     });
