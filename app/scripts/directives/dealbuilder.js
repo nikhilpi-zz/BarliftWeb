@@ -35,24 +35,24 @@ angular.module('barliftApp')
         //   }
         // });
 
-        scope.$watch('deal.deal_start_date', function(newValue, oldValue){
-          // if(moment(scope.deal.deal_start_date).isBefore(moment().add(3,"days"))){
-          //   scope.alert.text = "You must schedule deal 3 days in advance";
-          // } else {
-          //   scope.alert.text = null;
-          // }
-          if(moment(newValue).dayOfYear() !== moment(oldValue).dayOfYear()){
-            scope.deal.deal_end_date = moment(scope.deal.deal_end_date).dayOfYear(moment(newValue).dayOfYear()).toDate();
-          }
-        });
+        // scope.$watch('deal.deal_start_date', function(newValue, oldValue){
+        //   // if(moment(scope.deal.deal_start_date).isBefore(moment().add(3,"days"))){
+        //   //   scope.alert.text = "You must schedule deal 3 days in advance";
+        //   // } else {
+        //   //   scope.alert.text = null;
+        //   // }
+        //   if(moment(newValue).dayOfYear() !== moment(oldValue).dayOfYear()){
+        //     scope.deal.deal_end_date = moment(scope.deal.deal_end_date).dayOfYear(moment(newValue).dayOfYear()).toDate();
+        //   }
+        // });
 
-        scope.$watch('deal.deal_end_date', function(){      
-          if(scope.deal && moment(scope.deal.deal_end_date).isBefore(scope.deal.deal_start_date)){
-            scope.alert.text = "End time must come after start time";
-          } else {
-            scope.alert.text = null;
-          }
-        });
+        // scope.$watch('deal.deal_end_date', function(){      
+        //   if(scope.deal && moment(scope.deal.deal_end_date).isBefore(scope.deal.deal_start_date)){
+        //     scope.alert.text = "End time must come after start time";
+        //   } else {
+        //     scope.alert.text = null;
+        //   }
+        // });
 
         scope.$watch('deal.venue', function(){      
           if(scope.deal && scope.deal.venue){
