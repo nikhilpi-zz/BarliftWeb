@@ -8,7 +8,8 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-  .controller('ProfileviewCtrl', function ($scope, User, Venues, $state, CloudCode) {
+  .controller('ProfileviewCtrl', function ($scope, AuthService, User, Venues, $state, CloudCode) {
+    $scope.logout = AuthService.logout;
     $scope.venues = [];
     $scope.user = {};
     $scope.selectedVenue = Venues.newVenue($scope.user);

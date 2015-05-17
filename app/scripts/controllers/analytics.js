@@ -8,7 +8,7 @@
  * Controller of the barliftWebApp
  */
 angular.module('barliftApp')
-    .controller('AnalyticsCtrl', function($scope, $stateParams, Deals) {
+    .controller('AnalyticsCtrl', function($scope, $stateParams, Deals, AuthService) {
         Deals.get({
             objectId: $stateParams.selectedDeal
         }, function(res) {
@@ -204,4 +204,5 @@ angular.module('barliftApp')
             animateScale: false
         };
 
+        $scope.logout = AuthService.logout;
     });

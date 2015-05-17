@@ -8,7 +8,8 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-  .controller('PromoteviewCtrl', function ($scope, User, CloudCode, ParseTypes) {
+  .controller('PromoteviewCtrl', function ($scope, AuthService, User, CloudCode, ParseTypes) {
+    $scope.logout = AuthService.logout;
     $scope.deals = [];
     $scope.user = {};
     User.getCurrent(function(res){ 

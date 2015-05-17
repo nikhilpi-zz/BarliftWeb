@@ -8,12 +8,13 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-  .controller('FeedbackCtrl', function($scope, $stateParams, Deals, User, Feedback) {
+  .controller('FeedbackCtrl', function(AuthService, $scope, $stateParams, Deals, User, Feedback) {
     $scope.deal = {};
     $scope.feedback = {};
     $scope.submitted = false;
     $scope.update = false;
     $scope.deleted = false;
+    $scope.logout = AuthService.logout;
 
     // get deal from url
     Deals.get({

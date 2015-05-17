@@ -8,7 +8,8 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-  .controller('DashboardCtrl', function($scope, User, Deals, CloudCode, $http, googleCalendar, $ocLazyLoad) {
+  .controller('DashboardCtrl', function($scope, AuthService, User, Deals, CloudCode, $http, googleCalendar, $ocLazyLoad) {
+    $scope.logout = AuthService.logout;
     $scope.user = {};
 
     User.getCurrent(function(res) {

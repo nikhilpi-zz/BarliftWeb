@@ -15,6 +15,7 @@ angular.module('barliftApp')
         $scope.selectedDeal = {};
         $scope.selectedVenue = {};
         $scope.today = new Date();
+        $scope.logout = AuthService.logout;
 
         $scope.dealView = 'calendar';
         $scope.dealFilter = 'all';
