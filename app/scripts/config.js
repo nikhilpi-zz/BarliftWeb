@@ -63,7 +63,7 @@ angular.module('barliftApp')
                 templateUrl: 'views/register.html',
                 controller: 'LoginCtrl',
                 data: {
-                    authorizedRoles: [USER_ROLES.all]
+                    authorizedRoles: [USER_ROLES.admin]
                 }
             })
             .state('reset', {
