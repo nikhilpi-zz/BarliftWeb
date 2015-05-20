@@ -12,44 +12,6 @@ angular.module('barliftApp')
         });
 
         $stateProvider
-        // landing page 
-            // .state('home', {
-            //     abstract: true,
-            //     templateUrl: 'views/landingpage/home.partial.html',
-            //     controller: 'MainCtrl',
-            //     data: {
-            //         authorizedRoles: [USER_ROLES.all]
-            //     }
-            // })
-            // .state('home.index', {
-            //     url: "/",
-            //     templateUrl: 'views/landingpage/home.index.html',
-            //     data: {
-            //         authorizedRoles: [USER_ROLES.all]
-            //     }
-            // })
-            // .state('home.about', {
-            //     url: "/about",
-            //     templateUrl: 'views/landingpage/home.about.html',
-            //     data: {
-            //         authorizedRoles: [USER_ROLES.all]
-            //     }
-            // })
-            // .state('home.team', {
-            //     url: "/team",
-            //     templateUrl: 'views/landingpage/home.team.html',
-            //     data: {
-            //         authorizedRoles: [USER_ROLES.all]
-            //     }
-            // })
-            // .state('home.terms', {
-            //     url: "/terms",
-            //     templateUrl: 'views/landingpage/home.terms.html',
-            //     data: {
-            //         authorizedRoles: [USER_ROLES.all]
-            //     }
-            // })
-            // login/register
             .state('login', {
                 url: "/login",
                 templateUrl: 'views/login.html',
@@ -127,10 +89,18 @@ angular.module('barliftApp')
                 templateUrl: 'views/dash/deals.list.html',
                 data: {
                     authorizedRoles: [USER_ROLES.admin, USER_ROLES.bar]
+                },
+                resolve: {
+                    loadPlugin: function($ocLazyLoad) {
+                        return $ocLazyLoad.load([{
+                            name: 'datePicker',
+                            files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/datePicker.js']
+                        }]);
+                    }
                 }
             })
             .state('deals.builder', {
-                url: "/builder/:selectedDeal",
+                url: "/builder/:selectedDeal?dup",
                 templateUrl: 'views/dash/deals.builder.html',
                 data: {
                     authorizedRoles: [USER_ROLES.admin, USER_ROLES.bar]

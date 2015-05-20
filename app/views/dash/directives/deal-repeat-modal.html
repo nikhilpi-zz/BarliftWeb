@@ -1,0 +1,28 @@
+<div class="modal-body">
+    <h3 class="m-t-none m-b">{{deal.name}}</h3>
+    <div class="row">
+        <div class="col-sm-6 b-r">
+            <h4>Duplicate this deal</h4>
+            <p>Duplicating this deal to copy over the info and edit as you need</p>
+            <div class="hr-line-dashed"></div>
+            <button class="btn btn-sm btn-primary" ng-click="dup()">Duplicate</button>
+        </div>
+        <div class="col-sm-6">
+            <h4>Repeat this deal</h4>
+            <p>Repeat this deal exactly on a different date. The same times will be used</p>
+            <form role="form">
+                <div class="input-group date">
+                    <input type="datetime" class="form-control" date-time ng-model="newThings.date" date format="yyyy-MM-dd" min-view="date" required>
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <button class="btn btn-sm btn-primary" ng-click="repeat()">Repeat</button>
+            </form>
+            <div class="col-sm-12" ng-if="alert.text">
+                <div class="alert alert-danger" ng-if="alert">
+                    {{alert.text}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
