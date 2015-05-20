@@ -3,7 +3,7 @@
 angular.module('barliftApp')
     .config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $httpProvider, USER_ROLES, $locationProvider) {
         $locationProvider.html5Mode(true);
-        $urlRouterProvider.otherwise("/");
+        $urlRouterProvider.otherwise("/login");
         Stripe.setPublishableKey('pk_test_ilf0PC8WC51SBXQMp8zQFjXi');
 
         $ocLazyLoadProvider.config({
@@ -13,42 +13,42 @@ angular.module('barliftApp')
 
         $stateProvider
         // landing page 
-            .state('home', {
-                abstract: true,
-                templateUrl: 'views/landingpage/home.partial.html',
-                controller: 'MainCtrl',
-                data: {
-                    authorizedRoles: [USER_ROLES.all]
-                }
-            })
-            .state('home.index', {
-                url: "/",
-                templateUrl: 'views/landingpage/home.index.html',
-                data: {
-                    authorizedRoles: [USER_ROLES.all]
-                }
-            })
-            .state('home.about', {
-                url: "/about",
-                templateUrl: 'views/landingpage/home.about.html',
-                data: {
-                    authorizedRoles: [USER_ROLES.all]
-                }
-            })
-            .state('home.team', {
-                url: "/team",
-                templateUrl: 'views/landingpage/home.team.html',
-                data: {
-                    authorizedRoles: [USER_ROLES.all]
-                }
-            })
-            .state('home.terms', {
-                url: "/terms",
-                templateUrl: 'views/landingpage/home.terms.html',
-                data: {
-                    authorizedRoles: [USER_ROLES.all]
-                }
-            })
+            // .state('home', {
+            //     abstract: true,
+            //     templateUrl: 'views/landingpage/home.partial.html',
+            //     controller: 'MainCtrl',
+            //     data: {
+            //         authorizedRoles: [USER_ROLES.all]
+            //     }
+            // })
+            // .state('home.index', {
+            //     url: "/",
+            //     templateUrl: 'views/landingpage/home.index.html',
+            //     data: {
+            //         authorizedRoles: [USER_ROLES.all]
+            //     }
+            // })
+            // .state('home.about', {
+            //     url: "/about",
+            //     templateUrl: 'views/landingpage/home.about.html',
+            //     data: {
+            //         authorizedRoles: [USER_ROLES.all]
+            //     }
+            // })
+            // .state('home.team', {
+            //     url: "/team",
+            //     templateUrl: 'views/landingpage/home.team.html',
+            //     data: {
+            //         authorizedRoles: [USER_ROLES.all]
+            //     }
+            // })
+            // .state('home.terms', {
+            //     url: "/terms",
+            //     templateUrl: 'views/landingpage/home.terms.html',
+            //     data: {
+            //         authorizedRoles: [USER_ROLES.all]
+            //     }
+            // })
             // login/register
             .state('login', {
                 url: "/login",
@@ -63,7 +63,7 @@ angular.module('barliftApp')
                 templateUrl: 'views/register.html',
                 controller: 'LoginCtrl',
                 data: {
-                    authorizedRoles: [USER_ROLES.all]
+                    authorizedRoles: [USER_ROLES.admin]
                 }
             })
             .state('reset', {
