@@ -13,6 +13,6 @@
         </div>
     </div>
     <div class="col-lg-4" ng-if="deal">
-        <deal-card deal="deal"></deal-card>
+        <deal-card deal="deal" open-feedback="openFeedback({dealID: deal.objectId})"></deal-card>
     </div>
 </div>

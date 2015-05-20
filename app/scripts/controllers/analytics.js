@@ -10,7 +10,7 @@
 
 
 var generateMixpanelURl = function(from_date, to_date) {
-    var expire = (new Date().getTime()) + 100000;
+    var expire = (new Date().getTime()) + 1000;
 
     var sig_param = "api_key=9f892f20a7ddce5c46c49bccb9af0c9aevent=Deal Click to Detailexpire=" + expire + "format=jsonfrom_date=" + from_date + 'on=properties["DealID"]to_date=' + to_date + '82da5c883b1e6cb18800ee74553f8665';
     var sig = $.md5(sig_param);
@@ -30,7 +30,7 @@ var generateMixpanelURl = function(from_date, to_date) {
 }
 
 angular.module('barliftApp')
-    .controller('AnalyticsCtrl', function($scope, $stateParams, Deals, CloudCode, $http) {
+    .controller('AnalyticsCtrl', function($scope, $stateParams, Deals, CloudCode, $http, $modal) {
 
         // get deals
         Deals.get({
@@ -56,6 +56,38 @@ angular.module('barliftApp')
                 });
             }
         );
+
+        // feedback modal
+        $scope.openFeedback = function() {
+            var modalInstance = $modal.open({
+                templateUrl: 'views/dash/deals.feedback.html',
+                controller: 'FeedbackCtrl',
+                resolve: {
+                    dealID: function() {
+                        return $stateParams.selectedDeal;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (feedback) {
+              $scope.addAlert({type: 'success', msg: 'Thank you for your feedback!'});
+              $scope.deal.feedback = feedback;
+            });
+        };
+
+
+        /**
+         * alerts - used for dynamic alerts in Notifications and Tooltips view
+         */
+        $scope.alerts = [];
+
+        $scope.addAlert = function(alert) {
+            $scope.alerts.push(alert);
+        };
+
+        $scope.closeAlert = function(index) {
+            $scope.alerts.splice(index, 1);
+        };
 
 
         /**
@@ -89,7 +121,7 @@ angular.module('barliftApp')
                 } else {
                     nudges[temp] = {
                         utc: date.getTime(),
-                        count: 0
+                        count: 1
                     }
                 }
             });
@@ -103,6 +135,7 @@ angular.module('barliftApp')
             $scope.nudgeData.sort(function(a, b) {
                 return a[0] - b[0];
             });
+
 
             createNudgeGraph();
         });
@@ -130,6 +163,7 @@ angular.module('barliftApp')
 
         // create nudge line chart
         var createNudgeGraph = function() {
+            // console.log($scope.nudgeData);
             $scope.graphData.push({
                 label: "Nudges sent",
                 grow: {

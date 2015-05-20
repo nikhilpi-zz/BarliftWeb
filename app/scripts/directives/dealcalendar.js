@@ -12,7 +12,8 @@ angular.module('barliftApp')
       templateUrl: 'views/dash/directives/deal-calendar.html',
       restrict: 'E',
       scope:{
-        deals: '='
+        deals: '=',
+        openFeedback: '&'
       },
       controller: function($scope,$filter){
         $scope.events = [];
