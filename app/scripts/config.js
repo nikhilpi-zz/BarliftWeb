@@ -49,7 +49,6 @@ angular.module('barliftApp')
                 url: "/dashboard",
                 controller: 'DashboardCtrl',
                 templateUrl: 'views/dash/dash.main.html',
-                // templateUrl: 'views/quickstart.html'
                 data: {
                     authorizedRoles: [USER_ROLES.admin, USER_ROLES.bar]
                 },
