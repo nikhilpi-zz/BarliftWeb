@@ -39,6 +39,10 @@ angular.module('barliftApp')
             });
         });
 
+        $scope.dealDate = function(date){
+            return date.deal_start_date.valueOf();
+        }
+
         $scope.logout = AuthService.logout;
 
 
