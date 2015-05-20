@@ -73,7 +73,7 @@ angular.module('barliftApp')
             });
 
             modalInstance.result.then(function (feedback) {
-              $scope.addAlert({type: 'success', msg: 'Thank you for your feedback!'});
+              $scope.$emit('notify', {cssClass: 'alert-success', message:'Thank you for your feedback'});
             });
         };
 
