@@ -8,7 +8,7 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-    .controller('DealsviewCtrl', function($rootScope, $scope, User, Deals, AuthService, Venues) {
+    .controller('DealsviewCtrl', function($rootScope, $scope, User, Deals, AuthService, Venues, $modal) {
         $scope.deals = [];
         $scope.venues = [];
         $scope.user = {};
@@ -45,5 +45,36 @@ angular.module('barliftApp')
 
         $scope.logout = AuthService.logout;
 
+
+        /**
+         * alerts - used for dynamic alerts in Notifications and Tooltips view
+         */
+        $scope.alerts = [];
+
+        $scope.addAlert = function(alert) {
+            $scope.alerts.push(alert);
+        };
+
+        $scope.closeAlert = function(index) {
+            $scope.alerts.splice(index, 1);
+        };
+
+
+        // feedback modal
+        $scope.openFeedback = function(dealID) {
+            var modalInstance = $modal.open({
+                templateUrl: 'views/dash/deals.feedback.html',
+                controller: 'FeedbackCtrl',
+                resolve: {
+                    dealID: function() {
+                        return dealID;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (feedback) {
+              $scope.addAlert({type: 'success', msg: 'Thank you for your feedback!'});
+            });
+        };
 
     });

@@ -24,7 +24,7 @@ angular.module('barliftApp')
           function(barDeals) {
             $scope.allDeals = allDeals;
 
-            if (res.username == "Admin") {
+            if (res.username == "admin") {
               main(allDeals);
             } else {
               main(barDeals);
@@ -290,7 +290,8 @@ angular.module('barliftApp')
 
       // get events
       var eventsPromise = googleCalendar.getEvents({
-        'calendarId': 'qq86rub5anh0ikbdnav9vtlqfou6i38v@import.calendar.google.com',
+        //'calendarId': 'qq86rub5anh0ikbdnav9vtlqfou6i38v@import.calendar.google.com',
+        'calendarId': 'primary',
         'timeMin': (new Date()).toISOString(),
         'singleEvents': true,
         'maxResults': 20,

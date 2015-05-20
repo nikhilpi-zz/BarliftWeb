@@ -12,7 +12,8 @@ angular.module('barliftApp')
       templateUrl: 'views/dash/directives/deal-card.html',
       restrict: 'E',
       scope: {
-        deal: '='
+        deal: '=',
+        openFeedback: '&'
       },
       link: function postLink(scope, element, attrs) {
       	scope.today = new Date();
