@@ -32,11 +32,14 @@ angular.module('barliftApp')
           scope.venue = deal;
         };
 
-        scope.deleteVenue = function(deal) {
-          Venues.delete(deal,function(res){
-            loadDeals();
-            scope.venue = Venues.newVenue(scope.user);
-          });
+        scope.deleteVenue = function(venue) {
+          var r = confirm("Are you sure you want to delete "+ venue.bar_name);
+          if (r == true) {
+            Venues.delete(venue,function(res){
+              loadDeals();
+              scope.venue = Venues.newVenue(scope.user);
+            });
+          } 
         };
 
         scope.loadYelp = function(){

@@ -44,8 +44,8 @@ angular.module('barliftApp')
               $scope.newThings = {date: new Date()};
 
               $scope.dup = function () {
-                  $state.go('deals.builder',{selectedDeal: deal.objectId, dup: true})
-                  $modalInstance.close();
+                $state.go('deals.builder',{selectedDeal: deal.objectId, dup: true})
+                $modalInstance.close();
               };
 
               $scope.repeat = function () {
