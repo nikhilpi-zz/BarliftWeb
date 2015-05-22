@@ -218,6 +218,23 @@ angular.module('barliftApp')
                 data: {
                     authorizedRoles: [USER_ROLES.admin, USER_ROLES.bar]
                 }
+            })
+            //Admin
+            .state('admin', {
+                abstract: true,
+                url: "/profile",
+                templateUrl: 'views/dash/common/content.html',
+                controller: 'ProfileviewCtrl',
+                data: {
+                    authorizedRoles: [USER_ROLES.admin]
+                }
+            })
+            .state('admin.performance', {
+                url: "/performance",
+                templateUrl: 'views/dash/admin.performance.html',
+                data: {
+                    authorizedRoles: [USER_ROLES.admin]
+                }
             });
 
         $httpProvider.interceptors.push([
