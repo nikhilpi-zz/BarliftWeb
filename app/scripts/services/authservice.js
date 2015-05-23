@@ -8,7 +8,7 @@
  * Factory in the barliftApp.
  */
 angular.module('barliftApp')
-  .factory('AuthService', function ($http, $location, $window, Session, User) {
+  .factory('AuthService', function ($http, $state, $cookieStore, Session, User,  $cacheFactory) {
     var authService = {};
 
     authService.login = function (credentials) {
@@ -26,14 +26,23 @@ angular.module('barliftApp')
         });
       }).then(function(role){
         Session.setRole(role.data.name);
-        $window.sessionStorage['session'] = JSON.stringify(Session);
+        $cookieStore.put('barlift-sesh',Session.sessionToken);
+        $cookieStore.put('barlift-userid',Session.userId);
+        $cookieStore.put('barlift-username',Session.userName);
+        $cookieStore.put('barlift-userrole',Session.userRole);
       });
     };
 
     authService.logout = function(){
       Session.destroy();
-      delete $window.sessionStorage['session'];
-      $location.path('/login')
+      $cookieStore.remove('barlift-sesh');
+      $cookieStore.remove('barlift-sesh');
+      $cookieStore.remove('barlift-userid');
+      $cookieStore.remove('barlift-username');
+      $cookieStore.remove('barlift-userrole');
+      $state.go('login');
+      var $httpDefaultCache = $cacheFactory.get('$http');
+      $httpDefaultCache.removeAll();
     };
    
     authService.isAuthenticated = function () {

@@ -21,6 +21,11 @@ angular.module('barliftApp')
         if($stateParams.selectedDeal){
           Deals.get({objectId: $stateParams.selectedDeal}, function(res){
             scope.deal = res;
+            if($stateParams.dup){
+              scope.deal.objectId = null;
+              scope.deal.num_accepted = 0;
+              scope.deal.whos_going = [];
+            }
           });
         } else {
           scope.deal = Deals.newDeal(scope.user);

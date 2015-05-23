@@ -37,7 +37,10 @@ angular.module('barliftApp')
   };
 
   // logout
-  $scope.logout = AuthService.logout;
+  $scope.logout = function(){
+    $scope.user = null;
+    AuthService.logout();
+  };
   
 });
 
