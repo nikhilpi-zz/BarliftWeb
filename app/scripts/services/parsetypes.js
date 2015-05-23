@@ -16,7 +16,7 @@ angular.module('barliftApp')
         var keys = Object.keys(obj);
         obj.schema = [];
         for(var i = 0; i < keys.length; i++){
-          if(obj[keys[i]].__type){
+          if(obj[keys[i]] && obj[keys[i]].__type){
             var type = obj[keys[i]].__type;
             switch(type){
               case "Pointer":

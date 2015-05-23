@@ -23,6 +23,8 @@ angular.module('barliftApp')
             scope.deal = res;
             if($stateParams.dup){
               scope.deal.objectId = null;
+              scope.deal.num_accepted = 0;
+              scope.deal.whos_going = [];
             }
           });
         } else {
