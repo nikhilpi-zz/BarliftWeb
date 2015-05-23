@@ -7,12 +7,11 @@
  * # dealCalendar
  */
 angular.module('barliftApp')
-  .directive('dealCalendar', function () {
+  .directive('dealCalendar', function (Deals, $rootScope) {
     return {
       templateUrl: 'views/dash/directives/deal-calendar.html',
       restrict: 'E',
       scope:{
-        deals: '=',
         openFeedback: '&'
       },
       controller: function($scope,$filter){
@@ -20,38 +19,34 @@ angular.module('barliftApp')
         $scope.eventSource = [$scope.events];
         $scope.deal = null;
         $scope.today = new Date();
-
-
-        $scope.$watch('deals',function(){
+        Deals.query(function(deals) {
+          $scope.deals = deals;
           loadDeals();
         });
 
-        function loadDeals(){
-          angular.forEach($scope.deals, function(deal){
-            var found = false;
-            angular.forEach($scope.events, function(calEvent, index){
-              if(angular.equals(calEvent.deal, deal)){
-                found = true;
-              } else if(calEvent.deal.objectId === deal.objectId){
-                $scope.events.splice(index, 1);
-              }
+        $rootScope.$on('deals-update', function(event, args) {
+            Deals.query(function(deals) {
+                $scope.deals = deals;
+                loadDeals();
             });
+        });
 
-            if(!found){
-              var css = '';
-              if($scope.pastDate(deal.deal_start_date,$scope.today)){
-                css = 'past-event';
-              } else if(deal.main){
-                css = 'main-event';
-              }
-              $scope.events.push({
-                title: deal.name,
-                editable: false,
-                start: deal.deal_start_date,
-                deal: deal,
-                className: css
-              });
+        function loadDeals(){
+          $scope.events.length = 0;
+          angular.forEach($scope.deals, function(deal){
+            var css = '';
+            if($scope.pastDate(deal.deal_start_date,$scope.today)){
+              css = 'past-event';
+            } else if(deal.main){
+              css = 'main-event';
             }
+            $scope.events.push({
+              title: deal.name,
+              editable: false,
+              start: deal.deal_start_date,
+              deal: deal,
+              className: css
+            });
           });
         }
 

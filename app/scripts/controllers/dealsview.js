@@ -33,12 +33,6 @@ angular.module('barliftApp')
             });
         });
 
-        $scope.$on('deals-update', function(event, args) {
-            Deals.query(function(deals) {
-                $scope.deals = deals;
-            });
-        });
-
         $scope.dealDate = function(date){
             return date.deal_start_date.valueOf();
         }
