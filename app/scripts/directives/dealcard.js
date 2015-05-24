@@ -7,7 +7,7 @@
  * # dealcard
  */
 angular.module('barliftApp')
-  .directive('dealCard', function ($modal) {
+  .directive('dealCard', function ($modal, Deals) {
     return {
       templateUrl: 'views/dash/directives/deal-card.html',
       restrict: 'E',
@@ -31,6 +31,18 @@ angular.module('barliftApp')
             return moment(dealDate).isBetween(moment().startOf('day'), lockDate);
         };
 
+        scope.delete = function(){
+          Deals.delete(scope.deal).$promise.then(
+            function(res){
+              $rootScope.$broadcast('deals-update');
+              scope.$emit('notify', {cssClass: 'alert-success', message:'Your Deal has been deleted'});
+              $state.go('deals.list');
+            },
+            function(err){
+              scope.alert.text = err.data.error;
+            });
+        };
+
         scope.open = function () {
           var modalInstance = $modal.open({
             templateUrl: 'views/dash/directives/deal-repeat-modal.html',
@@ -42,6 +54,7 @@ angular.module('barliftApp')
             controller: function($scope, $modalInstance, deal, $state, Deals){
               $scope.deal = deal;
               $scope.newThings = {date: new Date()};
+              $scope.today = moment().format('YYYY-MM-DD');
 
               $scope.dup = function () {
                 $state.go('deals.builder',{selectedDeal: deal.objectId, dup: true})

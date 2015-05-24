@@ -17,6 +17,8 @@ angular.module('barliftApp')
       },
       link: function postLink(scope, element, attrs) {
         scope.alert = {};
+        scope.today = {};
+        scope.today.date = new Date();
 
         if($stateParams.selectedDeal){
           Deals.get({objectId: $stateParams.selectedDeal}, function(res){
@@ -31,6 +33,20 @@ angular.module('barliftApp')
         } else {
           scope.deal = Deals.newDeal(scope.user);
         }
+
+        scope.dateOptions = {
+          formatYear: 'yy',
+          startingDay: 1
+        };
+
+        scope.opened={};
+
+        scope.open = function($event,id) {
+          $event.preventDefault();
+          $event.stopPropagation();
+
+          scope.opened[id] = true;
+        };
 
         // scope.$watch('deal.name', function(){
         //   if(scope.deal.name && scope.deal.name.length >= 50){
@@ -49,13 +65,13 @@ angular.module('barliftApp')
         //   }
         // });
 
-        // scope.$watch('deal.deal_end_date', function(){      
-        //   if(scope.deal && moment(scope.deal.deal_end_date).isBefore(scope.deal.deal_start_date)){
-        //     scope.alert.text = "End time must come after start time";
-        //   } else {
-        //     scope.alert.text = null;
-        //   }
-        // });
+        scope.$watch('deal.deal_end_date', function(){      
+          if(scope.deal && moment(scope.deal.deal_end_date).isBefore(scope.deal.deal_start_date)){
+            scope.alert.text = "End time must come after start time";
+          } else {
+            scope.alert.text = null;
+          }
+        });
 
         scope.$watch('deal.venue', function(){      
           if(scope.deal && scope.deal.venue){
@@ -126,4 +142,14 @@ angular.module('barliftApp')
 
       }
     };
-  });
+  })
+  .directive('datepickerPopup', function (){
+    return {
+        restrict: 'EAC',
+        require: 'ngModel',
+        link: function(scope, element, attr, controller) {
+        //remove the default formatter from the input directive to prevent conflict
+        controller.$formatters.shift();
+        }
+    }
+});

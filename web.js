@@ -5,11 +5,6 @@ var app = express();
 
 app.use(morgan('dev'));
 
-// app.route('/#/terms')
-// .all(function(req, res, next) {
-//   res.redirect('/terms');
-// });
-// these need to go first:
 app.use("/fonts", gzippo.staticGzip(__dirname + "/dist/fonts"));
 app.use("/images", gzippo.staticGzip(__dirname + "/dist/images"));
 app.use("/js", gzippo.staticGzip(__dirname + "/dist/js"));
