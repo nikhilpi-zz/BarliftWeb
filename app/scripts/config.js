@@ -64,7 +64,7 @@ angular.module('barliftApp')
             // feedback
             .state('feedback', {
                 url: "/feedback/:dealId",
-                templateUrl: 'views/feedback.html',
+                templateUrl: 'views/emailfeedback.html',
                 controller: 'EmailFeedbackCtrl',
                 data: {
                     authorizedRoles: [USER_ROLES.all]

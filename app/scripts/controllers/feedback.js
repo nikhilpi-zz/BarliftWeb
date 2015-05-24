@@ -64,6 +64,10 @@ angular.module('barliftApp')
             $modalInstance.close($scope.feedback);
         };
 
+        $scope.cancel = function() {
+            $modalInstance.dismiss();
+        };
+
         var getPointer = function(objectId, objClass) {
             return {
                 objectId: objectId,
