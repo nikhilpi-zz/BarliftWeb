@@ -51,6 +51,7 @@ angular.module('barliftApp')
               $scope.repeat = function () {
                 var newDeal = angular.copy($scope.deal);
                 newDeal.objectId = null;
+                newDeal.main = false;
                 var newDoY = moment($scope.newThings.date).dayOfYear();
                 var oldDoY = moment($scope.deal.deal_start_date).dayOfYear();
                 var diff = newDoY - oldDoY;

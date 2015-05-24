@@ -8,12 +8,13 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-  .controller('ProfileviewCtrl', function ($scope, AuthService, User, Venues, $state, CloudCode) {
+  .controller('ProfileviewCtrl', function ($scope, AuthService, User, Venues, $state, CloudCode, Session) {
     $scope.logout = AuthService.logout;
     $scope.user = {};
     $scope.selectedVenue = Venues.newVenue($scope.user);
     $scope.alert = null;
     $scope.invoices = [];
+    $scope.role = Session.userRole;
     $scope.payments = {
       plans: [
       {

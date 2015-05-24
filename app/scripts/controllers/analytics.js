@@ -30,8 +30,8 @@ var generateMixpanelURl = function(from_date, to_date) {
 }
 
 angular.module('barliftApp')
-    .controller('AnalyticsCtrl', function($scope, $stateParams, Deals, CloudCode, $http, $modal) {
-
+    .controller('AnalyticsCtrl', function($scope, $stateParams, Deals, CloudCode, $http, $modal, Session) {
+        $scope.role = Session.userRole;
         // get deals
         Deals.get({
             objectId: $stateParams.selectedDeal,

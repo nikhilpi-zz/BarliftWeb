@@ -8,7 +8,7 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-    .controller('DealsviewCtrl', function($rootScope, $scope, User, Deals, AuthService, Venues, $modal) {
+    .controller('DealsviewCtrl', function($rootScope, $scope, User, Deals, AuthService, Venues, $modal, Session) {
         $scope.deals = [];
         $scope.venues = [];
         $scope.user = {};
@@ -16,6 +16,7 @@ angular.module('barliftApp')
         $scope.selectedVenue = {};
         $scope.today = new Date();
         $scope.logout = AuthService.logout;
+        $scope.role = Session.userRole;
 
         $scope.dealView = 'calendar';
 
