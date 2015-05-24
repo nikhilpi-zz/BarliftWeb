@@ -55,9 +55,6 @@ angular.module('barliftApp')
                 resolve: {
                     loadPlugin: function($ocLazyLoad) {
                         return $ocLazyLoad.load([{
-                            name: 'angles',
-                            files: ['js/plugins/chartJs/angles.js', 'js/plugins/chartJs/Chart.min.js']
-                        }, {
                             name: 'google apis',
                             files: ['https://apis.google.com/js/client.js']
                         }]);
