@@ -30,7 +30,7 @@ var generateMixpanelURl = function(from_date, to_date) {
 }
 
 angular.module('barliftApp')
-    .controller('AnalyticsCtrl', function($scope, $stateParams, Deals, CloudCode, $http, $modal) {
+    .controller('AnalyticsCtrl', function($scope, $stateParams, Deals, CloudCode, $http, $modal, Feedback) {
 
         // get deals
         Deals.get({
@@ -39,6 +39,7 @@ angular.module('barliftApp')
             include: "venue"
         }, function(res) {
             $scope.deal = res;
+            // console.log(JSON.stringify(res.feedback, null, 2));
         });
 
         // feedback modal
