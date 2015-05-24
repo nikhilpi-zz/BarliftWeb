@@ -218,6 +218,37 @@ angular.module('barliftApp')
                 data: {
                     authorizedRoles: [USER_ROLES.admin, USER_ROLES.bar]
                 }
+            })
+            //Admin
+            .state('admin', {
+                abstract: true,
+                controller: 'AdminviewCtrl',
+                url: "/admin",
+                templateUrl: 'views/dash/common/content.html',
+                data: {
+                    authorizedRoles: [USER_ROLES.admin]
+                }
+            })
+            .state('admin.performance', {
+                url: "/performance",
+                templateUrl: 'views/dash/admin.performance.html',
+                data: {
+                    authorizedRoles: [USER_ROLES.admin]
+                },
+                resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            name: 'ngGrid',
+                            files: ['js/plugins/nggrid/ng-grid-2.0.3.min.js']
+                        },
+                        {
+                            insertBefore: '#loadBefore',
+                            files: ['js/plugins/nggrid/ng-grid.css']
+                        }
+                    ]);
+                }
+            }
             });
 
         $httpProvider.interceptors.push([

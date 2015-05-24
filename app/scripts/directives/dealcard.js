@@ -53,6 +53,7 @@ angular.module('barliftApp')
                 newDeal.objectId = null;
                 newDeal.num_accepted = 0;
                 newDeal.whos_going = [];
+                newDeal.main = false;
                 var newDoY = moment($scope.newThings.date).dayOfYear();
                 var oldDoY = moment($scope.deal.deal_start_date).dayOfYear();
                 var diff = newDoY - oldDoY;
