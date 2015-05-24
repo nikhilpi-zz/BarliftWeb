@@ -40,20 +40,6 @@ angular.module('barliftApp')
         $scope.logout = AuthService.logout;
 
 
-        /**
-         * alerts - used for dynamic alerts in Notifications and Tooltips view
-         */
-        $scope.alerts = [];
-
-        $scope.addAlert = function(alert) {
-            $scope.alerts.push(alert);
-        };
-
-        $scope.closeAlert = function(index) {
-            $scope.alerts.splice(index, 1);
-        };
-
-
         // feedback modal
         $scope.openFeedback = function(dealID) {
             var modalInstance = $modal.open({

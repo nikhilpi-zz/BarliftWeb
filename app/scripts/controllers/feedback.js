@@ -10,7 +10,7 @@
 angular.module('barliftApp')
     .controller('FeedbackCtrl', function($scope, Deals, Feedback, $modalInstance, dealID) {
         $scope.deal = {};
-        $scope.feedback = {};
+        $scope.feedback = {rating: 1};
         $scope.submitted = false;
         $scope.update = false;
         $scope.deleted = false;

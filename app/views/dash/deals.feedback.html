@@ -7,10 +7,10 @@
             <div class="form-group">
                 <label class="col-sm-offset-1 col-sm-4 control-label">How effective was the deal?</label>
                 <div class="col-sm-6">
-                    <h1><rating name="rating" max="5" ng-model="feedback.rating" style="outline: none;" required></rating></h1>
-                    <span ng-show="form.$dirty && form.rating.$error.required" class="has-error">
-                                        <label class="control-label">Required</label>
-                                    </span>
+                    <h1>
+                        <rating name="rating" min="1" max="5" ng-model="feedback.rating" style="outline: none;" required>
+                        </rating>
+                    </h1>
                 </div>
             </div>
             <div class="form-group">
@@ -36,7 +36,7 @@
             <div class="form-group">
                 <div class="col-sm-offset-5 col-sm-4 text-left">
                     <button name="submit" type="submit" class="btn btn-primary">Submit</button>
-                    <button type="button" class="btn btn-white" ng-click="cancel()">Close</button>     
+                    <button type="button" class="btn btn-white" ng-click="cancel()">Close</button>
                 </div>
             </div>
         </div>

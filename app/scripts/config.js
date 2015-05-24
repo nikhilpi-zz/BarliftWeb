@@ -111,7 +111,7 @@ angular.module('barliftApp')
                 }
             })
             .state('deals.analytics', {
-                url: "/deal/:selectedDeal",
+                url: "/analytics/:selectedDeal",
                 templateUrl: 'views/dash/deals.analytics.html',
                 controller: 'AnalyticsCtrl',
                 data: {
@@ -120,13 +120,6 @@ angular.module('barliftApp')
                 resolve: {
                     loadPlugin: function($ocLazyLoad) {
                         return $ocLazyLoad.load([{
-                            serie: true,
-                            name: 'angular-flot',
-                            files: ['js/plugins/flot/jquery.flot.js', 'js/plugins/flot/jquery.flot.time.js', 'js/plugins/flot/jquery.flot.tooltip.min.js', 'js/plugins/flot/jquery.flot.spline.js', 'js/plugins/flot/jquery.flot.resize.js', 'js/plugins/flot/jquery.flot.pie.js', 'js/plugins/flot/curvedLines.js', 'js/plugins/flot/angular-flot.js', ]
-                        }, {
-                            name: 'angles',
-                            files: ['js/plugins/chartJs/angles.js', 'js/plugins/chartJs/Chart.min.js']
-                        }, {
                             name: 'mixpanel',
                             files: ['js/plugins/md5/jquery.md5.min.js']
                         }]);
