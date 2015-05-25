@@ -244,7 +244,7 @@ angular.module('barliftApp')
                         },
                         {
                             insertBefore: '#loadBefore',
-                            files: ['js/plugins/nggrid/ng-grid.css']
+                            files: ['css/plugins/nggrid/ng-grid.css']
                         }
                     ]);
                 }

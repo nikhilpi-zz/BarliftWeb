@@ -22,7 +22,7 @@
     </div>
     <div ng-if="dealView=='list'">
         <div class="row">
-            <div class="col-lg-3" ng-repeat="deal in deals| orderBy: dealDate:true| filter:filterDeals:true">
+            <div class="col-lg-4" ng-repeat="deal in deals| orderBy: dealDate:true| filter:filterDeals:true">
                 <deal-card deal="deal" open-feedback="openFeedback(dealID)"></deal-card>   
             </div>
         </div>
