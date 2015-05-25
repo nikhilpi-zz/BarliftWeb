@@ -20,12 +20,12 @@
                 <ul class="nav nav-second-level" ng-class="{in: $state.includes('profile')}">
                     <li ui-sref-active="active"><a ui-sref="profile.account">Account</a></li>
                     <li ui-sref-active="active"><a ui-sref="profile.venues">Locations</a></li>
-                    <li ui-sref-active="active"><a ui-sref="profile.payment.one_sub">Subscription</a></li>
+<!--                     <li ui-sref-active="active"><a ui-sref="profile.payment.one_sub">Subscription</a></li> -->
                     <li ui-sref-active="active"><a ui-sref="profile.invoice">Invoice</a></li>
                 </ul>
             </li>
             <li ng-class="{active: $state.includes('admin')}" ng-if="role == 'Admin'">
-                <a><i class="fa fa-user"></i> <span class="nav-label">Admin</span><span class="fa arrow"></span></a>
+                <a><i class="fa fa-cog"></i> <span class="nav-label">Admin</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level" ng-class="{in: $state.includes('admin')}">
                     <li ui-sref-active="active"><a ui-sref="admin.performance">Performance</a></li>
                 </ul>

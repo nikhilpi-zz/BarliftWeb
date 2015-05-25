@@ -7,12 +7,13 @@
  * # promoBuilder
  */
 angular.module('barliftApp')
-  .directive('promoBuilder', function (ParseTypes, $q, $state) {
+  .directive('promoBuilder', function (ParseTypes, $q, $state, $http, Deals, Invoice) {
     return {
       templateUrl: 'views/dash/directives/promo-builder.html',
       restrict: 'E',
       scope:{
-        deals: '='
+        deals: '=',
+        user: '='
       },
       controller: function($scope, CloudCode){
         $scope.events = [];
@@ -22,6 +23,11 @@ angular.module('barliftApp')
         $scope.eventSource = [$scope.events];
 
         $scope.total = 0;
+
+        $http.get('https://api.parse.com/1/config').
+          success(function(data, status, headers, config) {
+            $scope.pricing = data.params.pricing;
+        });
 
         $scope.$watch('deals',function(){
           loadDeals()
@@ -59,8 +65,10 @@ angular.module('barliftApp')
         function selectDeal(deal){
           CloudCode.call('pushCount', {community: deal.community_name}).then(
           function(res){
-            deal.main_price = res.result * 0.02;
-            $scope.total += res.result * 0.02;
+            deal.estPush = res.result;
+            deal.price = $scope.pricing[deal.deal_start_date.getDay()]/100;
+            deal.main_price = res.result * $scope.pricing[deal.deal_start_date.getDay()]/100;
+            $scope.total += res.result * $scope.pricing[deal.deal_start_date.getDay()]/100;
             $scope.selectedDeals.push(deal);
           });
           
@@ -84,18 +92,27 @@ angular.module('barliftApp')
         };
 
         $scope.buyDeals = function(){
-          function sucess(res){
-            console.log(res);
-          }
 
           var buys = [];
           angular.forEach($scope.selectedDeals, function(deal){
+            deal.main = true;
+            delete deal.__type;
+            delete deal.className;
             buys.push(
-              CloudCode.call('buyPush',{
-                amount: deal.main_price,
-                description: deal.name,
-                deal: deal.objectId
-              }).then(sucess));
+              Deals.update(deal).$promise
+            );
+
+            var invoice = Invoice.newInvoice($scope.user);
+            invoice.amount = deal.main_price;
+            invoice.type = 'deal of day';
+            invoice.description = {
+              dealname: deal.name,
+              dealid: deal.objectId
+            };
+            buys.push(
+              Invoice.save(invoice).$promise
+            );
+
           });
           $q.all(buys).then(function(){
               $scope.$emit('notify', {cssClass: 'alert-success', message:'Your deals of the day have been added to your invoice'});
