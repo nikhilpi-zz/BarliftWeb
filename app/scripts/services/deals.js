@@ -54,7 +54,7 @@ angular.module('barliftApp')
     });
 
     apiRest.newDeal = function(user){
-      var date = moment().add(3,'day').toDate();
+      var date = moment().toDate();
       var deal = {
         ACL: {
           '*': {

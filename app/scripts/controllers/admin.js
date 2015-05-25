@@ -1,11 +1,12 @@
 'use strict';
 
 angular.module('barliftApp')
-  .controller('AdminCtrl', function ($scope, User, Deals, AuthService, Venues) {
+  .controller('AdminCtrl', function ($scope, User, Deals, AuthService, Venues, Session) {
   // variables
   $scope.deals = [];
   $scope.venues = [];
   $scope.user = {};
+  $scope.role = Session.userRole;
   $scope.selectedDeal = {
       name: 'Please select a deal',
     };

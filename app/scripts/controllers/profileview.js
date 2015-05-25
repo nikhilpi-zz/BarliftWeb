@@ -8,12 +8,13 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-  .controller('ProfileviewCtrl', function ($scope, AuthService, User, Venues, $state, CloudCode) {
+  .controller('ProfileviewCtrl', function ($scope, AuthService, User, Venues, $state, Invoice, Session) {
     $scope.logout = AuthService.logout;
     $scope.user = {};
     $scope.selectedVenue = Venues.newVenue($scope.user);
     $scope.alert = null;
     $scope.invoices = [];
+    $scope.role = Session.userRole;
     $scope.payments = {
       plans: [
       {
@@ -48,9 +49,43 @@ angular.module('barliftApp')
       });
     };
 
-    CloudCode.call('getUpComingInvoice',{}).then(function(res){
-      $scope.invoices = res.result.data;
-    });
+    $scope.startInv = moment().startOf('month');
+    $scope.endInv = moment().endOf('month');
+    loadInovices();
+
+    $scope.prevMonth = function(){
+      $scope.startInv.subtract(1,'months');
+      $scope.endInv.subtract(1,'months');
+      loadInovices();
+    };
+
+    $scope.nextMonth = function(){
+      $scope.startInv.add(1,'months');
+      $scope.endInv.add(1,'months');
+      loadInovices();
+    };
+
+    function loadInovices(){
+      Invoice.query({
+        where:{
+          createdAt:
+          {
+            $gte: $scope.startInv.toDate(),
+            $lte: $scope.endInv.toDate()
+          }
+        }
+      }, function(res){
+        $scope.invoices = res;
+      });
+    }
+
+    $scope.getTotal = function(){
+      var total = 0;
+      angular.forEach($scope.invoices, function(invoice){
+        total += invoice.amount;
+      });
+      return total;
+    }
 
     $scope.updateUser = function(){
       User.update($scope.user).$promise.then(function(sucess){

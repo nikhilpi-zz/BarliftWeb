@@ -8,7 +8,7 @@
         <h5>{{deal.deal_start_date | date:'MM/dd/yyyy'}}</h5>
     </div>
     <div class="ibox-content">
-        <h3 class="font-bold no-margins">{{ deal.name | limitTo: 18 }}{{ deal.name.length > 18 ? '...' : ''}}</h3>
+        <h3 class="font-bold no-margins">{{ deal.name | limitTo: 30 }}{{ deal.name.length > 30 ? '...' : ''}}</h3>
         <div class="stat-percent font-bold text-success">{{deal.num_accepted}}</div>
         <small>People interested</small>
         <div class="row m-t text-center">
@@ -23,6 +23,9 @@
             </div>
             <div class="col-md-6">
                 <a class="btn btn-sm btn-primary btn-block" ng-click="open()">Duplicate Deal</a>
+            </div>
+            <div class="col-md-6" ng-if="!pastDate(deal.deal_start_date,today)">
+                <a class="btn btn-sm btn-danger btn-block" ng-click="delete()">Delete Deal</a>
             </div>
         </div>
     </div>
