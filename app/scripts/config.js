@@ -247,8 +247,15 @@ angular.module('barliftApp')
                             files: ['css/plugins/nggrid/ng-grid.css']
                         }
                     ]);
+                    }
                 }
-            }
+            })
+            .state('admin.pricing', {
+                url: "/pricing",
+                templateUrl: 'views/dash//admin.pricing.html',
+                data: {
+                    authorizedRoles: [USER_ROLES.admin]
+                }
             });
 
         $httpProvider.interceptors.push([
