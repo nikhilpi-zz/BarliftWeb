@@ -21,7 +21,8 @@ angular
         'oc.lazyLoad',
         'ui.calendar',
         'angularPayments',
-        'cgNotify'
+        'cgNotify',
+        'chart.js'
     ])
     .constant('AUTH_EVENTS', {
         loginSuccess: 'auth-login-success',

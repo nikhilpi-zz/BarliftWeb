@@ -245,49 +245,10 @@ angular.module('barliftApp')
       // revenue last week
       $scope.revenue = revenueInRange(0, 6);
 
-      /**
-       * Data for Line chart
-       */
-      $scope.lineData = {
-        labels: $scope.lastWeekDays,
-        datasets: [{
-          label: "Two Weeks Back",
-          fillColor: "rgba(220,220,220,0.5)",
-          strokeColor: "rgba(220,220,220,1)",
-          pointColor: "rgba(220,220,220,1)",
-          pointStrokeColor: "#fff",
-          pointHighlightFill: "#fff",
-          pointHighlightStroke: "rgba(220,220,220,1)",
-          data: $scope.interestedTwoWeeksBack
-        }, {
-          label: "Last Week",
-          fillColor: "rgba(26,179,148,0.5)",
-          strokeColor: "rgba(26,179,148,0.7)",
-          pointColor: "rgba(26,179,148,1)",
-          pointStrokeColor: "#fff",
-          pointHighlightFill: "#fff",
-          pointHighlightStroke: "rgba(26,179,148,1)",
-          data: $scope.interestedLastWeek
-        }]
-      };
-
-      /**
-       * Options for Line chart
-       */
-      $scope.lineOptions = {
-        scaleShowGridLines: false,
-        scaleGridLineColor: "rgba(0,0,0,.05)",
-        scaleGridLineWidth: 1,
-        bezierCurve: true,
-        bezierCurveTension: 0.4,
-        pointDot: true,
-        pointDotRadius: 4,
-        pointDotStrokeWidth: 1,
-        pointHitDetectionRadius: 20,
-        datasetStroke: true,
-        datasetStrokeWidth: 2,
-        datasetFill: true
-      };
+      // line chart
+      $scope.lineData = [$scope.interestedLastWeek, $scope.interestedTwoWeeksBack];
+      $scope.lineLabels = $scope.lastWeekDays;
+      $scope.lineSeries = ["Last week", "Two weeks back"];  
 
       // get events
       var eventsPromise = googleCalendar.getEvents({
