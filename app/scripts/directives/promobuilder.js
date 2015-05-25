@@ -7,7 +7,7 @@
  * # promoBuilder
  */
 angular.module('barliftApp')
-  .directive('promoBuilder', function (ParseTypes, $q, $state, $http, Deals, Invoice) {
+  .directive('promoBuilder', function (ParseTypes, $q, $state, $http, Deals, Invoice, Community) {
     return {
       templateUrl: 'views/dash/directives/promo-builder.html',
       restrict: 'E',
@@ -23,11 +23,6 @@ angular.module('barliftApp')
         $scope.eventSource = [$scope.events];
 
         $scope.total = 0;
-
-        $http.get('https://api.parse.com/1/config').
-          success(function(data, status, headers, config) {
-            $scope.pricing = data.params.pricing;
-        });
 
         $scope.$watch('deals',function(){
           loadDeals()
@@ -64,12 +59,15 @@ angular.module('barliftApp')
 
         function selectDeal(deal){
           CloudCode.call('pushCount', {community: deal.community_name}).then(
-          function(res){
-            deal.estPush = res.result;
-            deal.price = $scope.pricing[deal.deal_start_date.getDay()]/100;
-            deal.main_price = res.result * $scope.pricing[deal.deal_start_date.getDay()]/100;
-            $scope.total += res.result * $scope.pricing[deal.deal_start_date.getDay()]/100;
-            $scope.selectedDeals.push(deal);
+          function(num){
+            deal.estPush = num.result;
+            Community.query({where: {name: deal.community_name}}, function(com){
+              com = com[0];
+              deal.price = com.pricing[deal.deal_start_date.getDay()]/100;
+              deal.main_price = num.result * com.pricing[deal.deal_start_date.getDay()]/100;
+              $scope.total += num.result * com.pricing[deal.deal_start_date.getDay()]/100;
+              $scope.selectedDeals.push(deal);
+            })
           });
           
         };

@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc service
- * @name barliftApp.Invoice
+ * @name barliftApp.Community
  * @description
- * # Invoice
+ * # Community
  * Factory in the barliftApp.
  */
 angular.module('barliftApp')
-  .factory('Invoice', function ($resource, ParseTypes, Session) {
-    var apiRest = $resource('https://api.parse.com/1/classes/Invoice/:objectId',
+  .factory('Community', function ($resource, ParseTypes, Session) {
+     var apiRest = $resource('https://api.parse.com/1/classes/Community/:objectId',
       {
         objectId: '@objectId'
       },
@@ -25,7 +25,7 @@ angular.module('barliftApp')
         get: {
           transformResponse: function(data, headersGetter){
             data = angular.fromJson(data);
-            return ParseTypes.resProcess(data,'Invoice');
+            return ParseTypes.resProcess(data,'Community');
           }
         },
         query: {
@@ -34,7 +34,7 @@ angular.module('barliftApp')
             data = angular.fromJson(data);
             var results = data.results;
             var processed = results.map(function(x){
-              return ParseTypes.resProcess(x,'Invoice');
+              return ParseTypes.resProcess(x,'Community');
             });
             return processed;
           }
@@ -53,8 +53,7 @@ angular.module('barliftApp')
     });
 
     apiRest.newInvoice = function(user){
-      var date = moment().toDate();
-      var invoice = {
+      var community = {
         ACL: {
           '*': {
           },
@@ -62,25 +61,19 @@ angular.module('barliftApp')
             read: true,
             write: true
           },
-          'role:User': {
+          'role:Bar': {
             read: true
           }
         },
         schema: [
-          {
-            key: 'user',
-            __type: 'Pointer',
-            className: '_User'
-          }
         ],
       };
 
-      invoice.ACL[Session.userId] = {
+      community.ACL[Session.userId] = {
           read: true,
           write: true
         };
-      invoice.user = Session.userId;
-      return invoice;
+      return community;
     };
 
     return apiRest;

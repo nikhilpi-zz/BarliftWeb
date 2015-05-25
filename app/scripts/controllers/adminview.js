@@ -8,14 +8,15 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-  .controller('AdminviewCtrl', function ($scope,CloudCode, Deals, User, Venues, $q, Session, AuthService, $http) {
+  .controller('AdminviewCtrl', function ($scope,CloudCode, Deals, User, Venues, $q, Session, AuthService, Community) {
     var cellEditableTemplate = "<input ng-class=\"'colt' + col.index\" ng-input=\"COL_FIELD\" ng-model=\"COL_FIELD\" ng-change=\"updateEntity(row.entity)\"/>";
     $scope.selectedDeal = [];
-    $scope.pricing = [];
     $scope.deals = [];
     $scope.users = [];
+    $scope.communities = [];
     $scope.alert = {};
     $scope.role = Session.userRole;
+
     $scope.ngOptions = { 
       enableRowSelection: true,
       data: 'deals',
@@ -35,15 +36,6 @@ angular.module('barliftApp')
       return moment().day(num).format('dddd');
     }
 
-    $http.get('https://api.parse.com/1/config').
-      success(function(data, status, headers, config) {
-        $scope.pricing = data.params.pricing;
-    });
-
-    $scope.updateEntity = function(ent){
-      console.log(ent);
-    };
-
     Deals.query({}, function(deals) {
       var allq = [];
       angular.forEach(deals, function(deal){
@@ -57,7 +49,6 @@ angular.module('barliftApp')
       $q.all(allq).then(function(){
         $scope.deals = deals;
       });
-
     });
 
     User.query({
@@ -72,6 +63,13 @@ angular.module('barliftApp')
       $scope.users = users;
     })
 
+    $scope.updatePush = function(com){
+      console.log(com);
+      Community.update(com, function(){
+        $scope.$emit('notify', {cssClass: 'alert-success', message:'Push pricing has been saved'});
+      })
+    }
+
     $scope.updateSub = function(){
       angular.forEach($scope.users, function(user){
         if(user.sub_price){
@@ -81,6 +79,11 @@ angular.module('barliftApp')
 
       $scope.$emit('notify', {cssClass: 'alert-success', message:'Subscription pricing has been saved'});
     };
+
+    Community.query({}, function(res){
+      $scope.communities = res;
+      $scope.selectedCom = $scope.communities[0];
+    });
 
     $scope.logout = AuthService.logout;
 
