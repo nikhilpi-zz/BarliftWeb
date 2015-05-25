@@ -31,18 +31,21 @@ var generateMixpanelURl = function(from_date, to_date) {
 
 angular.module('barliftApp')
     .controller('AnalyticsCtrl', function($scope, $stateParams, Deals, CloudCode, $http, $modal, Session, Feedback) {
-
         $scope.role = Session.userRole;
+
         // get deals
         Deals.get({
             objectId: $stateParams.selectedDeal,
-            include: "venue"
+            include: "venue",
+            relation: "social"
         }, function(res) {
             $scope.deal = res;
             // console.log(JSON.stringify(res, null, 2));
         }).$promise.then(function(res) {
             if ($scope.deal.feedback) {
-                Feedback.get({objectId: $scope.deal.feedback}, function(res) {
+                Feedback.get({
+                    objectId: $scope.deal.feedback
+                }, function(res) {
                     $scope.deal.feedback = res;
                 });
             };
@@ -84,6 +87,40 @@ angular.module('barliftApp')
             // create chart
             $scope.genderData = [$scope.females, $scope.males];
             $scope.genderLabels = ["Females", "Males"];
+        });
+
+
+        // get communities
+        CloudCode.call('getUsersForDeal', {
+            dealId: $stateParams.selectedDeal
+        }).then(function(res) {
+            var users = res.result;
+            var groupsDict = {};
+
+            for (var i = 0; i < users.length; i++) {
+                var user = users[i];
+                var group = user["affiliation"];
+
+                if (group != "None" && group) {
+                    if (groupsDict[group]) {
+                        groupsDict[group] += 1;
+                    } else {
+                        groupsDict[group] = 1;
+                    };
+                };
+            };
+
+            // sort object by property value
+            var groupsArr = [];
+            for (var group in groupsDict) {
+                groupsArr.push([group, groupsDict[group]]);
+            };
+
+            groupsArr.sort(function(a, b) {
+                return b[1] - a[1]
+            });
+
+            $scope.groups = groupsArr.splice(0, 5);
         });
 
 
