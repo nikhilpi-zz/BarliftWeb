@@ -123,9 +123,9 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ng-repeat="i in [1,2,3,4,5]">
-                                                <td>1</td>
-                                                <td>Mark</td>
+                                            <tr ng-repeat="group in groups">
+                                                <td>{{group[1]}}</td>
+                                                <td>{{group[0]}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -134,7 +134,7 @@
                                     <div>
                                         <b>Gender:</b>
                                     </div>
-                                    <canvas id="doughnut" legend="true" height="200" class="chart chart-doughnut" data="genderData" labels="genderLabels" style="margin-top: 20px;"></canvas>
+                                    <canvas id="doughnut" legend="true" height="200" class="chart chart-doughnut" data="genderData" labels="genderLabels" style="margin-top: 40px;"></canvas>
                                 </div>
                             </div>
                         </div>
