@@ -35,11 +35,16 @@ angular.module('barliftApp')
         // get deals
         Deals.get({
             objectId: $stateParams.selectedDeal,
-            include: "feedback",
             include: "venue"
         }, function(res) {
             $scope.deal = res;
-            // console.log(JSON.stringify(res.feedback, null, 2));
+            // console.log(JSON.stringify(res, null, 2));
+        }).$promise.then(function(res) {
+            if ($scope.deal.feedback) {
+                Feedback.get({objectId: $scope.deal.feedback}, function(res) {
+                    $scope.deal.feedback = res;
+                });
+            };
         });
 
         // feedback modal
