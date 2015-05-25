@@ -30,7 +30,7 @@
             <tbody>
             <tr ng-repeat="invoice in invoices">
                 <td>{{invoice.createdAt | date:"MM/dd/yyyy"}}</td>
-                <td>{{invoice.description.dealname}}</td>
+                <td>{{invoice.description.dealname || invoice.description.text}}</td>
                 <td>{{invoice.type}}</td>
                 <td>${{invoice.amount}}</td>
             </tr>
