@@ -31,6 +31,8 @@ angular.module('barliftApp')
             });
         });
 
+        
+
         function loadDeals(){
           $scope.events.length = 0;
           angular.forEach($scope.deals, function(deal){

@@ -91,12 +91,13 @@
     </div>
     <div class="hr-line-dashed"></div>
     <div class="form-group">
-        <div class="col-sm-4 col-sm-offset-2">
+        <div class="col-sm-6 col-sm-offset-2">
             <button class="btn btn-danger" ng-if="deal.objectId" type="submit" ng-click="deleteDeal()">Delete</button>
             <button class="btn btn-primary" ng-if="deal.objectId" type="submit" ng-click="updateDeal()" ng-disabled="dealBuilder.$invalid ">Update</button>
-            <button class="btn btn-warning" ng-if="deal.objectId" ui-sref="deals.builder({selectedDeal: ''})">Cancel</button>
+            
             <button class="btn btn-defualt" ng-if="deal.objectId" ng-click="duplicateDeal()">Duplicate</button>
             <button class="btn btn-primary" ng-if="!deal.objectId" type="submit" ng-click="saveDeal()"  ng-disabled="dealBuilder.$invalid || alert.text">Create</button>
+            <button class="btn btn-warning" ui-sref="deals.list">Cancel</button>
         </div>
         <div class="col-sm-4" ng-if="alert.text">
             <div class="alert alert-danger" ng-if="alert">

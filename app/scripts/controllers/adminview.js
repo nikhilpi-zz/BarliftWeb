@@ -19,21 +19,31 @@ angular.module('barliftApp')
 
     $scope.ngOptions = { 
       enableRowSelection: true,
+      multiSelect: false,
       data: 'deals',
       sortInfo: { fields: ['deal_start_date'], directions: ['desc']},
       columnDefs: [
-        {field:'deal_start_date', displayName:'Date', cellFilter:'date:"M/d EEE"'},
-        {field:'venue_name', displayName:'Bar'},
-        {field:'name', displayName:'Name'},
-        {field:'community_name', displayName:'Community'},
-        {field:'main', displayName:'Deal of the day'},
-        {field:'Revenue',displayName:'Est Revenue'},
+        {field:'deal_start_date', displayName:'Date', cellFilter:'date:"M/d EEE"', width: 100},
+        {field:'venue_name', displayName:'Bar', width: 100},
+        {field:'name', displayName:'Name', width: 200},
+        {field:'community_name', displayName:'Community', width: 100},
+        {field:'main', displayName:'Main Deal', width: 100},
+        {field:'deal_type', displayName:'Deal type', width: 100},
+        {field:'revenue',displayName:'Est Revenue', width: 100},
+        {field:'notes',displayName:'Notes', width: 400},
       ],
       selectedItems: $scope.selectedDeal,
     };
 
     $scope.getDay = function(num){
       return moment().day(num).format('dddd');
+    }
+
+    $scope.updateDeal = function(deal){
+      Deals.update(deal, function(res){
+        $scope.selectedDeal.length = 0;
+        $scope.$emit('notify', {cssClass: 'alert-success', message:'Your Deal has been updated'});
+      })
     }
 
     Deals.query({}, function(deals) {

@@ -19,19 +19,27 @@ angular.module('barliftApp')
         scope.alert = {};
         scope.today = {};
         scope.today.date = new Date();
+        $http.get('https://api.parse.com/1/config').
+          success(function(data, status, headers, config) {
+            scope.communities = data.params.communities;
+            loadDeal();
+        });
 
-        if($stateParams.selectedDeal){
-          Deals.get({objectId: $stateParams.selectedDeal}, function(res){
-            scope.deal = res;
-            if($stateParams.dup){
-              scope.deal.objectId = null;
-              scope.deal.num_accepted = 0;
-              scope.deal.whos_going = [];
-              scope.deal.main = false;
-            }
-          });
-        } else {
-          scope.deal = Deals.newDeal(scope.user);
+        function loadDeal(){
+          if($stateParams.selectedDeal){
+            Deals.get({objectId: $stateParams.selectedDeal}, function(res){
+              scope.deal = res;
+              console.log(scope.deal.community_name);
+              if($stateParams.dup){
+                scope.deal.objectId = null;
+                scope.deal.num_accepted = 0;
+                scope.deal.whos_going = [];
+                scope.deal.main = false;
+              }
+            });
+          } else {
+            scope.deal = Deals.newDeal(scope.user);
+          }
         }
 
         scope.dateOptions = {
@@ -48,23 +56,6 @@ angular.module('barliftApp')
           scope.opened[id] = true;
         };
 
-        // scope.$watch('deal.name', function(){
-        //   if(scope.deal.name && scope.deal.name.length >= 50){
-        //     scope.deal.name = scope.deal.name.substring(0,50);
-        //   }
-        // });
-
-        // scope.$watch('deal.deal_start_date', function(newValue, oldValue){
-        //   // if(moment(scope.deal.deal_start_date).isBefore(moment().add(3,"days"))){
-        //   //   scope.alert.text = "You must schedule deal 3 days in advance";
-        //   // } else {
-        //   //   scope.alert.text = null;
-        //   // }
-        //   if(moment(newValue).dayOfYear() !== moment(oldValue).dayOfYear()){
-        //     scope.deal.deal_end_date = moment(scope.deal.deal_end_date).dayOfYear(moment(newValue).dayOfYear()).toDate();
-        //   }
-        // });
-
         scope.$watch('deal.deal_end_date', function(){      
           if(scope.deal && moment(scope.deal.deal_end_date).isBefore(scope.deal.deal_start_date)){
             scope.alert.text = "End time must come after start time";
@@ -79,11 +70,6 @@ angular.module('barliftApp')
           } else if(scope.deal){
             scope.deal.image_url = null;
           }
-        });
-
-        $http.get('https://api.parse.com/1/config').
-          success(function(data, status, headers, config) {
-            scope.communities = data.params.communities;
         });
 
         scope.addSubDeal = function(){
