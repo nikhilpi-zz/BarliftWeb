@@ -84,7 +84,7 @@ angular.module('barliftApp')
           Deals.delete(scope.deal).$promise.then(
             function(res){
               scope.deal = Deals.newDeal(scope.user);
-              $rootScope.$broadcast('deals-update');
+              $rootScope.$broadcast('deals-update', {query: {}});
               scope.$emit('notify', {cssClass: 'alert-success', message:'Your Deal has been deleted'});
               $state.go('deals.list');
             },
@@ -98,7 +98,7 @@ angular.module('barliftApp')
           Deals.save(scope.deal).$promise.then(
             function(res){
               scope.deal = Deals.newDeal(scope.user);
-              $rootScope.$broadcast('deals-update');
+              $rootScope.$broadcast('deals-update', {query: {}});
               scope.$emit('notify', {cssClass: 'alert-success', message:'Your Deal has been added'});
               $state.go('deals.list');
             },
@@ -116,7 +116,7 @@ angular.module('barliftApp')
           Deals.update(scope.deal).$promise.then(
             function(res){
               scope.deal = Deals.newDeal(scope.user);
-              $rootScope.$broadcast('deals-update');
+              $rootScope.$broadcast('deals-update', {query: {}});
               scope.$emit('notify', {cssClass: 'alert-success', message:'Your Deal has been updated'});
               $state.go('deals.list');
             },

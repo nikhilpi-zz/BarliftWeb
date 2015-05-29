@@ -39,7 +39,7 @@ angular.module('barliftApp')
         scope.delete = function(){
           Deals.delete(scope.deal).$promise.then(
             function(res){
-              $rootScope.$broadcast('deals-update');
+              $rootScope.$broadcast('deals-update', {query: {}});
               scope.$emit('notify', {cssClass: 'alert-success', message:'Your Deal has been deleted'});
               $state.go('deals.list');
             },
@@ -79,7 +79,7 @@ angular.module('barliftApp')
                 newDeal.deal_end_date = moment(newDeal.deal_end_date).add(diff, 'days').toDate();
                 Deals.save(newDeal).$promise.then(
                 function(res){
-                  $scope.$emit('deals-update');
+                  $scope.$emit('deals-update',{query: {}});
                   $scope.$emit('notify', {cssClass: 'alert-success', message:'Your Deal has been added'});
                   $modalInstance.close();
                 },
