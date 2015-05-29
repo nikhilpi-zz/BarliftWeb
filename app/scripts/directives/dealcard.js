@@ -7,7 +7,7 @@
  * # dealcard
  */
 angular.module('barliftApp')
-  .directive('dealCard', function ($modal, Deals, $rootScope) {
+  .directive('dealCard', function ($modal, Deals, $rootScope, Venues) {
     return {
       templateUrl: 'views/dash/directives/deal-card.html',
       restrict: 'E',
@@ -17,6 +17,11 @@ angular.module('barliftApp')
       },
       link: function postLink(scope, element, attrs) {
       	scope.today = new Date();
+        scope.venue = {};
+
+        Venues.get({objectId: scope.deal.venue}, function(res){
+          scope.venue = res;
+        })
 
       	scope.sameDate = function(aDate, bDate) {
             return moment(aDate).dayOfYear() === moment(bDate).dayOfYear()

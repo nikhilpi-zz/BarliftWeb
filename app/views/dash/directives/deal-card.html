@@ -9,6 +9,8 @@
     </div>
     <div class="ibox-content">
         <h3 class="font-bold no-margins">{{ deal.name | limitTo: 30 }}{{ deal.name.length > 30 ? '...' : ''}}</h3>
+        <small>{{deal.community_name}}</small>
+        <small class="pull-right">{{venue.bar_name}}</small><br>
         <div class="stat-percent font-bold text-success">{{deal.num_accepted}}</div>
         <small>People interested</small>
         <div class="row m-t text-center">
