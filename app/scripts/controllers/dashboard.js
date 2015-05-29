@@ -8,7 +8,7 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-  .controller('DashboardCtrl', function($scope, AuthService, User, Deals, CloudCode, $http, googleCalendar, $ocLazyLoad, Session) {
+  .controller('DashboardCtrl', function($scope, AuthService, User, Deals, CloudCode, $http, $ocLazyLoad, Session) {
     $scope.logout = AuthService.logout;
     $scope.user = {};
     $scope.role = Session.userRole;
@@ -251,22 +251,13 @@ angular.module('barliftApp')
       $scope.lineSeries = ["Last week", "Two weeks back"];  
 
       // get events
-      var eventsPromise = googleCalendar.getEvents({
-        //'calendarId': 'qq86rub5anh0ikbdnav9vtlqfou6i38v@import.calendar.google.com',
-        'calendarId': 'primary',
-        'timeMin': (new Date()).toISOString(),
-        'singleEvents': true,
-        'maxResults': 20,
-        'orderBy': 'startTime'
-      });
-
-      // handle events
-      eventsPromise.then(function(events) {
-        $scope.events = events;
+      $http.jsonp('https://www.googleapis.com/calendar/v3/calendars/barliftapp@gmail.com/events?key=AIzaSyBY79gH0aAvJ-cxiSuA2hYr5njtEHiM01k&callback=JSON_CALLBACK').
+      success(function(data, status, headers, config) {
+        $scope.events = data.items;
         nextWeekEvents();
-      }, function(err) {
-        console.log("Error loading events", err);
+      }).
+      error(function(data, status, headers, config) {
+        console.log("Couldn't get events", data);
       });
-
     }
   });
