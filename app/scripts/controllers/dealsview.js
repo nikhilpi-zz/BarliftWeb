@@ -8,17 +8,37 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-    .controller('DealsviewCtrl', function($rootScope, $scope, User, Deals, AuthService, Venues, $modal, Session) {
+    .controller('DealsviewCtrl', function($rootScope, $scope, User, Deals, AuthService, Venues, $modal, Session, $http) {
         $scope.deals = [];
         $scope.venues = [];
         $scope.user = {};
         $scope.selectedDeal = {};
         $scope.selectedVenue = {};
+        $scope.filter = {};
         $scope.today = new Date();
         $scope.logout = AuthService.logout;
         $scope.role = Session.userRole;
+        $scope.filter.community = 'All communities';
+        $scope.communities = ['All communities'];
 
         $scope.dealView = 'calendar';
+
+        $http.get('https://api.parse.com/1/config').
+          success(function(data, status, headers, config) {
+            $scope.communities = $scope.communities.concat(data.params.communities);
+        });
+
+        $scope.$watch('filter.community', function(){
+            var query = {};
+            if($scope.filter.community != 'All communities'){
+                query = {
+                    where: {
+                        community_name: $scope.filter.community
+                    }
+                };
+            }
+            $scope.$emit('deals-update', {query: query});
+        });
 
         User.getCurrent(function(res) {
             $scope.user = res;

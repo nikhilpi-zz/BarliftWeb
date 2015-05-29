@@ -8,7 +8,7 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-  .controller('ProfileviewCtrl', function ($scope, AuthService, User, Venues, $state, Invoice, Session) {
+  .controller('ProfileviewCtrl', function ($scope, AuthService, User, Venues, $state, Invoice, Session, $modal) {
     $scope.logout = AuthService.logout;
     $scope.user = {};
     $scope.selectedVenue = Venues.newVenue($scope.user);
@@ -87,16 +87,39 @@ angular.module('barliftApp')
       return total;
     }
 
-    $scope.updateUser = function(){
-      User.update($scope.user).$promise.then(function(sucess){
-        $scope.alert = null;
-        $scope.$emit('notify', {cssClass: 'alert-success', message:'Your account has been updated'});
-        $state.go('dash.main')
-      },
-      function(err){
-        $scope.alert = {text: err.data.error};
-      })
+    $scope.updateEmail = function(){
+      User.update($scope.user, function(res){
+        $scope.$emit('notify', {cssClass: 'alert-success', message:'Your new email has been saved'});
+      });
     }
+
+    $scope.openPassword = function () {
+      var modalInstance = $modal.open({
+        templateUrl: 'views/dash/directives/password-change-modal.html',
+        resolve: {
+          user: function () {
+            return $scope.user;
+          }
+        },
+        controller: function($scope, $modalInstance, user, User){
+          $scope.user = user;
+
+          $scope.saveUser = function() {
+            User.update($scope.user, function(res){
+              $scope.user = null;
+              $scope.$emit('notify', {cssClass: 'alert-success', message:'Your new password has been saved'});
+              $modalInstance.close();
+            });
+          }
+
+          $scope.cancel = function () {
+            $scope.user.confirmPassword = null;
+            $scope.user.password = null;
+            $modalInstance.dismiss('cancel');
+          };
+        }
+      });
+    };
 
 
   });
