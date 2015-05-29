@@ -44,7 +44,6 @@ angular
         $http.defaults.headers.common['X-Parse-Application-Id'] = '5DZi1FrdZcwBKXIxMplWsqYu3cEEumlmFDB1kKnC';
         $http.defaults.headers.common['X-Parse-REST-API-Key'] = 'pMT9AefpMkJfbcJ5fTA2uOGxwpitMII7hpCt8x4O';
 
-
         if ($cookieStore.get('barlift-sesh')) {
             var sesh = $cookieStore.get('barlift-sesh');
             var uid = $cookieStore.get('barlift-userid');

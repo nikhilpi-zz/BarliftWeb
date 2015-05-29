@@ -25,13 +25,12 @@ angular.module('barliftApp')
         });
 
         $rootScope.$on('deals-update', function(event, args) {
-            Deals.query(function(deals) {
+            Deals.query(args.query, function(deals) {
                 $scope.deals = deals;
                 loadDeals();
             });
         });
 
-        
 
         function loadDeals(){
           $scope.events.length = 0;

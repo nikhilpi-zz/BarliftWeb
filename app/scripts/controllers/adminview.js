@@ -8,7 +8,7 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-  .controller('AdminviewCtrl', function ($scope,CloudCode, Deals, User, Venues, $q, Session, AuthService, Community) {
+  .controller('AdminviewCtrl', function ($scope,CloudCode, Deals, User, Venues, $q, Session, AuthService, Community, $http) {
     var cellEditableTemplate = "<input ng-class=\"'colt' + col.index\" ng-input=\"COL_FIELD\" ng-model=\"COL_FIELD\" ng-change=\"updateEntity(row.entity)\"/>";
     $scope.selectedDeal = [];
     $scope.deals = [];
@@ -16,6 +16,9 @@ angular.module('barliftApp')
     $scope.communities = [];
     $scope.alert = {};
     $scope.role = Session.userRole;
+    $scope.filter = {};
+    $scope.filter.community = 'All communities';
+    $scope.communityNames = ['All communities'];
 
     $scope.ngOptions = { 
       enableRowSelection: true,
@@ -27,13 +30,32 @@ angular.module('barliftApp')
         {field:'venue_name', displayName:'Bar', width: 100},
         {field:'name', displayName:'Name', width: 200},
         {field:'community_name', displayName:'Community', width: 100},
+        {field:'num_accepted', displayName:'#Interested', width: 100},
         {field:'main', displayName:'Main Deal', width: 100},
         {field:'deal_type', displayName:'Deal type', width: 100},
         {field:'revenue',displayName:'Est Revenue', width: 100},
+        {field:'redeemed',displayName:'#Redeemed', width: 100},
         {field:'notes',displayName:'Notes', width: 400},
       ],
       selectedItems: $scope.selectedDeal,
     };
+
+    $http.get('https://api.parse.com/1/config').
+      success(function(data, status, headers, config) {
+        $scope.communityNames = $scope.communityNames.concat(data.params.communities);
+    });
+
+    $scope.$watch('filter.community', function(){
+      var query = {};
+      if($scope.filter.community != 'All communities'){
+        query = {
+          where: {
+            community_name: $scope.filter.community
+          }
+        };
+      }
+      loadDeals(query);
+    });
 
     $scope.getDay = function(num){
       return moment().day(num).format('dddd');
@@ -46,20 +68,25 @@ angular.module('barliftApp')
       })
     }
 
-    Deals.query({}, function(deals) {
-      var allq = [];
-      angular.forEach(deals, function(deal){
-        if(deal.venue){
-          allq.push(Venues.get({objectId: deal.venue},function(venue){
-            deal.venue_name = venue.bar_name;
-          }).$promise);
-        }
-      });
+    function loadDeals(query){
+      $scope.deals.length = 0;
+      Deals.query(query, function(deals) {
+        var allq = [];
+        angular.forEach(deals, function(deal){
+          if(deal.venue){
+            allq.push(Venues.get({objectId: deal.venue},function(venue){
+              deal.venue_name = venue.bar_name;
+            }).$promise);
+          }
+        });
 
-      $q.all(allq).then(function(){
-        $scope.deals = deals;
+        $q.all(allq).then(function(){
+          $scope.deals = deals;
+        });
       });
-    });
+    }
+
+    loadDeals({});
 
     User.query({
       where: {

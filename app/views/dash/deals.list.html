@@ -1,17 +1,15 @@
 <div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-8">
+    <div class="col-lg-10">
         <h2>Your Deals</h2>
         <a ui-sref="deals.builder" class="btn btn-warning btn-md">Add Deal</a>
         <div class="btn-group">
             <label class="btn btn-default" ng-model="dealView" btn-radio="'calendar'">Calendar</label>
             <label class="btn btn-default" ng-model="dealView" btn-radio="'list'">List</label>
         </div>
-<!--         <div class="btn-group" ng-show="dealView=='list'">
-            <label class="btn btn-primary" ng-model="dealFilter" btn-radio="'all'">All</label>
-            <label class="btn btn-primary" ng-model="dealFilter" btn-radio="'future'">Future</label>
-            <label class="btn btn-primary" ng-model="dealFilter" btn-radio="'today'">Today</label>
-            <label class="btn btn-primary" ng-model="dealFilter" btn-radio="'past'">Past</label>
-        </div> -->
+        <div class="btn-group">
+            <select class="form-control" name="account" ng-model="filter.community" ng-options="community for community in communities" required></select>
+        </div>
+
     </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">

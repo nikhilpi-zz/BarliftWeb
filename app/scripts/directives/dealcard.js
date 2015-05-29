@@ -7,7 +7,7 @@
  * # dealcard
  */
 angular.module('barliftApp')
-  .directive('dealCard', function ($modal, Deals) {
+  .directive('dealCard', function ($modal, Deals, $rootScope) {
     return {
       templateUrl: 'views/dash/directives/deal-card.html',
       restrict: 'E',
@@ -52,7 +52,7 @@ angular.module('barliftApp')
               }
             },
             controller: function($scope, $modalInstance, deal, $state, Deals){
-              $scope.deal = deal;
+              $scope.selectedDeal = deal;
               $scope.newThings = {date: new Date()};
               $scope.today = moment().format('YYYY-MM-DD');
 
@@ -62,13 +62,13 @@ angular.module('barliftApp')
               };
 
               $scope.repeat = function () {
-                var newDeal = angular.copy($scope.deal);
+                var newDeal = angular.copy($scope.selectedDeal);
                 newDeal.objectId = null;
                 newDeal.num_accepted = 0;
                 newDeal.whos_going = [];
                 newDeal.main = false;
                 var newDoY = moment($scope.newThings.date).dayOfYear();
-                var oldDoY = moment($scope.deal.deal_start_date).dayOfYear();
+                var oldDoY = moment($scope.selectedDeal.deal_start_date).dayOfYear();
                 var diff = newDoY - oldDoY;
                 newDeal.deal_start_date = moment(newDeal.deal_start_date).add(diff, 'days').toDate();
                 newDeal.deal_end_date = moment(newDeal.deal_end_date).add(diff, 'days').toDate();
