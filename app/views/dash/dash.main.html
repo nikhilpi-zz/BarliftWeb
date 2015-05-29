@@ -32,7 +32,7 @@
                                 <!-- deals -->
                                 <p ng-if="obj.deals.length > 0" class="text-navy">Deals</p>
                                 <p ng-if="obj.deals.length == 0" class="text-navy">No deals today</p>
-                                <p ng-repeat="deal in obj.deals">
+                                <p ng-repeat="deal in obj.deals | orderBy: 'deal_start_date'">
                                     <span>
                                        {{deal.deal_start_date | date:'shortTime'}} - 
                                     </span> {{deal.name}}
