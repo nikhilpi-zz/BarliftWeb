@@ -54,44 +54,44 @@ angular.module('barliftApp')
         }
       });
 
-    apiRest.newFeedback = function(){
-      var today = new Date();
-      var date = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-      var feedback = {
-        ACL: {
-          '*': {
-            read: true
-          },
-          'role:Admin': {
-            read: true,
-            write: true
-          }
-        },
-        schema: [
-          {
-            key: 'deal_start_date',
-            __type: 'Date'
-          },
-          {
-            key: 'deal_end_date',
-            __type: 'Date'
-          },
-          {
-            key: 'user',
-            __type: 'Pointer',
-            className: '_User'
-          }
-        ],
-        deal_start_date: date,
-        deal_end_date: date
-      };
+    // apiRest.newFeedback = function(){
+    //   var today = new Date();
+    //   var date = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    //   var feedback = {
+    //     ACL: {
+    //       '*': {
+    //         read: true
+    //       },
+    //       'role:Admin': {
+    //         read: true,
+    //         write: true
+    //       }
+    //     },
+    //     schema: [
+    //       {
+    //         key: 'deal_start_date',
+    //         __type: 'Date'
+    //       },
+    //       {
+    //         key: 'deal_end_date',
+    //         __type: 'Date'
+    //       },
+    //       {
+    //         key: 'user',
+    //         __type: 'Pointer',
+    //         className: '_User'
+    //       }
+    //     ],
+    //     deal_start_date: date,
+    //     deal_end_date: date
+    //   };
 
-      feedback.ACL[Session.userId] = {
-        read: true,
-        write: true
-      };
-      return feedback;
-    };
+    //   feedback.ACL[Session.userId] = {
+    //     read: true,
+    //     write: true
+    //   };
+    //   return feedback;
+    // };
 
     return apiRest;
 

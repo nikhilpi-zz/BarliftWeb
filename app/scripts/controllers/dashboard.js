@@ -8,7 +8,7 @@
  * Controller of the barliftApp
  */
 angular.module('barliftApp')
-  .controller('DashboardCtrl', function($scope, AuthService, User, Deals, CloudCode, $http, $ocLazyLoad, Session) {
+  .controller('DashboardCtrl', function($scope, AuthService, User, Deals, $http, $ocLazyLoad, Session) {
     $scope.logout = AuthService.logout;
     $scope.user = {};
     $scope.role = Session.userRole;
