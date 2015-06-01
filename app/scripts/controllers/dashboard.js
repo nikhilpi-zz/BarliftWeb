@@ -54,18 +54,16 @@ angular.module('barliftApp')
       var myDate = new Date();
 
       for (var i = 0; i < 7; i++) {
-        var nextDay = new Date();
+        var date = moment().add(i,'days').toDate();
         myDate.setHours(0, 0, 0, 0);
 
         var obj = {
-          date: myDate,
+          date: date,
           deals: [],
           events: []
         };
         $scope.upcomingDealsEvents[i] = obj;
 
-        nextDay.setDate(myDate.getDate() + 1);
-        myDate = nextDay;
       }
 
       // add upcoming deals to obj
