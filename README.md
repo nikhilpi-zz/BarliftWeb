@@ -1,6 +1,31 @@
 # Barlift - Web Dashboard
 The purpose of this web app is to create deals, buy deal of the day slots and view consumer and competetive analytics. BarLift uses your location to send you relevant, high quality deals when you're out at night. Barlift was built in Nuvention Web at Northwestern University in 2015.
 
+## Features:
+* Dashbaord
+ * Schedule of up coming student events
+ * Weather information
+ * Competitive analytics
+ * Past deal perfomarce
+* Deal list
+ * Calendar view or list view
+ * Repeat deals on specific dats
+ * Filter by community
+* Deal Builder
+ * Sub deals
+ * Custom images
+* Deal Analytics
+ * Demographic breakdown
+ * User engagement
+ * Feedback forms
+* Deal promoter
+ * Buy deal of the days
+ * See estimated reach
+ * Dynamic pricing based on day of week and community
+* Profile
+ * Add multiple locations
+ * View invoice
+
 ## Architecture
 The dashboard is a Angular.js app served by a node stack. Data is stored using a Parse.com app and reached over the REST api. Theming was done using INSPINIA, a purchased CSS package. The app was hosted on heroku.
 #### Dependencies:
